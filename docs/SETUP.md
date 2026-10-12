@@ -8,7 +8,7 @@
 | n8n GitHub credential | 승인 원고 JSON을 저장소 main 브랜치에 저장 | 미연결 |
 | Cloudflare 계정·Account ID·API token | Workers 정적 자산 배포 | 미연결 |
 | 도메인 | 최종 사이트 주소 | 미지정; 먼저 Workers 기본 주소로 검증 가능 |
-| 공개 문의 이메일 | 문의·오류 제보 | 미지정 |
+| 공개 문의 이메일 | 문의·오류 제보 | linkingmain@gmail.com 반영 |
 | Google Ads Keyword Planner 자료 | 월간 키워드 후보 분석 | 미연결 |
 | Search Console | 색인·실제 검색어·검색 성과 확인 | 사이트 배포 후 연결 |
 | 쿠팡 파트너스 계정·검토된 링크 | 제휴 수익 | 미연결 |
@@ -18,10 +18,34 @@
 
 ## GitHub와 Cloudflare
 
+### 로컬 배포 연결
+
+PowerShell에서 다음을 실행합니다. 열린 브라우저에서 중고미를 관리하는 기존 Cloudflare 계정으로 로그인하고 Wrangler 연결을 승인합니다.
+
+```powershell
+cd D:\Workspace\Blog
+npx.cmd wrangler login
+npx.cmd wrangler whoami
+```
+
+이 로그인은 로컬 배포 도구 연결입니다. GitHub Actions의 자동 배포에는 아래 API token 설정이 별도로 필요합니다. 브라우저가 자동으로 열리지 않으면 터미널에 표시된 로그인 주소를 직접 열면 됩니다.
+
+### GitHub 자동 배포 연결
+
+Cloudflare 대시보드의 Manage Account → API Tokens → Create Token에서 `Edit Cloudflare Workers` 정책을 선택하고 이름을 `LightStandards GitHub Deploy`로 지정합니다. 대상 계정과 zone 범위는 실제 배포에 필요한 범위로 제한합니다. 현재 설정에는 도메인 route가 없으므로 초기 정적 파일 배포에 DNS 편집 권한은 필요하지 않습니다.
+
+Account ID는 대시보드 검색(Ctrl+K)에서 `Copy account ID`를 검색해 복사하거나 Workers & Pages의 Account Details에서 확인할 수 있습니다.
+
+[이 저장소의 Actions secrets 설정](https://github.com/KimHanWol/Web-LightStandards/settings/secrets/actions)에서 New repository secret을 눌러 `CLOUDFLARE_API_TOKEN`과 `CLOUDFLARE_ACCOUNT_ID`를 등록합니다. Token 값은 채팅에 보내지 않습니다.
+
+- [Cloudflare 로그인 공식 문서](https://developers.cloudflare.com/workers/wrangler/commands/general/#login)
+- [자동 배포 인증 공식 문서](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/)
+- [Account ID 찾기](https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/)
+
 1. 현재 폴더의 Git 원격 `origin`은 `https://github.com/KimHanWol/Web-LightStandards.git`입니다. 이 저장소의 `main`을 사용합니다.
 2. n8n의 `Commit Approved Article` 노드에 GitHub credential을 연결합니다. Fine-grained token을 쓰면 해당 저장소의 Contents 읽기·쓰기로 범위를 제한합니다. 원고 JSON을 저장할 권한이며 계정 전체에 대한 권한은 필요하지 않습니다.
 3. GitHub 저장소 Settings → Secrets and variables → Actions에서 secrets `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`를 저장합니다. 배포 token은 대상 Cloudflare 계정의 Workers Scripts 편집 권한으로 시작합니다. 커스텀 도메인은 Cloudflare 대시보드에서 연결합니다.
-4. Actions variables에 `PUBLIC_SITE_URL`(최종 HTTPS 주소), `PUBLIC_CONTACT_EMAIL`을 입력합니다. `SITE_PUBLISH_ENABLED`는 배포 설정이 준비된 뒤 `true`로 설정합니다.
+4. Actions variables에 `PUBLIC_SITE_URL`(최종 HTTPS 주소)을 입력합니다. `PUBLIC_CONTACT_EMAIL`은 `linkingmain@gmail.com`을 기본값으로 적용하며 다른 주소가 필요할 때만 설정합니다. `SITE_PUBLISH_ENABLED`는 배포 설정이 준비된 뒤 `true`로 설정합니다.
 5. 운영자·문의·개인정보 문구를 실제 운영 내용에 맞게 확인하고 `config/publication.json`의 `reviewed`를 `true`로 변경합니다. 현재 정책은 광고·분석 비활성을 설명합니다. 광고나 분석 서비스를 켜기 전에 해당 서비스 처리 내용을 업데이트해야 합니다.
 6. GitHub Actions에서 `Publish LightStandards`을 수동 실행해 첫 배포를 확인합니다. Wrangler의 Worker 이름은 `lightstandards`입니다.
 7. n8n 발행 보조의 `Configuration`에 `repo_owner`, `repo_name`, `site_url`을 입력하고 배포 연결 확인 후 `enabled=true`로 설정합니다.

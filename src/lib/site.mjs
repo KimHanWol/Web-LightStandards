@@ -3,5 +3,5 @@ export const site = {
   description: '제품의 조건과 차이를 살펴보고, 내 생활에 맞는 선택을 돕는 쓸모 있는 기록.',
   url: import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321',
   ready: import.meta.env.PUBLIC_SITE_READY === 'true',
-  email: import.meta.env.PUBLIC_CONTACT_EMAIL || ''
+  email: import.meta.env.PUBLIC_CONTACT_EMAIL || 'linkingmain@gmail.com'
 };
