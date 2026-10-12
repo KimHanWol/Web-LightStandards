@@ -17,10 +17,15 @@
 .card-image img{width:100%;height:100%;object-fit:cover}
 .article-page{display:block}
 .article-page>.article-layout{width:100%;margin-inline:auto;min-width:0}
-.article-page.with-banner-sidebar{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px}
+.article-page.with-banner-sidebar{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:40px}
 .banner-sidebar{min-width:0;padding-block:120px 60px}
 .banner-sidebar-inner{position:sticky;top:24px}
-.affiliate-banner{margin-block:32px;padding:14px;background:#efeee6;border:1px solid var(--line);border-radius:4px;break-inside:avoid}
+.affiliate-banner{margin-block:32px;padding:14px;background:#efeee6;border:0;border-radius:4px;break-inside:avoid;container-type:inline-size}
+.affiliate-banner[hidden]{display:none}
+.dynamic-banner-frame{position:relative;width:min(var(--desktop-width),100%);aspect-ratio:var(--desktop-ratio);margin-inline:auto;overflow:hidden}
+.dynamic-banner-mount{position:absolute;top:0;left:50%;transform:translateX(-50%) scale(var(--widget-scale,1));transform-origin:top center}
+.dynamic-banner-mount iframe{border:0}
+@container(max-width:727px){.dynamic-banner-frame[data-responsive="true"]{width:min(var(--mobile-width),100%);aspect-ratio:var(--mobile-ratio)}}
 .banner-label{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--muted);margin-bottom:10px}
 .affiliate-banner>a{display:block;width:100%;max-width:100%;margin-inline:auto}
 .affiliate-banner picture{display:block;width:min(var(--banner-width),100%);max-width:100%;margin-inline:auto;aspect-ratio:var(--desktop-ratio);overflow:hidden;background:#e5e5dc}
@@ -29,6 +34,7 @@
 .banner-sidebar .affiliate-banner{padding:0;background:transparent;border:0;margin:0 0 36px}
 .notes-section>.affiliate-banner{margin-top:0;margin-bottom:40px}
 @media(max-width:1050px){.article-page.with-banner-sidebar{display:block}.banner-sidebar{display:none}}
+@media(max-height:740px){.banner-sidebar-inner{position:static}}
 @media(hover:hover) and (pointer:fine){
   .primary-link:hover{background:#1c4035}
   .article-card:hover h3,.topic-card:hover h3,.footer-links a:hover,.site-header nav a:hover{text-decoration:underline;text-underline-offset:5px}

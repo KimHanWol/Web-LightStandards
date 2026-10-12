@@ -4,7 +4,7 @@ import { getArticles, readingTime } from '../../lib/articles.mjs';
 import { renderMarkdown } from '../../lib/content.mjs';
 import { site } from '../../lib/site.mjs';
 import AffiliateBanner from '../../components/AffiliateBanner.astro';
-import { hasBanners } from '../../lib/banners.mjs';
+import { hasBanners, affiliateDisclosure } from '../../lib/banners.mjs';
 export function getStaticPaths(){return getArticles().map(article=>({params:{id:article.articleId},props:{article}}));}
 const { article } = Astro.props;
 const html = renderMarkdown(article.markdown);
@@ -23,7 +23,7 @@ const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPost
   <article class="article-layout">
     <a class="back-link" href="/">← 모든 노트</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
     <div class="article-byline">소소한 기준 편집팀 <span>·</span> {article.publishedAt.slice(0,10)} <span>·</span> {readingTime(article)}분 읽기</div>
-    {hasAffiliateContent&&<aside class="disclosure">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</aside>}
+    {hasAffiliateContent&&<aside class="disclosure">{affiliateDisclosure}</aside>}
     <div class="article-body">{sections.map((section,index)=><><div set:html={section}/>{(index===1||index===Math.max(2,Math.floor(sections.length/2)))&&article.images[index===1?0:1]?.localPath&&<figure><img src={article.images[index===1?0:1].localPath} alt={article.images[index===1?0:1].alt} width="1024" height="768" loading="lazy"/><figcaption>이해를 돕기 위한 AI 생성 설명 이미지입니다.</figcaption></figure>}{index===Math.min(1,sections.length-1)&&<AffiliateBanner slot="article-top" category={article.category}/>} {index===Math.max(2,Math.floor(sections.length/2))&&<AffiliateBanner slot="article-middle" category={article.category}/>}</>)}</div>
     <AffiliateBanner slot="article-bottom" category={article.category}/>
     {article.affiliates.length>0&&<section class="product-section"><h2>함께 살펴볼 제품</h2>{article.affiliates.map(p=><a class="product-link" href={p.url} rel="sponsored noopener noreferrer" target="_blank"><div><strong>{p.label}</strong>{p.note&&<p>{p.note}</p>}</div><span>쿠팡에서 확인 ↗</span></a>)}<small>가격·재고·배송 조건은 판매 페이지에서 확인해 주세요.</small></section>}
