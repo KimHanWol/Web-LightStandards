@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getArticles, readingTime, categories } from '../lib/articles.mjs';
+import AffiliateBanner from '../components/AffiliateBanner.astro';
 const articles = getArticles();
 const topics = [
   {n:'01',title:'사양보다 중요한 건,\n나에게 맞는 조건.',text:'비슷해 보이는 제품의 차이를 읽는 선택 가이드.',category:'선택 가이드',shape:'circles'},
@@ -15,13 +16,16 @@ const topics = [
   </section>
   <div class="manifesto"><div class="wrap"><span>조건을 확인하고</span><b>·</b><span>차이를 비교하고</span><b>·</b><span>오래 쓸 것을 고릅니다</span><span class="manifesto-end">SMALL CHOICES, CLEAR REASONS ↗</span></div></div>
   <section id="notes" class="notes-section wrap">
+    <AffiliateBanner slot="home-top" />
     <div class="section-heading"><div><p class="eyebrow">USEFUL NOTES</p><h2>지금, 쓸모 있는 이야기</h2></div><label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="궁금한 내용을 찾아보세요" aria-label="노트 검색" /></label></div>
     <div class="filter-tabs" role="group" aria-label="주제 선택">{categories.map((c,i)=><button class={i===0?'active':''} data-category={c} aria-pressed={i===0?'true':'false'}>{c}</button>)}</div>
     {articles.length > 0 ? <div class="article-grid">{articles.map(a=><a class="article-card" href={`/notes/${a.articleId}/`} data-article data-category={a.category} data-search={`${a.title} ${a.description}`}><div class="card-image">{a.images[0]?.localPath ? <img src={a.images[0].localPath} alt={a.images[0].alt} width="1024" height="768" loading="lazy" /> : <span class="card-glyph">쓸모<br/>있는<br/>기록.</span>}</div><span class="category-label">{a.category}</span><h3>{a.title}</h3><p>{a.description}</p><div class="card-meta"><span>{a.publishedAt.slice(0,10).replaceAll('-','.')} · {readingTime(a)}분 읽기</span><span>↗</span></div></a>)}</div> : <div class="topic-grid">{topics.map(t=><button class="topic-card" data-topic={t.category}><div class={`topic-visual ${t.shape}`} aria-hidden="true"><i></i><i></i><i></i><span>{t.n}</span></div><span class="category-label">{t.category}</span><h3>{t.title.split('\n').map(line=><span>{line}<br/></span>)}</h3><p>{t.text}</p><span class="topic-action">이 주제의 노트 살펴보기 <b>↗</b></span></button>)}</div>}
     <p id="empty-search" class="empty-state" role="status" aria-live="polite" hidden>아직 이 조건에 맞는 노트가 없습니다. 다른 검색어나 주제를 선택해 보세요.</p>
     {articles.length===0 && <p class="first-note">첫 번째 노트를 준비하고 있습니다. 확인한 자료와 분명한 기준으로 찾아올게요.</p>}
+    <AffiliateBanner slot="home-middle" />
   </section>
   <section class="editorial-band wrap"><span class="large-asterisk">✳</span><div><p class="eyebrow">OUR EDITORIAL PROMISE</p><h2>추천보다 먼저, 이유를 씁니다.</h2><p>확인한 사실에는 출처를, 비교에는 기준을.<br/>직접 써본 경험과 자료로 살펴본 정보를 구분합니다.</p></div><a href="/editorial/">우리가 기록하는 방식 <span>↗</span></a></section>
+  <div class="wrap"><AffiliateBanner slot="home-bottom" /></div>
 </Layout>
 <script>
   let category = '전체';

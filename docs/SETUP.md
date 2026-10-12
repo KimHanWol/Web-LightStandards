@@ -32,7 +32,11 @@ npx.cmd wrangler whoami
 
 ### GitHub 자동 배포 연결
 
-Cloudflare 대시보드의 Manage Account → API Tokens → Create Token에서 `Edit Cloudflare Workers` 정책을 선택하고 이름을 `LightStandards GitHub Deploy`로 지정합니다. 대상 계정과 zone 범위는 실제 배포에 필요한 범위로 제한합니다. 현재 설정에는 도메인 route가 없으므로 초기 정적 파일 배포에 DNS 편집 권한은 필요하지 않습니다.
+Cloudflare 대시보드의 Manage Account → API Tokens → Create Token에서 이름을 `LightStandards GitHub Deploy`로 지정합니다. Account Resources는 `Include → Specific account → 중고미를 관리하는 계정`입니다. 현재 설정에는 도메인 route가 없으므로 초기 정적 파일 배포에 Zone 권한은 필요하지 않습니다. 템플릿에 들어 있는 `Zone → Workers Routes` 행을 제거하면 Zone Resources도 필요하지 않습니다.
+
+새 Workers 역할 화면이라면 첫 생성에는 해당 계정 Workers 제품 범위의 `Admin`이 필요합니다. 이미 `lightstandards` Worker가 만들어진 뒤 자동 배포 token은 해당 Worker의 `Editor`로 좁힐 수 있습니다. 기존 권한 방식의 `Workers Scripts → Edit`는 공식 문서상 아직 지원되지만 신규 역할과의 동작 차이는 첫 배포 시 확인해야 합니다. 커스텀 도메인 연결은 별도 설정 단계로 진행합니다.
+
+Client IP Address Filtering은 비워 둡니다. GitHub Actions 실행기의 IP를 현재 PC 주소로 제한하면 자동 배포가 차단될 수 있습니다.
 
 Account ID는 대시보드 검색(Ctrl+K)에서 `Copy account ID`를 검색해 복사하거나 Workers & Pages의 Account Details에서 확인할 수 있습니다.
 
