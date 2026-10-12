@@ -1,0 +1,18 @@
+{
+  "name": "lightstandards",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "node scripts/validate-content.mjs && astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.mjs",
+    "import:article": "node scripts/import-article.mjs",
+    "deploy:check": "node scripts/check-deployment.mjs",
+    "deploy": "npm run deploy:check && npm run build && wrangler deploy"
+  },
+  "dependencies": { "astro": "7.3.8", "@astrojs/sitemap": "3.7.4", "@astrojs/rss": "4.0.19", "marked": "^17.0.0", "sanitize-html": "^2.17.0", "zod": "^4.0.0" },
+  "devDependencies": { "wrangler": "4.149.0" }
+}

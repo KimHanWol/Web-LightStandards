@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+import '../styles/polish.css';
+import { site } from '../lib/site.mjs';
+const { title = site.name, description = site.description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const naverVerification = import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION;
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === site.name ? `${site.name} — ${site.tagline}` : `${title} | ${site.name}`}</title>
+    <meta name="description" content={description} /><meta name="theme-color" content="#f7f5ef" />
+    <meta name="robots" content={noindex || !site.ready ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="canonical" href={canonical} /><link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} />
+    <meta property="og:type" content="website" /><meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ko_KR" /><meta property="og:site_name" content={site.name} />
+    {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+    {naverVerification && <meta name="naver-site-verification" content={naverVerification} />}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 바로가기</a>
+    <header class="site-header wrap">
+      <a href="/" class="wordmark" aria-label="소소한 기준 홈"><span class="brand-icon">소</span>소소한 기준<span class="wordmark-dot">.</span></a>
+      <nav aria-label="주 메뉴"><a href="/#notes">모든 노트</a><a href="/about/">소소한 기준 소개</a><a href="/editorial/">편집 원칙 <span>↗</span></a></nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer wrap">
+      <div><a href="/" class="footer-brand">소소한 기준.</a><p>생활의 작은 선택에, 쓸모 있는 한 장.</p></div>
+      <div class="footer-links"><a href="/about/">소개</a><a href="/contact/">문의</a><a href="/editorial/">편집 원칙</a><a href="/privacy/">개인정보처리방침</a><a href="/disclosure/">광고·제휴 안내</a><a href="/rss.xml">RSS</a></div>
+      <small>© {new Date().getFullYear()} 소소한 기준</small>
+    </footer>
+  </body>
+</html>

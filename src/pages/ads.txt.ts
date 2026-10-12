@@ -1,0 +1,1 @@
+export function GET(){const id=import.meta.env.PUBLIC_ADSENSE_CLIENT||'';const ready=import.meta.env.PUBLIC_SITE_READY==='true';return new Response(ready&&/^ca-pub-\d{16}$/.test(id)?`google.com, ${id.slice(3)}, DIRECT, f08c47fec0942fa0\n`:'',{headers:{'Content-Type':'text/plain'}});}

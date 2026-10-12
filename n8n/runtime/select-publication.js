@@ -1,0 +1,11 @@
+const c=$('Configuration').first().json;if(!c.enabled)return [];
+if(!/^[\w.-]+$/.test(c.repo_owner)||!/^[\w.-]+$/.test(c.repo_name))throw new Error('Configure GitHub repository');
+if(!/^https:\/\/[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?\.[a-z]{2,}\/?$/i.test(c.site_url))throw new Error('Configure HTTPS site origin');
+const origin=c.site_url.replace(/\/$/,'');
+const rows=$input.all().map(i=>i.json);
+const row=rows.find(r=>r.status==='publishing')||rows.find(r=>r.status==='approved'&&Date.parse(r.scheduled_at)<=Date.now());
+if(!row)return [];
+const p=JSON.parse(row.publish_payload);const sources=JSON.parse(row.sources_json).map(({title,url,checkedAt})=>({title,url,checkedAt}));
+if(p.articleId!==row.article_id||p.intentKey!==row.intent_key||p.category!==row.category||p.title!==row.title||p.description!==row.description||p.markdown!==row.body_markdown||p.revision!==Number(row.revision)||p.approvedRevision!==Number(row.approved_revision)||p.approvedAt!==row.approved_at||p.approvedBy!==row.approved_by||p.publishedAt!==row.scheduled_at||JSON.stringify(p.sources)!==JSON.stringify(sources)||JSON.stringify(p.images)!==JSON.stringify(JSON.parse(row.images_json))||JSON.stringify(p.affiliates)!==JSON.stringify(JSON.parse(row.affiliate_json||'[]')))throw new Error('Content changed since approval; review the new revision');
+if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.articleId))throw new Error('Invalid article ID');
+return [{json:{...row,repo_owner:c.repo_owner,repo_name:c.repo_name,site_url:origin,path:`content/inbox/${p.articleId}-r${p.revision}.json`,public_url:origin+'/notes/'+p.articleId+'/'}}];

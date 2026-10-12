@@ -1,0 +1,177 @@
+[
+  {
+    "name": "Manual Start",
+    "type": "n8n-nodes-base.manualTrigger",
+    "typeVersion": 1,
+    "parameters": {}
+  },
+  {
+    "name": "Hourly Schedule",
+    "type": "n8n-nodes-base.scheduleTrigger",
+    "typeVersion": 1.4,
+    "parameters": {
+      "rule": {
+        "interval": [
+          {
+            "field": "hours",
+            "hoursInterval": 1,
+            "triggerAtMinute": 10
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Read Image Requests",
+    "type": "n8n-nodes-base.dataTable",
+    "typeVersion": 1.1,
+    "parameters": {
+      "resource": "row",
+      "operation": "get",
+      "dataTableId": {
+        "__rl": true,
+        "mode": "list",
+        "value": "d0S98phwvzjPal6X",
+        "cachedResultName": "Blog - 소소한 기준 - Articles"
+      },
+      "returnAll": true,
+      "filters": {
+        "conditions": [
+          {
+            "keyName": "status",
+            "condition": "eq",
+            "keyValue": "image_pending"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "Select Image Request",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "parameters": {
+      "mode": "runOnceForAllItems",
+      "jsCode": "for(const item of $input.all()){\n  const r=item.json;if(r.status!=='image_pending'||!r.fal_request_id)continue;\n  const base='https://queue.fal.run/fal-ai/flux/requests/'+r.fal_request_id;\n  if(/^[a-zA-Z0-9-]+$/.test(r.fal_request_id)&&r.fal_status_url===base+'/status'&&r.fal_response_url===base)return [{json:r}];\n}\nreturn [];\n"
+    }
+  },
+  {
+    "name": "Read fal Status",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.5,
+    "parameters": {
+      "method": "GET",
+      "url": "={{ $json.fal_status_url }}",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "options": {
+        "timeout": 30000,
+        "redirect": {
+          "redirect": {
+            "followRedirects": false
+          }
+        },
+        "response": {
+          "response": {
+            "responseFormat": "json"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "Images Completed",
+    "type": "n8n-nodes-base.if",
+    "typeVersion": 2.3,
+    "parameters": {
+      "conditions": {
+        "options": {
+          "caseSensitive": true,
+          "leftValue": "",
+          "typeValidation": "strict"
+        },
+        "conditions": [
+          {
+            "leftValue": "={{ $json.status }}",
+            "rightValue": "COMPLETED",
+            "operator": {
+              "type": "string",
+              "operation": "equals"
+            }
+          }
+        ],
+        "combinator": "and"
+      }
+    }
+  },
+  {
+    "name": "Read fal Result",
+    "type": "n8n-nodes-base.httpRequest",
+    "typeVersion": 4.5,
+    "parameters": {
+      "method": "GET",
+      "url": "={{ $('Select Image Request').first().json.fal_response_url }}",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "options": {
+        "timeout": 30000,
+        "redirect": {
+          "redirect": {
+            "followRedirects": false
+          }
+        },
+        "response": {
+          "response": {
+            "responseFormat": "json"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "Validate Images",
+    "type": "n8n-nodes-base.code",
+    "typeVersion": 2,
+    "parameters": {
+      "mode": "runOnceForAllItems",
+      "jsCode": "const row=$('Select Image Request').first().json;const response=$input.first().json;\nconst images=response.images;\nif(!Array.isArray(images)||images.length!==2)throw new Error('Expected two illustrations; inspect fal result');\nfor(const i of images){if(typeof i.url!=='string'||!/^https:\\/\\/(?:[a-z0-9-]+\\.)*fal\\.media\\/[^\\s\\\\]+$/i.test(i.url))throw new Error('Unexpected image host');}\nreturn [{json:{...row,status:'needs_review',images_json:JSON.stringify(images.map((i,n)=>({url:i.url,alt:row.title+' — 설명용 생성 일러스트 '+(n+1),generated:true}))),actual_usd:Number(row.actual_usd||0)+0.006,reserved_usd:0,error:''}}];\n"
+    }
+  },
+  {
+    "name": "Save Review Package",
+    "type": "n8n-nodes-base.dataTable",
+    "typeVersion": 1.1,
+    "parameters": {
+      "resource": "row",
+      "operation": "update",
+      "dataTableId": {
+        "__rl": true,
+        "mode": "list",
+        "value": "d0S98phwvzjPal6X",
+        "cachedResultName": "Blog - 소소한 기준 - Articles"
+      },
+      "matchType": "allConditions",
+      "filters": {
+        "conditions": [
+          {
+            "keyName": "id",
+            "condition": "eq",
+            "keyValue": "={{ $json.id }}"
+          }
+        ]
+      },
+      "columns": {
+        "mappingMode": "defineBelow",
+        "value": {
+          "status": "={{ $json.status }}",
+          "images_json": "={{ $json.images_json }}",
+          "actual_usd": "={{ $json.actual_usd }}",
+          "reserved_usd": "={{ $json.reserved_usd }}",
+          "error": "={{ $json.error }}"
+        },
+        "matchingColumns": []
+      },
+      "options": {}
+    }
+  }
+]
