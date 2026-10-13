@@ -1,10 +1,10 @@
 ---
-import { getBanners, affiliateDisclosure } from '../lib/banners.mjs';
+import { getBanners, bannerDisclosure } from '../lib/banners.mjs';
 const { slot, category }=Astro.props;
 const banners=getBanners(slot,category);
 ---
 {banners.map(banner=><aside class="affiliate-banner" aria-label="쿠팡 파트너스 광고" data-banner-slot={slot}>
-  <div class="banner-label"><span>광고 · 쿠팡 파트너스</span><span>↗</span></div>
+  <div class="banner-label"><span>광고 · 쿠팡 파트너스</span></div>
   {banner.type==='dynamic' ? <div class="dynamic-banner-frame" data-responsive={Boolean(banner.mobile)} style={`--desktop-width:${banner.desktop.width}px;--desktop-ratio:${banner.desktop.width}/${banner.desktop.height};--mobile-width:${banner.mobile?.width||banner.desktop.width}px;--mobile-ratio:${banner.mobile?.width||banner.desktop.width}/${banner.mobile?.height||banner.desktop.height}`}>
     <div class="dynamic-banner-mount" data-coupang-widget={JSON.stringify({widget:banner.widget,mobileWidget:banner.mobileWidget,desktop:banner.desktop,mobile:banner.mobile})}></div>
     <noscript>추천 상품 광고는 JavaScript를 켜면 표시됩니다.</noscript>
@@ -14,7 +14,7 @@ const banners=getBanners(slot,category);
       <img src={banner.desktop.src} alt={banner.alt} width={banner.desktop.width} height={banner.desktop.height} loading="lazy" decoding="async" />
     </picture>
   </a>}
-  <p class="banner-disclosure">{affiliateDisclosure}</p>
+  <p class="banner-disclosure">{bannerDisclosure}</p>
 </aside>)}
 <script>
   import { initialiseCoupangBanners } from '../lib/coupang-client.mjs';

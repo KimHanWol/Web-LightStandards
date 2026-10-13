@@ -1,6 +1,6 @@
 export const site = {
-  name: '소소한 기준', englishName: 'LightStandards', tagline: '잘 고르고, 오래 쓰는 생활.',
-  description: '제품의 조건과 차이를 살펴보고, 내 생활에 맞는 선택을 돕는 쓸모 있는 기록.',
+  name: '소소한 기준', englishName: 'LightStandards', tagline: '정보 블로그',
+  description: '궁금한 내용을 검색하고 주제별 글을 찾아볼 수 있는 정보 블로그, 소소한 기준.',
   url: import.meta.env.PUBLIC_SITE_URL || 'http://localhost:4321',
   ready: import.meta.env.PUBLIC_SITE_READY === 'true',
   email: import.meta.env.PUBLIC_CONTACT_EMAIL || 'linkingmain@gmail.com'

@@ -14,7 +14,7 @@ const adSlot = import.meta.env.PUBLIC_ADSENSE_SLOT || '';
 const adsEnabled = site.ready && /^ca-pub-\d{16}$/.test(adClient) && /^\d+$/.test(adSlot);
 const related = getArticles().filter(a=>a.articleId!==article.articleId&&a.category===article.category).slice(0,3);
 const showSidebar=hasBanners(['article-sidebar-top','article-sidebar-bottom'],article.category);
-const hasAffiliateContent=article.affiliates.length>0||hasBanners(['article-top','article-middle','article-bottom','article-sidebar-top','article-sidebar-bottom'],article.category);
+const hasAffiliateContent=article.affiliates.length>0;
 const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPosting',headline:article.title,description:article.description,datePublished:article.publishedAt,dateModified:article.approvedAt,author:{'@type':'Organization',name:site.name,url:site.url},mainEntityOfPage:new URL(`/notes/${article.articleId}/`,site.url).href,image:article.images.filter(i=>i.localPath).map(i=>new URL(i.localPath,site.url).href)}).replaceAll('<','\\u003c');
 ---
 <Layout title={article.title} description={article.description}>
