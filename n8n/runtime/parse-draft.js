@@ -3,13 +3,16 @@ const response=$input.first().json;
 const result={...row,status:'needs_review',title:'',description:'',body_markdown:'',image_prompt:'',character_count:0,error:'',openai_response_id:response.id||''};
 const input=Number(response.usage?.input_tokens),output=Number(response.usage?.output_tokens);
 if(Number.isFinite(input)&&Number.isFinite(output)){
-  result.actual_usd=(input*0.4+output*1.6)/1000000;
+  result.actual_usd=Number(row.actual_usd||0)+(input*0.4+output*1.6)/1000000;
   result.reserved_usd=0;
 }
 try {
   if(response.error||response.status!=='completed') throw new Error('OpenAI result incomplete; inspect execution before retry');
-  const text=response.output.flatMap(o=>o.content||[]).filter(c=>c.type==='output_text').map(c=>c.text).join('');
-  const draft=JSON.parse(text.replace(/^```(?:json)?\s*|\s*```$/g,''));
+  const chunks=response.output.flatMap(o=>o.content||[]).filter(c=>c.type==='output_text').map(c=>c.text);
+  // n8n may parse JSON-format output_text into an object; the raw API uses strings.
+  const draft=chunks.length===1&&chunks[0]!==null&&typeof chunks[0]==='object'&&!Array.isArray(chunks[0])
+    ? chunks[0]
+    : JSON.parse(chunks.map(text=>typeof text==='string'?text:JSON.stringify(text)).join('').replace(/^```(?:json)?\s*|\s*```$/g,''));
   if(draft.canWrite!==true) throw new Error(draft.holdReason||'Insufficient source evidence');
   result.title=String(draft.title||'');result.description=String(draft.description||'');result.body_markdown=String(draft.markdown||'');result.image_prompt=String(draft.imagePrompt||'');
   const md=result.body_markdown;

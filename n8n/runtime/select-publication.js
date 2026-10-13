@@ -2,7 +2,7 @@ const c=$('Configuration').first().json;if(!c.enabled)return [];
 if(!/^[\w.-]+$/.test(c.repo_owner)||!/^[\w.-]+$/.test(c.repo_name))throw new Error('Configure GitHub repository');
 if(!/^https:\/\/[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?\.[a-z]{2,}\/?$/i.test(c.site_url))throw new Error('Configure HTTPS site origin');
 const origin=c.site_url.replace(/\/$/,'');
-const rows=$input.all().map(i=>i.json);
+const rows=$input.all().map(i=>i.json).filter(row=>!row.article_id?.startsWith('test-'));
 const row=rows.find(r=>r.status==='publishing')||rows.find(r=>r.status==='approved'&&Date.parse(r.scheduled_at)<=Date.now());
 if(!row)return [];
 const p=JSON.parse(row.publish_payload);const sources=JSON.parse(row.sources_json).map(({title,url,checkedAt})=>({title,url,checkedAt}));

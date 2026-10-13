@@ -16,7 +16,7 @@ for (const row of rows.filter(r=>r.status==='ready').sort((a,b)=>a.id-b.id)) {
     if(!sources.every(s=>s.title&&/^https:\/\//.test(s.url)&&s.reviewed===true&&s.checkedAt&&s.excerpt?.length>=300)) continue;
     const brief=JSON.stringify({keyword:row.keyword,category:row.category,sources,existingTitles:rows.filter(r=>r.title).map(r=>r.title).slice(-80)});
     if(brief.length>25000||sources.reduce((n,s)=>n+s.excerpt.length,0)<2000) continue;
-    return [{json:{...row,brief,revision:Number(row.revision||0)+1,reserved_usd:config.reserve_usd,actual_usd:0,budget_month:month,generation_day:today,claim_id:String($execution.id)}}];
+    return [{json:{...row,brief,revision:Number(row.revision||0)+1,reserved_usd:config.reserve_usd,actual_usd:Number(row.actual_usd||0),budget_month:month,generation_day:today,claim_id:String($execution.id)}}];
   } catch { continue; }
 }
 return [];

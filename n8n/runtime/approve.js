@@ -2,6 +2,7 @@ const c=$('Configuration').first().json;
 if(!c.article_id||!c.approved_by||!c.revision)return [];
 const row=$input.all().map(i=>i.json).find(r=>r.article_id===c.article_id);
 if(!row||row.status!=='needs_review'||Number(row.revision)!==Number(c.revision))throw new Error('Select an existing reviewed article and its current revision');
+if(row.article_id.startsWith('test-'))throw new Error('Test articles cannot be approved for publication');
 if(row.error||Number(row.character_count)<5000)throw new Error('Resolve editorial errors before approval');
 const images=JSON.parse(row.images_json||'[]'),sources=JSON.parse(row.sources_json||'[]'),affiliates=JSON.parse(row.affiliate_json||'[]');
 if(images.length!==2||sources.length<2||!sources.every(s=>s.reviewed===true))throw new Error('Review images and sources first');
