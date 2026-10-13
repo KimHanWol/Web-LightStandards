@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getArticles, readingTime, categories } from '../lib/articles.mjs';
+import { getArticles, readingTime, formatPublishedDate, categories } from '../lib/articles.mjs';
 import AffiliateBanner from '../components/AffiliateBanner.astro';
 const articles=getArticles();
 const groups=categories.filter(category=>category!=='전체').map(category=>({category,articles:articles.filter(article=>article.category===category).slice(0,4)}));
@@ -12,7 +12,7 @@ const groups=categories.filter(category=>category!=='전체').map(category=>({ca
       <div class="feed-grid">{articles.map((article,index)=><>
         <a class:list={['feed-card',{'feed-card-lead':index===0}]} href={`/notes/${article.articleId}/`} data-article data-category={article.category} data-search={`${article.title} ${article.description}`}>
         <div class:list={['feed-image',{'no-image':!article.images[0]?.localPath}]}><img src={article.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={article.images[0]?.alt||''} width={article.images[0]?.localPath?1024:256} height={article.images[0]?.localPath?768:256} loading={index===0?'eager':'lazy'} decoding="async"/></div>
-        <div class="feed-card-copy"><p class="feed-category">{article.category}</p><h2>{article.title}</h2><p class="feed-summary">{article.description}</p><div class="feed-meta"><time datetime={article.publishedAt}>{article.publishedAt.slice(0,10).replaceAll('-','.')}</time><span>{readingTime(article)}분 읽기</span></div></div>
+        <div class="feed-card-copy"><p class="feed-category">{article.category}</p><h2>{article.title}</h2><p class="feed-summary">{article.description}</p><div class="feed-meta"><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt).replaceAll('-','.')}</time><span>{readingTime(article)}분 읽기</span></div></div>
         </a>
         {index===Math.min(4,articles.length-1)&&<div class="feed-ad" data-feed-ad><AffiliateBanner slot="home-middle"/></div>}
       </>)}</div>
@@ -21,7 +21,7 @@ const groups=categories.filter(category=>category!=='전체').map(category=>({ca
         <h2>아직 발행된 글이 없습니다.</h2><p>새 글이 올라오면 이곳에서 확인할 수 있습니다.</p>
       </div>}
       <p id="feed-empty-search" class="feed-no-results" role="status" aria-live="polite" hidden>검색 결과가 없습니다. 다른 검색어를 입력해 주세요.</p>
-      {articles.length>=8&&<div id="category-groups">{groups.map(group=><section class="feed-group"><h2><a href={`/?category=${encodeURIComponent(group.category)}#articles`}>{group.category}</a></h2><ul>{group.articles.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{article.publishedAt.slice(0,10)}</time></li>)}</ul></section>)}</div>}
+      {articles.length>=8&&<div id="category-groups">{groups.map(group=><section class="feed-group"><h2><a href={`/?category=${encodeURIComponent(group.category)}#articles`}>{group.category}</a></h2><ul>{group.articles.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></li>)}</ul></section>)}</div>}
     </section>
   </div>
 </Layout>

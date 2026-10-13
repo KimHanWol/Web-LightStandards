@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getArticles, readingTime } from '../../lib/articles.mjs';
+import { getArticles, readingTime, formatPublishedDate } from '../../lib/articles.mjs';
 import { prepareArticle } from '../../lib/article-layout.mjs';
 import { site } from '../../lib/site.mjs';
 import AffiliateBanner from '../../components/AffiliateBanner.astro';
@@ -21,7 +21,7 @@ const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPost
   <div class:list={['article-page','wrap',{'with-banner-sidebar':showSidebar}]}>
   <article class="article-layout">
     <a class="back-link" href="/">← 전체 글</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
-    <div class="article-byline">{site.name} <span>·</span> {article.publishedAt.slice(0,10)} <span>·</span> {readingTime(article)}분 읽기</div>
+    <div class="article-byline">{site.name} <span>·</span> {formatPublishedDate(article.publishedAt)} <span>·</span> {readingTime(article)}분 읽기</div>
     {hasAffiliateContent&&<aside class="disclosure">{affiliateDisclosure}</aside>}
     {headings.length>0&&<nav class="article-toc" aria-label="이 글의 목차"><strong>이 글에서 바로 찾기</strong><ol>{headings.map(h=><li><a href={'#'+h.id}>{h.title}</a></li>)}</ol></nav>}
     <div class="article-body">{sections.map((section,index)=><><div set:html={section.html}/>{section.images.filter(image=>image.localPath).map(image=><figure><img src={image.localPath} alt={image.alt} width="1024" height="768" loading={image.lead?'eager':'lazy'} fetchpriority={image.lead?'high':'auto'}/><figcaption>이해를 돕기 위한 AI 생성 설명 이미지입니다.</figcaption></figure>)}{index===Math.min(1,sections.length-1)&&<AffiliateBanner slot="article-top" category={article.category}/>} {index===Math.max(2,Math.floor(sections.length/2))&&<AffiliateBanner slot="article-middle" category={article.category}/>}</>)}</div>

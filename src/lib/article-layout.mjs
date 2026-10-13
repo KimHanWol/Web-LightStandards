@@ -1,4 +1,7 @@
 import { renderMarkdown } from './content.mjs';
+export function formatPublishedDate(value) {
+  return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value));
+}
 export function prepareArticle(markdown, images) {
   const headings=[];
   const html=renderMarkdown(markdown).replace(/<h2>(.*?)<\/h2>/g,(_,title)=>{
