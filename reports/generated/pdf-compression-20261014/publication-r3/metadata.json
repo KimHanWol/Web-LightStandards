@@ -31,7 +31,7 @@
       "generated": true
     }
   ],
-  "published": false,
+  "published": true,
   "sources": [
     {
       "title": "Adobe Acrobat — PDF 파일 크기 줄이기",
@@ -69,5 +69,13 @@
     "2337",
     "2338",
     "2339"
-  ]
+  ],
+  "publicUrl": "https://lightstandards.linkingmain.workers.dev/notes/pdf-compression-20261014/",
+  "approvedRevision": 3,
+  "gitCommit": "1866769283f7d15446ccb4b368a7ee6341072acf",
+  "githubActionsRun": 38439121446,
+  "approvalExecution": "2340",
+  "commitExecution": "2341",
+  "manifestConfirmationExecution": "2342",
+  "renderedCharacters": 7050
 }

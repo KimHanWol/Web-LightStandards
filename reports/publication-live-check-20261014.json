@@ -1,0 +1,46 @@
+{
+  "articleStatus": 200,
+  "figureCount": 5,
+  "tableCount": 1,
+  "tocLinks": 10,
+  "dateIsSeoul": true,
+  "bannerLabels": true,
+  "verticalBanner": true,
+  "media": [
+    {
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 40472
+    },
+    {
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 40566
+    },
+    {
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 23672
+    },
+    {
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 19004
+    },
+    {
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 10786
+    }
+  ],
+  "manifest": {
+    "articles": [
+      {
+        "articleId": "pdf-compression-20261014",
+        "revision": 3
+      }
+    ]
+  },
+  "homeStatus": 200,
+  "homeHasArticle": true
+}
