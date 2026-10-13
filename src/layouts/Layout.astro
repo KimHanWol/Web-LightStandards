@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/polish.css';
+import '../styles/editorial.css';
 import { site } from '../lib/site.mjs';
 const { title = site.name, description = site.description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
@@ -14,24 +15,28 @@ const naverVerification = import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION;
     <title>{title === site.name ? `${site.name} — ${site.tagline}` : `${title} | ${site.name}`}</title>
     <meta name="description" content={description} /><meta name="theme-color" content="#f7f5ef" />
     <meta name="robots" content={noindex || !site.ready ? 'noindex, nofollow' : 'index, follow'} />
-    <link rel="canonical" href={canonical} /><link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} /><link rel="icon" href="/brand/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
     <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
     <meta property="og:type" content="website" /><meta property="og:url" content={canonical} />
     <meta property="og:locale" content="ko_KR" /><meta property="og:site_name" content={site.name} />
+    <meta property="og:image" content={new URL('/brand/everyday-hero.webp',site.url).href} />
     {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
     {naverVerification && <meta name="naver-site-verification" content={naverVerification} />}
     <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 바로가기</a>
+    <div class="publication-strip"><div class="wrap"><span>생활을 고르는 작은 기준</span><span>LIGHTSTANDARDS</span></div></div>
     <header class="site-header wrap">
-      <a href="/" class="wordmark" aria-label="소소한 기준 홈"><span class="brand-icon">소</span>소소한 기준<span class="wordmark-dot">.</span></a>
-      <nav aria-label="주 메뉴"><a href="/#notes">모든 노트</a><a href="/about/">소소한 기준 소개</a><a href="/editorial/">편집 원칙 <span>↗</span></a></nav>
+      <a href="/" class="wordmark" aria-label="소소한 기준 홈"><img class="brand-symbol" src="/brand/lightstandards-mark.png" alt="" width="52" height="52"/><span class="brand-type">소소한 기준<small>일상을 위한 선택의 기록</small></span></a>
+      <nav aria-label="주 메뉴"><a href="/#notes">모든 노트</a><a href="/about/">소개</a><a href="/editorial/">편집 원칙 <span aria-hidden="true">↗</span></a></nav>
     </header>
+    <nav class="topic-navigation wrap" aria-label="주제별 노트"><a href="/?category=생활 도구#notes">생활 도구</a><a href="/?category=디지털 생활#notes">디지털 생활</a><a href="/?category=공간과 수납#notes">공간과 수납</a><a href="/?category=선택 가이드#notes">선택 가이드</a><span>잘 고르고, 오래 쓰는 생활.</span></nav>
     <main id="main"><slot /></main>
     <footer class="site-footer wrap">
-      <div><a href="/" class="footer-brand">소소한 기준.</a><p>생활의 작은 선택에, 쓸모 있는 한 장.</p></div>
+      <div class="footer-identity"><a href="/" class="footer-brand"><img src="/brand/lightstandards-mark.png" alt="" width="40" height="40"/>소소한 기준</a><p>생활의 작은 선택에, 쓸모 있는 한 장.</p><span class="footer-english">LIGHTSTANDARDS</span></div>
       <div class="footer-links"><a href="/about/">소개</a><a href="/contact/">문의</a><a href="/editorial/">편집 원칙</a><a href="/privacy/">개인정보처리방침</a><a href="/disclosure/">광고·제휴 안내</a><a href="/rss.xml">RSS</a></div>
       <small>© {new Date().getFullYear()} 소소한 기준</small>
     </footer>

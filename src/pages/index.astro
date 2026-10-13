@@ -2,45 +2,74 @@
 import Layout from '../layouts/Layout.astro';
 import { getArticles, readingTime, categories } from '../lib/articles.mjs';
 import AffiliateBanner from '../components/AffiliateBanner.astro';
-const articles = getArticles();
-const topics = [
-  {n:'01',title:'사양보다 중요한 건,\n나에게 맞는 조건.',text:'비슷해 보이는 제품의 차이를 읽는 선택 가이드.',category:'선택 가이드',shape:'circles'},
-  {n:'02',title:'연결은 간단하게.\n생활은 더 편하게.',text:'매일 쓰는 기기와 주변 도구를 이해하는 노트.',category:'디지털 생활',shape:'lines'},
-  {n:'03',title:'작은 공간에도\n좋은 해답은 있다.',text:'치수와 동선을 먼저 생각하는 공간의 기록.',category:'공간과 수납',shape:'blocks'}
+const articles=getArticles();
+const topics=[
+  {number:'01',title:'매일 쓰는 물건의 이유',text:'자주 손이 가는 생활 도구. 재료와 쓰임을 살펴봅니다.',category:'생활 도구',image:'/brand/everyday-hero.webp'},
+  {number:'02',title:'편리함에도 기준이 필요해',text:'기능을 더하기 전에, 나에게 필요한 조건부터.',category:'디지털 생활',image:'/brand/digital-tools.webp'},
+  {number:'03',title:'공간은 작아도, 생활은 넉넉하게',text:'치수와 동선으로 찾는 수납과 작은 공간의 해답.',category:'공간과 수납',image:'/brand/quiet-storage.webp'}
 ];
+const categoryImage=(category)=>topics.find(topic=>topic.category===category)?.image||'/brand/everyday-hero.webp';
 ---
 <Layout>
-  <section class="hero wrap">
-    <div class="hero-copy"><p class="eyebrow"><span></span> EVERYDAY, A LITTLE WISER</p><h1>잘 고르고,<br/>오래 쓰는 <em>생활.</em></h1><p class="hero-description">복잡한 정보는 덜어내고, 필요한 기준은 선명하게.<br/>당신의 일상에 쓸모 있는 선택을 기록합니다.</p><a class="primary-link" href="#notes">쓸모 있는 노트 읽기 <span>↗</span></a></div>
-    <div class="hero-art" aria-hidden="true"><div class="art-grid"></div><div class="paper paper-back"></div><div class="paper paper-front"><span class="paper-label">LIGHTSTANDARDS / 001</span><div class="paper-heading">작은 선택,<br/>좋은 기준.</div><div class="paper-rule"></div><div class="paper-small">필요한 것을 알아보는 눈.<br/>소소한 기준에서 함께 기릅니다.</div><div class="paper-mark">✓</div></div><div class="art-stamp">KEEP<br/>WHAT<br/>MATTERS</div><span class="art-caption">A NOTE FOR BETTER EVERYDAY</span></div>
+  <section class="cover-story wrap" aria-labelledby="cover-title">
+    <div class="cover-copy">
+      <p class="edition-label"><span class="edition-rule"></span> 소소한 기준의 시선</p>
+      <h1 id="cover-title">사소한 선택을,<br/><em>좋은 기준으로.</em></h1>
+      <p class="cover-description">한 번 사고 오래 쓰는 물건.<br/>조금 더 편해지는 공간.<br/>일상의 작은 선택을 차근차근 살펴봅니다.</p>
+      <a class="cover-link" href="#themes">우리의 관심사 살펴보기 <span aria-hidden="true">↗</span></a>
+      <div class="cover-footnote"><span>작은 선택, 분명한 이유.</span><span>소소한 기준</span></div>
+    </div>
+    <figure class="cover-photograph">
+      <img src="/brand/everyday-hero.webp" srcset="/brand/everyday-hero-small.webp 768w, /brand/everyday-hero.webp 1536w" sizes="(max-width: 700px) calc(100vw - 36px), 58vw" alt="햇살이 드는 나무 테이블 위의 노트와 생활 도구" width="1536" height="1024" fetchpriority="high"/>
+      <figcaption><span>EVERYDAY, WITH A LITTLE MORE THOUGHT</span><span>AI 생성 브랜드 이미지</span></figcaption>
+    </figure>
   </section>
-  <div class="manifesto"><div class="wrap"><span>조건을 확인하고</span><b>·</b><span>차이를 비교하고</span><b>·</b><span>오래 쓸 것을 고릅니다</span><span class="manifesto-end">SMALL CHOICES, CLEAR REASONS ↗</span></div></div>
-  <section id="notes" class="notes-section wrap">
-    <AffiliateBanner slot="home-top" />
-    <div class="section-heading"><div><p class="eyebrow">USEFUL NOTES</p><h2>지금, 쓸모 있는 이야기</h2></div><label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="궁금한 내용을 찾아보세요" aria-label="노트 검색" /></label></div>
-    <div class="filter-tabs" role="group" aria-label="주제 선택">{categories.map((c,i)=><button class={i===0?'active':''} data-category={c} aria-pressed={i===0?'true':'false'}>{c}</button>)}</div>
-    {articles.length > 0 ? <div class="article-grid">{articles.map(a=><a class="article-card" href={`/notes/${a.articleId}/`} data-article data-category={a.category} data-search={`${a.title} ${a.description}`}><div class="card-image">{a.images[0]?.localPath ? <img src={a.images[0].localPath} alt={a.images[0].alt} width="1024" height="768" loading="lazy" /> : <span class="card-glyph">쓸모<br/>있는<br/>기록.</span>}</div><span class="category-label">{a.category}</span><h3>{a.title}</h3><p>{a.description}</p><div class="card-meta"><span>{a.publishedAt.slice(0,10).replaceAll('-','.')} · {readingTime(a)}분 읽기</span><span>↗</span></div></a>)}</div> : <div class="topic-grid">{topics.map(t=><button class="topic-card" data-topic={t.category}><div class={`topic-visual ${t.shape}`} aria-hidden="true"><i></i><i></i><i></i><span>{t.n}</span></div><span class="category-label">{t.category}</span><h3>{t.title.split('\n').map(line=><span>{line}<br/></span>)}</h3><p>{t.text}</p><span class="topic-action">이 주제의 노트 살펴보기 <b>↗</b></span></button>)}</div>}
-    <p id="empty-search" class="empty-state" role="status" aria-live="polite" hidden>아직 이 조건에 맞는 노트가 없습니다. 다른 검색어나 주제를 선택해 보세요.</p>
-    {articles.length===0 && <p class="first-note">첫 번째 노트를 준비하고 있습니다. 확인한 자료와 분명한 기준으로 찾아올게요.</p>}
-    <AffiliateBanner slot="home-middle" />
+
+  <section id="themes" class="themes-section wrap" aria-labelledby="themes-title">
+    <div class="editorial-heading"><div><p class="section-kicker">우리가 살펴보는 것들</p><h2 id="themes-title">생활을 읽는 세 가지 시선</h2></div><p class="section-note">물건에서 공간까지,<br/>필요한 이유를 먼저 생각합니다.</p></div>
+    <div class="theme-grid">{topics.map(topic=><a class="theme-card" href={`/?category=${encodeURIComponent(topic.category)}#notes`}>
+      <div class="theme-image"><img src={topic.image} alt="" width="768" height="512" loading="lazy" decoding="async"/><span class="theme-number">{topic.number}</span></div>
+      <div class="theme-category"><span>{topic.category}</span><span aria-hidden="true">↗</span></div>
+      <h3>{topic.title}</h3><p>{topic.text}</p>
+    </a>)}</div>
   </section>
-  <section class="editorial-band wrap"><span class="large-asterisk">✳</span><div><p class="eyebrow">OUR EDITORIAL PROMISE</p><h2>추천보다 먼저, 이유를 씁니다.</h2><p>확인한 사실에는 출처를, 비교에는 기준을.<br/>직접 써본 경험과 자료로 살펴본 정보를 구분합니다.</p></div><a href="/editorial/">우리가 기록하는 방식 <span>↗</span></a></section>
-  <div class="wrap"><AffiliateBanner slot="home-bottom" /></div>
+
+  <section id="notes" class="notes-section wrap" aria-labelledby="notes-title">
+    <AffiliateBanner slot="home-top"/>
+    <div class="editorial-heading"><div><p class="section-kicker">차근차근 모아두는 기록</p><h2 id="notes-title">새로 쓴 노트</h2></div><label class="note-search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search" type="search" placeholder="궁금한 내용을 찾아보세요" aria-label="노트 검색"/></label></div>
+    <div class="filter-tabs" role="group" aria-label="주제 선택">{categories.map((category,index)=><button class={index===0?'active':''} data-category={category} aria-pressed={index===0?'true':'false'}>{category}</button>)}</div>
+    {articles.length>0&&<div class="article-grid">{articles.map(article=><a class="article-card" href={`/notes/${article.articleId}/`} data-article data-category={article.category} data-search={`${article.title} ${article.description}`}>
+      <div class="card-image"><img src={article.images[0]?.localPath||categoryImage(article.category)} alt={article.images[0]?.alt||''} width="1024" height="768" loading="lazy" decoding="async"/></div>
+      <span class="category-label">{article.category}</span><h3>{article.title}</h3><p>{article.description}</p><div class="card-meta"><span>{article.publishedAt.slice(0,10).replaceAll('-','.')} · {readingTime(article)}분 읽기</span><span aria-hidden="true">↗</span></div>
+    </a>)}</div>}
+    <div id="first-note" class="note-empty" hidden={articles.length>0}><img src="/brand/lightstandards-mark.png" alt="" width="48" height="48"/><div><h3>첫 번째 노트를 준비하고 있습니다.</h3><p>확인한 자료와 분명한 기준으로, 차근차근 채워갈게요.</p></div></div>
+    <p id="empty-search" class="note-empty" role="status" aria-live="polite" hidden>아직 이 조건에 맞는 노트가 없습니다. 다른 검색어나 주제를 선택해 보세요.</p>
+    <AffiliateBanner slot="home-middle"/>
+  </section>
+
+  <section class="editor-letter wrap" aria-labelledby="letter-title">
+    <div class="letter-symbol"><img src="/brand/lightstandards-mark.png" alt="" width="90" height="90"/><span>소소한 기준의 약속</span></div>
+    <div class="letter-copy"><p class="section-kicker">한 장의 노트를 쓰는 마음</p><h2 id="letter-title">추천보다 먼저,<br/>이유를 씁니다.</h2><p>비슷해 보이는 물건 사이의 작은 차이.<br/>누군가에게는 꼭 필요한, 다른 누군가에게는 필요 없는 기능.<br/>무엇을 고를지보다 왜 고르는지를 함께 생각합니다.</p><a class="text-link" href="/editorial/">편집 원칙 읽기 <span aria-hidden="true">↗</span></a></div>
+    <div class="letter-margin"><span>LESS, BUT<br/>WITH REASON.</span><span>LIGHTSTANDARDS</span></div>
+  </section>
+  <div class="wrap"><AffiliateBanner slot="home-bottom"/></div>
 </Layout>
 <script>
-  let category = '전체';
-  const search = document.querySelector<HTMLInputElement>('#search');
-  function filter() {
-    const query = search?.value.trim().toLowerCase() || '';
-    let visible = 0;
-    document.querySelectorAll<HTMLElement>('[data-article]').forEach(card => { const match = (category==='전체'||card.dataset.category===category) && (card.dataset.search||'').toLowerCase().includes(query); card.hidden=!match; if(match) visible++; });
-    const empty = document.querySelector<HTMLElement>('#empty-search');
-    if(empty) empty.hidden = visible>0 || (category==='전체'&&!query);
-    const topics = document.querySelector<HTMLElement>('.topic-grid');
-    if(topics) topics.hidden = Boolean(query) || category!=='전체';
-    document.querySelectorAll<HTMLElement>('[data-category]:not([data-article])').forEach(b=>{b.classList.toggle('active',b.dataset.category===category); b.setAttribute('aria-pressed',String(b.dataset.category===category));});
+  const categoryNames=['전체','생활 도구','디지털 생활','공간과 수납','선택 가이드'];
+  const requestedCategory=new URLSearchParams(window.location.search).get('category');
+  let category=categoryNames.includes(requestedCategory||'')?requestedCategory||'전체':'전체';
+  const search=document.querySelector<HTMLInputElement>('#search');
+  function filter(){
+    const query=search?.value.trim().toLowerCase()||'';
+    let visible=0;
+    document.querySelectorAll<HTMLElement>('[data-article]').forEach(card=>{const match=(category==='전체'||card.dataset.category===category)&&(card.dataset.search||'').toLowerCase().includes(query);card.hidden=!match;if(match)visible++;});
+    const empty=document.querySelector<HTMLElement>('#empty-search');
+    if(empty)empty.hidden=visible>0||(category==='전체'&&!query);
+    const first=document.querySelector<HTMLElement>('#first-note');
+    if(first)first.hidden=Boolean(query)||category!=='전체'||document.querySelectorAll('[data-article]').length>0;
+    document.querySelectorAll<HTMLButtonElement>('.filter-tabs button').forEach(button=>{const selected=button.dataset.category===category;button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));});
   }
-  document.querySelectorAll<HTMLButtonElement>('.filter-tabs button').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category||'전체';filter();}));
-  document.querySelectorAll<HTMLButtonElement>('[data-topic]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.topic||'전체';filter();document.querySelector('#notes')?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}));
+  document.querySelectorAll<HTMLButtonElement>('.filter-tabs button').forEach(button=>button.addEventListener('click',()=>{category=button.dataset.category||'전체';filter();}));
   search?.addEventListener('input',filter);
+  filter();
 </script>
