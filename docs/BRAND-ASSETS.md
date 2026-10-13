@@ -1,6 +1,26 @@
 # LightStandards 브랜드 자산
 
-2026-10-14 수정: 사용자가 고정 생활 주제와 잡지형 브랜드 소개 구성을 거부했습니다. 아래 생성 사진과 기존 편집 구성은 제작 이력으로만 보관하며 현재 홈페이지에서는 사용하지 않습니다. 로고만 유지합니다. 현행 홈페이지는 [Lifewire](https://www.lifewire.com/)의 실제 화면에서 확인한 검색·기사 목록·광고 배치를 참고하며, 해당 매체의 기술 주제를 우리 주제로 가져오지 않습니다. 고정 카테고리, 브랜드 철학 소개, 편집 원칙 페이지와 메뉴는 제거했습니다.
+## 현재 로고 — 남색 인덱스 심볼
+
+2026-10-14 후속 수정에서 녹색 LS 로고를 교체했습니다. 기본 제공 image_gen으로 새로 생성한 투명 PNG를 사용합니다. 한국어와 영어 워드마크는 HTML 텍스트로 표시합니다. 원본을 유지한 채 투명 여백 정리와 크기 축소만 Sharp로 수행했습니다.
+
+| 자산 | 최종 파일 | 크기 |
+| --- | --- | --- |
+| 남색·파란색 심볼 | `public/brand/lightstandards-mark-v2.png` | 256×256, 약 28KB |
+| 파비콘 | `public/brand/favicon-v2.png` | 64×64, 약 2.5KB |
+| 홈 화면 아이콘 | `public/brand/apple-touch-icon-v2.png` | 180×180, 약 13KB |
+
+원본: `C:/Users/wssh0/.codex/generated_images/01a13071-029e-7001-88bf-0ec92b728bf2/exec-dbb0b833-1cd0-4ed0-921a-a043ea140a39.png`.
+
+현재 로고의 전체 생성 프롬프트:
+
+```text
+Use case: logo-brand. Design one exceptionally simple flat symbol for LightStandards, a broad Korean search-driven information publication named 소소한 기준. This is a completely new identity replacing a rejected green LS folded-book logo. Symbol only; no letters or typography. A compact custom editorial punctuation mark: two precisely aligned thick rounded horizontal ink strokes, one short vertical connector forming a subtle open quotation or index shape, and one tiny separate cobalt-blue square accent. A distinctive strong silhouette, considered negative space, excellent recognition at 24px. Dark navy ink #182938 and a single cobalt accent #476cf0. Clean solid shapes, optically balanced spacing, flat vector-like edges, minimal European digital publication brand feel. One icon centered on a genuine transparent square background, filling 75% of canvas. No book, no folded paper, no LS lettering, no sun, no leaf, no gradients, no lighting, no texture, no shadows, no 3D, no mockups, no sheet of variations, no words or watermarks.
+```
+
+## 이전 자산 제작 이력
+
+2026-10-14 수정: 사용자가 고정 생활 주제와 잡지형 브랜드 소개 구성을 거부했습니다. 아래 생성 사진과 이전 로고·편집 구성은 제작 이력으로만 보관하며 현재 홈페이지에서는 사용하지 않습니다. 현행 홈페이지는 [Lifewire](https://www.lifewire.com/)의 실제 화면에서 확인한 검색·기사 목록·광고 배치를 참고하며, 해당 매체의 기술 주제를 우리 주제로 가져오지 않습니다. 고정 카테고리, 브랜드 철학 소개, 편집 원칙 페이지와 메뉴는 제거했습니다.
 
 2026-10-13 제작. 기본 제공 `image_gen` 도구를 사용했으며 기존 n8n OpenAI/fal credential 또는 유료 워크플로를 실행하지 않았습니다. 원본은 생성 이미지 보관 폴더에 유지하고, 사이트에 쓰는 최종 자산은 `public/brand/`에 저장했습니다. 사진은 생성된 브랜드 연출 이미지이며 실제 제품 테스트나 사용 경험의 증거가 아닙니다.
 

@@ -21,15 +21,15 @@ const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPost
   <Fragment slot="head"><script type="application/ld+json" set:html={jsonLd} />{adsEnabled && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossorigin="anonymous"></script>}</Fragment>
   <div class:list={['article-page','wrap',{'with-banner-sidebar':showSidebar}]}>
   <article class="article-layout">
-    <a class="back-link" href="/">← 모든 노트</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
-    <div class="article-byline">소소한 기준 편집팀 <span>·</span> {article.publishedAt.slice(0,10)} <span>·</span> {readingTime(article)}분 읽기</div>
+    <a class="back-link" href="/">← 전체 글</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
+    <div class="article-byline">{site.name} <span>·</span> {article.publishedAt.slice(0,10)} <span>·</span> {readingTime(article)}분 읽기</div>
     {hasAffiliateContent&&<aside class="disclosure">{affiliateDisclosure}</aside>}
     <div class="article-body">{sections.map((section,index)=><><div set:html={section}/>{(index===1||index===Math.max(2,Math.floor(sections.length/2)))&&article.images[index===1?0:1]?.localPath&&<figure><img src={article.images[index===1?0:1].localPath} alt={article.images[index===1?0:1].alt} width="1024" height="768" loading="lazy"/><figcaption>이해를 돕기 위한 AI 생성 설명 이미지입니다.</figcaption></figure>}{index===Math.min(1,sections.length-1)&&<AffiliateBanner slot="article-top" category={article.category}/>} {index===Math.max(2,Math.floor(sections.length/2))&&<AffiliateBanner slot="article-middle" category={article.category}/>}</>)}</div>
     <AffiliateBanner slot="article-bottom" category={article.category}/>
     {article.affiliates.length>0&&<section class="product-section"><h2>함께 살펴볼 제품</h2>{article.affiliates.map(p=><a class="product-link" href={p.url} rel="sponsored noopener noreferrer" target="_blank"><div><strong>{p.label}</strong>{p.note&&<p>{p.note}</p>}</div><span>쿠팡에서 확인 ↗</span></a>)}<small>가격·재고·배송 조건은 판매 페이지에서 확인해 주세요.</small></section>}
     <section class="source-section"><h2>확인한 자료</h2><ol>{article.sources.map(s=><li><a href={s.url} rel="noopener noreferrer" target="_blank">{s.title} ↗</a><span>확인 {s.checkedAt.slice(0,10)}</span></li>)}</ol><p>자료 기반 설명과 실제 사용 경험을 구분합니다. 오류 제보는 <a href="/contact/">문의 안내</a>를 이용해 주세요.</p></section>
     {adsEnabled&&<div class="ad-slot"><small>광고</small><ins class="adsbygoogle" style="display:block" data-ad-client={adClient} data-ad-slot={adSlot} data-ad-format="auto" data-full-width-responsive="true"></ins><script is:inline>(window.adsbygoogle = window.adsbygoogle || []).push({});</script></div>}
-    {related.length>0&&<section class="related"><h2>이어서 읽어볼 노트</h2>{related.map(a=><a href={`/notes/${a.articleId}/`}>{a.title} ↗</a>)}</section>}
+    {related.length>0&&<section class="related"><h2>이어서 읽어볼 글</h2>{related.map(a=><a href={`/notes/${a.articleId}/`}>{a.title} ↗</a>)}</section>}
   </article>
   {showSidebar&&<aside class="banner-sidebar" aria-label="추천 상품 광고"><div class="banner-sidebar-inner"><AffiliateBanner slot="article-sidebar-top" category={article.category}/><AffiliateBanner slot="article-sidebar-bottom" category={article.category}/></div></aside>}
   </div>
