@@ -24,9 +24,9 @@
 
 ## 기본 공개 주소 만들기
 
-2026-10-14 실제 Cloudflare API 조회 결과, 현재 계정에는 workers.dev 하위 도메인이 없습니다. API는 [Workers & Pages 첫 화면](https://dash.cloudflare.com/?to=/:account/workers/workers-and-pages)을 처음 열면 기본 하위 도메인이 자동 생성된다고 안내했습니다. 기존 중고미를 관리하는 계정에서 이 화면을 엽니다. 하위 도메인 설정 화면이 나오면 설정을 마칩니다.
+2026-10-14 계정의 `workers.dev` 하위 도메인 `linkingmain`을 실제 API로 확인하고, 준비된 사이트를 배포했습니다. 현재 기본 확인용 주소는 `https://lightstandards.linkingmain.workers.dev`입니다. 홈페이지·문의·robots.txt·사이트맵의 HTTP 200 응답과 실제 주소 반영을 확인했습니다.
 
-첫 배포를 하면 `https://lightstandards.<실제 계정 하위 도메인>.workers.dev` 주소가 나옵니다. 꺾쇠 부분은 예시이며 그대로 입력하는 값이 아닙니다. 새 도메인 없이 기본 주소로 배포를 확인할 수 있습니다. 현재 `lightstandards` Worker도 아직 없음을 확인했습니다.
+Cloudflare Worker `lightstandards`의 배포 버전은 `becb18cd-741e-4c0a-9b15-75fa8d5757bc`입니다. 검색 노출은 준비 전 상태로 유지했습니다(`noindex`, robots.txt의 `Disallow: /`). 승인된 게시 글은 아직 0개이며, 테스트 원고는 게시하지 않았습니다. 사용자는 정식 도메인을 나중에 직접 구매하기로 했습니다. `lightstandards.com`은 같은 날 Verisign RDAP에서 이미 등록된 도메인임을 확인했습니다.
 
 로컬 인증된 Wrangler로 미리보기 배포를 실행하는 순서입니다. 현재 사이트는 준비 전 noindex 상태이며 테스트 원고는 게시 대상에서 제외됩니다.
 
@@ -36,7 +36,7 @@ npm run build
 npx wrangler deploy
 ```
 
-배포 출력의 실제 HTTPS 주소를 사용합니다. [Workers 기본 주소 규칙](https://developers.cloudflare.com/workers/configuration/routing/workers-dev/), [정적 배포 안내](https://docs.astro.build/en/guides/deploy/cloudflare/).
+위 명령은 이후 로컬 확인용 배포에 사용할 수 있습니다. 정식 운영 설정을 마치기 전에는 빌드에 `PUBLIC_SITE_URL=https://lightstandards.linkingmain.workers.dev`, `PUBLIC_SITE_READY=false`를 지정합니다. [Workers 기본 주소 규칙](https://developers.cloudflare.com/workers/configuration/routing/workers-dev/), [정적 배포 안내](https://docs.astro.build/en/guides/deploy/cloudflare/).
 
 ## 같은 공개 주소를 두 곳에 입력
 
@@ -46,6 +46,10 @@ npx wrangler deploy
 | n8n Publish Approved → Configuration | `site_url` | 위와 같은 실제 공개 HTTPS 주소 |
 | n8n Publish Approved → Configuration | `repo_owner` | `KimHanWol`, 이미 설정됨 |
 | n8n Publish Approved → Configuration | `repo_name` | `Web-LightStandards`, 이미 설정됨 |
+
+현재 `PUBLIC_SITE_URL`과 n8n `site_url`에 기본 확인용 주소를 저장했습니다. GitHub credential `GitHub - 소소한 기준`도 게시 노드에 연결됐습니다. 자동 게시·유료 생성 일정은 활성화하지 않았습니다.
+
+![GitHub 공개 주소 변수 저장 확인](../reports/github-public-site-url.png)
 
 [GitHub Actions 설정](https://github.com/KimHanWol/Web-LightStandards/settings/secrets/actions)에서 Cloudflare 배포에는 기존 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` secret을 사용합니다. GitHub PAT는 n8n credential에 저장합니다.
 

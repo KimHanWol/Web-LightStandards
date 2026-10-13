@@ -1,0 +1,96 @@
+{
+  "articleId": "pdf-compression-20261014",
+  "title": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법",
+  "description": "Acrobat, 맥 미리보기, 웹 압축으로 PDF 용량을 줄이는 순서와 화질·한글 글꼴·스캔본·제출 전 확인할 항목을 설명합니다. 원본을 보존하며 결과를 비교하는 방법도 정리했습니다.",
+  "category": "문서 작업",
+  "revision": 2,
+  "status": "needs_review",
+  "generatedCharacterCount": 5494,
+  "editedCharacterCount": 6608,
+  "estimatedUsd": 0.024957599999999996,
+  "invoiceVerified": false,
+  "executions": {
+    "firstGeneration": "2329",
+    "expandedGeneration": "2332",
+    "firstImages": "2333",
+    "editorialSaveAndReplacementImages": "2334",
+    "finalImages": "2335"
+  },
+  "sources": [
+    {
+      "title": "Adobe Acrobat — PDF 파일 크기 줄이기",
+      "url": "https://helpx.adobe.com/acrobat/desktop/create-documents/optimize-pdfs/reduce-file-size.html",
+      "excerpt": "Adobe의 데스크톱 Acrobat 도움말은 Windows에서 Menu, Save as Other, Reduced size PDF 순서로 들어가 크기를 줄이는 절차를 안내한다. macOS에서는 File, Save as Other, Reduced size PDF를 사용한다. 이어서 Make compatible with에서 호환성 대상을 선택하고 확인한 뒤 저장 위치와 새 파일 이름을 정한다. 여러 파일은 Apply to Multiple Files와 Add Files 또는 Add Open Files로 처리하고 출력 폴더, 이름, 덮어쓰기 설정을 지정한다. 이 절차가 무료 Reader에서도 동일하게 제공된다거나 특정 사용권에서 항상 활성화된다고 요약하지 않는다. 현재 도움말의 영문 메뉴 이름을 근거로 설명하며, 한국어 번역 이름이나 앱 버전에 따른 배치 차이는 같은 의미의 메뉴를 확인하도록 안내한다. 특정 파일의 압축률, 처리 시간, 화질 보존 또는 제출 기관의 허용 규격은 이 자료로 확인하지 않았으므로 결과값을 약속하지 않는다.",
+      "checkedAt": "2026-10-14",
+      "reviewed": true
+    },
+    {
+      "title": "Adobe Acrobat on the web — 온라인 PDF 압축",
+      "url": "https://helpx.adobe.com/acrobat/web/share-review-and-export/export-and-print/compress-pdfs.html",
+      "excerpt": "Adobe 웹 Acrobat 도움말은 홈 화면의 Convert, Compress a PDF를 선택하고 파일 위치에서 대상 PDF를 고른 뒤 Continue로 진행하는 절차를 설명한다. Add files로 추가 파일을 선택할 수 있고 High, Medium, Low 가운데 압축 수준을 고른 뒤 Compress를 실행한다. 결과 파일은 filename_compressed 이름으로 만들어져 Adobe 클라우드 저장소에 자동 저장되며, 알림에서 Download를 눌러 다운로드할 수 있다. 도움말은 압축 과정에서 이미지 압축, 글꼴 및 불필요한 요소 정리를 설명하지만 모든 문서에서 동일한 비율로 줄어든다고 보장하지 않는다. 웹 압축은 파일을 웹 서비스와 클라우드 저장소에 올리는 작업이라는 점을 독자에게 알린다. 문서에 주민번호나 고객 자료 등 민감한 내용이 있는 경우 소속 기관의 업로드 허용 범위를 확인하는 판단 절차를 권고할 수 있지만, 이 페이지로 보관 기간·자동 삭제·기밀 보호를 확정하거나 오프라인 처리라고 주장할 수는 없다.",
+      "checkedAt": "2026-10-14",
+      "reviewed": true
+    },
+    {
+      "title": "Apple Preview — Mac에서 PDF 크기 줄이기",
+      "url": "https://support.apple.com/en-ie/guide/preview/prvw1509/mac",
+      "excerpt": "Apple 공식 Preview 도움말은 PDF를 열고 File, Export에서 Quartz Filter의 Reduce File Size를 선택한 뒤 저장하는 방법을 설명한다. 기존 파일을 교체할지 묻는 경우 저장을 진행하거나 Cancel을 선택하고 Export As에서 다른 이름을 입력해 별도 파일로 저장한다. Apple은 압축 후 품질이 원본보다 낮아질 수 있고 선택한 옵션에 따라 결과 파일 크기와 이미지 품질이 달라진다고 명시한다. 같은 내보내기 화면에서 Create Linearized PDF, Optimize images for screen, Save images as JPEG 옵션도 설명한다. Linearized는 웹 브라우저에서 빠르게 불러와 보도록 최적화하는 옵션이고, 화면용 이미지 최적화와 JPEG 변환은 이미지 및 크기 관련 옵션이다. 모든 Mac의 모든 버전에서 옵션이 똑같이 보인다고 일반화하지 않는다. '인쇄'와 '내보내기'를 같은 메뉴로 설명하거나 Reduce File Size가 언제나 무손실이라고 주장하지 않는다. 새 파일과 원본을 비교하는 방법은 편집자가 권장하는 점검 절차로 구분한다.",
+      "checkedAt": "2026-10-14",
+      "reviewed": true
+    },
+    {
+      "title": "Adobe Acrobat Pro — PDF 최적화 설정",
+      "url": "https://helpx.adobe.com/in/acrobat/desktop/create-documents/optimize-pdfs/pdf-optimizer-settings.html",
+      "excerpt": "Adobe PDF Optimizer 도움말에서 Images 설정은 컬러·회색조·단색 이미지의 압축과 다운샘플링을 다룬다. 다운샘플링은 이미지 해상도를 낮추는 방식이고 JPEG와 JPEG2000의 품질 조정은 일부 픽셀 데이터를 영구히 제거할 수 있다. 점진적 색 변화가 있는 이미지는 JPEG 계열, 평면적인 색의 삽화는 ZIP 방식이 맞을 수 있으며 모든 문서에 한 압축 방식을 고정하지 않는다. Optimize images only if there is a reduction in size는 실제 크기가 감소할 때만 이미지 최적화를 적용한다. 글꼴 포함을 해제하면 원래 글꼴이 없는 시스템에서 한글을 포함한 글자가 대체 글꼴로 표시될 수 있다. Clean Up에서는 불필요하거나 중복된 요소를 정리하며 영향이 불분명하면 기본 선택을 사용하는 안내가 있다. 투명도와 레이어를 평면화하면 레이어 정보가 없어질 수 있으므로 문서 편집 기능을 유지해야 하는 경우 검토가 필요하다. 파일 크기 최적화와 기능 보존을 구분해 설명하고 압축률 수치는 만들지 않는다.",
+      "checkedAt": "2026-10-14",
+      "reviewed": true
+    },
+    {
+      "title": "Adobe Acrobat — 스캔 PDF 설정",
+      "url": "https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/scanned-pdf-settings.html",
+      "excerpt": "Adobe 스캔 설정 도움말은 색상 모드, 해상도, 용지 크기와 출력 방식을 각각 설정할 수 있다고 설명한다. 색상 모드는 자동 감지, 컬러, 흑백, 회색조 가운데 선택할 수 있고 해상도는 DPI 값으로 지정한다. Optimize Image와 Small Size/High Quality는 크기와 품질 사이의 균형을 조정한다. 이미지 최적화에는 적응형 압축, 기울기 보정, 배경 정리, 인쇄물의 점 패턴 제거와 문자 선명도 관련 옵션이 있다. OCR은 이미지로 된 글자를 검색하거나 선택할 수 있는 텍스트로 변환하는 기능이며 언어와 출력 유형을 별도로 정한다. OCR 실행 자체를 파일 용량 감소나 원본 정보 보존의 보장으로 설명하지 않는다. ZIP은 무손실 압축을 선호할 때 사용되는 선택지로 소개되며 다른 손실 방식과 구분한다. 제출 문서라면 문서 수신자의 색상·해상도·판독성 요구를 먼저 확인하는 방법을 권고하되, 특정 기관의 규정·최대 용량이나 모든 자료에 적용되는 최저 DPI를 만들지 않는다.",
+      "checkedAt": "2026-10-14",
+      "reviewed": true
+    },
+    {
+      "title": "Adobe Acrobat — 결합 PDF의 순서와 파일 크기",
+      "url": "https://helpx.adobe.com/acrobat/desktop/edit-documents/combine-files/rearrange-combined-files.html",
+      "excerpt": "Adobe의 PDF 결합 도움말은 All tools, Organize pages에서 페이지를 재배열하고 필요에 따라 페이지를 삭제할 수 있는 절차를 설명한다. 결합 옵션의 Smaller File Size는 큰 이미지를 화면 해상도로 낮추고 낮은 품질의 JPEG 압축을 사용해 화면 보기, 이메일 및 인터넷 사용에 맞춘다. Default File Size는 업무 문서의 신뢰할 수 있는 보기와 인쇄에 맞추며 목록에 있는 기존 PDF의 크기와 품질을 유지한다. Larger File Size는 데스크톱 인쇄용 프리셋을 적용하고 기존 PDF의 크기와 품질을 유지하며 결과 크기가 커질 수도 있다. 원본이 이미 PDF인 경우 Smaller File Size는 크기 감소 기능을 적용하지만 Default와 Larger에서는 이를 적용하지 않는다. 이를 모든 PDF의 일괄 압축 메뉴나 결과 크기가 정확히 같아지는 옵션으로 일반화하지 않는다. 불필요한 페이지를 제거하기 전 제출 요구 사항과 페이지 누락 여부를 확인하는 것은 별도의 편집 권고이며, 페이지 삭제가 항상 허용되거나 원본 문서를 수정해도 된다는 근거는 아니다.",
+      "checkedAt": "2026-10-14",
+      "reviewed": true
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3d31/Aeldma2WYeIrJw6PyZOtk.png",
+      "alt": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법 — 설명용 생성 일러스트 1",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3d31/OJTYLOU1dBG0Nym6CyuuI.png",
+      "alt": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법 — 설명용 생성 일러스트 2",
+      "generated": true
+    }
+  ],
+  "firstImages": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3d10/7mk2OItApIIqMsGT3La_R.png",
+      "alt": "PDF 용량 줄이기: Windows Acrobat, Mac 미리보기, 웹 압축 절차와 품질·글꼴·보안·제출 전 점검법 — 설명용 생성 일러스트 1",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3d10/fANFPDQ0bO0m4l0pemNic.png",
+      "alt": "PDF 용량 줄이기: Windows Acrobat, Mac 미리보기, 웹 압축 절차와 품질·글꼴·보안·제출 전 점검법 — 설명용 생성 일러스트 2",
+      "generated": true
+    }
+  ],
+  "imagePrompt": "Photorealistic editorial still life about reducing digital document file size. A closed unbranded silver laptop beside a large neat stack and a smaller neat stack of entirely blank white paper on a warm neutral wooden desk, one plain binder clip and a simple ceramic cup, soft window daylight, quiet everyday office setting, natural realistic materials, balanced composition with generous space. No people, no open screens, no user interface, no icons, no charts, no diagrams. A conceptual illustrative scene, not a measured before-and-after compression result. No text, no letters, no numbers, no labels, no logos, no watermark.",
+  "published": false,
+  "keywordVolumeVerified": false,
+  "editorialNotes": [
+    "OpenAI 실제 생성 원고는 raw-model-draft.md에 보존했다. 최종본은 메뉴 경로, 근거 없는 일반화, 반복 표현, 글꼴 확인 방법을 대조·편집했다.",
+    "사용자가 도메인 구매를 뒤로 미루고 글 작성을 요청해 선택한 원고 주제다. 고정 카테고리나 검색량·수익을 검증한 주제라는 뜻은 아니다.",
+    "생성 이미지의 가짜 UI를 제외하고 문서 작업을 표현하는 개념 사진으로 교체했다.",
+    "AI 보조 작성 후 공식 자료 대조·문체 편집을 수행했으며 실제 앱에서 각 절차를 실행한 체험 원고가 아니다."
+  ]
+}
