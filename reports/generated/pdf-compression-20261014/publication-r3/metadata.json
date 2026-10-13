@@ -1,0 +1,73 @@
+{
+  "articleId": "pdf-compression-20261014",
+  "revision": 3,
+  "title": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법",
+  "characterCount": 7092,
+  "estimatedUsd": 0.0339576,
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3d31/Aeldma2WYeIrJw6PyZOtk.png",
+      "alt": "노트북과 빈 문서를 놓은 작업 공간 — AI 생성 설명 이미지",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3d31/OJTYLOU1dBG0Nym6CyuuI.png",
+      "alt": "서류를 정리하는 작업 공간 — AI 생성 설명 이미지",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3db8/u-x1ND2kwEbTO2v9OEdVW.png",
+      "alt": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법 — AI 생성 설명 이미지 3",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3dba/JnF2t7Mjmp5SUfydwN2Wa.png",
+      "alt": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법 — AI 생성 설명 이미지 4",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae3dbe/QCFuc2fYR4iQrZga33mfw.png",
+      "alt": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법 — AI 생성 설명 이미지 5",
+      "generated": true
+    }
+  ],
+  "published": false,
+  "sources": [
+    {
+      "title": "Adobe Acrobat — PDF 파일 크기 줄이기",
+      "url": "https://helpx.adobe.com/acrobat/desktop/create-documents/optimize-pdfs/reduce-file-size.html",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "title": "Adobe Acrobat on the web — 온라인 PDF 압축",
+      "url": "https://helpx.adobe.com/acrobat/web/share-review-and-export/export-and-print/compress-pdfs.html",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "title": "Apple Preview — Mac에서 PDF 크기 줄이기",
+      "url": "https://support.apple.com/en-ie/guide/preview/prvw1509/mac",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "title": "Adobe Acrobat Pro — PDF 최적화 설정",
+      "url": "https://helpx.adobe.com/in/acrobat/desktop/create-documents/optimize-pdfs/pdf-optimizer-settings.html",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "title": "Adobe Acrobat — 스캔 PDF 설정",
+      "url": "https://helpx.adobe.com/acrobat/desktop/create-documents/scan-documents-to-pdfs/scanned-pdf-settings.html",
+      "checkedAt": "2026-10-14"
+    },
+    {
+      "title": "Adobe Acrobat — 결합 PDF의 순서와 파일 크기",
+      "url": "https://helpx.adobe.com/acrobat/desktop/edit-documents/combine-files/rearrange-combined-files.html",
+      "checkedAt": "2026-10-14"
+    }
+  ],
+  "executions": [
+    "2336",
+    "2337",
+    "2338",
+    "2339"
+  ]
+}

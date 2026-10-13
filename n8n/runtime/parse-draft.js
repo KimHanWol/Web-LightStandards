@@ -14,7 +14,7 @@ try {
     ? chunks[0]
     : JSON.parse(chunks.map(text=>typeof text==='string'?text:JSON.stringify(text)).join('').replace(/^```(?:json)?\s*|\s*```$/g,''));
   if(draft.canWrite!==true) throw new Error(draft.holdReason||'Insufficient source evidence');
-  result.title=String(draft.title||'');result.description=String(draft.description||'');result.body_markdown=String(draft.markdown||'');result.image_prompt=String(draft.imagePrompt||'');
+  result.title=String(draft.title||'');result.description=String(draft.description||'');result.body_markdown=String(draft.markdown||'');result.image_prompt=Array.isArray(draft.imagePrompts)?JSON.stringify(draft.imagePrompts):String(draft.imagePrompt||'');
   const md=result.body_markdown;
   result.character_count=[...md.replace(/!?\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/https?:\/\/\S+/g,'').replace(/[#*`_|>~-]/g,'').replace(/\s+/g,' ').trim()].length;
   if(result.character_count<5000||md.length>60000) throw new Error('Body length check failed');
@@ -26,8 +26,10 @@ try {
   if(new Set(links).size<2||links.some(u=>!sourceUrls.has(u))) throw new Error('Sources missing or unexpected links');
   const paragraphs=md.split(/\n\s*\n/).map(p=>p.trim()).filter(p=>p.length>100);
   if(new Set(paragraphs).size!==paragraphs.length) throw new Error('Repeated paragraphs');
-  if(result.image_prompt.length<20||result.image_prompt.length>3000) throw new Error('Illustration brief missing or too long');
+  const plans=JSON.parse(result.image_prompt);
+  if(plans.length!==5||!plans.every(p=>typeof p==='string'&&p.length>=20&&p.length<=1500))throw new Error('Five distinct image briefs required');
+  result.images_json='[]';
   if(!Number.isFinite(input)||!Number.isFinite(output)) throw new Error('Usage could not be reconciled');
-  result.status='text_ready';result.reserved_usd=0.006;
+  result.status='text_ready';result.reserved_usd=0.015;
 } catch(e) {result.error=String(e.message).slice(0,1000);}
 return [{json:result}];

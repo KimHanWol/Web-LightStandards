@@ -79,7 +79,22 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .article-layout>h1{font-size:36px;line-height:1.45}
 .article-description{font-size:18px;line-height:1.8;margin-top:22px}
 .article-byline{font-size:12px;gap:12px;padding-block:22px 27px}
-.article-body{font-size:17px;line-height:1.95;margin-top:35px}
+.article-body{font-size:17px;line-height:1.9;margin-top:32px;color:#26313d}
+.article-body p{margin:0 0 22px}
+.article-body h2{scroll-margin-top:28px;margin:56px 0 22px;padding-top:18px;border-top:1px solid var(--line)}
+.article-body h3{margin:30px 0 14px}
+.article-body ul,.article-body ol{padding-left:24px;margin:18px 0 26px}
+.article-body li{padding-left:5px;margin:11px 0}
+.article-body table{width:100%;margin:24px 0 30px;font-size:15px;line-height:1.7}
+.article-body td,.article-body th{padding:14px 16px;vertical-align:top;min-width:120px}
+.article-body figure{margin:34px 0 42px}
+.article-body figure img{aspect-ratio:16/10;object-fit:cover;border-radius:8px}
+.article-body figcaption{text-align:left;font-size:12px;line-height:1.6;margin-top:10px}
+.article-toc{margin-top:28px;padding:23px 25px;border:1px solid #e1e7ef;border-radius:8px;background:#f7f9fc;font-size:14px;line-height:1.7}
+.article-toc>strong{font-size:15px;font-weight:650}
+.article-toc ol{display:grid;grid-template-columns:1fr 1fr;gap:9px 32px;padding-left:20px;margin:14px 0 0}
+.article-toc a{color:#44566b;text-decoration:none}
+.article-toc a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
 .article-body h2{font-size:27px;font-weight:680;letter-spacing:-.6px;line-height:1.5}
 .article-body h3{font-size:22px;font-weight:650;line-height:1.5}
 .article-body th,.article-body blockquote{background:#f6f8fc}
@@ -134,6 +149,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .article-body{font-size:16px;line-height:1.95}
   .article-body h2{font-size:24px}
   .article-body h3{font-size:20px}
+  .article-toc{padding:20px;font-size:14px}
+  .article-toc ol{grid-template-columns:1fr;gap:9px}
+  .article-body h2{margin-top:42px;padding-top:14px}
+  .article-body table{font-size:14px}
   .information-page{padding-block:39px 55px}
   .information-page h1{font-size:29px}
   .information-copy{font-size:15px}

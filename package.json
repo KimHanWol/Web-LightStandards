@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22.12.0" },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "node scripts/validate-content.mjs && astro build",
@@ -13,6 +15,16 @@
     "deploy:check": "node scripts/check-deployment.mjs",
     "deploy": "npm run deploy:check && npm run build && wrangler deploy"
   },
-  "dependencies": { "astro": "7.3.8", "@astrojs/sitemap": "3.7.4", "@astrojs/rss": "4.0.19", "marked": "^17.0.0", "sanitize-html": "^2.17.0", "zod": "^4.0.0" },
-  "devDependencies": { "wrangler": "4.149.0" }
+  "dependencies": {
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.3.8",
+    "marked": "^17.0.0",
+    "sanitize-html": "^2.17.0",
+    "sharp": "0.35.5",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.149.0"
+  }
 }

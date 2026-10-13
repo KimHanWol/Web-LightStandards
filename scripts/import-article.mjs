@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir, readdir, access } from 'node:fs/promises';
 import { resolve, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import sharp from 'sharp';
 import { validateArticle } from '../src/lib/content.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export function allowedMedia(url){const u=new URL(url);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&(u.hostname==='fal.media'||u.hostname.endsWith('.fal.media'));}
@@ -17,7 +18,8 @@ async function downloadImage(image,articleId){
   if(Number(response.headers.get('content-length')||0)>8000000)throw new Error('Image exceeds 8MB');
   const chunks=[];let length=0;for await(const chunk of response.body){length+=chunk.length;if(length>8000000){await response.body.cancel().catch(()=>{});throw new Error('Image exceeds 8MB');}chunks.push(chunk);}
   const bytes=Buffer.concat(chunks);if((ext==='png'&&bytes.subarray(0,8).toString('hex')!=='89504e470d0a1a0a')||(ext==='jpg'&&bytes.subarray(0,3).toString('hex')!=='ffd8ff')||(ext==='webp'&&(bytes.subarray(0,4).toString()!=='RIFF'||bytes.subarray(8,12).toString()!=='WEBP')))throw new Error('Image signature mismatch');
-  await writeFile(resolve(folder,hash+'.'+ext),bytes);return {...image,localPath:`/media/${articleId}/${hash}.${ext}`};
+  const optimized=await sharp(bytes,{limitInputPixels:20000000}).rotate().resize({width:1280,withoutEnlargement:true}).webp({quality:82}).toBuffer();
+  await writeFile(resolve(folder,hash+'.webp'),optimized);return {...image,localPath:`/media/${articleId}/${hash}.webp`};
 }
 export async function importArticle(file){
   const article=validateArticle(JSON.parse(await readFile(file,'utf8')));

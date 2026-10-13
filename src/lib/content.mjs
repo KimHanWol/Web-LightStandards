@@ -12,7 +12,7 @@ export const articleSchema = z.object({
   revision: z.number().int().positive(), approvedRevision: z.number().int().positive(),
   approvedBy: z.string().min(1), approvedAt: z.string().datetime(), publishedAt: z.string().datetime(),
   sources: z.array(z.object({ title: z.string().min(2), url: safeUrl, checkedAt: z.string().min(10) })).min(2),
-  images: z.array(z.object({ url: safeUrl, alt: z.string().min(3), generated: z.literal(true), localPath: z.string().optional() })).max(2),
+  images: z.array(z.object({ url: safeUrl, alt: z.string().min(3), generated: z.literal(true), localPath: z.string().optional() })).min(5).max(8),
   affiliates: z.array(z.object({ label: z.string().min(2), url: safeUrl.refine(v => ['link.coupang.com','www.coupang.com'].includes(new URL(v).hostname)), note: z.string().max(200).optional() })).default([]),
   demo: z.boolean().default(false)
 }).strict();

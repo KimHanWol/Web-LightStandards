@@ -21,7 +21,7 @@ test('uncertain model outcomes retain the budget reservation and stop image gene
 });
 test('draft validation accepts parsed n8n JSON objects and raw API JSON strings',()=>{
   const markdown=['## 첫 확인','## 다음 확인','## 마지막 확인'].map((heading,index)=>heading+'\n\n'+Array.from({length:20},(_,paragraph)=>`${index}-${paragraph} 검증 자료에서 확인한 조건과 적용 범위를 구체적으로 설명합니다. `.repeat(4)).join('\n\n')).join('\n\n')+'\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
-  const draft={canWrite:true,title:'서로 다른 조건을 확인하는 검증용 원고',description:'실제 게시하지 않는 응답 형식 검증용 원고의 설명입니다.',markdown,imagePrompt:'A simple educational illustration without words or logos.'};
+  const draft={canWrite:true,title:'서로 다른 조건을 확인하는 검증용 원고',description:'실제 게시하지 않는 응답 형식 검증용 원고의 설명입니다.',markdown,imagePrompts:Array.from({length:5},(_,i)=>'Distinct educational still life scene '+i+' without words or logos.')};
   for(const text of [draft,JSON.stringify(draft)]){
     const response={id:'response-fixture',status:'completed',usage:{input_tokens:100,output_tokens:1000},output:[{content:[{type:'output_text',text}]}]};
     const result=run('parse-draft',[response],{'Select Draft':{...row,actual_usd:.004}})[0].json;
@@ -39,7 +39,21 @@ test('fal receipt validation works without URL global and rejects credentials se
   const receipt={request_id:'abc-123',response_url:'https://queue.fal.run/fal-ai/flux/requests/abc-123',status_url:'https://queue.fal.run/fal-ai/flux/requests/abc-123/status'};
   assert.equal(run('save-fal-request',[receipt],{'Check Draft':row})[0].json.status,'image_pending');
   assert.equal(run('save-fal-request',[{...receipt,status_url:receipt.status_url.replace('queue.fal.run','evil.example')}],{'Check Draft':row})[0].json.status,'image_uncertain');
-  assert.throws(()=>run('parse-image',[{images:[{url:'https://fal.media@evil.example/a.webp'},{url:'https://fal.media/a.webp'}]}],{'Select Image Request':row}),/Unexpected image host/);
+  assert.throws(()=>run('parse-image',[{images:[{url:'https://fal.media@evil.example/a.webp'}]}],{'Select Image Request':row}),/Unexpected image host/);
+});
+
+test('image receipts accumulate to five scenes without duplicate charges',()=>{
+  let current={...row,images_json:'[]',actual_usd:0.01,reserved_usd:0.015};
+  for(let index=0;index<5;index++){
+    const receipt={images:[{url:'https://fal.media/image-'+index+'.png'}],has_nsfw_concepts:[false]};
+    current=run('parse-image',[receipt],{'Select Image Request':current})[0].json;
+    assert.equal(JSON.parse(current.images_json).length,index+1);
+    assert.equal(current.status,index===4?'needs_review':'image_more_needed');
+    assert.ok(Math.abs(current.actual_usd-(0.01+0.003*(index+1)))<1e-9);
+    assert.ok(Math.abs(current.reserved_usd-(4-index)*0.003)<1e-9);
+    if(index<4)assert.throws(()=>run('parse-image',[receipt],{'Select Image Request':current}),/already recorded/);
+  }
+  assert.throws(()=>run('parse-image',[{images:[{url:'https://fal.media/extra.png'}]}],{'Select Image Request':current}),/remaining illustration/);
 });
 test('approval cannot use a stale revision',()=>{
   assert.throws(()=>run('approve',[{...row,status:'needs_review',revision:2}],{Configuration:{article_id:row.article_id,revision:1,approved_by:'Test'}}),/current revision/);
