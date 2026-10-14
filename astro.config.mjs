@@ -1,4 +1,10 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { readdirSync,readFileSync } from 'node:fs';
+import { sections,articleSection } from './src/lib/navigation.mjs';
 const site = process.env.PUBLIC_SITE_URL || 'http://localhost:4321';
-export default defineConfig({ site, output: 'static', trailingSlash: 'always', integrations: [sitemap()] });
+const folder=new URL('./content/articles/',import.meta.url);
+const articles=readdirSync(folder).filter(name=>name.endsWith('.json')).map(name=>JSON.parse(readFileSync(new URL(name,folder),'utf8'))).filter(article=>new Date(article.publishedAt)<=new Date());
+const populated=new Set(articles.map(article=>articleSection(article).id));
+const emptyCategoryPaths=new Set([...sections.map(section=>section.id),'other'].filter(id=>!populated.has(id)).map(id=>`/categories/${id}/`));
+export default defineConfig({ site, output: 'static', trailingSlash: 'always', integrations: [sitemap({filter:page=>!emptyCategoryPaths.has(new URL(page).pathname)})] });

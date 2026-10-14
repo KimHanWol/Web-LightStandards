@@ -1,0 +1,15 @@
+{
+  "references": [
+    { "name": "How-To Geek", "url": "https://www.howtogeek.com/", "use": "분야 메뉴, 주요 기사와 최신 목록의 분리, 분야별 글 묶음" },
+    { "name": "MakeUseOf", "url": "https://www.makeuseof.com/", "use": "큰 분야 아래 세부 주제, 주요 글·최신 글·별도 모음의 구성" },
+    { "name": "wikiHow", "url": "https://www.wikihow.com/Main-Page", "use": "다양한 질문을 수용하는 넓은 분야 분류와 카테고리 디렉터리" }
+  ],
+  "sections": [
+    { "id": "digital", "label": "IT·디지털", "description": "컴퓨터, 스마트폰, 앱과 인터넷을 다루는 방법", "topics": ["컴퓨터·스마트폰", "앱·소프트웨어", "인터넷·보안", "문서·업무 도구"], "articleCategories": ["브라우저 문제 해결", "문서 작업", "IT·디지털"] },
+    { "id": "home", "label": "생활·주거", "description": "집, 일상 서비스와 생활에서 필요한 정보", "topics": ["집·주거", "생활 서비스", "음식·살림"], "articleCategories": ["생활·주거"] },
+    { "id": "money-work", "label": "경제·일", "description": "돈 관리, 직장 생활과 필요한 제도의 안내", "topics": ["돈 관리", "일·직장", "제도·행정"], "articleCategories": ["경제·일"] },
+    { "id": "travel", "label": "여행·이동", "description": "여행 준비, 교통과 이동에 필요한 정보", "topics": ["여행 준비", "교통·이동", "자동차"], "articleCategories": ["여행·이동"] },
+    { "id": "culture", "label": "취미·문화", "description": "여가, 문화와 즐기는 활동을 알아보는 방법", "topics": ["취미·여가", "영상·문화", "스포츠·야외 활동"], "articleCategories": ["취미·문화"] }
+  ],
+  "featuredArticleIds": ["pdf-compression-20261014", "chrome-cache-clear-20261014"]
+}

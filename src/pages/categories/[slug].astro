@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import {getArticles} from '../../lib/articles.mjs';
+import {sections,sectionArticles,otherSection} from '../../lib/navigation.mjs';
+export function getStaticPaths(){return [...sections,otherSection].map(section=>({params:{slug:section.id},props:{section}}));}
+const {section}=Astro.props;
+const articles=sectionArticles(getArticles(),section.id);
+---
+<Layout title={section.label} description={section.description} noindex={articles.length===0}>
+  <div class="category-page wrap">
+    <a class="category-back" href="/">홈으로 돌아가기</a>
+    <header class="category-heading"><div><h1>{section.label}</h1><p>{section.description}</p></div><span>{articles.length}개의 글</span></header>
+    <ul class="category-subtopics" aria-label="분야의 세부 주제">{section.topics.map(topic=><li>{topic}</li>)}</ul>
+    {articles.length>0?<div class="guide-grid">{articles.map(article=><ArticleCard article={article}/>)}</div>:<div class="category-empty"><h2>아직 등록된 글이 없습니다.</h2><a href="/?view=all#articles">전체 글 살펴보기 <span aria-hidden="true">→</span></a></div>}
+  </div>
+</Layout>

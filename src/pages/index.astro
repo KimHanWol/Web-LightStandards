@@ -1,70 +1,74 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getArticles, readingTime, formatPublishedDate } from '../lib/articles.mjs';
-import topicMap from '../../config/topic-map.json';
+import ArticleCard from '../components/ArticleCard.astro';
 import AffiliateBanner from '../components/AffiliateBanner.astro';
+import {getArticles,formatPublishedDate,readingTime} from '../lib/articles.mjs';
+import {sections,articleSection,sectionArticles,featuredArticles} from '../lib/navigation.mjs';
+import topicMap from '../../config/topic-map.json';
 const articles=getArticles();
+const [lead,secondary]=featuredArticles(articles);
 const mapped=new Map(topicMap.articles.map(topic=>[topic.articleId,topic]));
-const topics=articles.map(article=>({article,topic:mapped.get(article.articleId),label:mapped.get(article.articleId)?.aliases[0]||article.title})).sort((a,b)=>a.label.localeCompare(b.label,'ko'));
+const populated=sections.map(section=>({...section,articles:sectionArticles(articles,section.id)})).filter(section=>section.articles.length);
+const other=articles.filter(article=>articleSection(article).id==='other');
+if(other.length)populated.push({id:'other',label:'기타 정보',description:'다른 분야의 안내',topics:[],articleCategories:[],articles:other});
+const latest=articles.slice(0,4);
 ---
 <Layout>
-  <div class="feed-shell wrap">
-    {articles.length>0&&<section id="topics" class="home-discovery" aria-labelledby="discovery-title">
-      <div class="discovery-heading"><h1 id="discovery-title">궁금한 내용을 찾아보세요</h1><p>주제로 살펴보거나 검색으로 필요한 글을 찾아보세요.</p></div>
-      <h2 class="topic-list-title">주제로 찾기</h2>
-      <div class="home-topic-list">{topics.map(({article,topic,label})=><a class="home-topic-link" href={`/notes/${article.articleId}/`}>
-        <div><h3>{label}</h3><p>{topic?.scope||article.description}</p></div><span aria-hidden="true">↗</span>
-      </a>)}</div>
-    </section>}
-    <section id="articles" class="feed-main" aria-labelledby="feed-title">
-      <div class="feed-heading"><div><h2 id="feed-title">최근 올라온 글</h2></div><div class="feed-heading-links"><p id="feed-count">전체 {articles.length}개의 글</p><a href="/?view=all#articles" id="feed-all-link">전체 글 보기 <span aria-hidden="true">→</span></a></div></div>
-      <div class="feed-grid">{articles.map((article,index)=><>
-        <a class:list={['feed-card',{'feed-card-lead':index===0}]} href={`/notes/${article.articleId}/`} data-article data-category={article.category} data-search={`${article.title} ${article.description} ${(mapped.get(article.articleId)?.aliases||[]).join(' ')} ${mapped.get(article.articleId)?.scope||''}`}>
-        <div class:list={['feed-image',{'no-image':!article.images[0]?.localPath}]}><img src={article.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={article.images[0]?.alt||''} width={article.images[0]?.localPath?1024:256} height={article.images[0]?.localPath?768:256} loading={index===0?'eager':'lazy'} decoding="async"/></div>
-        <div class="feed-card-copy"><p class="feed-category">{article.category}</p><h3>{article.title}</h3><p class="feed-summary">{article.description}</p><div class="feed-meta"><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt).replaceAll('-','.')}</time><span>{readingTime(article)}분 읽기</span></div></div>
+  <div class="magazine-shell wrap">
+    <div data-home-module>
+      <h1 class="screen-reader-title">소소한 기준 — 분야별 정보와 가이드</h1>
+      {lead&&<section class="magazine-top" aria-label="주요 글과 최근 글">
+        <a class="magazine-lead" href={`/notes/${lead.articleId}/`}>
+          <div class="magazine-lead-image"><img src={lead.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={lead.images[0]?.alt||''} width="1024" height="768" loading="eager" decoding="async"/></div>
+          <p class="magazine-kicker">{articleSection(lead).label}<span>{lead.category}</span></p>
+          <h2>{lead.title}</h2><p class="magazine-lead-description">{lead.description}</p>
+          <p class="magazine-meta">{readingTime(lead)}분 읽기</p>
         </a>
-        {index===Math.min(4,articles.length-1)&&<div class="feed-ad" data-feed-ad><AffiliateBanner slot="home-middle"/></div>}
-      </>)}</div>
-      {articles.length===0&&<div id="feed-initial-empty" class="feed-empty">
-        <div class="empty-illustration" aria-hidden="true"><div class="empty-sheet"><img src="/brand/lightstandards-mark-v2.png" alt="" width="46" height="46"/><span></span><span></span><span></span></div><div class="empty-index"></div></div>
-        <h2>아직 발행된 글이 없습니다.</h2><p>새 글이 올라오면 이곳에서 확인할 수 있습니다.</p>
-      </div>}
-      <p id="feed-empty-search" class="feed-no-results" role="status" aria-live="polite" hidden>검색 결과가 없습니다. 다른 검색어를 입력해 주세요.</p>
+        <div class="magazine-top-side">
+          {secondary&&<a class="magazine-secondary" href={`/notes/${secondary.articleId}/`}>
+            <img src={secondary.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={secondary.images[0]?.alt||''} width="1024" height="768" loading="eager" decoding="async"/>
+            <p class="magazine-kicker">{articleSection(secondary).label}</p><h2>{secondary.title}</h2>
+          </a>}
+          <section class="latest-rail" aria-labelledby="latest-title"><div class="magazine-section-heading"><h2 id="latest-title">최근 글</h2><a href="/?view=all#articles">전체 보기 <span aria-hidden="true">→</span></a></div><ol>{latest.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></li>)}</ol></section>
+        </div>
+      </section>}
+      <div class="magazine-ad"><AffiliateBanner slot="home-middle"/></div>
+      <section class="category-directory" aria-labelledby="directory-title">
+        <div class="magazine-section-heading"><h2 id="directory-title">분야별로 둘러보기</h2><span>카테고리</span></div>
+        <div class="category-directory-grid">{sections.map(section=><a href={`/categories/${section.id}/`} class="directory-item"><h3>{section.label}<span aria-hidden="true">↗</span></h3><ul>{section.topics.slice(0,3).map(topic=><li>{topic}</li>)}</ul><p>{sectionArticles(articles,section.id).length}개의 글</p></a>)}</div>
+      </section>
+      <div class="category-shelves">{populated.map(section=><section class="category-shelf" aria-labelledby={`shelf-${section.id}`}>
+        <div class="magazine-section-heading"><h2 id={`shelf-${section.id}`}>{section.label}</h2><a href={`/categories/${section.id}/`}>모두 보기 <span aria-hidden="true">→</span></a></div>
+        <div class="guide-grid">{section.articles.slice(0,4).map(article=><ArticleCard article={article}/>)}</div>
+      </section>)}</div>
+    </div>
+    <section id="articles" class="article-library" aria-labelledby="library-title" hidden>
+      <header class="library-heading"><h1 id="library-title">전체 글</h1><p id="library-count">{articles.length}개의 글</p></header>
+      <div class="guide-grid">{articles.map(article=><ArticleCard article={article} aliases={mapped.get(article.articleId)?.aliases||[]}/>)}</div>
+      <div id="library-empty" class="category-empty" role="status" hidden><h2>검색 결과가 없습니다.</h2><p>다른 검색어를 입력하거나 전체 글을 살펴보세요.</p><a href="/?view=all#articles">전체 글 보기 →</a></div>
     </section>
+    {articles.length===0&&<p class="category-empty">아직 발행된 글이 없습니다.</p>}
   </div>
 </Layout>
 <script>
-  const cards=[...document.querySelectorAll<HTMLElement>('[data-article]')];
   const params=new URLSearchParams(window.location.search);
   const query=(params.get('q')||'').trim().toLowerCase();
-  const requestedCategory=params.get('category')||'전체';
-  const validCategories=new Set(cards.map(card=>card.dataset.category));
-  const category=validCategories.has(requestedCategory)?requestedCategory:'전체';
-  const filtered=Boolean(query)||category!=='전체';
-  const allMode=filtered||params.get('view')==='all';
+  const requestedCategory=params.get('category')||'';
+  const cards=[...document.querySelectorAll<HTMLElement>('#articles [data-article]')];
+  const category=cards.some(card=>card.dataset.category===requestedCategory)?requestedCategory:'';
+  const libraryMode=params.get('view')==='all'||Boolean(query)||Boolean(category);
   const input=document.querySelector<HTMLInputElement>('.site-search input');
   if(input)input.value=params.get('q')||'';
+  document.querySelectorAll<HTMLElement>('[data-home-module]').forEach(module=>module.hidden=libraryMode);
+  const library=document.querySelector<HTMLElement>('#articles');
+  if(library)library.hidden=!libraryMode;
   let visible=0;
-  cards.forEach((card,index)=>{
-    const match=(allMode||index<6)&&(category==='전체'||card.dataset.category===category)&&(card.dataset.search||'').toLowerCase().includes(query);
-    card.hidden=!match;if(match)visible++;
-  });
-  document.querySelectorAll<HTMLElement>('[data-feed-ad]').forEach(ad=>{ad.hidden=filtered;});
-  const count=document.querySelector<HTMLElement>('#feed-count');
-  if(count)count.textContent=allMode?`${visible}개의 글`:`최근 ${visible}개 · 전체 ${cards.length}개`;
-  const initial=document.querySelector<HTMLElement>('#feed-initial-empty');
-  if(initial)initial.hidden=filtered;
-  const noResults=document.querySelector<HTMLElement>('#feed-empty-search');
-  if(noResults)noResults.hidden=visible>0||!filtered;
-  const discovery=document.querySelector<HTMLElement>('.home-discovery');
-  if(discovery)discovery.hidden=allMode;
-  const allLink=document.querySelector<HTMLElement>('#feed-all-link');
-  if(allLink)allLink.hidden=allMode;
-  const title=document.querySelector<HTMLElement>('#feed-title');
-  if(title)title.textContent=query?'검색 결과':category!=='전체'?category:allMode?'전체 글':'최근 올라온 글';
-  document.querySelectorAll<HTMLElement>('.site-navigation a').forEach(link=>{
-    if(link.closest('.navigation-info'))return;
-    const url=new URL(link.getAttribute('href')||'/',window.location.origin);
-    link.classList.toggle('active',url.searchParams.get('view')==='all'?allMode:!allMode&&url.hash!=='#topics');
-  });
+  cards.forEach(card=>{const matches=(!category||card.dataset.category===category)&&(card.dataset.search||'').toLowerCase().includes(query);card.hidden=!matches;if(matches)visible++;});
+  const title=document.querySelector<HTMLElement>('#library-title');
+  if(title)title.textContent=query?'검색 결과':category||'전체 글';
+  const count=document.querySelector<HTMLElement>('#library-count');
+  if(count)count.textContent=`${visible}개의 글`;
+  const empty=document.querySelector<HTMLElement>('#library-empty');
+  if(empty)empty.hidden=visible>0;
+  document.querySelectorAll<HTMLElement>('.site-navigation>.wrap>a').forEach(link=>{const url=new URL(link.getAttribute('href')||'/',location.origin);link.classList.toggle('active',url.searchParams.get('view')==='all'?libraryMode:!libraryMode&&url.pathname==='/');});
 </script>
