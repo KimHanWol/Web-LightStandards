@@ -7,6 +7,15 @@ import { validateArticle } from '../src/lib/content.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export function allowedMedia(url){const u=new URL(url);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&(u.hostname==='fal.media'||u.hostname.endsWith('.fal.media'));}
 async function downloadImage(image,articleId){
+  if(!image.generated){
+    const path=resolve(root,'public'+image.localPath);
+    const bytes=await readFile(path);
+    if(bytes.length>8000000||createHash('sha256').update(bytes).digest('hex')!==image.localPath.split('/').pop().split('.')[0])throw new Error('Captured media file hash mismatch');
+    const metadata=await sharp(bytes,{limitInputPixels:20000000}).metadata();
+    if(!['webp','png','jpeg'].includes(metadata.format))throw new Error('Unsupported captured media');
+    if(image.width!==metadata.width||image.height!==metadata.height)throw new Error('Captured media dimensions mismatch');
+    return image;
+  }
   if(!allowedMedia(image.url))throw new Error('Only fal.media HTTPS image URLs are accepted');
   const hash=createHash('sha256').update(image.url).digest('hex');
   const folder=resolve(root,'public/media',articleId);await mkdir(folder,{recursive:true});

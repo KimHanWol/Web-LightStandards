@@ -10,11 +10,18 @@ if(rows.some(r=>['generation_started','image_submitting'].includes(r.status))) r
 for (const row of rows.filter(r=>r.status==='ready').sort((a,b)=>a.id-b.id)) {
   try {
     if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.article_id)||row.article_id.length>90||!row.intent_key||!row.keyword||!row.category) continue;
-    if(rows.some(r=>r.id!==row.id && (r.article_id===row.article_id || r.intent_key===row.intent_key) && r.status!=='candidate')) continue;
+    if(rows.some(r=>r.id!==row.id&&(r.article_id===row.article_id||r.intent_key===row.intent_key)&&r.status!=='candidate'))continue;
+    const normalize=v=>String(v||'').toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
+    const mapOf=r=>r.topic_map_json?JSON.parse(r.topic_map_json):{};
+    const candidateMap=mapOf(row);
+    const activeRows=rows.filter(r=>r.id!==row.id&&!r.article_id?.startsWith('test-')&&r.status!=='candidate');
+    const aliases=r=>[r.keyword,...(mapOf(r).aliases||[]),mapOf(r).coreQuestion].filter(Boolean).map(normalize);
+    if(activeRows.some(r=>r.article_id===row.article_id||r.intent_key===row.intent_key||aliases(r).some(alias=>aliases(row).includes(alias))))continue;
     const sources=JSON.parse(row.sources_json||'[]');
     if(sources.length<2||new Set(sources.map(s=>s.url)).size<2) continue;
     if(!sources.every(s=>s.title&&/^https:\/\//.test(s.url)&&s.reviewed===true&&s.checkedAt&&s.excerpt?.length>=300)) continue;
-    const brief=JSON.stringify({keyword:row.keyword,category:row.category,sources,existingTitles:rows.filter(r=>r.title).map(r=>r.title).slice(-80)});
+    const existingTopics=activeRows.slice(-80).map(r=>({articleId:r.article_id,category:r.category,intentKey:r.intent_key,title:r.title,keyword:r.keyword,status:r.status,...mapOf(r)}));
+    const brief=JSON.stringify({keyword:row.keyword,category:row.category,sources,candidateTopic:candidateMap,existingTopics,existingTitles:existingTopics.map(r=>r.title).filter(Boolean)});
     if(brief.length>25000||sources.reduce((n,s)=>n+s.excerpt.length,0)<2000) continue;
     return [{json:{...row,brief,revision:Number(row.revision||0)+1,reserved_usd:config.reserve_usd,actual_usd:Number(row.actual_usd||0),budget_month:month,generation_day:today,claim_id:String($execution.id)}}];
   } catch { continue; }

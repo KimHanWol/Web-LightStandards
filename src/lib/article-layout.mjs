@@ -20,7 +20,8 @@ export function prepareArticle(markdown, images) {
   const placement=new Map();
   images.forEach((image,index)=>{
     const first=sections[0].includes('<h2')?0:Math.min(1,sections.length-1);
-    const slot=first+Math.floor(index*(sections.length-first)/images.length);
+    const specific=image.sectionHeading?sections.findIndex(html=>html.includes('>'+image.sectionHeading+'</h2>')):-1;
+    const slot=specific>=0?specific:first+Math.floor(index*(sections.length-first)/images.length);
     placement.set(slot,[...(placement.get(slot)||[]),{...image,lead:index===0}]);
   });
   return {headings,sections:sections.map((html,index)=>({html,images:placement.get(index)||[]}))};

@@ -6,3 +6,10 @@ function fixture(){return {articleId:'test-article',intentKey:'test intent',titl
 test('only reviewed long-form content passes publication validation',()=>{assert.equal(validateArticle(fixture()).articleId,'test-article');assert.throws(()=>validateArticle({...fixture(),approvedRevision:2}),/Approval/);assert.throws(()=>validateArticle({...fixture(),markdown:'짧은 글'}),/5000/);assert.throws(()=>validateArticle({...fixture(),demo:true}),/Demo/);});
 test('untrusted markup and media cannot enter published content',()=>{assert.throws(()=>validateArticle({...fixture(),markdown:fixture().markdown+'<script>alert(1)</script>'}),/Raw HTML/);assert.throws(()=>validateArticle({...fixture(),articleId:'../escape'}));const html=renderMarkdown('[unsafe](javascript:alert(1)) <script>alert(1)</script>');assert.ok(!html.includes('javascript:'));assert.ok(!html.includes('<script'));assert.ok(!allowedMedia('https://fal.media.evil.example/a.png'));assert.ok(!allowedMedia('http://fal.media/a.png'));assert.ok(!allowedMedia('https://user@fal.media/a.png'));assert.ok(allowedMedia('https://v3.fal.media/files/a.png'));});
 test('visible character count excludes Markdown URLs and formatting',()=>{assert.equal(plainText('## 제목\n\n[설명](https://example.com/very-long-link)'), '제목 설명');});
+test('captured screenshots require provenance and a restricted local path',()=>{
+  const original=fixture();const capture={url:'https://example.com/media/test-article/'+ 'a'.repeat(64)+'.webp',localPath:'/media/test-article/'+'a'.repeat(64)+'.webp',generated:false,alt:'검토한 공식 안내 캡처',caption:'공식 도움말의 짧은 안내 구간',sourceUrl:original.sources[0].url,width:600,height:60};
+  const article={...original,images:[capture,...original.images.slice(1)]};
+  assert.equal(validateArticle(article).images[0].generated,false);
+  assert.throws(()=>validateArticle({...article,images:[{...capture,sourceUrl:'https://unknown.example/source'},...original.images.slice(1)]}),/matching source/);
+  assert.throws(()=>validateArticle({...article,images:[{...capture,localPath:'/media/../private.png'},...original.images.slice(1)]}),/Invalid local/);
+});

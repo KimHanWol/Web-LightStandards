@@ -6,3 +6,4 @@ dist/
 .env.*
 !.env.example
 .local/
+reports/generated/*/*-source-screen.jpg

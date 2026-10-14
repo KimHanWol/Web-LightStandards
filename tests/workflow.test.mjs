@@ -19,6 +19,15 @@ test('uncertain model outcomes retain the budget reservation and stop image gene
   const output=run('parse-draft',[{error:'timeout'}],{'Select Draft':{...row,reserved_usd:.08}})[0].json;
   assert.equal(output.status,'needs_review');assert.equal(output.reserved_usd,.08);assert.ok(output.error);
 });
+test('topic maps reject aliases across categories and expose scoped topics to the writer',()=>{
+  const candidate={...row,article_id:'real-new',intent_key:'new-intent',keyword:'크롬 캐시 지우기',category:'새 분류'};
+  const previous={...row,id:2,article_id:'real-existing',status:'published',intent_key:'old-intent',keyword:'크롬 캐시 삭제',topic_map_json:JSON.stringify({coreQuestion:'캐시 삭제 방법',aliases:['크롬 캐시 지우기'],scope:'Chrome'})};
+  assert.equal(run('select-draft',[candidate,previous],{Configuration:config}).length,0);
+  const unrelated={...candidate,keyword:'다른 도구의 독립적인 질문'};
+  const selected=run('select-draft',[unrelated,previous],{Configuration:config})[0].json;
+  assert.equal(JSON.parse(selected.brief).existingTopics[0].scope,'Chrome');
+  assert.equal(run('select-draft',[{...unrelated,topic_map_json:'broken-json'}],{Configuration:config}).length,0);
+});
 test('draft validation accepts parsed n8n JSON objects and raw API JSON strings',()=>{
   const markdown=['## 첫 확인','## 다음 확인','## 마지막 확인'].map((heading,index)=>heading+'\n\n'+Array.from({length:20},(_,paragraph)=>`${index}-${paragraph} 검증 자료에서 확인한 조건과 적용 범위를 구체적으로 설명합니다. `.repeat(4)).join('\n\n')).join('\n\n')+'\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
   const draft={canWrite:true,title:'서로 다른 조건을 확인하는 검증용 원고',description:'실제 게시하지 않는 응답 형식 검증용 원고의 설명입니다.',markdown,imagePrompts:Array.from({length:5},(_,i)=>'Distinct educational still life scene '+i+' without words or logos.')};

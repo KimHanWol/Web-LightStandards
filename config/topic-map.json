@@ -1,0 +1,59 @@
+{
+  "updatedAt": "2026-10-14",
+  "policy": "실제 발행·작성 글의 질문·범위·별칭으로 중복을 확인한다. 카테고리는 고정하지 않고 후보 검색량·수익성은 별도 검토한다.",
+  "articles": [
+    {
+      "articleId": "pdf-compression-20261014",
+      "category": "문서 작업",
+      "intentKey": "pdf-file-size-compression-guide",
+      "status": "published",
+      "coreQuestion": "PDF 파일 용량을 어떻게 줄이고 결과를 확인하나요?",
+      "scope": "윈도우 Acrobat, 맥 미리보기, 웹 압축",
+      "coverage": [
+        "압축 절차",
+        "원본 보존",
+        "글꼴·이미지 품질",
+        "스캔과 OCR의 차이",
+        "결합 파일과 제출 전 점검"
+      ],
+      "outOfScope": [
+        "PDF 암호 설정·해제",
+        "PDF 병합만 하는 방법",
+        "파일 형식 변환"
+      ],
+      "aliases": [
+        "PDF 용량 줄이기",
+        "PDF 압축 방법",
+        "피디에프 용량 줄이는 법"
+      ]
+    },
+    {
+      "articleId": "chrome-cache-clear-20261014",
+      "category": "브라우저 문제 해결",
+      "intentKey": "chrome-cache-clear-with-data-scope",
+      "status": "in_review",
+      "coreQuestion": "크롬 캐시를 어떤 항목과 기간으로 삭제하고 결과를 확인하나요?",
+      "scope": "PC Chrome, Android Chrome, iPhone·iPad Chrome",
+      "coverage": [
+        "캐시·쿠키·방문 기록 구분",
+        "기기별 삭제 항목 선택",
+        "계정 데이터 영향",
+        "삭제 후 확인",
+        "시크릿·확장 프로그램 점검",
+        "설정 초기화와 차이"
+      ],
+      "outOfScope": [
+        "Safari 캐시 삭제",
+        "Edge 캐시 삭제",
+        "Chrome 계정 복구",
+        "확장 프로그램 설치 추천"
+      ],
+      "aliases": [
+        "크롬 캐시 삭제",
+        "Chrome 캐시 삭제 방법",
+        "크롬 캐시 지우기",
+        "크롬 임시 파일 삭제"
+      ]
+    }
+  ]
+}
