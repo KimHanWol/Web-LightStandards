@@ -10,7 +10,7 @@ import searchVerification from '../../config/search-verification.json';
 const {title=site.name,description=site.description,noindex=false,image='/brand/lightstandards-mark-v2.png'}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
 const googleVerification=import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION||searchVerification.google;
-const naverVerification=import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION;
+const naverVerification=import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION||searchVerification.naver;
 ---
 <!doctype html>
 <html lang="ko">
