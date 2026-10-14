@@ -21,12 +21,23 @@ test('uncertain model outcomes retain the budget reservation and stop image gene
 });
 test('topic maps reject aliases across categories and expose scoped topics to the writer',()=>{
   const candidate={...row,article_id:'real-new',intent_key:'new-intent',keyword:'크롬 캐시 지우기',category:'새 분류'};
-  const previous={...row,id:2,article_id:'real-existing',status:'published',intent_key:'old-intent',keyword:'크롬 캐시 삭제',topic_map_json:JSON.stringify({coreQuestion:'캐시 삭제 방법',aliases:['크롬 캐시 지우기'],scope:'Chrome'})};
+  const previous={...row,id:2,article_id:'real-existing',status:'published',title:'크롬 캐시 삭제 방법과 적용 범위',character_count:6100,intent_key:'old-intent',keyword:'크롬 캐시 삭제',topic_map_json:JSON.stringify({coreQuestion:'캐시 삭제 방법',aliases:['크롬 캐시 지우기'],scope:'Chrome'})};
   assert.equal(run('select-draft',[candidate,previous],{Configuration:config}).length,0);
   const unrelated={...candidate,keyword:'다른 도구의 독립적인 질문'};
   const selected=run('select-draft',[unrelated,previous],{Configuration:config})[0].json;
   assert.equal(JSON.parse(selected.brief).existingTopics[0].scope,'Chrome');
   assert.equal(run('select-draft',[{...unrelated,topic_map_json:'broken-json'}],{Configuration:config}).length,0);
+});
+
+test('queued and rejected empty drafts do not masquerade as existing articles',()=>{
+  const candidate={...row,article_id:'drive-sharing',intent_key:'drive-sharing',keyword:'드라이브 공유 권한'};
+  const queued={...row,id:2,article_id:'drive-folders',intent_key:'drive-folders',keyword:'드라이브 폴더 관리'};
+  const rejected={...queued,id:3,article_id:'drive-search',intent_key:'drive-search',keyword:'드라이브 검색',status:'needs_review',title:'',character_count:0};
+  const completed={...queued,id:4,article_id:'chrome-alerts',intent_key:'chrome-alerts',keyword:'크롬 알림 차단',status:'publishing',title:'크롬 사이트 알림을 차단하는 방법',character_count:6115};
+  const selected=run('select-draft',[candidate,queued,rejected,completed],{Configuration:config})[0].json;
+  const brief=JSON.parse(selected.brief);
+  assert.deepEqual(brief.existingTopics.map(topic=>topic.articleId),['chrome-alerts']);
+  assert.equal(run('select-draft',[candidate,{...queued,keyword:candidate.keyword}],{Configuration:config}).length,0);
 });
 test('draft validation accepts parsed n8n JSON objects and raw API JSON strings',()=>{
   const markdown=['## 첫 확인','## 다음 확인','## 마지막 확인'].map((heading,index)=>heading+'\n\n'+Array.from({length:20},(_,paragraph)=>`${index}-${paragraph} 검증 자료에서 확인한 조건과 적용 범위를 구체적으로 설명합니다. `.repeat(4)).join('\n\n')).join('\n\n')+'\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';

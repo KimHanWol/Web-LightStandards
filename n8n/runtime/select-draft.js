@@ -20,7 +20,9 @@ for (const row of rows.filter(r=>r.status==='ready').sort((a,b)=>a.id-b.id)) {
     const sources=JSON.parse(row.sources_json||'[]');
     if(sources.length<2||new Set(sources.map(s=>s.url)).size<2) continue;
     if(!sources.every(s=>s.title&&/^https:\/\//.test(s.url)&&s.reviewed===true&&s.checkedAt&&s.excerpt?.length>=300)) continue;
-    const existingTopics=activeRows.slice(-80).map(r=>({...mapOf(r),articleId:r.article_id,category:r.category,intentKey:r.intent_key,title:r.title,keyword:r.keyword,status:r.status}));
+    // A queued topic is not an existing article. Keep queue collision checks above,
+    // but give the writer only completed article scopes for semantic comparison.
+    const existingTopics=activeRows.filter(r=>!['ready','candidate','generation_started'].includes(r.status)&&String(r.title||'').trim()&&Number(r.character_count)>=5000).slice(-80).map(r=>({...mapOf(r),articleId:r.article_id,category:r.category,intentKey:r.intent_key,title:r.title,keyword:r.keyword,status:r.status}));
     const brief=JSON.stringify({keyword:row.keyword,category:row.category,sources,candidateTopic:candidateMap,existingTopics,existingTitles:existingTopics.map(r=>r.title).filter(Boolean)});
     if(brief.length>25000||sources.reduce((n,s)=>n+s.excerpt.length,0)<2000) continue;
     return [{json:{...row,brief,revision:Number(row.revision||0)+1,reserved_usd:config.reserve_usd,actual_usd:Number(row.actual_usd||0),budget_month:month,generation_day:today,claim_id:String($execution.id)}}];
