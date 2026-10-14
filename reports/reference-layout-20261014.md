@@ -48,3 +48,15 @@ wikiHow의 실제 카테고리 링크 예:
 ![How-To Geek 실제 홈](generated/reference-layout-20261014/howtogeek.jpg)
 ![MakeUseOf 실제 홈](generated/reference-layout-20261014/muo.jpg)
 ![wikiHow 실제 분야 디렉터리](generated/reference-layout-20261014/wikihow-categories.jpg)
+
+## 공개 배포 검증 — 2026-10-15
+
+커밋 6a39448c0076f0e286d0f15a522b16b82dd0f4c7, GitHub Actions 38585269599 배포 성공. PC 1280px 및 모바일 390×844px에서 본문 가로 넘침 없음. 모바일 주 메뉴는 자체 가로 스크롤이며 본문은 한 열입니다. 기본 홈 주요 글은 PDF, 보조 글은 Chrome이며 최근 목록은 실제 발행일 순입니다. IT·디지털 허브의 실제 글 2편, 글이 없는 분야의 빈 상태와 noindex 처리, 홈페이지 전체 글 2편 및 별칭 검색 결과 1편을 확인했습니다. 카테고리 5개 모두 HTTP 200. 사이트맵은 실제 글이 있는 digital 허브만 포함하고 빈 허브는 제외합니다. 원고 승인 revision은 PDF 3·Chrome 4를 유지합니다.
+
+홈 중간 배너의 공식 쿠팡 iframe과 loaded 상태 및 실제 표시를 확인했습니다. 새 홈을 공개 브라우저에 남겼고 임시 모바일 뷰포트는 복원했습니다. 참고용 브라우저 탭은 정리했습니다.
+
+![배너 포함 최종 공개 홈](generated/reference-layout-20261014/published-home-with-banner.jpg)
+
+![실제 카테고리 페이지](generated/reference-layout-20261014/published-category.jpg)
+
+![모바일 홈](generated/reference-layout-20261014/published-home-mobile.jpg)
