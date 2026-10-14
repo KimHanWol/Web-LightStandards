@@ -1,13 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getArticles, readingTime, formatPublishedDate } from '../../lib/articles.mjs';
-import { prepareArticle } from '../../lib/article-layout.mjs';
+import { prepareArticle, articleAdPlacements } from '../../lib/article-layout.mjs';
 import { site } from '../../lib/site.mjs';
 import AffiliateBanner from '../../components/AffiliateBanner.astro';
 import { hasBanners, affiliateDisclosure } from '../../lib/banners.mjs';
 export function getStaticPaths(){return getArticles().map(article=>({params:{id:article.articleId},props:{article}}));}
 const { article } = Astro.props;
 const {headings,sections} = prepareArticle(article.markdown,article.images);
+const adPlacements=articleAdPlacements(sections);
 const adClient = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
 const adSlot = import.meta.env.PUBLIC_ADSENSE_SLOT || '';
 const adsEnabled = site.ready && /^ca-pub-\d{16}$/.test(adClient) && /^\d+$/.test(adSlot);
@@ -23,8 +24,8 @@ const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPost
     <a class="back-link" href="/">← 전체 글</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
     <div class="article-byline">{site.name} <span>·</span> {formatPublishedDate(article.publishedAt)} <span>·</span> {readingTime(article)}분 읽기</div>
     {hasAffiliateContent&&<aside class="disclosure">{affiliateDisclosure}</aside>}
-    {headings.length>0&&<nav class="article-toc" aria-label="이 글의 목차"><strong>이 글에서 바로 찾기</strong><ol>{headings.map(h=><li><a href={'#'+h.id}>{h.title}</a></li>)}</ol></nav>}
-    <div class="article-body">{sections.map((section,index)=><><div set:html={section.html}/>{section.images.filter(image=>image.localPath).map(image=><figure><img src={image.localPath} alt={image.alt} width="1024" height="768" loading={image.lead?'eager':'lazy'} fetchpriority={image.lead?'high':'auto'}/><figcaption>이해를 돕기 위한 AI 생성 설명 이미지입니다.</figcaption></figure>)}{index===Math.min(1,sections.length-1)&&<AffiliateBanner slot="article-top" category={article.category}/>} {index===Math.max(2,Math.floor(sections.length/2))&&<AffiliateBanner slot="article-middle" category={article.category}/>}</>)}</div>
+    {headings.length>0&&<nav class="article-toc" aria-label="이 글의 목차"><details><summary>목차 <span>{headings.length}개 항목</span></summary><ol>{headings.map(h=><li><a href={'#'+h.id}>{h.title}</a></li>)}</ol></details></nav>}
+    <div class="article-body">{sections.map((section,index)=><><div class:list={['article-section',{'article-intro':index===0&&!section.html.includes('<h2')}]} set:html={section.html}/>{section.images.filter(image=>image.localPath).map(image=><figure><img src={image.localPath} alt={image.alt} width="1024" height="768" loading={image.lead?'eager':'lazy'} fetchpriority={image.lead?'high':'auto'}/><figcaption>이해를 돕기 위한 AI 생성 설명 이미지입니다.</figcaption></figure>)}{adPlacements.has(index)&&<AffiliateBanner slot={adPlacements.get(index)} category={article.category}/>}</>)}</div>
     <AffiliateBanner slot="article-bottom" category={article.category}/>
     {article.affiliates.length>0&&<section class="product-section"><h2>함께 살펴볼 제품</h2>{article.affiliates.map(p=><a class="product-link" href={p.url} rel="sponsored noopener noreferrer" target="_blank"><div><strong>{p.label}</strong>{p.note&&<p>{p.note}</p>}</div><span>쿠팡에서 확인 ↗</span></a>)}<small>가격·재고·배송 조건은 판매 페이지에서 확인해 주세요.</small></section>}
     <section class="source-section"><h2>확인한 자료</h2><ol>{article.sources.map(s=><li><a href={s.url} rel="noopener noreferrer" target="_blank">{s.title} ↗</a><span>확인 {s.checkedAt.slice(0,10)}</span></li>)}</ol><p>자료 기반 설명과 실제 사용 경험을 구분합니다. 오류 제보는 <a href="/contact/">문의 안내</a>를 이용해 주세요.</p></section>
