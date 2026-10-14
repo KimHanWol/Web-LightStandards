@@ -25,7 +25,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .feed-main{min-width:0}
 .feed-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;border-bottom:1px solid var(--ink);padding-bottom:23px;margin-bottom:32px}
 .feed-heading .section-kicker{font-size:10px;letter-spacing:.18em;font-weight:650;color:var(--accent);margin:0 0 8px}
-.feed-heading h1{font-family:inherit;font-size:28px;font-weight:700;letter-spacing:-.5px;line-height:1.5}
+.feed-heading h1,.feed-heading h2{font-family:inherit;font-size:28px;font-weight:700;letter-spacing:-.5px;line-height:1.5}
 .feed-heading>p{font-size:12px;color:var(--muted);margin:0 0 3px;font-variant-numeric:tabular-nums}
 .feed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 36px}
 .feed-card{display:grid;grid-template-columns:170px minmax(0,1fr);align-items:start;gap:22px;min-width:0;border-bottom:1px solid var(--line);padding-bottom:28px;text-decoration:none}
@@ -37,10 +37,26 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .feed-image.no-image>img{width:54px;height:54px;object-fit:contain;opacity:.55}
 .feed-card-lead .no-image>img{width:90px;height:90px}
 .feed-category{font-size:11px;color:var(--green);font-weight:600;margin:0 0 9px}
-.feed-card h2{font-family:inherit;font-size:20px;font-weight:600;letter-spacing:-.35px;line-height:1.5;text-wrap:pretty}
-.feed-card-lead h2{font-size:32px;line-height:1.45;letter-spacing:-.6px}
+.feed-card h2,.feed-card h3{font-family:inherit;font-size:20px;font-weight:600;letter-spacing:-.35px;line-height:1.5;text-wrap:pretty;margin:0}
+.feed-card-lead h2,.feed-card-lead h3{font-size:32px;line-height:1.45;letter-spacing:-.6px}
 .feed-summary{font-size:13px;line-height:1.8;color:var(--muted);margin:10px 0 14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .feed-card-lead .feed-summary{font-size:15px;line-height:1.85;margin:18px 0 24px;-webkit-line-clamp:3}
+.home-discovery{padding-bottom:46px;margin-bottom:30px;border-bottom:1px solid var(--line);scroll-margin-top:24px}
+.discovery-heading h1{font-size:34px;line-height:1.5;letter-spacing:-.7px;font-weight:700}
+.discovery-heading>p{font-size:15px;line-height:1.8;color:var(--muted);margin:12px 0 30px}
+.topic-list-title{font-size:13px;line-height:1.5;letter-spacing:0;font-weight:550;color:var(--muted);margin-bottom:12px}
+.home-topic-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px}
+.home-topic-link{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:106px;padding:22px 24px;background:#f7f8fa;border-radius:8px}
+.home-topic-link>div{min-width:0}
+.home-topic-link h3{font-size:20px;font-weight:650;line-height:1.5;letter-spacing:-.3px;margin:0}
+.home-topic-link p{font-size:12px;line-height:1.8;color:var(--muted);margin:7px 0 0;overflow-wrap:anywhere}
+.home-topic-link>span{font-size:20px;color:var(--accent);flex-shrink:0}
+.feed-heading-links{display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:flex-end}
+.feed-heading-links p{font-size:12px;color:var(--muted);margin:0;font-variant-numeric:tabular-nums}
+.feed-heading-links>a{display:inline-flex;gap:10px;align-items:center;min-height:44px;font-size:13px;font-weight:550;color:var(--accent)}
+@media(hover:hover) and (pointer:fine){.home-topic-link:hover h3,.feed-card:hover h3,.feed-heading-links>a:hover{text-decoration:underline;text-underline-offset:5px}}
+@media(max-width:900px){.feed-card h3{font-size:18px}.feed-card-lead h3{font-size:28px}}
+@media(max-width:700px){.home-discovery{padding-bottom:30px;margin-bottom:28px}.discovery-heading h1{font-size:27px}.discovery-heading>p{font-size:14px;margin-bottom:23px}.home-topic-list{grid-template-columns:1fr;gap:10px}.home-topic-link{min-height:96px;padding:19px 20px}.home-topic-link h3{font-size:18px}.feed-heading h2{font-size:24px}.feed-card h3{font-size:18px}.feed-card-lead h3{font-size:27px}.feed-heading-links{gap:2px;flex-direction:column;align-items:flex-end}.feed-heading-links p{font-size:10px}.feed-heading-links>a{font-size:12px}}
 .feed-meta{font-size:11px;color:#838b94;display:flex;gap:16px;line-height:1.7;font-variant-numeric:tabular-nums}
 .feed-meta span::before{content:'·';margin-right:16px}
 .feed-ad{grid-column:1/-1;margin:0;padding:4px 0 14px}

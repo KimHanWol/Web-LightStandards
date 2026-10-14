@@ -4,7 +4,6 @@ import '../styles/global.css';
 import '../styles/polish.css';
 import '../styles/publication.css';
 import { site } from '../lib/site.mjs';
-import { categories } from '../lib/articles.mjs';
 const {title=site.name,description=site.description,noindex=false,image='/brand/lightstandards-mark-v2.png'}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
 const googleVerification=import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -38,8 +37,9 @@ const naverVerification=import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION;
       </form>
     </header>
     <nav class="site-navigation" aria-label="주 메뉴"><div class="wrap">
-      <a href="/#articles" class={Astro.url.pathname==='/'?'active':''}>전체 글</a>
-      {categories.filter(category=>category!=='전체').map(category=><a href={`/?category=${encodeURIComponent(category)}#articles`}>{category}</a>)}
+      <a href="/" class={Astro.url.pathname==='/'?'active':''}>홈</a>
+      <a href="/#topics">주제로 찾기</a>
+      <a href="/?view=all#articles">전체 글</a>
       <div class="navigation-info"><a href="/about/">소개</a><a href="/contact/">문의</a></div>
     </div></nav>
     <main id="main"><slot/></main>
