@@ -30,17 +30,17 @@ const latest=articles.slice(0,4);
             <p class="magazine-kicker">{articleSection(secondary).label}</p><h2>{secondary.title}</h2>
           </a>}
           <section class="latest-rail" aria-labelledby="latest-title"><div class="magazine-section-heading"><h2 id="latest-title">최근 글</h2><a href="/?view=all#articles">전체 보기 <span aria-hidden="true">→</span></a></div><ol>{latest.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></li>)}</ol></section>
+          <div class="home-ad-sidebar"><AffiliateBanner slot="home-sidebar"/></div>
         </div>
       </section>}
-      <div class="magazine-ad"><AffiliateBanner slot="home-middle"/></div>
       <section class="category-directory" aria-labelledby="directory-title">
         <div class="magazine-section-heading"><h2 id="directory-title">분야별로 둘러보기</h2><span>카테고리</span></div>
         <div class="category-directory-grid">{sections.map(section=><a href={`/categories/${section.id}/`} class="directory-item"><h3>{section.label}<span aria-hidden="true">↗</span></h3><ul>{section.topics.slice(0,3).map(topic=><li>{topic}</li>)}</ul><p>{sectionArticles(articles,section.id).length}개의 글</p></a>)}</div>
       </section>
-      <div class="category-shelves">{populated.map(section=><section class="category-shelf" aria-labelledby={`shelf-${section.id}`}>
+      <div class="category-shelves">{populated.map((section,index)=><><section class="category-shelf" aria-labelledby={`shelf-${section.id}`}>
         <div class="magazine-section-heading"><h2 id={`shelf-${section.id}`}>{section.label}</h2><a href={`/categories/${section.id}/`}>모두 보기 <span aria-hidden="true">→</span></a></div>
         <div class="guide-grid">{section.articles.slice(0,4).map(article=><ArticleCard article={article}/>)}</div>
-      </section>)}</div>
+      </section>{index===0&&<div class="home-ad-mobile"><AffiliateBanner slot="home-middle"/></div>}</>)}</div>
     </div>
     <section id="articles" class="article-library" aria-labelledby="library-title" hidden>
       <header class="library-heading"><h1 id="library-title">전체 글</h1><p id="library-count">{articles.length}개의 글</p></header>
