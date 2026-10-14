@@ -52,4 +52,8 @@ https://github.com/KimHanWol/Web-LightStandards/actions/runs/38515198609
 
 ## 사용자 캡처 제외 요청 반영
 
-2026-10-14 사용자가 도움말 문장 캡처가 불필요하다고 판단하여 두 캡처를 제거했습니다. 본문·근거·기존 설명 이미지 3장은 유지한 승인 revision 3입니다. 신규 자동 원고의 5장 기준을 낮추지 않고 해당 승인 원고의 imageCountException에 사유를 기록했습니다. 새 이미지 유료 요청은 없습니다. n8n 작성 프롬프트·주제 맵 지침·AGENTS.md에도 문장 캡처 제외와 실제 조작 화면만 사용한다는 기준을 반영했습니다. 로컬 테스트 19개 및 빌드 통과.
+2026-10-14 사용자가 도움말 문장 캡처가 불필요하다고 판단하여 두 캡처를 제거했습니다. 기존 설명 이미지 3장은 유지하고 캡처를 가리키던 본문 안내도 출처 안내로 바꾼 최종 승인 revision 4입니다. 신규 자동 원고의 5장 기준을 낮추지 않고 해당 승인 원고의 imageCountException에 사유를 기록했습니다. 새 이미지 유료 요청은 없습니다. n8n 작성 프롬프트·주제 맵 지침·AGENTS.md에도 문장 캡처 제외와 실제 조작 화면만 사용한다는 기준을 반영했습니다. 로컬 테스트 19개 및 빌드 통과.
+
+최종 공개 manifest는 Chrome revision 4, PDF revision 3입니다. GitHub Actions 38563004254에서 배포 성공. n8n 실행 2382는 사용자 요청으로 검토한 revision 4를 Select Publication의 입력으로 고정한 선택 실행이며, 공개 manifest 확인·revision 대조·Data Table 저장은 실제 노드를 실행했습니다. 행 상태 published·approved_revision=4·images_json 3장·본문 6,110자, 누적 비용 $0.013696 유지. 임시 저장 매핑을 원복했습니다. 공개 화면에서 캡처 0장·그림 3장·가로 넘침 없음 확인. PC 우측 배너의 기존 sticky 배치를 유지하며 넓이·높이가 충분하지 않은 창에서는 기존 반응형 조건을 따릅니다.
+
+![캡처 제거 후 공개 본문](generated/chrome-cache-clear-20261014/published-without-captures.jpg)
