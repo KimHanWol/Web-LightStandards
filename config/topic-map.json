@@ -31,7 +31,7 @@
       "articleId": "chrome-cache-clear-20261014",
       "category": "브라우저 문제 해결",
       "intentKey": "chrome-cache-clear-with-data-scope",
-      "status": "in_review",
+      "status": "published",
       "coreQuestion": "크롬 캐시를 어떤 항목과 기간으로 삭제하고 결과를 확인하나요?",
       "scope": "PC Chrome, Android Chrome, iPhone·iPad Chrome",
       "coverage": [
