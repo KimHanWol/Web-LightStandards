@@ -240,6 +240,32 @@
       ]
     },
     {
+      "articleId": "sheets-conditional-format-20261015",
+      "category": "경제·일",
+      "categoryId": "money-work",
+      "categoryLabel": "경제·일",
+      "intentKey": "sheets-conditional-format",
+      "status": "published",
+      "title": "구글 스프레드시트 조건부 서식: 셀과 행을 조건에 맞게 강조하는 방법",
+      "coreQuestion": "구글 스프레드시트 조건부 서식: 셀과 행을 조건에 맞게 강조하는 방법",
+      "scope": "구글 스프레드시트 조건부 서식의 기본 규칙, 사용자 지정 수식, 상대·절대 참조, 텍스트 조건과 와일드카드, 필터와의 차이를 함께 정리합니다.",
+      "coverage": [
+        "1. 조건부 서식이 하는 일",
+        "2. 기본 규칙을 만드는 순서",
+        "3. 사용자 지정 수식으로 행을 칠하는 법",
+        "4. 상대 참조와 절대 참조 구분하기",
+        "5. 텍스트 조건과 와일드카드 쓰기",
+        "6. 색과 범위가 어긋날 때 확인할 것",
+        "7. 필터와 함께 쓸 때의 차이",
+        "8. 바로 적용할 때의 점검 순서",
+        "9. 자주 헷갈리는 부분 정리"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "구글 스프레드시트 조건부 서식: 셀과 행을 조건에 맞게 강조하는 방법"
+      ]
+    },
+    {
       "articleId": "sheets-pivot-table-20261015",
       "category": "경제·일",
       "categoryId": "money-work",
@@ -465,6 +491,27 @@
       "id": "money-work",
       "label": "경제·일",
       "articles": [
+        {
+          "articleId": "sheets-conditional-format-20261015",
+          "intentKey": "sheets-conditional-format",
+          "coreQuestion": "구글 스프레드시트 조건부 서식: 셀과 행을 조건에 맞게 강조하는 방법",
+          "scope": "구글 스프레드시트 조건부 서식의 기본 규칙, 사용자 지정 수식, 상대·절대 참조, 텍스트 조건과 와일드카드, 필터와의 차이를 함께 정리합니다.",
+          "coverage": [
+            "1. 조건부 서식이 하는 일",
+            "2. 기본 규칙을 만드는 순서",
+            "3. 사용자 지정 수식으로 행을 칠하는 법",
+            "4. 상대 참조와 절대 참조 구분하기",
+            "5. 텍스트 조건과 와일드카드 쓰기",
+            "6. 색과 범위가 어긋날 때 확인할 것",
+            "7. 필터와 함께 쓸 때의 차이",
+            "8. 바로 적용할 때의 점검 순서",
+            "9. 자주 헷갈리는 부분 정리"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "구글 스프레드시트 조건부 서식: 셀과 행을 조건에 맞게 강조하는 방법"
+          ]
+        },
         {
           "articleId": "sheets-pivot-table-20261015",
           "intentKey": "sheets-pivot-table",
