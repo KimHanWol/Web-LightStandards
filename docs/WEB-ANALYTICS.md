@@ -2,7 +2,7 @@
 
 사이트: https://lightstandards.linkingmain.workers.dev/
 
-운영자 대시보드(Cloudflare 로그인 필요): https://dash.cloudflare.com/40b12740d554a2a64712de5562d42fd9/web-analytics/overview?siteTag~in=25fb1126b9104dd0bf9cc2c88daad963&excludeBots=Yes
+운영자 대시보드(Cloudflare 로그인 필요): https://dash.cloudflare.com/40b12740d554a2a64712de5562d42fd9/web-analytics/overview/visits?siteTag~in=25fb1126b9104dd0bf9cc2c88daad963&excludeBots=Yes
 
 기본 화면은 최근 24시간, GMT+9, 봇 제외 필터다. 날짜 선택에서 조회 기간을 변경할 수 있다. Visits와 Page views를 구분해 읽고, 글별 수치는 Page views에서 확인한다.
 
@@ -28,3 +28,5 @@ Visits는 외부 사이트 또는 직접 유입에서 시작한 방문이고, �
 - https://developers.cloudflare.com/web-analytics/faq/
 
 2026-10-16 사용자 재로그인 후 블로그 hostname을 등록하고 수동 설치용 token을 연결했다. 이 날짜 이전 방문 기록을 새 통계로 복원한 것으로 해석하지 않는다.
+
+검증: 배포 커밋 ee7bc7efff70bca49f1d712051095f1c892ca470, GitHub Actions 38758476043 성공. 44개 HTML에 스니펫이 한 번씩 들어감을 확인했다. 공개 홈·글·개인정보처리방침이 HTTP 200이고 분석 안내도 반영됐다. 실제 브라우저 방문 후 Visits·Page views·페이지 성능 데이터가 운영자 대시보드에 수신됨을 확인했다. 초기 집계에는 연결 확인을 위한 테스트 방문이 포함된다.
