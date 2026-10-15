@@ -1,0 +1,5 @@
+{
+  "image": { "maxBytes": 200000, "targetBytes": 160000, "maxWidth": 1280, "maxHeight": 1280, "sourceMaxBytes": 8000000, "sourceMaxPixels": 20000000 },
+  "files": { "image": 200000, "svg": 50000, "font": 100000, "css": 120000, "javascript": 150000, "html": 250000, "data": 500000, "other": 500000 },
+  "page": { "eagerImageBytes": 450000 }
+}

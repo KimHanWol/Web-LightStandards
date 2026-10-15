@@ -35,6 +35,7 @@ jobs:
       - run: npm test
       - run: npm run deploy:check
       - run: npm run import:article -- --inbox
+      - run: npm run assets:optimize
       - name: Preserve imported Markdown and media
         run: |
           git config user.name 'lightstandards-bot'

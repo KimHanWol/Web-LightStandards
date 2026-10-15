@@ -6,14 +6,16 @@ import sharp from 'sharp';
 import { validateArticle } from '../src/lib/content.mjs';
 import { validStockPhoto, stockDownloadUrl } from '../src/lib/stock-photos.mjs';
 import { syncTopicMap } from './sync-topic-map.mjs';
+import { assetBudgets, optimizeImage } from '../src/lib/image-optimization.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export function allowedMedia(url){const u=new URL(url);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&(u.hostname==='fal.media'||u.hostname.endsWith('.fal.media'));}
 async function downloadImage(image,articleId){
   if(!image.generated&&!image.stock){
     const path=resolve(root,'public'+image.localPath);
     const bytes=await readFile(path);
-    if(bytes.length>8000000||createHash('sha256').update(bytes).digest('hex')!==image.localPath.split('/').pop().split('.')[0])throw new Error('Captured media file hash mismatch');
-    const metadata=await sharp(bytes,{limitInputPixels:20000000}).metadata();
+    if(bytes.length>assetBudgets.image.sourceMaxBytes||createHash('sha256').update(bytes).digest('hex')!==image.localPath.split('/').pop().split('.')[0])throw new Error('Captured media file hash mismatch');
+    if(bytes.length>assetBudgets.image.maxBytes)throw new Error('Optimize captured image to '+assetBudgets.image.maxBytes+' bytes before approval');
+    const metadata=await sharp(bytes,{limitInputPixels:assetBudgets.image.sourceMaxPixels}).metadata();
     if(!['webp','png','jpeg'].includes(metadata.format))throw new Error('Unsupported captured media');
     if(image.width!==metadata.width||image.height!==metadata.height)throw new Error('Captured media dimensions mismatch');
     return image;
@@ -27,10 +29,11 @@ async function downloadImage(image,articleId){
   if(!response.ok)throw new Error('Image download failed '+response.status);
   const mime=(response.headers.get('content-type')||'').split(';')[0];const ext={'image/webp':'webp','image/png':'png','image/jpeg':'jpg'}[mime];
   if(!ext)throw new Error('Unsupported image content type');
-  if(Number(response.headers.get('content-length')||0)>8000000)throw new Error('Image exceeds 8MB');
-  const chunks=[];let length=0;for await(const chunk of response.body){length+=chunk.length;if(length>8000000){await response.body.cancel().catch(()=>{});throw new Error('Image exceeds 8MB');}chunks.push(chunk);}
+  const sourceLimit=assetBudgets.image.sourceMaxBytes;
+  if(Number(response.headers.get('content-length')||0)>sourceLimit){await response.body?.cancel();throw new Error('Source image exceeds '+sourceLimit+' bytes');}
+  const chunks=[];let length=0;for await(const chunk of response.body){length+=chunk.length;if(length>sourceLimit)throw new Error('Source image exceeds '+sourceLimit+' bytes');chunks.push(chunk);}
   const bytes=Buffer.concat(chunks);if((ext==='png'&&bytes.subarray(0,8).toString('hex')!=='89504e470d0a1a0a')||(ext==='jpg'&&bytes.subarray(0,3).toString('hex')!=='ffd8ff')||(ext==='webp'&&(bytes.subarray(0,4).toString()!=='RIFF'||bytes.subarray(8,12).toString()!=='WEBP')))throw new Error('Image signature mismatch');
-  const {data:optimized,info}=await sharp(bytes,{limitInputPixels:20000000}).rotate().resize({width:1280,withoutEnlargement:true}).webp({quality:82}).toBuffer({resolveWithObject:true});
+  const {data:optimized,info}=await optimizeImage(bytes);
   await writeFile(resolve(folder,hash+'.webp'),optimized);return {...image,localPath:`/media/${articleId}/${hash}.webp`,...(image.stock?{width:info.width,height:info.height}:{})};
 }
 export async function importArticle(file){
