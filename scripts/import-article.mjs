@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { validateArticle } from '../src/lib/content.mjs';
-import { validStockPhoto } from '../src/lib/stock-photos.mjs';
+import { validStockPhoto, stockDownloadUrl } from '../src/lib/stock-photos.mjs';
 import { syncTopicMap } from './sync-topic-map.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export function allowedMedia(url){const u=new URL(url);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&(u.hostname==='fal.media'||u.hostname.endsWith('.fal.media'));}
@@ -22,7 +22,8 @@ async function downloadImage(image,articleId){
   const hash=createHash('sha256').update(image.url).digest('hex');
   const folder=resolve(root,'public/media',articleId);await mkdir(folder,{recursive:true});
   for(const ext of ['webp','png','jpg']){const path=resolve(folder,hash+'.'+ext);try{await access(path);return {...image,localPath:`/media/${articleId}/${hash}.${ext}`};}catch{}}
-  const response=await fetch(image.url,{redirect:'error',signal:AbortSignal.timeout(30000)});
+  const downloadUrl=image.stock?await stockDownloadUrl(image):image.url;
+  const response=await fetch(downloadUrl,{redirect:'error',signal:AbortSignal.timeout(30000)});
   if(!response.ok)throw new Error('Image download failed '+response.status);
   const mime=(response.headers.get('content-type')||'').split(';')[0];const ext={'image/webp':'webp','image/png':'png','image/jpeg':'jpg'}[mime];
   if(!ext)throw new Error('Unsupported image content type');

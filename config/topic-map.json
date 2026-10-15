@@ -170,6 +170,29 @@
       "title": "PDF 용량 줄이기: 윈도우·맥에서 화질 확인하며 압축하는 방법"
     },
     {
+      "articleId": "photos-albums-20261015",
+      "category": "취미·문화",
+      "categoryId": "culture",
+      "categoryLabel": "취미·문화",
+      "intentKey": "photos-albums",
+      "status": "published",
+      "title": "구글 포토 앨범 정리 방법: 표지·순서·삭제를 구분해 정리하기",
+      "coreQuestion": "구글 포토 앨범 정리 방법: 표지·순서·삭제를 구분해 정리하기",
+      "scope": "PC에서 구글 포토 앨범의 표지, 제목, 사진 순서, 자동 추가, 앨범 제거와 원본 삭제의 차이를 구분해 정리하는 방법을 안내합니다.",
+      "coverage": [
+        "앨범에서 먼저 구분할 것",
+        "표지와 제목을 바꾸는 방법",
+        "사진 순서와 구성 정리",
+        "사진 추가와 제거를 나누는 법",
+        "앨범을 찾기 쉽게 정리하기",
+        "앨범 정리 전에 자주 막히는 지점"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "구글 포토 앨범 정리 방법: 표지·순서·삭제를 구분해 정리하기"
+      ]
+    },
+    {
       "articleId": "photos-editing-20261015",
       "category": "취미·문화",
       "categoryId": "culture",
@@ -564,6 +587,24 @@
       "id": "culture",
       "label": "취미·문화",
       "articles": [
+        {
+          "articleId": "photos-albums-20261015",
+          "intentKey": "photos-albums",
+          "coreQuestion": "구글 포토 앨범 정리 방법: 표지·순서·삭제를 구분해 정리하기",
+          "scope": "PC에서 구글 포토 앨범의 표지, 제목, 사진 순서, 자동 추가, 앨범 제거와 원본 삭제의 차이를 구분해 정리하는 방법을 안내합니다.",
+          "coverage": [
+            "앨범에서 먼저 구분할 것",
+            "표지와 제목을 바꾸는 방법",
+            "사진 순서와 구성 정리",
+            "사진 추가와 제거를 나누는 법",
+            "앨범을 찾기 쉽게 정리하기",
+            "앨범 정리 전에 자주 막히는 지점"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "구글 포토 앨범 정리 방법: 표지·순서·삭제를 구분해 정리하기"
+          ]
+        },
         {
           "articleId": "photos-editing-20261015",
           "intentKey": "photos-editing",
