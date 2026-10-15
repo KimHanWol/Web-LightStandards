@@ -47,7 +47,7 @@ try {
   }
   const md=result.body_markdown;
   result.character_count=[...md.replace(/!?\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/https?:\/\/\S+/g,'').replace(/[#*`_|>~-]/g,'').replace(/\s+/g,' ').trim()].length;
-  if(result.character_count<5000||md.length>60000) throw new Error('Body length check failed');
+  if(result.character_count<3500||md.length>60000) throw new Error('Body length check failed');
   if(result.title.length<8||result.title.length>120||result.description.length<20||result.description.length>300) throw new Error('Title or description length check failed');
   if(/<\/?[a-z!][^>]*>/i.test(md)||/!\[[^\]]*\]\(/.test(md)) throw new Error('Unreviewed HTML or images');
   if((md.match(/^## /gm)||[]).length<3) throw new Error('At least three useful sections required');

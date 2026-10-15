@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {plainText} from '../src/lib/content.mjs';
 function run(file,items,refs={}){
   const code=readFileSync(new URL('../n8n/runtime/'+file+'.js',import.meta.url),'utf8');
   return vm.runInNewContext('(function(){'+code+'})()',{$input:{all:()=>items.map(json=>({json})),first:()=>({json:items[0]})},$:name=>({first:()=>({json:refs[name]})}),$execution:{id:'test'},$runIndex:0,$now:{setZone:()=>({toFormat:format=>format==='yyyy-MM'?'2026-10':'2026-10-13'})}});
@@ -51,6 +52,23 @@ test('draft validation accepts parsed n8n JSON objects and raw API JSON strings'
   }
 });
 
+test('draft, independent review, approval and routing agree on the 3500 minimum',()=>{
+ const prefix='## 시작\n\n## 실행\n\n## 결과\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
+ for(const size of [3499,3500,4000]){
+  const markdown=prefix+'\n\n'+'가'.repeat(size-[...plainText(prefix)].length-1);
+  const article={...row,id:35,article_id:'windows-screenshots-20261016',intent_key:'screenshots',revision:1,title:'길이 경계를 확인하는 검증용 원고',description:'실제로 발행하거나 유료 생성하지 않는 길이 경계 검사입니다.',body_markdown:markdown,character_count:size,status:'needs_review',images_json:JSON.stringify(Array.from({length:5},(_,i)=>({url:'https://fal.media/fixture-'+i+'.png',alt:'검증용 이미지',generated:true}))),error:'',reserved_usd:0};
+  const draft={canWrite:true,title:article.title,description:article.description,markdown,imagePrompts:Array.from({length:5},(_,i)=>'Distinct physical objects for educational scene '+i+' without lettering.')};
+  const response={id:'fixture-response',model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:100,output_tokens:100},output:[{content:[{type:'output_text',text:draft}]}]};
+  const parsed=run('parse-draft',[response],{'Select Draft':article,Configuration:{input_usd_per_million:.75,cached_input_usd_per_million:.075,output_usd_per_million:4.5}})[0].json;
+  assert.equal(parsed.character_count,size);assert.equal(parsed.error,size<3500?'Body length check failed':'');
+  const reviewConfig={article_id:article.article_id,revision:1,approved_by:'Offline fixture'};
+  assert.equal(run('select-review',[article],{Configuration:reviewConfig}).length,size<3500?0:1);
+  if(size<3500)assert.throws(()=>run('approve',[article],{Configuration:reviewConfig}),/editorial errors/);
+  else assert.equal(run('approve',[article],{Configuration:reviewConfig})[0].json.status,'approved');
+  assert.equal(run('batch-router',[article])[0].json.action,size<3500?'finished':'review');
+ }
+});
+
 test('a held automatic correction preserves the previous draft instead of erasing it',()=>{
  const previous={...row,title:'이전에 작성한 원고 제목',body_markdown:'기존의 올바른 설명을 보존합니다.',character_count:4921};
  const response={id:'hold-response',status:'completed',output:[{content:[{type:'output_text',text:{canWrite:false,holdReason:'근거 보강이 필요한 하위 질문'}}]}]};
@@ -59,10 +77,10 @@ test('a held automatic correction preserves the previous draft instead of erasin
 });
 
 test('confirmed short drafts use bounded additions without another full rewrite',()=>{
- const short={...row,id:7,article_id:'drive-help',status:'needs_review',body_markdown:'기존에 작성한 근거 있는 설명입니다. '.repeat(160),character_count:4500,error:'Body length check failed',openai_response_id:'confirmed',reserved_usd:0,topic_map_json:JSON.stringify({automaticWritingAttempts:2})};
+ const short={...row,id:7,article_id:'drive-help',status:'needs_review',body_markdown:'기존에 작성한 근거 있는 설명입니다. '.repeat(140),character_count:3200,error:'Body length check failed',openai_response_id:'confirmed',reserved_usd:0,topic_map_json:JSON.stringify({automaticWritingAttempts:2})};
  const selected=run('select-draft',[short],{Configuration:{...config,batch_mode:true}})[0].json;
  assert.equal(selected.completionMode,true);assert.equal(JSON.parse(selected.topic_map_json).automaticWritingAttempts,2);assert.equal(JSON.parse(selected.topic_map_json).completionAttempts,1);
- assert.equal(JSON.parse(selected.brief).correction.requiredAdditionalCharacters,1200);
+ assert.equal(JSON.parse(selected.brief).correction.requiredAdditionalCharacters,800);
  assert.equal(run('select-draft',[{...short,reserved_usd:.12}],{Configuration:{...config,batch_mode:true}}).length,0);
  assert.equal(run('select-draft',[{...short,topic_map_json:JSON.stringify({automaticWritingAttempts:2,completionAttempts:2})}],{Configuration:{...config,batch_mode:true}}).length,0);
 });

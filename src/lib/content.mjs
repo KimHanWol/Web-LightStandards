@@ -28,7 +28,7 @@ export function validateArticle(value, { allowDemo = false } = {}) {
   if (article.revision !== article.approvedRevision) throw new Error('Approval does not match current revision');
   if (article.images.length < 5 && !article.imageCountException) throw new Error('Fewer than five images requires an approved editorial exception');
   if (article.demo && !allowDemo) throw new Error('Demo content cannot be published');
-  if (!article.demo && [...plainText(article.markdown)].length < 5000) throw new Error('Article body must contain at least 5000 characters');
+  if (!article.demo && [...plainText(article.markdown)].length < 3500) throw new Error('Article body must contain at least 3500 characters');
   if (/<\/?[a-z!][^>]*>/i.test(article.markdown)) throw new Error('Raw HTML is not allowed in article Markdown');
   if (/!\[[^\]]*\]\(/.test(article.markdown)) throw new Error('Article images must use the reviewed images field');
   for (const image of article.images) {

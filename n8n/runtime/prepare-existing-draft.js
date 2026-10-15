@@ -1,7 +1,7 @@
 const input=$('Batch Input').first().json;
 const row=$input.all().map(i=>i.json).find(r=>r.article_id===input.article_id);
-if(row&&input.action==='resume_images'&&row.status==='text_ready'&&Number(row.character_count)>=5000&&JSON.parse(row.images_json||'[]').length<5&&!row.error)return [{json:row}];
-if(!row||row.status!=='needs_review'||Number(row.reserved_usd||0)!==0||Number(row.character_count)<5000||!row.body_markdown||!String(row.error||'').startsWith('Editorial review: '))return [];
+if(row&&input.action==='resume_images'&&row.status==='text_ready'&&Number(row.character_count)>=3500&&JSON.parse(row.images_json||'[]').length<5&&!row.error)return [{json:row}];
+if(!row||row.status!=='needs_review'||Number(row.reserved_usd||0)!==0||Number(row.character_count)<3500||!row.body_markdown||!String(row.error||'').startsWith('Editorial review: '))return [];
 const issues=JSON.parse(row.error.slice('Editorial review: '.length));
 const reviewMap=JSON.parse(row.topic_map_json||'{}');
 const typedVisual=Number(reviewMap.reviewIssues?.revision)===Number(row.revision)&&reviewMap.reviewIssues.type==='images';
