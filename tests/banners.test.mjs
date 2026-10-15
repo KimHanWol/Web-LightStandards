@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateBanners, getBanners, affiliateDisclosure } from '../src/lib/banners.mjs';
+import { validateBanners, getBanners, selectBanners, affiliateDisclosure } from '../src/lib/banners.mjs';
 import { chooseBannerSize, createCoupangLoader, initialiseCoupangBanners, coupangScriptUrl } from '../src/lib/coupang-client.mjs';
 const banner={id:'test-banner',slot:'article-middle',href:'https://link.coupang.com/a/test',alt:'테스트용 상품 안내',desktop:{src:'https://example.com/banner.webp',width:728,height:90},mobile:{src:'https://example.com/mobile.webp',width:300,height:250}};
 test('banner configuration rejects scripts, deceptive links and duplicate placements',()=>{
@@ -8,6 +8,19 @@ test('banner configuration rejects scripts, deceptive links and duplicate placem
   assert.throws(()=>validateBanners({enabled:true,banners:[{...banner,href:'javascript:alert(1)'}]}));
   assert.throws(()=>validateBanners({enabled:true,banners:[{...banner,href:'https://link.coupang.com@evil.example/banner'}]}));
   assert.throws(()=>validateBanners({enabled:true,banners:[banner,{...banner,id:'second-banner'}]}),/one banner per placement/);
+});
+
+test('contextual ads replace the default in one slot without stacking or leaking to unrelated topics',()=>{
+  const technology={...banner,id:'technology',categories:['문서 작업','스프레드시트']};
+  const home={...banner,id:'home',categories:['생활 가전']};
+  const configuration=validateBanners({enabled:true,banners:[banner,technology,home]});
+  assert.deepEqual(selectBanners(configuration,'article-middle','문서 작업').map(b=>b.id),['technology']);
+  assert.deepEqual(selectBanners(configuration,'article-middle','생활 가전').map(b=>b.id),['home']);
+  assert.deepEqual(selectBanners(configuration,'article-middle','여행 준비').map(b=>b.id),['test-banner']);
+  assert.deepEqual(selectBanners(configuration,'article-middle').map(b=>b.id),['test-banner']);
+  assert.deepEqual(selectBanners({...configuration,enabled:false},'article-middle','문서 작업'),[]);
+  assert.deepEqual(selectBanners({...configuration,banners:[technology]},'article-middle','여행 준비'),[]);
+  assert.throws(()=>validateBanners({enabled:true,banners:[technology,{...home,categories:['문서 작업']}]}),/one banner per placement/);
 });
 
 const dynamic={id:'recommendations',slot:'article-middle',categories:[],type:'dynamic',widget:{id:1038394,template:'carousel',trackingCode:'AF1976226',tsource:''},mobileWidget:{id:1038387,template:'carousel',trackingCode:'AF1976226',tsource:''},desktop:{width:728,height:90},mobile:{width:300,height:250}};

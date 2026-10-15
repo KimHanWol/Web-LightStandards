@@ -30,7 +30,6 @@ const latest=articles.slice(0,4);
             <p class="magazine-kicker">{articleSection(secondary).label}</p><h2>{secondary.title}</h2>
           </a>}
           <section class="latest-rail" aria-labelledby="latest-title"><div class="magazine-section-heading"><h2 id="latest-title">최근 글</h2><a href="/?view=all#articles">전체 보기 <span aria-hidden="true">→</span></a></div><ol>{latest.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></li>)}</ol></section>
-          <div class="home-ad-sidebar"><AffiliateBanner slot="home-sidebar"/></div>
         </div>
       </section>}
       <section class="category-directory" aria-labelledby="directory-title">
@@ -40,7 +39,7 @@ const latest=articles.slice(0,4);
       <div class="category-shelves">{populated.map((section,index)=><><section class="category-shelf" aria-labelledby={`shelf-${section.id}`}>
         <div class="magazine-section-heading"><h2 id={`shelf-${section.id}`}>{section.label}</h2><a href={`/categories/${section.id}/`}>모두 보기 <span aria-hidden="true">→</span></a></div>
         <div class="guide-grid">{section.articles.slice(0,4).map(article=><ArticleCard article={article}/>)}</div>
-      </section>{index===0&&<div class="home-ad-mobile"><AffiliateBanner slot="home-middle"/></div>}</>)}</div>
+      </section>{index===0&&<div class="home-feed-ad"><AffiliateBanner slot="home-middle"/></div>}</>)}</div>
     </div>
     <section id="articles" class="article-library" aria-labelledby="library-title" hidden>
       <header class="library-heading"><h1 id="library-title">전체 글</h1><p id="library-count">{articles.length}개의 글</p></header>

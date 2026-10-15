@@ -31,10 +31,24 @@ const bannerSchema=z.union([imageBannerSchema,dynamicBannerSchema]);
 export function validateBanners(value){
   const parsed=z.object({enabled:z.boolean(),banners:z.array(bannerSchema)}).strict().parse(value);
   if(new Set(parsed.banners.map(b=>b.id)).size!==parsed.banners.length)throw new Error('Banner IDs must be unique');
-  for(const slot of bannerSlots)if(parsed.banners.filter(b=>b.slot===slot).length>1)throw new Error('Choose one banner per placement');
+  for(const slot of bannerSlots){
+    const placements=parsed.banners.filter(b=>b.slot===slot);
+    if(placements.filter(b=>!b.categories.length).length>1)throw new Error('Choose one banner per placement for the default audience');
+    const categories=new Set();
+    for(const banner of placements)for(const category of banner.categories){
+      if(categories.has(category))throw new Error('Choose one banner per placement for each category');
+      categories.add(category);
+    }
+  }
   return parsed;
 }
 const settings=validateBanners(configuration);
 export const bannersEnabled=settings.enabled&&settings.banners.length>0;
-export function getBanners(slot,category){return settings.enabled?settings.banners.filter(b=>b.slot===slot&&(!b.categories.length||category&&b.categories.includes(category))):[];}
+export function selectBanners(configuration,slot,category){
+  if(!configuration.enabled)return [];
+  const placements=configuration.banners.filter(b=>b.slot===slot);
+  const contextual=category?placements.filter(b=>b.categories.includes(category)):[];
+  return contextual.length?contextual:placements.filter(b=>!b.categories.length);
+}
+export function getBanners(slot,category){return selectBanners(settings,slot,category);}
 export function hasBanners(slots,category){return slots.some(slot=>getBanners(slot,category).length>0);}
