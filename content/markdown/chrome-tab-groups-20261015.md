@@ -1,0 +1,114 @@
+---
+title: "크롬 탭 그룹 만들기: PC에서 묶고 접고 다시 여는 방법"
+articleId: "chrome-tab-groups-20261015"
+revision: 2
+---
+
+크롬 탭 그룹은 비슷한 탭을 한 묶음으로 정리해 두는 기능입니다. 오른쪽 클릭 몇 번으로 만들 수 있고, 이름과 색을 붙여 구분할 수 있습니다. 같은 Google 계정으로 동기화 중이면 그룹 상태가 다른 기기에도 저장됩니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop), [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+## 크롬 탭 그룹은 무엇인가요
+탭 그룹은 관련 있는 탭을 하나의 묶음으로 보이게 하는 정리 방식입니다. 예를 들어 검색한 자료, 비교 중인 페이지, 작업 중인 문서를 한 그룹으로 묶어 두면 탭 바가 덜 복잡해집니다. 그룹은 색으로 구분할 수 있고, 필요할 때 접어서 길이를 줄일 수 있습니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+이 기능은 단순히 보기 편하게 만드는 것에 그치지 않습니다. 탭이 많을수록 원하는 페이지를 다시 찾는 시간이 길어지기 쉬운데, 그룹 이름과 색을 붙이면 어떤 묶음이 어떤 작업인지 빠르게 판단할 수 있습니다. 크롬 도움말은 탭 그룹 변경 내용이 Google 계정과 함께 동기화된다고 안내합니다. [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+### 먼저 알아둘 용어
+- **탭**: 브라우저 상단에 열려 있는 각 페이지입니다.
+- **탭 그룹**: 여러 탭을 같은 색과 이름으로 묶은 단위입니다.
+- **접기**: 그룹 안의 탭을 숨겨 이름이나 색만 보이게 하는 동작입니다.
+
+이 세 가지를 구분해 두면, 만들기·접기·해제·삭제를 헷갈리지 않습니다. 특히 접기는 탭을 닫는 것이 아니므로, 페이지가 사라졌다고 생각하지 않아도 됩니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+## 탭 그룹 만드는 방법
+탭 그룹은 PC용 Chrome에서 만들 수 있습니다. 방법은 간단하지만, 어느 탭에서 시작하느냐와 어떤 메뉴를 눌렀는지가 중요합니다. 새 그룹을 바로 만들 수도 있고, 기존 그룹에 탭을 넣을 수도 있습니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+1. Chrome을 열고 상단의 탭 가운데 하나를 **오른쪽 클릭**합니다.
+2. 메뉴에서 `Add tab to group` 또는 `새 그룹`에 해당하는 항목을 선택합니다.
+3. 그룹 이름을 바로 입력하거나, 기존 그룹이 있으면 그 그룹을 선택합니다.
+4. 필요하면 그룹 색을 선택해 다른 묶음과 구분합니다.
+
+처음 만들 때는 어떤 탭에서 시작해도 됩니다. 중요한 것은 메뉴에서 탭을 그룹에 추가하는 항목을 찾는 일입니다. 크롬 팁 페이지는 탭을 오른쪽 클릭한 뒤 `Add Tab to new group`을 선택하라고 설명합니다. 언어와 화면 구성에 따라 문구는 조금 다를 수 있지만, 의미는 같습니다. [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+### 이미 열린 탭을 그룹에 넣는 법
+새로 그룹을 만든 뒤에는 다른 탭도 쉽게 옮길 수 있습니다. 탭을 그룹 영역으로 끌어다 놓으면 됩니다. 이 방법은 여러 페이지를 한 번에 정리할 때 빠릅니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+1. 추가할 탭을 마우스로 잡습니다.
+2. 색이 있는 그룹 쪽으로 끌어다 놓습니다.
+3. 탭이 그룹 안으로 들어갔는지 확인합니다.
+
+탭이 들어가면 그룹의 색이 유지되고, 같은 묶음으로 표시됩니다. 만약 드래그가 잘 안 되면 탭을 잡은 위치가 아니라 탭 제목 부분을 다시 잡아 보세요. 그룹 이름을 눌러 접었다가 펼치는 동작과는 별개입니다. [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+## 이름과 색은 어떻게 바꾸나요
+탭 그룹은 만든 뒤에도 이름과 색을 바꿀 수 있습니다. 처음에는 임시로 묶어 두고, 나중에 `업무`, `쇼핑`, `자료`처럼 알아보기 쉬운 이름으로 정리하면 됩니다. 색은 그룹을 빠르게 구분하는 데 도움이 됩니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+1. 그룹 왼쪽의 **색 원 또는 그룹 이름**을 마우스 오른쪽 버튼으로 클릭합니다.
+2. 이름을 입력해 그룹을 구분합니다.
+3. 색을 골라 같은 창에 열린 다른 그룹과 구별합니다.
+4. 필요하면 탭을 더 추가해 묶음을 넓힙니다.
+
+이름과 색은 같은 역할을 하지 않습니다. 이름은 그룹의 목적을 설명하고, 색은 화면에서 빠르게 찾도록 돕습니다. 탭이 많아질수록 색만으로는 의미를 기억하기 어렵기 때문에, 둘을 함께 쓰는 편이 판단이 쉽습니다. [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+### 그룹을 나중에 수정해야 할 때
+그룹 이름을 바꾸는 시점은 정해져 있지 않습니다. 작업 주제가 바뀌었거나 같은 색의 묶음이 늘어 헷갈릴 때 수정하면 됩니다. Chrome 도움말은 그룹 편집에서 이름 변경, 색 변경, 탭 추가, 그룹 제거가 가능하다고 안내합니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+수정할 때는 먼저 현재 그룹 안의 탭이 같은 주제인지 보세요. 주제가 달라졌다면 이름을 고치는 것보다 탭을 나누는 편이 낫습니다. 같은 그룹에 서로 다른 작업이 섞이면 접어 두어도 다시 펼쳤을 때 찾기 어려워집니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+## 접기와 다시 열기는 무엇이 다른가요
+탭 그룹을 접으면 그룹 이름이나 색 원만 보이도록 줄일 수 있습니다. 탭을 닫는 것이 아니므로, 안의 페이지는 그대로 남아 있습니다. 공간이 부족할 때 특히 유용합니다. [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+1. 접고 싶은 그룹의 **이름 또는 색 원**을 클릭합니다.
+2. 그룹이 접혔는지 확인합니다. 탭 내용은 숨겨지고 표시 폭이 줄어듭니다.
+3. 다시 보고 싶으면 같은 이름이나 색 원을 한 번 더 클릭합니다.
+
+이 기능은 탭 수가 많아졌을 때 차이를 크게 만듭니다. 접기는 정리 상태를 유지한 채 화면만 간단하게 만드는 방식이고, 탭을 닫는 작업과는 다릅니다. 따라서 나중에 다시 열었을 때 같은 페이지를 이어서 볼 수 있습니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+### 접기와 닫기의 차이
+- **접기**: 그룹 표시를 줄일 뿐, 탭은 열려 있습니다.
+- **닫기**: 탭 자체를 닫는 동작입니다.
+- **그룹 닫기**: 도움말에 따르면 그룹을 닫아도 삭제와는 다르며, 저장된 그룹은 다시 열 수 있습니다.
+
+이 차이를 모르면 그룹을 접은 뒤 탭을 잃어버렸다고 느낄 수 있습니다. 실제로는 페이지가 남아 있으므로, 그룹 이름을 다시 누르거나 저장된 그룹을 찾아 열면 됩니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+## 그룹을 다시 열거나 삭제하는 법
+크롬 도움말은 닫은 탭 그룹을 다시 열 수 있다고 안내합니다. 그룹이 완전히 삭제된 것과, 닫아서 잠시 숨겨진 것은 다릅니다. 이 구분을 알면 실수로 정리한 뒤에도 복구할 수 있습니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+1. 닫아 둔 그룹을 열고 싶다면 북마크 바에서 그룹 아이콘을 찾거나, 메뉴의 `More > Tab groups` 쪽에서 선택합니다.
+2. 그룹이 목록에 보이면 눌러 다시 엽니다.
+3. 완전히 지우려면 그룹을 오른쪽 클릭하고 `Delete group`을 선택합니다.
+4. 삭제 확인 창이 뜨면 다시 확인합니다.
+
+삭제는 단순 해제가 아니라 그룹 자체를 지우는 동작입니다. 반대로 `Ungroup`은 탭을 열어 둔 채 그룹만 없앱니다. 즉, 어떤 동작을 눌렀는지에 따라 결과가 달라집니다. 그룹을 없애려는지, 묶음만 풀려는지 먼저 정한 뒤 선택해야 합니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+### 삭제와 해제의 차이
+| 동작 | 결과 | 탭 상태 |
+|---|---|---|
+| Ungroup | 그룹만 제거 | 탭은 열린 채로 남음 |
+| Delete group | 그룹 삭제 | 그룹 자체가 없어짐 |
+| Close group | 그룹을 접어 숨김 | 나중에 다시 열 수 있음 |
+
+이 표처럼 결과를 나눠 보면 어떤 메뉴를 골라야 할지 정리됩니다. 특히 `Ungroup`과 `Delete group`은 이름이 비슷하지만 결과가 다르므로, 실수로 잘못 누르지 않도록 구분해 두는 편이 좋습니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+## 동기화와 표시 위치는 어떻게 보나요
+탭 그룹은 Google 계정으로 탭과 방문 기록을 동기화하는 환경에서 다른 기기에도 저장될 수 있습니다. 그래서 한 컴퓨터에서 정리한 그룹이 같은 계정의 다른 기기에도 반영될 수 있습니다. 다만 이런 동작은 동기화가 켜져 있을 때의 조건을 따릅니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+그룹을 찾는 위치도 두 가지가 있습니다. 하나는 탭 표시줄이고, 다른 하나는 북마크 바 또는 메뉴의 `Tab groups` 항목입니다. 도움말은 설정의 `Appearance`에서 `Show tab groups in bookmarks bar`를 켜면 북마크 바에서 그룹을 볼 수 있다고 설명합니다. 자동으로 새 그룹을 북마크 바에 고정하는 옵션도 같은 위치에 있습니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
+- 그룹을 북마크 바에서 보고 싶다면 `Settings > Appearance`를 확인합니다.
+- 새 그룹도 자동으로 고정하려면 같은 위치의 자동 고정 옵션을 켭니다.
+- 다른 기기에서 만든 새 그룹도 같은 계정으로 고정될 수 있습니다.
+
+이 설정은 그룹을 더 쉽게 찾으려는 목적일 때 유용합니다. 다만 북마크 바를 자주 쓰지 않는다면 굳이 바꿀 필요는 없습니다. 중요한 것은 그룹이 어디에 저장되는지보다, 현재 작업 방식에 맞는 위치에서 다시 찾을 수 있느냐입니다. [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+## 자주 헷갈리는 점
+탭 그룹을 다루다 보면 같은 단어처럼 보여도 결과가 다른 동작이 있습니다. 아래 기준만 기억하면 실수를 줄일 수 있습니다.
+
+- **새 그룹 만들기**: 관련 탭을 처음 묶을 때 씁니다.
+- **그룹에 추가하기**: 이미 만든 그룹에 탭을 더할 때 씁니다.
+- **Ungroup**: 그룹만 없애고 탭은 남길 때 씁니다.
+- **Delete group**: 그룹을 완전히 삭제할 때 씁니다.
+- **Close group**: 그룹을 접어 숨길 때 씁니다.
+
+크롬의 도움말과 팁 페이지는 이 동작들을 각각 다르게 설명합니다. 따라서 같은 “정리”라도 결과가 다를 수 있습니다. 작업 전에 원하는 상태가 “묶기”, “풀기”, “숨기기”, “삭제” 중 무엇인지 먼저 정하면 메뉴 선택이 쉬워집니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop), [Google Chrome tips: tab groups](https://www.google.com/chrome/tips/)
+
+## 마무리 전에 확인할 것
+탭 그룹을 만든 뒤에는 세 가지만 보면 됩니다. 첫째, 같은 주제의 탭만 한 그룹에 들어갔는지 봅니다. 둘째, 이름과 색이 지금 작업과 맞는지 확인합니다. 셋째, 접기와 삭제를 헷갈리지 않았는지 다시 봅니다. 이 세 가지가 맞으면 이후에는 탭이 많아져도 원하는 페이지를 찾기 쉽습니다. [Chrome 도움말: manage tabs](https://support.google.com/chrome/answer/2391819?hl=en&co=GENIE.Platform%3DDesktop)
+
