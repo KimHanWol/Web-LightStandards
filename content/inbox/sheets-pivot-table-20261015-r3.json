@@ -1,0 +1,54 @@
+{
+  "articleId": "sheets-pivot-table-20261015",
+  "intentKey": "sheets-pivot-table",
+  "title": "구글 스프레드시트 피벗 테이블 만드는 법과 설정 바꾸기",
+  "description": "PC용 Google Sheets 기준으로 피벗 테이블을 만드는 순서, 행·열·값 배치, 정렬·필터·그룹·계산 필드 조정, 결과 확인까지 정리합니다.",
+  "category": "경제·일",
+  "markdown": "구글 스프레드시트 피벗 테이블은 큰 표를 행·열 기준으로 다시 묶어 합계나 개수를 빠르게 보는 기능입니다. 원본 표에 열 머리글이 있어야 만들 수 있고, 만든 뒤에도 원본 데이터가 바뀌면 피벗 테이블이 함께 갱신됩니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop), [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n이 글은 PC에서 Google Sheets를 쓰는 기준으로, 피벗 테이블을 새로 만들고 필요한 항목을 배치한 뒤 정렬·그룹·필터·계산 필드까지 조정하는 방법을 다룹니다. 모바일 앱의 조작 방법이나 다른 스프레드시트 서비스는 포함하지 않습니다.\n\n## 피벗 테이블이 하는 일\n피벗 테이블은 같은 데이터를 다른 기준으로 다시 보는 도구입니다. 예를 들어 판매 표가 있으면 사람별 합계, 월별 합계, 항목별 개수를 따로 볼 수 있습니다. 원본 행을 직접 고치지 않고도 요약 형태를 바꾸기 때문에, 비교 기준이 자주 바뀌는 표에서 특히 유용합니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n피벗 테이블에서 자주 쓰는 기본 용어는 세 가지입니다. **행(Rows)** 은 왼쪽 축, **열(Columns)** 은 위쪽 축, **값(Values)** 은 합계·개수·평균처럼 실제로 집계되는 숫자입니다. 이 셋의 조합이 바뀌면 같은 원본도 전혀 다른 표처럼 보입니다.\n\n### 행·열·값의 차이\n- **행**: 분류 기준을 세로로 늘어놓습니다.\n- **열**: 같은 분류를 가로로 나눠 봅니다.\n- **값**: 합계, 개수, 평균처럼 계산 결과를 보여 줍니다.\n\n예를 들어 사람 이름을 행에 두고, 월을 열에 두고, 매출을 값에 두면 사람별 월별 매출을 한 번에 볼 수 있습니다. 반대로 월을 행에 두고 사람을 열에 두면 같은 자료를 다른 방향에서 비교하게 됩니다.\n\n## 원본 표에서 먼저 확인할 것\n피벗 테이블을 만들기 전에 원본 표 구조를 점검해야 합니다. 각 열에 머리글이 있어야 하고, 표 안에 빈 줄이나 섞인 형식이 너무 많으면 원하는 방식으로 집계하기 어렵습니다. Google Sheets 도움말은 각 열에 헤더가 필요하다고 안내합니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n원본이 제대로 잡혀 있는지 볼 때는 아래 항목을 먼저 확인하면 됩니다.\n\n- 첫 행에 열 이름이 있는지\n- 같은 열에 같은 종류의 값이 들어 있는지\n- 숫자로 집계할 열이 숫자 형식인지\n- 날짜나 분류가 한 열 안에서 섞이지 않았는지\n\n이 점검은 피벗 테이블이 무엇을 기준으로 묶을지 정확히 읽게 하려는 단계입니다. 헤더가 없으면 행과 열의 이름을 구분하기 어렵고, 숫자처럼 보여도 텍스트로 들어간 값은 합계 계산에 기대와 다르게 반응할 수 있습니다.\n\n## 피벗 테이블 만드는 순서\n피벗 테이블 생성은 메뉴 위치만 알면 어렵지 않습니다. 먼저 원본 범위를 지정하고, 새 피벗 테이블을 만든 뒤, 편집 패널에서 행·열·값을 넣으면 됩니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n1. Google Sheets에서 원본이 들어 있는 스프레드시트를 엽니다.\n2. 피벗 테이블에 쓸 원본 셀 범위를 선택합니다.\n3. 상단 메뉴에서 `Insert` > `Pivot table`을 클릭합니다.\n4. 피벗 테이블을 넣을 시트를 선택합니다.\n5. 오른쪽 편집 패널에서 `Rows`, `Columns`, `Values` 옆의 `Add`를 눌러 항목을 넣습니다.\n\n이 단계에서 중요한 것은 원본 범위를 제대로 잡았는지와 어느 시트에 피벗 테이블을 만들지입니다. 이미 만들어진 시트에 추가할 수도 있고, 새 시트에 분리해서 볼 수도 있습니다. 원본이 바뀌면 피벗 테이블도 그 변경을 따라가므로, 나중에 데이터가 늘어나도 같은 표를 다시 만들 필요는 없습니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 추천 피벗 테이블이 보일 때\nGoogle Sheets는 선택한 데이터에 따라 추천 피벗 테이블을 보여줄 수 있습니다. `Suggested` 아래에서 제안된 항목을 고르면 바로 삽입됩니다. 다만 이 제안이 항상 내가 원하는 분류와 같지는 않으므로, 제안 표를 그대로 쓰기보다 무엇이 행·열·값으로 들어갔는지 먼저 확인하는 편이 좋습니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n제안 기능이 불편하면 끌 수도 있습니다. 상단의 `Tools` > `Suggestion controls`에서 `Enable Pivot table suggestions`를 끄면 됩니다. 추천을 끈다고 해서 피벗 테이블 자체가 꺼지는 것은 아니고, 자동 제안만 줄어듭니다.\n\n## 행·열·값 넣는 법\n피벗 테이블의 핵심은 어떤 항목을 어느 칸에 놓느냐입니다. 같은 원본도 행과 열의 배치가 달라지면 읽는 방식이 달라집니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 행과 열 넣기\n`Rows` 또는 `Columns` 옆의 `Add`를 눌러 분류 기준을 고릅니다. 예를 들어 부서, 상품명, 월 같은 항목이 여기에 들어갑니다. 행에 넣으면 세로 목록이 되고, 열에 넣으면 가로 분류가 됩니다.\n\n이때 어떤 항목을 먼저 둘지 정리하면 표가 덜 복잡해집니다. 보통 더 큰 범주를 바깥쪽 기준으로 두고, 더 세부적인 범주를 안쪽에 둡니다. 다만 자료에 없는 추가 계층을 억지로 만들 필요는 없습니다.\n\n### 값 넣기\n`Values` 옆의 `Add`를 눌러 합계나 개수를 볼 열을 선택합니다. 매출처럼 더해야 하는 숫자는 합계로, 건수처럼 몇 개인지 보려면 개수로 보는 식입니다. 피벗 테이블은 값 영역을 통해 실제 결과를 계산합니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n값을 넣은 뒤에는 같은 항목이라도 `Summarize by`가 무엇으로 되어 있는지 확인해야 합니다. 숫자 열을 넣었다고 자동으로 항상 같은 계산이 되는 것은 아니므로, 합계·개수·평균 중 무엇이 필요한지 맞춰 봐야 합니다.\n\n## 정렬·그룹·요약 바꾸기\n기본 피벗 테이블이 만들어진 뒤에는 결과 모양을 조정할 수 있습니다. 정렬, 총계 표시, 묶음 그룹 만들기, 퍼센트 표시 같은 기능은 읽는 목적에 따라 달라집니다. [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 정렬과 총계\n`Rows` 또는 `Columns` 아래에서 `Order`나 `Sort by`를 바꾸면 이름순 또는 집계값 기준으로 순서를 조정할 수 있습니다. 총계를 보고 싶다면 `Show totals`를 켭니다. 총계는 전체 규모를 확인할 때 도움이 되지만, 세부 항목의 순서가 더 중요하다면 꺼 두는 편이 읽기 쉬울 수 있습니다. [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n정렬 기준은 목적에 맞게 고르는 것이 좋습니다. 이름순은 항목 찾기에 편하고, 값 기준 정렬은 가장 큰 항목이나 가장 작은 항목을 빠르게 찾는 데 유리합니다. 같은 데이터라도 “누가 많은가”를 볼 때와 “목록을 찾기 쉽게 둘 때”의 기준이 다릅니다.\n\n### 수동 재배치\n정렬만으로 원하는 순서가 나오지 않으면 피벗 테이블 안에서 항목을 직접 끌어 옮길 수 있습니다. `Q2` 같은 범주 값을 드래그해서 위치를 바꾸면 해당 분류는 `Custom`으로 표시됩니다. [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n다만 모든 이동이 허용되는 것은 아닙니다. 범주 헤더를 값 영역으로 옮길 수는 없고, 같은 계층 안에서만 이동할 수 있습니다. 블록 단위 이동도 가능하지만, 충분한 공간이 없으면 원래 자리로 돌아갑니다. 위치를 바꾼 뒤에는 표의 계층이 의도대로 유지되는지 다시 봐야 합니다.\n\n### 이름 바꾸기와 비율 표시\n열 머리글의 이름은 바꿀 수 있습니다. 다만 `Grand Total`은 이름을 바꿀 수 없습니다. 값은 기본 표시 대신 전체 대비 퍼센트로도 볼 수 있어, 비중을 비교할 때 더 읽기 쉬워집니다. [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n이 기능은 절대값보다 상대 비율이 더 중요한 질문에서 유용합니다. 예를 들어 월별 매출 총액보다 각 월이 전체에서 얼마나 차지하는지 보고 싶을 때 쓰기 좋습니다. 숫자 자체와 비율은 해석이 다르므로, 비교 목적에 맞는 표시 방식을 선택해야 합니다.\n\n## 그룹과 날짜 묶기\n피벗 테이블은 비슷한 항목을 묶어서 볼 수도 있습니다. 숫자 범위를 일정 간격으로 나누거나, 날짜를 월·분기·연도처럼 묶어 보는 방식입니다. [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 숫자 그룹 만들기\n숫자 셀을 마우스 오른쪽 버튼으로 클릭한 뒤 `Create pivot group rule`을 선택하면 구간을 정할 수 있습니다. 예를 들어 가격이나 수량을 일정 단위로 묶는 식입니다. 시작과 끝 범위도 정할 수 있으므로, 분석에 필요한 구간만 남길 수 있습니다.\n\n이 기능은 숫자가 너무 잘게 흩어져 있을 때 유용합니다. 개별 값마다 보면 흐름이 안 보이지만, 구간으로 묶으면 어느 범위에 데이터가 몰리는지 보기 쉬워집니다.\n\n### 날짜 그룹 만들기\n날짜 형식 셀은 `Create pivot date group`으로 묶을 수 있습니다. 월, 분기, 연도처럼 기간 단위로 바꾸면 시계열 흐름을 보기 편합니다. 묶음을 해제하려면 `Ungroup pivot items`를 쓰면 됩니다. [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n날짜 묶기는 원본이 날짜 형식으로 인식될 때만 제대로 동작합니다. 글자처럼 들어간 날짜는 원하는 단위로 묶이지 않을 수 있으니, 날짜 열의 형식부터 확인해야 합니다.\n\n## 필터로 보는 범위 줄이기\n피벗 테이블 필터는 원하는 항목만 남기고 나머지를 숨길 때 씁니다. 조건별 필터와 값 목록 필터를 구분하면, 단순 제외와 규칙 기반 제외를 나눠서 쓸 수 있습니다. [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n`Filters` 옆의 `Add`를 누르면 필터 항목을 고를 수 있습니다. 그다음 `Showing all items` 옆의 화살표에서 조건을 정합니다.\n\n- **Filter by condition**: 비어 있지 않음, 특정 숫자보다 작음, 특정 글자를 포함함 같은 규칙으로 거릅니다.\n- **Filter by values**: 목록에서 보이지 않게 할 항목의 체크를 해제합니다.\n\n필터를 쓰면 분석 범위를 좁힐 수 있지만, 원본 자체가 바뀌는 것은 아닙니다. 화면에서 숨기는 것과 데이터가 삭제되는 것은 다르므로, 나중에 전체 표가 필요하면 필터 조건을 다시 확인해야 합니다. 값 기준 필터는 선택이 빠르고, 조건 기준 필터는 규칙이 분명할 때 적합합니다.\n\n## 계산 필드로 새 값 만들기\n피벗 테이블 안에서 새로운 지표를 만들고 싶을 때는 계산 필드를 사용할 수 있습니다. 단순 합계나 개수로는 부족하고, 계산식을 넣어 비율이나 단가 같은 값을 보고 싶을 때 유용합니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n`Values` 옆에서 `Add`를 누른 뒤 `Calculated field`를 선택하면 계산 필드를 넣을 수 있습니다. 구조화된 수식 편집기가 열리며, 열 삽입과 함수 삽입 메뉴가 보이고, 저장 전에 수식 검증도 진행됩니다. 수식이 맞으면 초록 체크가 표시되고, 틀리면 빨간 느낌표가 나타납니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n계산 필드에 넣는 값은 다른 열을 참조할 수 있습니다. 공백이 있는 필드 이름은 따옴표로 감싸야 합니다. 예를 들어 `=\"h sdf\"`처럼 쓰는 방식입니다. 복잡한 계산을 넣을 때는 이름과 수식이 맞는지 먼저 확인하고, 저장 뒤에는 값이 원하는 열로 추가됐는지 봐야 합니다.\n\n## 수정·갱신·세부 확인\n피벗 테이블은 한 번 만들고 끝나는 표가 아닙니다. 원본 범위가 달라지면 편집 패널에서 다시 범위를 바꾸거나 항목을 옮겨야 할 수 있습니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n피벗 테이블 아래의 팝업 `Edit` 버튼을 누르면 설정을 다시 열 수 있습니다. 여기에서 필드를 다른 칸으로 옮기거나, `Remove`로 없애거나, `Select data range`로 원본 범위를 바꾸거나, `Clear all`로 전부 지울 수 있습니다. 원본 데이터 셀이 바뀌면 피벗 테이블은 그 변경을 다시 반영합니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop)\n\n셀 하나의 근거 데이터를 더 자세히 보고 싶으면 해당 값을 더블클릭합니다. 그러면 그 셀을 만든 원본 데이터가 새 시트로 열립니다. 숫자 하나가 어디에서 나왔는지 확인해야 할 때 이 방식이 도움이 됩니다. 집계 결과와 원본 행을 함께 보면, 어떤 조건이 합계에 들어갔는지 더 정확하게 판단할 수 있습니다.\n\n## 실제로 확인할 때 볼 것\n피벗 테이블이 제대로 만들어졌는지 확인하려면 결과 숫자만 보지 말고 구조를 함께 봐야 합니다. 행과 열이 의도한 기준인지, 값이 합계인지 개수인지, 필터가 너무 많이 걸리지 않았는지 확인해야 합니다. [Google Sheets: create pivot tables](https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop), [Google Sheets: customize pivot tables](https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop)\n\n점검 순서는 간단하게 정리할 수 있습니다.\n\n1. 행과 열의 기준이 맞는지 봅니다.\n2. 값의 집계 방식이 필요한 계산인지 확인합니다.\n3. 필터가 의도한 범위만 남겼는지 확인합니다.\n4. 날짜나 숫자 그룹이 잘 묶였는지 봅니다.\n5. 원본을 바꾼 뒤 표가 함께 갱신되는지 확인합니다.\n\n이 다섯 가지를 보면 피벗 테이블이 내가 원하는 질문에 답하는지 판단할 수 있습니다. 숫자가 맞아 보여도 축이 바뀌어 있으면 해석이 달라질 수 있으므로, 마지막에는 표의 방향과 조건을 다시 읽는 편이 안전합니다.\n",
+  "revision": 3,
+  "approvedRevision": 3,
+  "approvedBy": "Automated evidence and image review; user-authorized publication",
+  "approvedAt": "2026-10-15T08:34:39.969Z",
+  "publishedAt": "2026-10-15T08:34:39.969Z",
+  "sources": [
+    {
+      "title": "Google Sheets: create pivot tables",
+      "url": "https://support.google.com/docs/answer/1272900?hl=en&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-14T16:12:47.760Z"
+    },
+    {
+      "title": "Google Sheets: customize pivot tables",
+      "url": "https://support.google.com/docs/answer/7572895?hl=en&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-14T16:12:47.815Z"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae723b/qEqosA1kkS7vysBg3wHmy.png",
+      "alt": "흰 종이 더미가 양쪽에 쌓인 추상적인 개념 이미지",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7241/hPlKXEJj42OTG1d3Y9e3Q.png",
+      "alt": "쟁반에 담긴 여러 종류의 재료를 분류해 놓은 추상적인 배치 사진",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7242/2emzn1kNq5I5h2aMzMNnN.png",
+      "alt": "계산기와 숫자 블록, 메모지가 놓인 책상 위 개념 이미지",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae74ca/Qr3uHOIZBfxfp2q8Hl5ZN.png",
+      "alt": "체에 담긴 재료와 그릇에 나뉜 견과류가 보이는 분류 개념 사진",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae74cc/JCmJeWHDZG1hJrZStqAev.png",
+      "alt": "계산기와 숫자 큐브, 펜이 놓인 책상 위 계산 개념 이미지",
+      "generated": true
+    }
+  ],
+  "affiliates": [],
+  "demo": false
+}
