@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import AffiliateBanner from '../components/AffiliateBanner.astro';
-import {getArticles,formatPublishedDate,readingTime} from '../lib/articles.mjs';
+import {getArticles,formatPublishedDate} from '../lib/articles.mjs';
 import {sections,articleSection,sectionArticles,featuredArticles} from '../lib/navigation.mjs';
 import topicMap from '../../config/topic-map.json';
 const articles=getArticles();
@@ -23,7 +23,6 @@ const latest=articles.slice(0,3);
           <div class="magazine-lead-image"><img src={lead.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={lead.images[0]?.alt||''} width="1024" height="768" loading="eager" decoding="async"/></div>
           <p class="magazine-kicker">{articleSection(lead).label}<span>{lead.category}</span></p>
           <h2>{lead.title}</h2><p class="magazine-lead-description">{lead.description}</p>
-          <p class="magazine-meta">{readingTime(lead)}분 읽기</p>
         </a>
           {secondary&&<a class="magazine-secondary" href={`/notes/${secondary.articleId}/`}>
             <img src={secondary.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={secondary.images[0]?.alt||''} width="1024" height="768" loading="eager" decoding="async"/>

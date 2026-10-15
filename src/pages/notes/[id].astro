@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getArticles, readingTime, formatPublishedDate } from '../../lib/articles.mjs';
+import { getArticles, formatPublishedDate } from '../../lib/articles.mjs';
 import { prepareArticle, articleAdPlacements } from '../../lib/article-layout.mjs';
 import { site } from '../../lib/site.mjs';
 import AffiliateBanner from '../../components/AffiliateBanner.astro';
@@ -23,7 +23,7 @@ const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPost
   <div class:list={['article-page','wrap',{'with-banner-sidebar':showSidebar}]}>
   <article class="article-layout">
     <a class="back-link" href="/">← 전체 글</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
-    <div class="article-byline">{site.name} <span>·</span> {formatPublishedDate(article.publishedAt)} <span>·</span> {readingTime(article)}분 읽기</div>
+    <div class="article-byline">{site.name} <span>·</span> {formatPublishedDate(article.publishedAt)}</div>
     {hasAffiliateContent&&<aside class="disclosure">{affiliateDisclosure}</aside>}
     {headings.length>0&&<nav class="article-toc" aria-label="이 글의 목차"><details><summary>목차 <span>{headings.length}개 항목</span></summary><ol>{headings.map(h=><li><a href={'#'+h.id}>{h.title}</a></li>)}</ol></details></nav>}
     <div class="article-body">{sections.map((section,index)=><><div class:list={['article-section',{'article-intro':index===0&&!section.html.includes('<h2')}]} set:html={section.html}/>{section.images.filter(image=>image.localPath).map(image=><ArticleFigure image={image}/>)}{adPlacements.has(index)&&<AffiliateBanner slot={adPlacements.get(index)} category={article.category}/>}</>)}</div>
