@@ -11,24 +11,27 @@ const mapped=new Map(topicMap.articles.map(topic=>[topic.articleId,topic]));
 const populated=sections.map(section=>({...section,articles:sectionArticles(articles,section.id)})).filter(section=>section.articles.length);
 const other=articles.filter(article=>articleSection(article).id==='other');
 if(other.length)populated.push({id:'other',label:'기타 정보',description:'다른 분야의 안내',topics:[],articleCategories:[],articles:other});
-const latest=articles.slice(0,4);
+const latest=articles.slice(0,3);
 ---
 <Layout>
   <div class="magazine-shell wrap">
     <div data-home-module>
       <h1 class="screen-reader-title">소소한 기준 — 분야별 정보와 가이드</h1>
       {lead&&<section class="magazine-top" aria-label="주요 글과 최근 글">
+        <div class="magazine-feature-stack">
         <a class="magazine-lead" href={`/notes/${lead.articleId}/`}>
           <div class="magazine-lead-image"><img src={lead.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={lead.images[0]?.alt||''} width="1024" height="768" loading="eager" decoding="async"/></div>
           <p class="magazine-kicker">{articleSection(lead).label}<span>{lead.category}</span></p>
           <h2>{lead.title}</h2><p class="magazine-lead-description">{lead.description}</p>
           <p class="magazine-meta">{readingTime(lead)}분 읽기</p>
         </a>
-        <div class="magazine-top-side">
           {secondary&&<a class="magazine-secondary" href={`/notes/${secondary.articleId}/`}>
             <img src={secondary.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={secondary.images[0]?.alt||''} width="1024" height="768" loading="eager" decoding="async"/>
             <p class="magazine-kicker">{articleSection(secondary).label}</p><h2>{secondary.title}</h2>
           </a>}
+        </div>
+        <div class="magazine-top-side">
+          <div class="home-primary-ad"><AffiliateBanner slot="home-sidebar"/></div>
           <section class="latest-rail" aria-labelledby="latest-title"><div class="magazine-section-heading"><h2 id="latest-title">최근 글</h2><a href="/?view=all#articles">전체 보기 <span aria-hidden="true">→</span></a></div><ol>{latest.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></li>)}</ol></section>
         </div>
       </section>}
@@ -39,7 +42,7 @@ const latest=articles.slice(0,4);
       <div class="category-shelves">{populated.map((section,index)=><><section class="category-shelf" aria-labelledby={`shelf-${section.id}`}>
         <div class="magazine-section-heading"><h2 id={`shelf-${section.id}`}>{section.label}</h2><a href={`/categories/${section.id}/`}>모두 보기 <span aria-hidden="true">→</span></a></div>
         <div class="guide-grid">{section.articles.slice(0,4).map(article=><ArticleCard article={article}/>)}</div>
-      </section>{index===0&&<div class="home-feed-ad"><AffiliateBanner slot="home-middle"/></div>}</>)}</div>
+      </section>{index===1&&<div class="home-feed-ad"><AffiliateBanner slot="home-middle"/></div>}</>)}</div>
     </div>
     <section id="articles" class="article-library" aria-labelledby="library-title" hidden>
       <header class="library-heading"><h1 id="library-title">전체 글</h1><p id="library-count">{articles.length}개의 글</p></header>
