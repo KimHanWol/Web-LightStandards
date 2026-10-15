@@ -43,12 +43,19 @@ test('draft validation accepts parsed n8n JSON objects and raw API JSON strings'
   const markdown=['## 첫 확인','## 다음 확인','## 마지막 확인'].map((heading,index)=>heading+'\n\n'+Array.from({length:20},(_,paragraph)=>`${index}-${paragraph} 검증 자료에서 확인한 조건과 적용 범위를 구체적으로 설명합니다. `.repeat(4)).join('\n\n')).join('\n\n')+'\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
   const draft={canWrite:true,title:'서로 다른 조건을 확인하는 검증용 원고',description:'실제 게시하지 않는 응답 형식 검증용 원고의 설명입니다.',markdown,imagePrompts:Array.from({length:5},(_,i)=>'Distinct educational still life scene '+i+' without words or logos.')};
   for(const text of [draft,JSON.stringify(draft)]){
-    const response={id:'response-fixture',status:'completed',usage:{input_tokens:100,output_tokens:1000},output:[{content:[{type:'output_text',text}]}]};
-    const result=run('parse-draft',[response],{'Select Draft':{...row,actual_usd:.004}})[0].json;
+    const response={id:'response-fixture',model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:100,output_tokens:1000},output:[{content:[{type:'output_text',text}]}]};
+    const result=run('parse-draft',[response],{'Select Draft':{...row,actual_usd:.004},Configuration:{input_usd_per_million:.75,cached_input_usd_per_million:.075,output_usd_per_million:4.5}})[0].json;
     assert.equal(result.status,'text_ready',result.error);
     assert.equal(result.body_markdown,markdown);
-    assert.equal(result.actual_usd,.00564);
+    assert.equal(result.actual_usd,.008575);
   }
+});
+
+test('a held automatic correction preserves the previous draft instead of erasing it',()=>{
+ const previous={...row,title:'이전에 작성한 원고 제목',body_markdown:'기존의 올바른 설명을 보존합니다.',character_count:4921};
+ const response={id:'hold-response',status:'completed',output:[{content:[{type:'output_text',text:{canWrite:false,holdReason:'근거 보강이 필요한 하위 질문'}}]}]};
+ const out=run('parse-draft',[response],{'Select Draft':previous})[0].json;
+ assert.equal(out.status,'needs_review');assert.equal(out.body_markdown,previous.body_markdown);assert.equal(out.character_count,4921);assert.equal(out.error,'근거 보강이 필요한 하위 질문');
 });
 test('test-only drafts cannot be approved or selected for publication',()=>{
   assert.throws(()=>run('approve',[{...row,status:'needs_review',revision:1}],{Configuration:{article_id:row.article_id,revision:1,approved_by:'Test'}}),/Test articles/);

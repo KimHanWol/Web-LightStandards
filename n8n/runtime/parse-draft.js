@@ -1,9 +1,13 @@
 const row=$('Select Draft').first().json;
 const response=$input.first().json;
-const result={...row,status:'needs_review',title:'',description:'',body_markdown:'',image_prompt:'',character_count:0,error:'',openai_response_id:response.id||''};
+const result={...row,status:'needs_review',error:'',openai_response_id:response.id||''};
 const input=Number(response.usage?.input_tokens),output=Number(response.usage?.output_tokens);
 if(Number.isFinite(input)&&Number.isFinite(output)){
-  result.actual_usd=Number(row.actual_usd||0)+(input*0.4+output*1.6)/1000000;
+  const c=$('Configuration').first().json;
+  const cached=Math.min(input,Math.max(0,Number(response.usage?.input_tokens_details?.cached_tokens||0)));
+  const knownModel=String(response.model||'').startsWith('gpt-5.4-mini');
+  if(!knownModel)throw new Error('Unexpected model pricing; preserve reservation and inspect usage');
+  result.actual_usd=Number(row.actual_usd||0)+((input-cached)*c.input_usd_per_million+cached*c.cached_input_usd_per_million+output*c.output_usd_per_million)/1000000;
   result.reserved_usd=0;
 }
 try {
@@ -28,8 +32,11 @@ try {
   if(new Set(paragraphs).size!==paragraphs.length) throw new Error('Repeated paragraphs');
   const plans=JSON.parse(result.image_prompt);
   if(plans.length!==5||!plans.every(p=>typeof p==='string'&&p.length>=20&&p.length<=1500))throw new Error('Five distinct image briefs required');
+  const topic=JSON.parse(row.topic_map_json||'{}');
+  result.topic_map_json=JSON.stringify({...topic,coverage:[...md.matchAll(/^##\s+(.+)$/gm)].map(m=>m[1]),photoSearchQuery:String(draft.photoSearchQuery||row.article_id.replace(/-\d{8}$/,'').replace(/-/g,' ')).trim().slice(0,150)});
   result.images_json='[]';
   if(!Number.isFinite(input)||!Number.isFinite(output)) throw new Error('Usage could not be reconciled');
   result.status='text_ready';result.reserved_usd=0.015;
 } catch(e) {result.error=String(e.message).slice(0,1000);}
 return [{json:result}];
+
