@@ -1,0 +1,54 @@
+{
+  "articleId": "windows-clipboard-history-20261015",
+  "intentKey": "windows-clipboard-history",
+  "title": "윈도우 11 클립보드 기록 켜기부터 삭제까지 한 번에 정리",
+  "description": "윈도우 11에서 클립보드 기록을 켜는 방법, 항목을 고정·동기화·삭제하는 법, 기록이 보이지 않을 때 확인할 점을 함께 정리합니다.",
+  "category": "IT·디지털",
+  "markdown": "# 윈도우 11 클립보드 기록 켜기부터 삭제까지 한 번에 정리\n\n윈도우 11의 클립보드 기록은 최근에 복사한 내용을 여러 개 다시 붙여넣을 수 있게 해주는 기능입니다. 처음에는 `Windows 키 + V`로 켜고, 이후에는 기록 창에서 항목을 고정하거나 삭제할 수 있습니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard), [Microsoft: keyboard tips](https://support.microsoft.com/en-US/Windows/Hardware/Input-Devices/windows-keyboard-tips-and-tricks)\n\n이 기능은 복사한 텍스트를 자주 다시 써야 할 때 특히 유용합니다. 다만 장치 간 동기화는 별도 설정이 필요하고, 기록은 항목 수와 크기 제한이 있습니다. 같은 Microsoft 계정이나 회사 계정으로 로그인했는지도 함께 확인해야 합니다.\n\n## 클립보드 기록은 무엇이 다른가\n클립보드는 `Ctrl + C`로 복사한 내용을 잠시 담아두는 공간입니다. 일반 붙여넣기는 가장 최근 한 개만 쓰지만, **클립보드 기록**은 이전 항목도 다시 꺼내 쓸 수 있습니다. 이 차이를 알아두면 지금 붙여넣을 내용과 나중에 다시 쓸 내용을 구분하기 쉬워집니다.\n\n윈도우 11에서는 기록 창을 열어 여러 항목 중에서 골라 붙여넣을 수 있습니다. 자주 쓰는 문구는 고정해 두면 지워지지 않게 유지할 수 있습니다. 반대로 민감한 내용은 기록에 남기지 않거나, 사용 뒤에 따로 지우는 편이 안전합니다.\n\n클립보드 기록은 단순히 복사본을 더 많이 남겨두는 기능이라기보다, **최근 항목을 목록으로 다시 꺼내 쓰는 기능**입니다. 그래서 `Ctrl + V`처럼 가장 마지막 복사본만 붙여넣는 방식과는 다르게, `Windows 키 + V`에서 원하는 항목을 골라 붙여넣게 됩니다.\n\n1. 먼저 `Ctrl + C`로 평소처럼 복사합니다.\n2. 이어서 `Windows 키 + V`를 눌러 기록 목록을 엽니다.\n3. 붙여넣을 항목을 목록에서 선택합니다.\n\n이 차이를 알아두면 기록 기능이 필요한 상황이 더 분명해집니다. 한 번만 붙여넣을 내용이라면 일반 붙여넣기로 충분하고, 이전에 복사한 문구를 다시 써야 할 때만 기록을 열면 됩니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n### 먼저 기억할 기준\n- 최근 것만 잠깐 쓰면 일반 복사·붙여넣기로 충분합니다.\n- 여러 문구를 번갈아 붙여넣어야 하면 기록 기능이 편합니다.\n- 여러 기기에서 같은 내용을 쓰려면 동기화 설정까지 봐야 합니다.\n\n기능의 범위를 먼저 나누면 설정을 어디까지 켜야 하는지도 정리됩니다. 기록만 필요한지, 다른 PC나 노트북에도 이어 쓸지에 따라 다음 단계가 달라집니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n## 처음 켤 때 어떤 순서로 하나\n처음 사용하는 경우에는 기능이 꺼져 있을 수 있습니다. 이때는 기록 창을 한 번 열고, 거기서 기능을 켜는 방식이 가장 빠릅니다. 윈도우 11에서는 키보드만으로 시작할 수 있습니다.\n\n1. `Windows 키 + V`를 누릅니다.\n2. 기록 창이 보이면 `Turn on`을 선택합니다.\n3. 이후부터는 복사한 항목이 기록에 쌓이는지 확인합니다.\n\n기록 창이 바로 뜨지 않으면 아직 기능이 꺼져 있거나, 입력이 막혀 있을 수 있습니다. 이 경우에는 설정에서 직접 켜도 됩니다. 같은 안내는 Microsoft 도움말에서도 `Windows 키 + V`로 처음 켠다고 설명합니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n설정에서 켜려면 다음 경로를 사용합니다.\n\n1. `시작 > 설정 > 시스템 > 클립보드`로 이동합니다.\n2. `클립보드 기록` 관련 옵션이 있으면 켭니다.\n3. 필요하면 기록 창을 다시 열어 동작을 확인합니다.\n\n이 경로는 기능 상태를 다시 확인할 때도 쓸 수 있습니다. 기록 창으로 바로 켜는 방법과 설정 앱에서 켜는 방법을 둘 다 알아두면, 어느 쪽이 막혀도 확인할 수 있습니다.\n\n처음 켤 때는 기록 창에서 바로 활성화하는 방법이 가장 간단하지만, 설정 앱에서 확인하면 **현재 기능 상태를 다시 점검**할 수 있습니다. 특히 단축키로 켜지지 않거나 창이 보이지 않을 때는 설정 경로가 더 확실합니다.\n\n1. `Windows 키 + V`로 기록 창을 열어 `Turn on`이 보이는지 확인합니다.\n2. 보이지 않거나 동작이 이상하면 `시작 > 설정 > 시스템 > 클립보드`로 이동합니다.\n3. 클립보드 기록 관련 옵션이 켜져 있는지 보고, 필요하면 다시 활성화합니다.\n\n이렇게 두 경로를 나눠 보면, 기능이 꺼진 것인지 입력이 막힌 것인지 구분하기 쉽습니다. 기록 창에서 바로 켰는데도 목록이 비어 있다면, 복사 자체가 제대로 됐는지도 같이 살펴보면 됩니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n## 기록 창에서 항목을 고정하고 지우는 법\n기록이 켜지면 `Windows 키 + V`로 저장된 항목 목록을 볼 수 있습니다. 여기서 자주 쓰는 항목은 고정하고, 다시 보기 싫은 항목은 삭제할 수 있습니다. 같은 창 안에서 작업이 끝나기 때문에 개별 관리가 쉽습니다.\n\n고정은 자주 쓰는 문구를 위에 붙잡아 두는 기능이라고 생각하면 됩니다. 재시작 후에도 남길 수 있지만, 일반 항목은 오래된 순서에 따라 사라질 수 있습니다. 그러므로 매일 쓰는 주소, 계좌 메모 같은 반복 문구만 고정하는 편이 맞습니다.\n\n### 항목별로 할 수 있는 일\n- **고정**: 자주 쓰는 항목을 남겨 둡니다.\n- **삭제**: 특정 항목만 기록에서 뺍니다.\n- **모두 지우기**: 현재 기기의 기록을 한꺼번에 정리합니다.\n\n개별 항목을 지우려면 `Windows 키 + V`를 연 뒤 해당 항목 옆의 더보기 메뉴를 선택하고 `Delete`를 누릅니다. 전체를 비우려면 같은 창에서 `Clear all`을 선택하거나, 설정 앱의 `Clear clipboard data` 영역에서 `Clear`를 선택합니다. Microsoft는 고정된 항목은 지우기 대상에서 제외된다고 안내합니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n전체 삭제와 개별 삭제는 목적이 다릅니다. 특정 문장만 없애고 싶으면 개별 삭제를 쓰고, 작업이 끝나서 흔적을 비우고 싶으면 전체 삭제를 씁니다. 민감한 문구가 들어 있었다면 고정 여부도 함께 확인해야 합니다.\n\n## 다른 PC와 동기화하려면 무엇이 필요한가\n클립보드 기록은 같은 계정으로 로그인한 다른 기기와 동기화할 수 있습니다. 다만 이 기능은 자동으로 켜지지 않으며, 설정에서 별도로 활성화해야 합니다. 계정 기준이 맞지 않으면 같은 작업을 해도 다른 장치로 이어지지 않습니다.\n\nMicrosoft 안내에 따르면 동기화는 `Microsoft 계정` 또는 `작업 계정`에 묶입니다. 즉, 다른 PC에서도 같은 로그인 정보를 써야 합니다. 이 조건이 다르면 동기화가 안 된다고 보기보다, 계정이 일치하는지 먼저 확인하는 편이 맞습니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n동기화를 쓰려면 같은 계정으로 로그인하는 것만으로 끝나지 않고, **동기화 방식까지 선택**해야 합니다. 자동 동기화는 복사할 때마다 이어지지만, 수동 동기화는 기록 창을 열어 항목별로 보내야 합니다.\n\n1. 다른 기기에서도 같은 Microsoft 계정 또는 작업 계정으로 로그인합니다.\n2. `시작 > 설정 > 시스템 > 클립보드`에서 `Clipboard history across your devices`를 켭니다.\n3. 자주 이어 써야 하면 `Automatically sync text that I copy`를 선택합니다.\n4. 민감한 문구처럼 필요한 것만 옮기려면 수동 동기화를 씁니다.\n\n자동과 수동의 차이를 먼저 정리해 두면, 왜 어떤 항목은 바로 보이고 어떤 항목은 안 보이는지 이해하기 쉽습니다. 동기화가 되지 않을 때도 계정 불일치인지, 자동 옵션이 꺼진 것인지 순서대로 확인할 수 있습니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n### 동기화 설정에서 확인할 것\n1. `시작 > 설정 > 시스템 > 클립보드`를 엽니다.\n2. `Clipboard history across your devices`를 `On`으로 바꿉니다.\n3. `Automatically sync text that I copy`를 선택하면 자동 동기화가 됩니다.\n4. 수동 동기화를 쓰려면 기록 창에서 항목별 동기화 버튼을 눌러야 합니다.\n\n자동 동기화와 수동 동기화는 같지 않습니다. 자동은 복사할 때마다 이어지고, 수동은 기록 창에서 따로 올려야 합니다. 다른 기기까지 자주 쓰면 자동이 편하고, 민감한 문구는 필요한 것만 수동으로 보내는 방식이 더 낫습니다.\n\n## 기록이 안 보이거나 금방 사라질 때 확인할 점\n기록이 안 보인다고 해서 바로 오류라고 볼 수는 없습니다. 먼저 기능이 켜져 있는지, 재부팅 직후인지, 복사한 항목이 제한을 넘지 않았는지 살펴봐야 합니다. 기본 조건이 맞지 않으면 기록이 비어 보일 수 있습니다.\n\nMicrosoft는 기록이 PC를 다시 시작할 때 지워질 수 있다고 안내합니다. 단, 고정한 항목은 예외입니다. 따라서 재부팅 뒤에 기록이 비었다면 기능이 고장이라기보다 정상 동작일 수 있습니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n또한 항목 제한도 있습니다. 한 항목의 크기는 `4 MB`까지 지원되고, 기록에는 최대 `25`개의 복사 항목이 저장됩니다. 오래된 항목은 고정되지 않았다면 자동으로 빠집니다. 긴 문서 조각이나 큰 이미지 조각을 자주 복사할 때 기록이 예상보다 일찍 줄어들 수 있습니다.\n\n기록이 예상보다 빨리 비는 경우에는 삭제 오류보다 **제한에 먼저 걸렸는지** 보는 것이 좋습니다. Microsoft는 클립보드 기록이 최대 25개 항목까지 유지되고, 한 항목의 크기는 4 MB까지 지원된다고 안내합니다.\n\n1. 기록 창이 열리는지 확인합니다.\n2. 최근에 PC를 다시 시작했는지 생각해 봅니다.\n3. 고정한 항목만 남아 있는지 봅니다.\n4. 큰 이미지나 긴 내용을 많이 복사했다면 항목 수와 크기 제한을 의심합니다.\n\n재시작 후에는 고정하지 않은 항목이 사라질 수 있으므로, 기록이 갑자기 줄어든 것처럼 보여도 정상 동작일 수 있습니다. 반대로 자주 쓰는 문구가 계속 남아 있어야 한다면 고정을 먼저 해두는 쪽이 맞습니다. [Microsoft: using the clipboard](https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard)\n\n### 문제가 있을 때 점검 순서\n- `Windows 키 + V`로 기록 창이 열리는지 봅니다.\n- `시작 > 설정 > 시스템 > 클립보드`에서 기록이 켜져 있는지 확인합니다.\n- 같은 계정으로 다른 기기와 로그인했는지 확인합니다.\n- 최근 재시작 뒤라면 고정 항목만 남았는지 봅니다.\n- 복사한 내용이 너무 크거나, `25`개를 넘지 않았는지 생각해 봅니다.\n\n이 순서대로 보면 원인을 좁히기 쉽습니다. 기록 창이 열리는데 목록만 비어 있다면 설정과 재시작 영향부터 보는 것이 맞고, 동기화가 안 되면 계정과 동기화 옵션을 따로 확인해야 합니다.\n\n## 자주 쓰는 단축키와 함께 보면 편한 경우\n클립보드 기록은 단축키와 같이 쓰면 더 빠릅니다. `Ctrl + C`는 복사, `Ctrl + V`는 붙여넣기, `Windows 키 + V`는 기록 열기입니다. 이 세 개만 구분해도 일반 복사와 기록 기능을 헷갈리지 않습니다. [Microsoft: keyboard tips](https://support.microsoft.com/en-US/Windows/Hardware/Input-Devices/windows-keyboard-tips-and-tricks)\n\n특히 여러 문구를 오가며 입력할 때는, 먼저 필요한 항목을 기록에 쌓아 두고 나중에 `Windows 키 + V`에서 선택해 붙여넣는 방식이 편합니다. 반대로 한 번 쓰고 끝나는 문구라면 굳이 기록을 관리하지 않아도 됩니다. 사용 빈도에 따라 두 방식을 나눠 쓰면 됩니다.\n\n### 이렇게 판단하면 됩니다\n- 같은 내용을 반복 붙여넣는 일이 많다 → 기록 기능을 켭니다.\n- 다른 기기에서도 이어 쓰고 싶다 → 동기화를 켭니다.\n- 민감한 내용이 섞였다 → 개별 삭제나 전체 삭제를 먼저 합니다.\n- 기록이 비어 보인다 → 재시작, 계정, 제한을 순서대로 확인합니다.\n\n클립보드 기록은 설정을 한 번만 해 두면 계속 편리하게 쓸 수 있지만, 동기화와 삭제 방식은 따로 관리해야 합니다. 어디까지 남길지 먼저 정해 두면 기록이 쌓여도 혼란이 적습니다.\n",
+  "revision": 7,
+  "approvedRevision": 7,
+  "approvedBy": "Automated evidence and image review; user-authorized publication",
+  "approvedAt": "2026-10-15T10:28:13.979Z",
+  "publishedAt": "2026-10-15T10:28:13.979Z",
+  "sources": [
+    {
+      "title": "Microsoft: using the clipboard",
+      "url": "https://support.microsoft.com/en-US/Windows/Apps/using-the-clipboard",
+      "checkedAt": "2026-10-14T16:12:46.034Z"
+    },
+    {
+      "title": "Microsoft: keyboard tips",
+      "url": "https://support.microsoft.com/en-US/Windows/Hardware/Input-Devices/windows-keyboard-tips-and-tricks",
+      "checkedAt": "2026-10-14T16:12:45.919Z"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7774/viZ-DR4Mf73nX8slzJwvu.png",
+      "alt": "흰 배경 위에 클립보드와 메모지, 펜이 놓인 미니멀한 문구 정리 장면",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7775/JC8VM5uyzRZS3uXK3_Ogc.png",
+      "alt": "따뜻한 배경의 투명한 정리함 안에 종이와 열쇠 장식이 들어간 메모 보관 장면",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7776/vL8spn_bG7cY1rFIPTzBU.png",
+      "alt": "코르크 보드 위에 메모지와 압정, 핀이 흩어진 클립보드 관리 개념 이미지",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7777/ymF-_Ywv7-CinMT3WbquR.png",
+      "alt": "두 개의 서류가방과 바닥에 놓인 작은 메모들로 동기화와 항목 이동을 표현한 장면",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7777/JIMTYxTTVUs2bAtbKyc81.png",
+      "alt": "문서가 파쇄되는 장치 옆에 메모가 정리된 상자가 놓인 삭제와 보관 개념 이미지",
+      "generated": true
+    }
+  ],
+  "affiliates": [],
+  "demo": false
+}

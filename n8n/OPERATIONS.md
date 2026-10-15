@@ -12,7 +12,11 @@ an article published. No hourly schedules were activated for this batch.
 Writing failures with a confirmed response and reconciled charge can receive
 one automatic correction. The correction includes the previous draft, measured
 length and concrete review issues. A topic receives at most two tracked writing
-attempts. Unknown paid outcomes retain their reservation and are never resubmitted.
+attempts. A confirmed short draft then uses at most two additions passes: only
+missing explanations are generated and inserted into existing sections; the full
+article is preserved. Unknown paid outcomes retain their reservation and are never resubmitted.
+Factual review failures use at most two paragraph-patch passes, with actual paragraph
+indices and current review feedback. Image-only errors never trigger a text rewrite.
 The monthly generation and review budget remains USD 7 including reservations.
 
 The approval helper performs a separate source and image review through the
@@ -57,4 +61,6 @@ For this content-publishing use of external AI tools, see cases 4 and 10 in the
 
 Confirmed image-only review failures retain the existing text and accepted images.
 Only rejected slots are replaced; the revision increments and its prior approval is
-cleared before a new independent review. This does not waive article-quality checks.
+cleared before a new independent review. A rejected visual review can provide a new
+image prompt for its exact position; accepted image order and replacement prompts
+stay aligned. This does not waive article-quality checks.

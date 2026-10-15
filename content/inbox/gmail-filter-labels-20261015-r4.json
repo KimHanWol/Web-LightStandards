@@ -1,0 +1,54 @@
+{
+  "articleId": "gmail-filter-labels-20261015",
+  "intentKey": "gmail-filter-labels",
+  "title": "지메일 자동 분류 필터 설정법: 라벨과 보관까지 PC에서 정리하기",
+  "description": "PC Gmail에서 검색 조건을 필터로 저장해 메일을 라벨·보관·삭제·전달로 자동 분류하는 방법을 정리합니다. 기존 필터 수정·내보내기까지 확인할 수 있습니다.",
+  "category": "경제·일",
+  "markdown": "# 지메일 자동 분류 필터 설정법: 라벨과 보관까지 PC에서 정리하기\n\nPC의 Gmail에서는 검색 조건을 필터로 저장해 들어오는 메일을 자동으로 분류할 수 있습니다. 조건에 맞는 메일에 라벨을 붙이거나 보관, 삭제, 별표, 자동 전달까지 지정할 수 있습니다. 필터는 새 메일에 적용되며, 조건에 맞는 검색 결과를 먼저 확인한 뒤 만드는 것이 안전합니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop), [Gmail 도움말: search operators](https://support.google.com/mail/answer/7190?hl=en&co=GENIE.Platform%3DDesktop)\n\n이 글은 데스크톱 Gmail 기준입니다. 휴대기기 앱의 메뉴 이름과 경로는 다를 수 있으므로, PC에서 검색 조건을 만든 뒤 필터로 저장하는 흐름에 맞춰 읽으면 됩니다.\n\n## 1) 지메일 필터는 무엇을 자동으로 하나요\n\nGmail 필터는 특정 조건을 만족하는 메일에 미리 정한 동작을 붙이는 기능입니다. 대표적으로 라벨 추가, 받은편지함에서 보관, 삭제, 별표 표시, 다른 주소로 전달이 있습니다. 메일이 자주 들어오는 업무용 계정이라면 같은 발신자나 같은 제목 패턴을 반복해서 처리하지 않아도 됩니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n필터는 검색 조건을 기반으로 작동합니다. 그래서 “어떤 메일을 묶을지”를 먼저 정해야 합니다. 예를 들어 특정 발신자, 제목에 들어가는 단어, 첨부파일이 있는 메일, 특정 기간의 메일처럼 기준을 좁히면 자동 분류가 더 정확해집니다. [Gmail 도움말: search operators](https://support.google.com/mail/answer/7190?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 필터에서 자주 쓰는 기준\n\n- `from:` 특정 발신자\n- `subject:` 제목에 포함된 단어\n- `has:attachment` 첨부파일이 있는 메일\n- `label:` 이미 붙은 라벨\n- `after:` / `before:` 날짜 범위\n- `is:unread` 읽지 않은 메일\n\n이런 검색어는 필터 조건으로 그대로 활용할 수 있습니다. 다만 검색 결과와 필터 결과가 항상 완전히 같다고 단정할 수는 없으므로, 먼저 검색으로 맞는 메일이 보이는지 확인하는 편이 좋습니다. [Gmail 도움말: search operators](https://support.google.com/mail/answer/7190?hl=en&co=GENIE.Platform%3DDesktop)\n\n## 2) 검색 조건을 먼저 확인하는 이유\n\n필터는 한 번 저장하면 조건에 맞는 메일이 계속 처리됩니다. 그래서 검색창에서 조건을 먼저 시험해 보는 단계가 중요합니다. 잘못된 조건으로 저장하면 원치 않는 메일까지 같은 방식으로 분류될 수 있습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\nGmail에서는 상단 검색창의 검색 옵션을 열어 조건을 입력하고, 검색 결과를 먼저 볼 수 있습니다. 결과가 기대와 같다면 그 검색을 바탕으로 필터를 만들 수 있습니다. 이 단계에서 메일 수가 너무 많거나 너무 적게 나오면 조건을 다시 좁히거나 넓히면 됩니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 이런 경우에는 조건을 다시 보세요\n\n- 발신자 이름은 맞는데 메일 주소가 다른 경우\n- 제목에 비슷한 단어가 여러 개 들어가는 경우\n- 같은 스레드 안에 조건이 다른 답장이 섞인 경우\n- 기간 조건을 너무 좁혀서 최근 메일만 보이는 경우\n\n특히 대화형 메일은 같은 대화 안의 일부 메시지만 조건에 맞을 수 있습니다. Gmail 도움말은 필터된 메시지에 대한 답장도 같은 검색 조건을 만족해야 필터링된다고 설명합니다. 그래서 이전 메일만 보고 필터를 만들면 다음 답장에 적용되지 않을 수 있습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n## 3) 새 메일을 자동 분류하는 방법\n\n필터를 새로 만드는 기본 절차는 검색 조건을 입력하고, 그 조건에 맞는 메일에 무엇을 할지 고르는 방식입니다. 한 번 만들어 두면 이후에 들어오는 메일에 자동으로 적용됩니다. 새 메일만 영향을 받는다는 점을 기준으로 생각하면, 이미 받은 메일까지 한꺼번에 정리하려는 기대와는 구분할 수 있습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n1. Gmail을 엽니다.\n2. 상단 검색창에서 **검색 옵션 표시**를 엽니다.\n3. 조건을 입력합니다. 예를 들어 발신자, 제목, 첨부파일 여부, 날짜를 조합할 수 있습니다.\n4. 검색 결과를 확인합니다.\n5. 검색창 아래쪽에서 **필터 만들기**를 선택합니다.\n6. 원하는 동작을 고릅니다. 라벨 적용, 보관, 삭제, 별표, 전달 중 필요한 항목을 선택합니다.\n7. **필터 만들기**를 눌러 저장합니다.\n\n이 흐름에서 가장 먼저 볼 것은 “어떤 메일을 잡을지”이고, 그다음이 “잡힌 메일을 어떻게 처리할지”입니다. 라벨만 붙일지, 받은편지함에서 숨길지, 바로 삭제할지에 따라 같은 필터라도 결과가 크게 달라집니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 동작을 고를 때 보는 기준\n\n- **라벨 추가**: 분류는 유지하고 받은편지함에서도 찾고 싶을 때\n- **보관**: 받은편지함에서 제외하고 라벨이나 검색으로 찾고 싶을 때\n- **삭제**: 조건이 분명하고 나중에 볼 필요가 없을 때\n- **전달**: 다른 주소로 함께 받아야 할 때\n- **별표**: 눈에 띄게 표시하고 싶을 때\n\n전달은 특히 주의가 필요합니다. 필터로 전달을 만들면 새로 들어오는 메일만 영향을 받습니다. 이미 받은 메일까지 소급해서 전달하는 방식으로 이해하면 안 됩니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n## 4) 이미 받은 메일로 필터를 만드는 법\n\n조건을 기억하기 어렵거나 특정 메일과 같은 형식만 자동 분류하고 싶다면, 메일 하나를 기준으로 필터를 만들 수 있습니다. 이 방법은 “이 메일과 비슷한 것들”을 찾는 데 유용합니다. 발신자, 제목, 수신 방식이 비슷한 메일을 묶을 때 특히 편합니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n1. Gmail에서 기준으로 삼을 메일을 찾습니다.\n2. 메일 옆 체크박스를 선택합니다.\n3. 더보기 메뉴를 엽니다.\n4. **이와 유사한 메일 필터링**을 선택합니다.\n5. 조건을 필요한 만큼 조정합니다.\n6. **필터 만들기**를 눌러 동작을 선택합니다.\n\n이 방식은 처음부터 검색어를 직접 입력하기 어렵거나, 이미 받은 메일 한 통이 기준일 때 편합니다. 다만 메일 한 통의 정보만으로는 범위를 너무 넓게 잡을 수 있으므로, 저장 전에 조건이 충분히 좁은지 다시 확인하는 편이 좋습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n## 5) 라벨과 보관은 어떻게 다르게 쓰나요\n\n자동 분류에서 가장 많이 헷갈리는 부분은 라벨과 보관의 차이입니다. 라벨은 메일에 분류표를 붙이는 방식이고, 보관은 받은편지함에서 치워 두는 동작입니다. 둘은 같이 쓸 수 있지만 역할이 같지는 않습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n| 항목 | 의미 | 확인할 점 |\n|---|---|---|\n| 라벨 | 분류 이름을 붙임 | 나중에 같은 묶음으로 찾기 쉬운가 |\n| 보관 | 받은편지함에서 숨김 | 새 메일 흐름을 덜 방해하는가 |\n| 삭제 | 메일함에서 제거 | 다시 확인할 필요가 없는가 |\n\n라벨만 붙이면 받은편지함에 계속 보일 수 있습니다. 반대로 보관만 하면 분류 이름이 없어 나중에 찾을 때 검색어가 더 중요해집니다. 업무별로 메일을 정리하려면 보관과 라벨을 함께 쓰는 쪽이 이해하기 쉽습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 적용 순서 예시\n\n1. 먼저 라벨 이름을 기준으로 묶을 메일을 정합니다.\n2. 라벨을 붙일지, 받은편지함에서 뺄지 정합니다.\n3. 중요한 메일은 삭제 대신 보관을 우선 검토합니다.\n4. 정말 반복적으로 불필요한 메일만 삭제 조건으로 분리합니다.\n\n이렇게 순서를 잡으면 삭제와 보관을 섞어서 실수할 가능성이 줄어듭니다. 특히 처음 만드는 필터는 보관이나 라벨부터 시작하고, 결과를 본 뒤 삭제 조건을 따로 두는 편이 안전합니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n## 6) 기존 필터를 수정·삭제하는 방법\n\n메일 규칙은 시간이 지나면 바뀌므로, 한 번 만든 필터도 고쳐야 할 수 있습니다. 발신자 주소가 달라지거나 제목 형식이 바뀌면 같은 조건이 더는 맞지 않을 수 있습니다. 이럴 때는 필터를 새로 만들기보다 기존 필터를 편집하는 것이 빠릅니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n1. Gmail 오른쪽 위에서 설정을 엽니다.\n2. **모든 설정 보기**로 들어갑니다.\n3. **필터 및 차단된 주소** 탭을 엽니다.\n4. 바꾸려는 필터를 찾습니다.\n5. **수정** 또는 **삭제**를 선택합니다.\n6. 수정한 경우 저장 단계에서 변경 내용을 확정합니다.\n\n수정은 조건만 바꾸는 것이 아니라 동작도 함께 바꿀 수 있습니다. 예를 들어 같은 조건에 라벨만 붙이다가, 나중에는 보관까지 추가할 수 있습니다. 반대로 더 이상 필요 없는 분류라면 삭제가 더 단순합니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n## 7) 필터를 내보내고 가져오는 경우\n\n필터를 많이 만들어 두었거나 계정 정리가 필요할 때는 내보내기와 가져오기 기능이 도움이 됩니다. Gmail 도움말에는 필터를 `.xml` 파일로 내보낼 수 있고, 다시 가져올 수 있다고 안내되어 있습니다. 백업이 있으면 같은 규칙을 다시 만들 때 시간을 줄일 수 있습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n1. Gmail에서 **필터 및 차단된 주소** 탭을 엽니다.\n2. 내보낼 필터를 선택합니다.\n3. **내보내기**를 누릅니다.\n4. 저장된 `.xml` 파일을 보관합니다.\n5. 다시 사용해야 할 때 **필터 가져오기**를 선택합니다.\n6. 파일을 열고 가져오기 작업을 마칩니다.\n\n이 기능은 여러 규칙을 한 번에 옮기거나 백업하려는 경우에 유용합니다. 다만 파일이 있다고 해서 어떤 메일에 어떤 규칙이 적용되는지 자동으로 이해되는 것은 아니므로, 가져온 뒤에도 라벨과 동작을 한 번 점검해야 합니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n\n## 8) 필터가 기대와 다를 때 보는 점\n\n필터가 제대로 안 작동하는 것처럼 보일 때는 먼저 조건 자체를 다시 봐야 합니다. 메일이 필터에 안 걸리는 이유는 메일 내용보다 조건이 너무 좁거나, 다른 대화와 섞였기 때문인 경우가 많습니다. 검색어가 맞는지 확인하고, 조건을 하나씩 줄여 보면서 어디서 벗어나는지 찾는 편이 빠릅니다. [Gmail 도움말: search operators](https://support.google.com/mail/answer/7190?hl=en&co=GENIE.Platform%3DDesktop)\n\n### 확인할 순서\n\n- 조건에 들어간 주소가 정확한지 봅니다.\n- 제목에 넣은 단어가 실제 메일과 같은지 봅니다.\n- 날짜 조건이 너무 좁지 않은지 봅니다.\n- 대화형 메일이라면 답장 메시지까지 같은 조건인지 봅니다.\n- 검색 결과와 필터 동작이 같은 기준인지 다시 맞춥니다.\n\n필터는 검색 결과를 바탕으로 만들 수 있지만, 저장 후의 동작은 메일 흐름에 따라 다르게 느껴질 수 있습니다. 그래서 “검색에서는 보이는데 분류는 안 된다”면 조건과 대화 흐름을 분리해서 점검해야 합니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop), [Gmail 도움말: search operators](https://support.google.com/mail/answer/7190?hl=en&co=GENIE.Platform%3DDesktop)\n\nGmail 자동 분류 필터는 복잡한 메일함을 한 번에 정리하는 기능이라기보다, 반복되는 메일 처리 규칙을 고정해 두는 도구에 가깝습니다. 처음에는 조건을 좁게 잡고, 결과를 본 뒤 라벨과 보관을 조정하는 방식이 가장 이해하기 쉽습니다. [Gmail 도움말: filters](https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop)\n",
+  "revision": 4,
+  "approvedRevision": 4,
+  "approvedBy": "Automated evidence and image review; user-authorized publication",
+  "approvedAt": "2026-10-15T10:17:51.595Z",
+  "publishedAt": "2026-10-15T10:17:51.595Z",
+  "sources": [
+    {
+      "title": "Gmail: create filters",
+      "url": "https://support.google.com/mail/answer/6579?hl=en&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-14T16:12:49.628Z"
+    },
+    {
+      "title": "Gmail: search operators",
+      "url": "https://support.google.com/mail/answer/7190?hl=en&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-14T16:12:50.473Z"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7282/HxlVrqTye1odaVKD39UlB.png",
+      "alt": "색색의 폴더와 편지 봉투가 서류함에 정리된 개념도",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7284/KOmcGnwMHPjHzk0xn0OHV.png",
+      "alt": "Archive, Label, Delete라고 적힌 상자에 메일을 분류하는 개념 일러스트",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7286/dGaHwOFIQhQY3-b2gSX--.png",
+      "alt": "돋보기와 서류 더미로 검색 조건을 확인하는 개념 이미지",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7287/-7SxY6pNzORjhvcFuXdGX.png",
+      "alt": "메모와 태그, 우편물로 메일 분류와 우선순위를 설명하는 책상 위 개념도",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7739/PP4ChFa_Pl_M4pApyYcXF.png",
+      "alt": "백업 상자와 봉투로 필터를 내보내고 가져오는 흐름을 보여주는 개념 일러스트",
+      "generated": true
+    }
+  ],
+  "affiliates": [],
+  "demo": false
+}

@@ -18,7 +18,33 @@ try {
     ? chunks[0]
     : JSON.parse(chunks.map(text=>typeof text==='string'?text:JSON.stringify(text)).join('').replace(/^```(?:json)?\s*|\s*```$/g,''));
   if(draft.canWrite!==true) throw new Error(draft.holdReason||'Insufficient source evidence');
-  result.title=String(draft.title||'');result.description=String(draft.description||'');result.body_markdown=String(draft.markdown||'');result.image_prompt=Array.isArray(draft.imagePrompts)?JSON.stringify(draft.imagePrompts):String(draft.imagePrompt||'');
+  if(row.factCorrectionMode){
+    if(!Array.isArray(draft.replacements)||draft.replacements.length<1||draft.replacements.length>5)throw new Error('Expected specific factual corrections');
+    const paragraphs=row.body_markdown.split(/\n\s*\n/),changed=new Set();
+    for(const patch of draft.replacements){
+      if(!Number.isInteger(patch.paragraphIndex)||patch.paragraphIndex<0||patch.paragraphIndex>=paragraphs.length||changed.has(patch.paragraphIndex)||typeof patch.replacementMarkdown!=='string'||patch.replacementMarkdown.length>4000)throw new Error('Invalid factual correction position');
+      changed.add(patch.paragraphIndex);paragraphs[patch.paragraphIndex]=patch.replacementMarkdown;
+    }
+    result.body_markdown=paragraphs.filter(p=>p.trim()).join('\n\n');
+  }else if(row.completionMode){
+    if(!Array.isArray(draft.additions)||draft.additions.length<1||draft.additions.length>8)throw new Error('Expected bounded article additions');
+    let markdown=row.body_markdown,applied=0;
+    for(const addition of draft.additions){
+      if(typeof addition.afterHeading!=='string'||typeof addition.markdown!=='string'||addition.markdown.length<100||addition.markdown.length>12000)throw new Error('Invalid article addition');
+      const headings=[...markdown.matchAll(/^#{2,3}\s+(.+)$/gm)];
+      const heading=addition.afterHeading.replace(/^#{1,6}\s+/,'').trim();
+      const at=headings.findIndex(h=>h[1]===heading);
+      if(at<0)continue;
+      const end=headings[at+1]?.index??markdown.length;
+      markdown=markdown.slice(0,end).trimEnd()+'\n\n'+addition.markdown.trim()+'\n\n'+markdown.slice(end).trimStart();
+      applied++;
+    }
+    if(!applied)throw new Error('No additions matched the original headings');
+    const seen=new Set();
+    result.body_markdown=markdown.split(/\n\s*\n/).filter(p=>{const key=p.trim();if(key.length<=100)return true;if(seen.has(key))return false;seen.add(key);return true;}).join('\n\n');
+  }else{
+    result.title=String(draft.title||'');result.description=String(draft.description||'');result.body_markdown=String(draft.markdown||'');result.image_prompt=Array.isArray(draft.imagePrompts)?JSON.stringify(draft.imagePrompts):String(draft.imagePrompt||'');
+  }
   const md=result.body_markdown;
   result.character_count=[...md.replace(/!?\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/https?:\/\/\S+/g,'').replace(/[#*`_|>~-]/g,'').replace(/\s+/g,' ').trim()].length;
   if(result.character_count<5000||md.length>60000) throw new Error('Body length check failed');
@@ -34,9 +60,10 @@ try {
   if(plans.length!==5||!plans.every(p=>typeof p==='string'&&p.length>=20&&p.length<=1500))throw new Error('Five distinct image briefs required');
   const topic=JSON.parse(row.topic_map_json||'{}');
   result.topic_map_json=JSON.stringify({...topic,coverage:[...md.matchAll(/^##\s+(.+)$/gm)].map(m=>m[1]),photoSearchQuery:String(draft.photoSearchQuery||row.article_id.replace(/-\d{8}$/,'').replace(/-/g,' ')).trim().slice(0,150)});
-  result.images_json='[]';
+  result.images_json=row.completionMode||row.factCorrectionMode?(row.images_json||'[]'):'[]';
   if(!Number.isFinite(input)||!Number.isFinite(output)) throw new Error('Usage could not be reconciled');
-  result.status='text_ready';result.reserved_usd=0.015;
+  const remaining=5-JSON.parse(result.images_json).length;
+  result.status=remaining===0?'needs_review':'text_ready';result.reserved_usd=remaining*.003;
 } catch(e) {result.error=String(e.message).slice(0,1000);}
 return [{json:result}];
 

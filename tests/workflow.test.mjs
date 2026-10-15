@@ -57,6 +57,24 @@ test('a held automatic correction preserves the previous draft instead of erasin
  const out=run('parse-draft',[response],{'Select Draft':previous})[0].json;
  assert.equal(out.status,'needs_review');assert.equal(out.body_markdown,previous.body_markdown);assert.equal(out.character_count,4921);assert.equal(out.error,'근거 보강이 필요한 하위 질문');
 });
+
+test('confirmed short drafts use bounded additions without another full rewrite',()=>{
+ const short={...row,id:7,article_id:'drive-help',status:'needs_review',body_markdown:'기존에 작성한 근거 있는 설명입니다. '.repeat(160),character_count:4500,error:'Body length check failed',openai_response_id:'confirmed',reserved_usd:0,topic_map_json:JSON.stringify({automaticWritingAttempts:2})};
+ const selected=run('select-draft',[short],{Configuration:{...config,batch_mode:true}})[0].json;
+ assert.equal(selected.completionMode,true);assert.equal(JSON.parse(selected.topic_map_json).automaticWritingAttempts,2);assert.equal(JSON.parse(selected.topic_map_json).completionAttempts,1);
+ assert.equal(JSON.parse(selected.brief).correction.requiredAdditionalCharacters,1200);
+ assert.equal(run('select-draft',[{...short,reserved_usd:.12}],{Configuration:{...config,batch_mode:true}}).length,0);
+ assert.equal(run('select-draft',[{...short,topic_map_json:JSON.stringify({automaticWritingAttempts:2,completionAttempts:2})}],{Configuration:{...config,batch_mode:true}}).length,0);
+});
+
+test('completion merges actual additions into the existing section and retains original text',()=>{
+ const initial='## 적용 조건\n\n'+Array.from({length:45},(_,i)=>`${i} 적용 환경에 따라 작업 순서를 구분하는 기존 설명입니다. `.repeat(3)).join('\n\n')+'\n\n## 실행 순서\n\n기존 절차입니다.\n\n## 결과 확인\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
+ const previous={...row,completionMode:true,title:'기존 원고의 제목을 그대로 보존합니다',description:'제공한 근거의 적용 조건을 정리한 기존 원고의 설명입니다.',body_markdown:initial,image_prompt:JSON.stringify(Array.from({length:5},(_,i)=>'Photographic physical objects scene '+i+' without text.')),images_json:'[]'};
+ const added=Array.from({length:20},(_,i)=>`${i} 원고에서 아직 다루지 않은 확인 기준을 근거에 따라 추가로 설명합니다. `.repeat(3)).join('\n\n');
+ const response={id:'completion-response',model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:100,output_tokens:1000},output:[{content:[{type:'output_text',text:{canWrite:true,additions:[{afterHeading:'## 실행 순서',markdown:added}],photoSearchQuery:'physical objects'}}]}]};
+ const out=run('parse-draft',[response],{'Select Draft':previous,Configuration:{input_usd_per_million:.75,cached_input_usd_per_million:.075,output_usd_per_million:4.5}})[0].json;
+ assert.equal(out.status,'text_ready',out.error);assert.equal(out.title,previous.title);assert.ok(out.body_markdown.includes('기존 절차입니다.'));assert.ok(out.body_markdown.indexOf(added)<out.body_markdown.indexOf('## 결과 확인'));assert.ok(out.character_count>=5000);
+});
 test('test-only drafts cannot be approved or selected for publication',()=>{
   assert.throws(()=>run('approve',[{...row,status:'needs_review',revision:1}],{Configuration:{article_id:row.article_id,revision:1,approved_by:'Test'}}),/Test articles/);
   const settings={enabled:true,repo_owner:'test-owner',repo_name:'test-repo',site_url:'https://example.com'};
@@ -125,4 +143,24 @@ test('stock selection keeps accepted images and uses only real licensed candidat
  assert.equal(out.status,'needs_review');assert.equal(images.length,5);assert.equal(images[0].url,accepted[0].url);assert.equal(images[4].generated,false);assert.equal(images[4].stock.creator,candidate.creator);assert.equal(images[4].sourceUrl,candidate.pageUrl);assert.equal(out.reserved_usd,0);
  const unknown=run('merge-photo-selection',[{error:'timeout'}],{'Filter Photo Candidates':prepared})[0].json;
  assert.equal(unknown.status,'stock_uncertain');assert.equal(unknown.reserved_usd,.033);assert.equal(JSON.parse(unknown.images_json).length,4);
+});
+
+test('image-only repair preserves text and keeps the rejected image prompt in its replacement slot',()=>{
+ const draft={...row,id:21,article_id:'actual-article',status:'needs_review',revision:3,reserved_usd:0,character_count:5100,body_markdown:'검토한 기존 본문',error:'Editorial review: ["이미지 2: 읽을 수 있는 가짜 글자가 있습니다."]',images_json:JSON.stringify(Array.from({length:5},(_,i)=>({url:'https://fal.media/original-'+i+'.png',generated:true}))),image_prompt:JSON.stringify(['scene 1','replacement scene 2','scene 3','scene 4','scene 5'])};
+ const out=run('prepare-existing-draft',[draft],{'Batch Input':{article_id:draft.article_id,action:'repair_images'}})[0].json;
+ assert.equal(out.body_markdown,draft.body_markdown);assert.equal(out.status,'text_ready');assert.equal(JSON.parse(out.images_json).length,4);assert.equal(JSON.parse(out.image_prompt)[4],'replacement scene 2');assert.equal(out.approved_revision,0);
+ const combined=run('prepare-existing-draft',[{...draft,error:'Editorial review: ["이미지 1, 3, 4~5에 읽을 수 있는 가짜 글자가 있습니다."]'}],{'Batch Input':{article_id:draft.article_id,action:'repair_images'}})[0].json;
+ assert.deepEqual(Array.from(JSON.parse(combined.topic_map_json).replacedImageIndexes),[0,2,3,4]);assert.equal(JSON.parse(combined.images_json).length,1);
+});
+
+test('factual review issues route to text patches and only the specified paragraph changes',()=>{
+ const markdown='## 적용 환경\n\n잘못된 플랫폼 설명입니다.\n\n'+Array.from({length:50},(_,i)=>`${i} 확인한 조건과 절차를 설명하는 기존 문단입니다. `.repeat(4)).join('\n\n')+'\n\n## 실행 순서\n\n기존 절차입니다.\n\n## 결과 확인\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
+ const previous={...row,id:28,article_id:'actual-fact-correction',status:'needs_review',error:'Editorial review: ["플랫폼 설명이 근거와 다릅니다."]',openai_response_id:'confirmed',reserved_usd:0,character_count:6000,body_markdown:markdown,title:'근거에 따라 적용 조건을 구분하는 원고입니다',description:'기존 원고에서 적용 환경에 맞지 않는 설명만 수정합니다.',topic_map_json:JSON.stringify({automaticWritingAttempts:2,repairFeedback:'과거 이미지 오류'}),image_prompt:JSON.stringify(Array.from({length:5},(_,i)=>'Existing distinct photographic scene '+i+' without text.')),images_json:JSON.stringify(Array.from({length:5},(_,i)=>({url:'https://fal.media/existing-'+i+'.png',generated:true})))};
+ const route=run('identify-repair-scope',[{...previous,action:'repair_images'}])[0].json;
+ assert.equal(route.imageOnlyRepair,false);
+ const selected=run('select-draft',[previous],{Configuration:{...config,batch_mode:true}})[0].json;
+ assert.equal(selected.factCorrectionMode,true);assert.equal(JSON.parse(selected.brief).correction.feedback,previous.error);
+ const response={id:'factual-response',model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:100,output_tokens:100},output:[{content:[{type:'output_text',text:{canWrite:true,replacements:[{paragraphIndex:1,replacementMarkdown:'근거에서 확인한 플랫폼에서만 지원하는 기능입니다.'}],photoSearchQuery:'physical objects'}}]}]};
+ const out=run('parse-draft',[response],{'Select Draft':selected,Configuration:{input_usd_per_million:.75,cached_input_usd_per_million:.075,output_usd_per_million:4.5}})[0].json;
+ assert.equal(out.status,'needs_review',out.error);assert.equal(out.error,'');assert.equal(out.images_json,previous.images_json);assert.ok(out.body_markdown.includes('기존 절차입니다.'));assert.ok(!out.body_markdown.includes('잘못된 플랫폼 설명입니다.'));
 });
