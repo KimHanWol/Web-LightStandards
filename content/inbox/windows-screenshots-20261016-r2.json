@@ -1,0 +1,59 @@
+{
+  "articleId": "windows-screenshots-20261016",
+  "intentKey": "windows-screenshots",
+  "title": "윈도우 11 화면 캡처와 저장 방법: 일부만 찍고 파일로 남기는 법",
+  "description": "윈도우 11에서 화면 일부를 캡처해 붙여넣거나 파일로 저장하는 방법을 정리합니다. 단축키, 캡처 도구, 저장 위치 확인, 지연 캡처까지 초보자 기준으로 설명합니다.",
+  "category": "IT·디지털",
+  "markdown": "윈도우 11에서는 화면의 일부만 빠르게 찍을 수도 있고, 전체 화면을 파일로 저장할 수도 있습니다. 가장 먼저 익혀둘 방법은 `Windows 로고 키 + Shift + S`로 캡처를 시작한 뒤 필요한 범위를 고르는 흐름입니다. 찍은 화면은 바로 붙여넣을 수도 있고, 캡처 도구에서 파일로 저장할 수도 있습니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots), [Microsoft: 창 또는 화면 내용 복사](https://support.microsoft.com/ko-kr/office/copy-the-window-or-screen-contents)\n\n이 글은 Windows 11의 정지 화면 캡처만 다룹니다. 동영상 녹화, OCR, 다른 운영체제 방법은 제외하고, 초보자가 실제로 많이 쓰는 붙여넣기와 저장을 먼저 구분해 설명합니다.\n\n## 먼저 구분할 것: 복사와 저장\n화면 캡처는 결과가 비슷해 보여도, 실제로는 **클립보드에 복사하는 것**과 **파일로 저장하는 것**이 다릅니다. 클립보드는 잠깐 담아 두는 공간이고, 파일 저장은 원하는 폴더에 이미지 자체를 남기는 일입니다. 이 차이를 먼저 알아두면 캡처가 끝난 뒤 어디를 확인해야 하는지 헷갈리지 않습니다. [Microsoft: 창 또는 화면 내용 복사](https://support.microsoft.com/ko-kr/office/copy-the-window-or-screen-contents)\n\n### 클립보드로 복사되는 경우\n`Windows + Shift + S`로 캡처하면 화면을 찍은 뒤 클립보드에 복사됩니다. 이 경우에는 메모장처럼 글자만 받는 칸이 아니라, 이미지를 붙여 넣을 수 있는 문서나 메신저에서 `Ctrl + V`를 써야 보입니다. 즉, 캡처가 끝났다고 해서 바로 파일이 생기는 것은 아닙니다. [Microsoft: 창 또는 화면 내용 복사](https://support.microsoft.com/ko-kr/office/copy-the-window-or-screen-contents)\n\n캡처 후 바로 파일이 생기지 않는 이유는, 이 방식이 이미지를 먼저 임시 보관해 두는 과정이기 때문입니다. 그래서 다음 단계는 저장이 아니라 붙여넣기이며, 이미지를 받을 수 있는 문서나 메신저 창에서만 결과가 보입니다.\n\n1. `Windows + Shift + S`로 캡처합니다.\n2. 알림을 선택해 편집기를 열거나, 이미지를 받을 앱으로 이동합니다.\n3. `Ctrl + V`로 붙여 넣습니다.\n4. 문서 안에서 그림이 들어갔는지 확인합니다.\n\n붙여넣기가 안 되면 캡처가 실패한 것보다, 받는 쪽이 이미지를 지원하지 않거나 현재 커서가 텍스트 입력칸에만 있는 경우를 먼저 의심하는 편이 좋습니다.\n\n### 파일로 저장되는 경우\n파일로 남기려면 캡처 도구의 저장 기능을 사용합니다. Microsoft 안내에는 캡처 이미지가 스크린샷 폴더에 자동 저장될 수 있다고 되어 있지만, 앱 설정에서 자동 저장 동작과 기본 스크린샷 폴더를 바꿀 수 있다고 설명합니다. 따라서 “항상 같은 곳에 저장된다”고 단정하지 말고, 실제로 저장된 위치를 확인하는 흐름이 안전합니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n파일 저장은 캡처 결과를 나중에 다시 찾기 위한 단계입니다. 그래서 저장 버튼을 눌렀는지보다, 저장한 뒤 같은 이미지가 실제로 폴더에 남았는지 확인하는 과정이 더 중요합니다.\n\n1. 캡처 편집 창에서 저장을 선택합니다.\n2. 다른 이름으로 저장이 보이면 필요한 폴더와 이름을 정합니다.\n3. 저장이 끝나면 방금 지정한 위치를 다시 엽니다.\n4. 썸네일이나 파일 이름으로 같은 캡처가 맞는지 확인합니다.\n\n자동 저장이 켜져 있어도 추가 복사본을 직접 저장하면 파일이 두 개 생길 수 있습니다. 따라서 저장 후에는 같은 화면을 한 번만 남기려는지, 복사본을 따로 보관하려는지부터 정해 두면 혼동이 적습니다.\n\n## 가장 빠른 캡처 방법\nWindows 11에서 가장 먼저 익히기 좋은 방법은 단축키로 캡처 오버레이를 여는 방식입니다. 단축키를 누르면 화면이 어두워지고, 원하는 모양을 선택한 뒤 필요한 영역만 지정할 수 있습니다. 시작 메뉴에서 캡처 도구를 찾아 여는 방법도 있지만, 자주 쓸수록 단축키가 훨씬 빠릅니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n1. 캡처할 화면을 먼저 띄웁니다.\n   - 화면에 담고 싶은 창, 표, 문단, 웹페이지를 미리 열어 둡니다.\n2. `Windows + Shift + S`를 누릅니다.\n   - 화면이 어두워지면 캡처 준비가 된 상태입니다.\n3. 원하는 캡처 모드를 고릅니다.\n   - 사각형, 창, 전체 화면, 자유형 중에서 고를 수 있습니다.\n4. 마우스로 원하는 부분을 선택합니다.\n   - 필요한 정보만 담겼는지 선택 직후 눈으로 확인합니다.\n5. 붙여넣기나 저장 중 하나를 선택합니다.\n   - 문서에 넣을지, 파일로 남길지에 따라 다음 행동이 달라집니다.\n\n### 어떤 모드를 고르면 되는지\n사각형은 가장 많이 쓰는 방식으로, 원하는 영역만 드래그해서 고릅니다. 창 모드는 열린 창 하나만 담고 싶을 때 편합니다. 전체 화면은 화면 전체를 그대로 남길 때 쓰고, 자유형은 모양이 일정하지 않은 부분을 따로 떼어내고 싶을 때 맞습니다. 목적이 “딱 필요한 정보만 남기기”라면 보통 사각형부터 시작하면 됩니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n### 붙여넣기와 저장의 차이\n캡처를 문서나 메신저에 넣으려면 `Ctrl + V`로 붙여 넣습니다. 반대로 사진 파일로 보관하려면 캡처 도구의 저장 기능으로 폴더와 파일 이름을 정합니다. 같은 화면을 캡처해도 어디에 쓰느냐에 따라 마무리가 달라지므로, 먼저 사용할 곳을 정한 뒤 다음 행동을 고르는 편이 낫습니다. [Microsoft: 창 또는 화면 내용 복사](https://support.microsoft.com/ko-kr/office/copy-the-window-or-screen-contents), [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n## 저장 위치와 파일 이름 확인\n캡처를 파일로 남길 때는 “저장했다”는 사실보다 **어디에, 어떤 이름으로 저장됐는지**가 더 중요합니다. 나중에 찾지 못하면 저장 자체가 끝난 게 아니기 때문입니다. 캡처 도구에서 저장을 선택한 뒤에는 위치와 이름을 눈으로 확인하고, 실제 파일이 그곳에 있는지 다시 여는 과정이 필요합니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n1. 캡처 편집 창에서 저장을 누릅니다.\n   - `Ctrl + S`를 써도 됩니다.\n2. 저장할 폴더를 직접 고릅니다.\n   - 원하는 위치를 정해야 나중에 찾기 쉽습니다.\n3. 파일 이름을 바꿉니다.\n   - 비슷한 캡처가 많다면 날짜나 용도를 붙여 구분합니다.\n4. 저장이 끝난 뒤 폴더에서 파일을 다시 엽니다.\n   - 방금 찍은 화면이 맞는지 확인합니다.\n\n### 자동 저장을 믿기 전에 볼 점\nMicrosoft 안내에는 자동 저장이 스크린샷 폴더와 연결될 수 있다고 되어 있지만, 앱 설정에서 동작을 바꿀 수 있습니다. 그래서 다른 PC나 다른 설정 상태에서는 같은 위치가 아닐 수 있습니다. 익숙하지 않은 상태라면 자동 저장만 기대하기보다, 한 번은 직접 저장 위치를 정해 두는 편이 안전합니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n## 지연 캡처가 필요한 때\n메뉴가 사라지기 전에 찍어야 하거나, 마우스를 놓는 순간 화면이 바뀌는 경우에는 지연 캡처가 도움이 됩니다. 지연 시간은 원하는 동작을 준비한 뒤 캡처가 시작되도록 기다려 주는 기능입니다. 빠른 단축키만으로 잡기 어려운 장면에서 특히 유용합니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n1. 캡처 도구를 엽니다.\n   - 시작 메뉴에서 검색해 열 수 있습니다.\n2. 지연 시간과 캡처 모드를 고릅니다.\n   - Microsoft 안내에는 5초 예시가 나옵니다.\n3. `새로 만들기`를 누릅니다.\n   - 대기 시간이 시작됩니다.\n4. 기다리는 동안 캡처할 메뉴나 화면을 엽니다.\n   - 숨겨진 메뉴처럼 잠깐 나타나는 화면에 맞습니다.\n5. 회색 화면이 뜨면 필요한 부분을 선택합니다.\n   - 준비가 끝난 뒤 원하는 영역을 잡습니다.\n\n### 언제 쓰면 좋은가\n드롭다운 메뉴, 우클릭 메뉴, 잠깐 뜨는 안내창처럼 마우스나 키보드 조작 직후 사라질 수 있는 화면에 적합합니다. 반대로 정적인 화면이라면 굳이 지연 기능까지 쓸 필요는 없습니다. 필요한 상황에만 쓰는 편이 절차도 짧고 실패도 적습니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n## 편집할 때는 표시와 자르기를 나눠 보기\n캡처한 뒤에 눈에 띄게 만들고 싶을 때는 펜이나 형광펜으로 표시할 수 있습니다. 반대로 보여 줄 범위를 줄이고 싶으면 자르기를 씁니다. 두 조작은 비슷해 보여도 목적이 다르므로, 먼저 무엇을 바꿀지 정하고 도구를 고르는 편이 좋습니다. 표시를 추가했다고 해서 원본 정보가 없어지는 것은 아닙니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n- **펜/형광펜**: 중요한 부분을 둘러서 보여 주고 싶을 때\n- **지우개**: 방금 추가한 표시를 없애고 싶을 때\n- **자르기**: 화면의 가장자리나 불필요한 부분을 덜어내고 싶을 때\n\n표시는 화면에 설명을 덧붙이는 조작이고, 자르기는 아예 보여 줄 범위를 줄이는 조작입니다. 둘은 비슷해 보여도 결과가 달라서, ‘무엇을 강조할지’와 ‘무엇을 숨길지’를 구분해 선택해야 합니다.\n\n1. 강조가 필요하면 펜이나 형광펜으로 표시합니다.\n2. 일부만 남기고 싶으면 자르기를 먼저 적용합니다.\n3. 불필요한 표시가 생기면 지우개로 되돌립니다.\n4. 편집 뒤에는 제목, 버튼, 숫자가 잘리지 않았는지 다시 봅니다.\n\n특히 개인정보나 계정 정보가 있는 화면은 표시만으로 충분하지 않을 수 있습니다. 잘라내기 전후를 눈으로 비교해, 남기려는 정보와 지워야 할 정보가 섞이지 않았는지 확인하는 흐름이 필요합니다.\n\n### 편집 뒤에 확인할 것\n편집 후에는 표시가 너무 많아 본문 정보가 가려지지 않는지 봐야 합니다. 자르기를 했다면 필요한 문구나 버튼이 잘리지 않았는지 확인합니다. 결국 캡처는 보기 좋게 만드는 것이 아니라, 상대가 한눈에 이해할 수 있게 남기는 작업입니다. [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n## 전체 화면만 빠르게 남기려면\n전체 화면이 꼭 필요하다면 `Windows + PrtScn` 단축키를 사용할 수 있습니다. Microsoft의 단축키 안내에는 이 조합이 전체 화면 스크린샷을 찍어 사진(Pictures) 폴더 안의 스크린샷 하위 폴더에 저장한다고 나와 있습니다. 다만 키보드마다 `PrtScn` 표기나 배치가 다를 수 있으므로, 키 이름을 찾기 어렵다면 캡처 도구를 여는 경로가 더 단순합니다. [Microsoft: Windows에서 바로 가기 키](https://support.microsoft.com/ko-kr/accessibility/windows/keyboard-shortcuts-in-windows)\n\n이 방법은 화면 전체를 빠르게 남길 때 편하지만, 필요한 부분만 정교하게 잘라야 한다면 오히려 불리할 수 있습니다. 제출용 문서나 안내 자료처럼 일부만 보여 주면 되는 경우에는 `Windows + Shift + S`가 더 맞습니다. 전체 화면은 정보가 너무 많아질 수 있기 때문입니다. [Microsoft: Windows에서 바로 가기 키](https://support.microsoft.com/ko-kr/accessibility/windows/keyboard-shortcuts-in-windows)\n\n## 막혔을 때 먼저 볼 점\n캡처가 안 되거나 저장 파일을 못 찾는다면 복잡한 문제부터 의심하기보다 기본 흐름을 다시 확인하는 편이 빠릅니다. 대부분은 키 조합, 붙여넣기 대상, 저장 위치의 세 가지에서 헷갈립니다. 어느 단계에서 막혔는지 나눠 보면 해결이 쉬워집니다. [Microsoft: 창 또는 화면 내용 복사](https://support.microsoft.com/ko-kr/office/copy-the-window-or-screen-contents), [Microsoft: 캡처 도구를 사용하여 스크린샷 캡처](https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots)\n\n- `Windows + Shift + S`를 눌렀는지 다시 봅니다.\n- 붙여넣을 수 있는 곳에 `Ctrl + V`를 썼는지 확인합니다.\n- 파일로 저장했다면 실제 폴더에서 파일을 다시 엽니다.\n- 자동 저장을 기대했다면 스크린샷 폴더와 설정을 함께 봅니다.\n\n윈도우 11 화면 캡처는 결국 “어디까지 담을지 정하고, 그 결과를 클립보드로 쓸지 파일로 남길지 고르는 일”입니다. 먼저 `Windows + Shift + S`로 필요한 부분만 잡아 보고, 저장이 필요할 때만 폴더와 파일 이름까지 챙기면 됩니다.\n\n캡처가 안 될 때는 단축키 자체보다도 현재 화면 상태를 먼저 확인해야 합니다. 회색 오버레이가 보이지 않으면 단축키 입력이 다른 프로그램에 가로막혔을 수 있고, 오버레이는 떴는데 결과가 안 보이면 붙여넣기나 저장 위치를 잘못 본 경우가 많습니다.\n\n1. 먼저 `Windows + Shift + S`를 다시 눌러 오버레이가 뜨는지 봅니다.\n2. 복사한 뒤에는 `Ctrl + V`가 가능한 앱인지 확인합니다.\n3. 파일을 저장했다면 기본 폴더와 바꿔 둔 저장 위치를 둘 다 확인합니다.\n4. 전체 화면 단축키를 썼다면 사진(Pictures) 안의 스크린샷 폴더까지 찾아봅니다.\n\n이 순서로 보면 캡처 실패와 확인 실패를 구분하기 쉽습니다. 실제로는 캡처가 되었는데 결과를 보는 위치만 다르게 기억한 경우도 적지 않기 때문입니다.\n\n",
+  "revision": 2,
+  "approvedRevision": 2,
+  "approvedBy": "Automated evidence and image review; user-authorized publication",
+  "approvedAt": "2026-10-15T15:50:01.882Z",
+  "publishedAt": "2026-10-15T15:50:01.882Z",
+  "sources": [
+    {
+      "title": "Microsoft: 캡처 도구를 사용하여 스크린샷 캡처",
+      "url": "https://support.microsoft.com/ko-kr/windows/apps/use-snipping-tool-to-capture-screenshots",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "title": "Microsoft: 창 또는 화면 내용 복사",
+      "url": "https://support.microsoft.com/ko-kr/office/copy-the-window-or-screen-contents",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "title": "Microsoft: Windows에서 바로 가기 키",
+      "url": "https://support.microsoft.com/ko-kr/accessibility/windows/keyboard-shortcuts-in-windows",
+      "checkedAt": "2026-10-16"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7eff/keh85CTbdh4Pe9do3w36J.png",
+      "alt": "책상 위 노트북 화면에 캡처 영역이 떠 있고 옆에 스마트폰과 마우스가 놓인 장면",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7f00/RMpD_dUSJ_K7SbkZJekzs.png",
+      "alt": "노트북과 펜 옆에 흰 종이와 인화 사진이 놓인 작업 공간 장면",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7f01/5vTRZCAWx_R57ZA9tGKEc.png",
+      "alt": "손이 원형 확대경으로 흰 종이 위의 사각형 영역을 가리키는 장면",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7f01/CEzFLestTwk7TteCmToTi.png",
+      "alt": "모니터 앞 책상에서 손가락이 키보드 옆을 누르며 캡처 타이밍을 기다리는 장면",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae7f02/Je0OVACoahUK0UimoENpk.png",
+      "alt": "노트북 일부와 흰 메모지, 펜이 놓인 어두운 책상 위 캡처 준비 장면",
+      "generated": true
+    }
+  ],
+  "affiliates": [],
+  "demo": false
+}
