@@ -5,6 +5,8 @@ import { prepareArticle, articleAdPlacements } from '../../lib/article-layout.mj
 import { site } from '../../lib/site.mjs';
 import AffiliateBanner from '../../components/AffiliateBanner.astro';
 import ArticleFigure from '../../components/ArticleFigure.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { relatedArticles, relatedPlacement } from '../../lib/reading-paths.mjs';
 import { hasBanners, getBanners, affiliateDisclosure } from '../../lib/banners.mjs';
 export function getStaticPaths(){return getArticles().map(article=>({params:{id:article.articleId},props:{article}}));}
 const { article } = Astro.props;
@@ -15,7 +17,10 @@ const endingBannerSlot=hasContextualMiddle&&![...adPlacements.values()].includes
 const adClient = import.meta.env.PUBLIC_ADSENSE_CLIENT || '';
 const adSlot = import.meta.env.PUBLIC_ADSENSE_SLOT || '';
 const adsEnabled = site.ready && /^ca-pub-\d{16}$/.test(adClient) && /^\d+$/.test(adSlot);
-const related = getArticles().filter(a=>a.articleId!==article.articleId&&a.category===article.category).slice(0,3);
+const related=relatedArticles(article,getArticles());
+const nextIndex=related.length?relatedPlacement(sections,adPlacements):null;
+const inlineNext=nextIndex===null?null:related[0];
+const endingRelated=inlineNext?related.slice(1):related;
 const showSidebar=hasBanners(['article-sidebar-top','article-sidebar-bottom'],article.category);
 const hasAffiliateContent=article.affiliates.length>0;
 const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPosting',headline:article.title,description:article.description,datePublished:article.publishedAt,dateModified:article.approvedAt,author:{'@type':'Organization',name:site.name,url:site.url},mainEntityOfPage:new URL(`/notes/${article.articleId}/`,site.url).href,image:article.images.filter(i=>i.localPath).map(i=>new URL(i.localPath,site.url).href)}).replaceAll('<','\\u003c');
@@ -28,12 +33,12 @@ const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPost
     <div class="article-byline">{site.name} <span>·</span> {formatPublishedDate(article.publishedAt)}</div>
     {hasAffiliateContent&&<aside class="disclosure">{affiliateDisclosure}</aside>}
     {headings.length>0&&<nav class="article-toc" aria-label="이 글의 목차"><details><summary>목차 <span>{headings.length}개 항목</span></summary><ol>{headings.map(h=><li><a href={'#'+h.id}>{h.title}</a></li>)}</ol></details></nav>}
-    <div class="article-body">{sections.map((section,index)=><><div class:list={['article-section',{'article-intro':index===0&&!section.html.includes('<h2')}]} set:html={section.html}/>{section.images.filter(image=>image.localPath).map(image=><ArticleFigure image={image}/>)}{adPlacements.has(index)&&<AffiliateBanner slot={adPlacements.get(index)} category={article.category}/>}</>)}</div>
+    <div class="article-body">{sections.map((section,index)=><><div class:list={['article-section',{'article-intro':index===0&&!section.html.includes('<h2')}]} set:html={section.html}/>{section.images.filter(image=>image.localPath).map(image=><ArticleFigure image={image}/>)}{index===nextIndex&&inlineNext&&<aside class="reading-next" aria-label="함께 읽을 글"><p>함께 읽기</p><a href={`/notes/${inlineNext.articleId}/`}>{inlineNext.title}<span aria-hidden="true"> →</span></a></aside>}{adPlacements.has(index)&&<AffiliateBanner slot={adPlacements.get(index)} category={article.category}/>}</>)}</div>
     <AffiliateBanner slot={endingBannerSlot} category={article.category}/>
     {article.affiliates.length>0&&<section class="product-section"><h2>함께 살펴볼 제품</h2>{article.affiliates.map(p=><a class="product-link" href={p.url} rel="sponsored noopener noreferrer" target="_blank"><div><strong>{p.label}</strong>{p.note&&<p>{p.note}</p>}</div><span>쿠팡에서 확인 ↗</span></a>)}<small>가격·재고·배송 조건은 판매 페이지에서 확인해 주세요.</small></section>}
     <section class="source-section"><h2>확인한 자료</h2><ol>{article.sources.map(s=><li><a href={s.url} rel="noopener noreferrer" target="_blank">{s.title} ↗</a><span>확인 {s.checkedAt.slice(0,10)}</span></li>)}</ol><p>자료 기반 설명과 실제 사용 경험을 구분합니다. 오류 제보는 <a href="/contact/">문의 안내</a>를 이용해 주세요.</p></section>
     {adsEnabled&&<div class="ad-slot"><small>광고</small><ins class="adsbygoogle" style="display:block" data-ad-client={adClient} data-ad-slot={adSlot} data-ad-format="auto" data-full-width-responsive="true"></ins><script is:inline>(window.adsbygoogle = window.adsbygoogle || []).push({});</script></div>}
-    {related.length>0&&<section class="related"><h2>이어서 읽어볼 글</h2>{related.map(a=><a href={`/notes/${a.articleId}/`}>{a.title} ↗</a>)}</section>}
+    {endingRelated.length>0&&<section class="related related-guides" aria-label="이어서 읽어볼 글"><h2>이어서 읽어볼 글</h2><div class="guide-grid">{endingRelated.map(next=><ArticleCard article={next}/>)}</div></section>}
   </article>
   {showSidebar&&<aside class="banner-sidebar" aria-label="추천 상품 광고"><div class="banner-sidebar-inner"><AffiliateBanner slot="article-sidebar-top" category={article.category}/><AffiliateBanner slot="article-sidebar-bottom" category={article.category}/></div></aside>}
   </div>

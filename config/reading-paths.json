@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {"id":"chrome","label":"크롬 설정과 정리","intentPrefixes":["chrome-"],"intentKeys":["chrome-cache-clear-with-data-scope","chrome-notifications","chrome-bookmarks","chrome-tab-groups"]},
+    {"id":"windows","label":"윈도우 설정","intentPrefixes":["windows-"],"intentKeys":["windows-clipboard-history","windows-storage-sense"]},
+    {"id":"sheets","label":"스프레드시트 작업","intentPrefixes":["sheets-"],"intentKeys":["sheets-data-cleanup","sheets-dropdown","sheets-conditional-format","sheets-filter-views","sheets-pivot-table","sheets-protect-ranges"]},
+    {"id":"photos","label":"사진 백업과 정리","intentPrefixes":["photos-"],"intentKeys":["photos-backup","photos-albums","photos-archive","photos-editing","photos-sharing","photos-export"]},
+    {"id":"maps","label":"지도와 여행 준비","intentPrefixes":["maps-"],"intentKeys":["maps-travel-lists","maps-street-view","maps-multiple-stops","maps-distance-measure","maps-offline","maps-location-sharing"]},
+    {"id":"appliances","label":"생활 가전 관리","intentPrefixes":[],"intentKeys":["dishwasher-efficient-use","dryer-efficient-use","dehumidifier-use","refrigerator-energy-use"]}
+  ],
+  "nextByIntent": {
+    "pdf-file-size-compression-guide":["docs-page-numbers"],
+    "docs-page-numbers":["pdf-file-size-compression-guide","drive-sharing-permissions"],
+    "drive-sharing-permissions":["sheets-protect-ranges","docs-page-numbers"],
+    "gmail-filter-labels":["drive-sharing-permissions","docs-page-numbers"],
+    "photos-backup":["photos-albums","photos-export","photos-sharing"],
+    "photos-albums":["photos-archive","photos-sharing"],
+    "photos-archive":["photos-export","photos-albums"],
+    "photos-editing":["photos-albums","photos-export"],
+    "photos-sharing":["photos-albums","photos-backup"],
+    "photos-export":["photos-backup","photos-sharing"],
+    "maps-travel-lists":["maps-street-view","maps-offline","maps-multiple-stops"],
+    "maps-offline":["maps-travel-lists","maps-multiple-stops","maps-location-sharing"],
+    "maps-multiple-stops":["maps-distance-measure","maps-offline"],
+    "sheets-data-cleanup":["sheets-filter-views","sheets-pivot-table","sheets-dropdown"],
+    "sheets-protect-ranges":["drive-sharing-permissions","sheets-filter-views"]
+  }
+}

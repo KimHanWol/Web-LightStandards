@@ -1,10 +1,10 @@
 ---
 import { formatPublishedDate } from '../lib/articles.mjs';
 import { articleSection } from '../lib/navigation.mjs';
-const {article,aliases=[]}=Astro.props;
+const {article,aliases=[],featured=false}=Astro.props;
 const section=articleSection(article);
 ---
 <a class="guide-card" href={`/notes/${article.articleId}/`} data-article data-section={section.id} data-category={article.category} data-search={`${article.title} ${article.description} ${article.category} ${aliases.join(' ')}`}>
   <div class="guide-card-image"><img src={article.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={article.images[0]?.alt||''} width="1024" height="768" loading="lazy" decoding="async"/></div>
-  <div class="guide-card-copy"><p class="guide-card-topic">{article.category}</p><h3>{article.title}</h3><p class="guide-card-description">{article.description}</p><div class="guide-card-meta"><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></div></div>
+  <div class="guide-card-copy"><p class="guide-card-topic">{article.category}{featured&&<span class="guide-card-featured">대표 글</span>}</p><h3>{article.title}</h3><p class="guide-card-description">{article.description}</p><div class="guide-card-meta"><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></div></div>
 </a>

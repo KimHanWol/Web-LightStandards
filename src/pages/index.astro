@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import AffiliateBanner from '../components/AffiliateBanner.astro';
 import {getArticles,formatPublishedDate} from '../lib/articles.mjs';
-import {sections,articleSection,sectionArticles,featuredArticles} from '../lib/navigation.mjs';
+import {sections,articleSection,sectionArticles,sectionHighlights,isSectionFeatured,featuredArticles} from '../lib/navigation.mjs';
 import topicMap from '../../config/topic-map.json';
 const articles=getArticles();
 const [lead,secondary]=featuredArticles(articles);
@@ -21,7 +21,7 @@ const latest=articles.slice(0,3);
         <div class="magazine-feature-stack">
         <a class="magazine-lead" href={`/notes/${lead.articleId}/`}>
           <div class="magazine-lead-image"><img src={lead.images[0]?.localPath||'/brand/lightstandards-mark-v2.png'} alt={lead.images[0]?.alt||''} width="1024" height="768" loading="eager" decoding="async"/></div>
-          <p class="magazine-kicker">{articleSection(lead).label}<span>{lead.category}</span></p>
+          <p class="magazine-kicker">{articleSection(lead).label}{lead.category!==articleSection(lead).label&&<span>{lead.category}</span>}</p>
           <h2>{lead.title}</h2><p class="magazine-lead-description">{lead.description}</p>
         </a>
           {secondary&&<a class="magazine-secondary" href={`/notes/${secondary.articleId}/`}>
@@ -40,7 +40,7 @@ const latest=articles.slice(0,3);
       </section>
       <div class="category-shelves">{populated.map((section,index)=><><section class="category-shelf" aria-labelledby={`shelf-${section.id}`}>
         <div class="magazine-section-heading"><h2 id={`shelf-${section.id}`}>{section.label}</h2><a href={`/categories/${section.id}/`}>모두 보기 <span aria-hidden="true">→</span></a></div>
-        <div class="guide-grid">{section.articles.slice(0,4).map(article=><ArticleCard article={article}/>)}</div>
+        <div class="guide-grid">{sectionHighlights(articles,section.id).slice(0,4).map(article=><ArticleCard article={article} featured={isSectionFeatured(article)}/>)}</div>
       </section>{index===1&&<div class="home-feed-ad"><AffiliateBanner slot="home-middle"/></div>}</>)}</div>
     </div>
     <section id="articles" class="article-library" aria-labelledby="library-title" hidden>

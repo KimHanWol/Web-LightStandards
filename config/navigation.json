@@ -11,5 +11,12 @@
     { "id": "travel", "label": "여행·이동", "description": "여행 준비, 교통과 이동에 필요한 정보", "topics": ["여행 준비", "교통·이동", "자동차"], "articleCategories": ["여행·이동"] },
     { "id": "culture", "label": "취미·문화", "description": "여가, 문화와 즐기는 활동을 알아보는 방법", "topics": ["취미·여가", "영상·문화", "스포츠·야외 활동"], "articleCategories": ["취미·문화"] }
   ],
-  "featuredArticleIds": ["pdf-compression-20261014", "chrome-cache-clear-20261014"]
+  "featuredArticleIds": ["maps-offline-20261015", "dishwasher-efficient-use-20261015"],
+  "sectionFeaturedArticleIds": {
+    "digital":"drive-sharing-permissions-20261015",
+    "home":"dishwasher-efficient-use-20261015",
+    "money-work":"sheets-dropdown-20261015",
+    "travel":"maps-offline-20261015",
+    "culture":"photos-backup-20261015"
+  }
 }
