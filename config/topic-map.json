@@ -240,6 +240,33 @@
       ]
     },
     {
+      "articleId": "sheets-pivot-table-20261015",
+      "category": "경제·일",
+      "categoryId": "money-work",
+      "categoryLabel": "경제·일",
+      "intentKey": "sheets-pivot-table",
+      "status": "published",
+      "title": "구글 스프레드시트 피벗 테이블 만드는 법과 설정 바꾸기",
+      "coreQuestion": "구글 스프레드시트 피벗 테이블 만드는 법과 설정 바꾸기",
+      "scope": "PC용 Google Sheets 기준으로 피벗 테이블을 만드는 순서, 행·열·값 배치, 정렬·필터·그룹·계산 필드 조정, 결과 확인까지 정리합니다.",
+      "coverage": [
+        "피벗 테이블이 하는 일",
+        "원본 표에서 먼저 확인할 것",
+        "피벗 테이블 만드는 순서",
+        "행·열·값 넣는 법",
+        "정렬·그룹·요약 바꾸기",
+        "그룹과 날짜 묶기",
+        "필터로 보는 범위 줄이기",
+        "계산 필드로 새 값 만들기",
+        "수정·갱신·세부 확인",
+        "실제로 확인할 때 볼 것"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "구글 스프레드시트 피벗 테이블 만드는 법과 설정 바꾸기"
+      ]
+    },
+    {
       "articleId": "windows-storage-sense-20261015",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -437,7 +464,30 @@
     {
       "id": "money-work",
       "label": "경제·일",
-      "articles": []
+      "articles": [
+        {
+          "articleId": "sheets-pivot-table-20261015",
+          "intentKey": "sheets-pivot-table",
+          "coreQuestion": "구글 스프레드시트 피벗 테이블 만드는 법과 설정 바꾸기",
+          "scope": "PC용 Google Sheets 기준으로 피벗 테이블을 만드는 순서, 행·열·값 배치, 정렬·필터·그룹·계산 필드 조정, 결과 확인까지 정리합니다.",
+          "coverage": [
+            "피벗 테이블이 하는 일",
+            "원본 표에서 먼저 확인할 것",
+            "피벗 테이블 만드는 순서",
+            "행·열·값 넣는 법",
+            "정렬·그룹·요약 바꾸기",
+            "그룹과 날짜 묶기",
+            "필터로 보는 범위 줄이기",
+            "계산 필드로 새 값 만들기",
+            "수정·갱신·세부 확인",
+            "실제로 확인할 때 볼 것"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "구글 스프레드시트 피벗 테이블 만드는 법과 설정 바꾸기"
+          ]
+        }
+      ]
     },
     {
       "id": "travel",
