@@ -30,7 +30,6 @@
 .home-primary-ad .affiliate-banner{margin:0;padding:0;border:0;background:transparent}
 .home-primary-ad .banner-label,.home-primary-ad .banner-disclosure{max-width:100%}
 .home-feed-ad .affiliate-banner{margin:0;padding-block:20px;background:#f6f7f9}
-.home-feed-ad .dynamic-banner-frame{height:250px;aspect-ratio:auto}
 .category-directory{margin-top:42px}
 .category-directory{padding-bottom:40px;margin-bottom:40px;border-bottom:1px solid var(--line)}
 .category-directory-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:5px;overflow:hidden}
