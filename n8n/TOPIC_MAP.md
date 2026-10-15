@@ -2,6 +2,10 @@
 
 운영용 스냅샷은 `config/topic-map.json`, n8n의 실시간 정보는 Articles Data Table의 `topic_map_json`과 행 상태입니다. 핵심 질문·적용 범위·다룬 내용·제외 범위·키워드 별칭을 기록합니다. 아직 검토하지 않은 후보를 발행 가능한 주제라고 표시하지 않습니다.
 
+`config/topic-map.json`의 `categories`는 `config/navigation.json`의 큰 분류별로 실제 발행 글을 묶습니다. 승인 원고를 가져올 때 `scripts/sync-topic-map.mjs`가 실제 H2와 발행 글을 기준으로 자동 갱신하며, 기존에 검토한 핵심 질문·제외 범위·별칭을 보존합니다. 아직 글이 없는 분류는 비워 둡니다.
+
+n8n 작성 입력은 같은 분류의 완성 글 `categoryTopicMap.existingTopics`, 예약 후보 `categoryTopicMap.plannedTopics`, 다른 분류의 완성 글 `crossCategoryTopics`를 구분합니다. 카테고리 안팎의 중복을 모두 비교하며, 대기 중인 주제를 발행된 글로 표시하지 않습니다.
+
 ```mermaid
 flowchart TD
   Blog[소소한 기준]

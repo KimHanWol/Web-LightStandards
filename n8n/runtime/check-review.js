@@ -11,7 +11,7 @@ try{
  const review=chunks.length===1&&typeof chunks[0]==='object'?chunks[0]:JSON.parse(chunks.join(''));
  if(review.approved!==true)throw new Error('Editorial review: '+JSON.stringify(review.issues||[]));
  if(!Array.isArray(review.imageAlts)||review.imageAlts.length!==5||review.imageAlts.some(a=>typeof a!=='string'||a.length<4||a.length>250))throw new Error('Review image descriptions missing');
- result.images_json=JSON.stringify(JSON.parse(row.images_json).map((image,index)=>({...image,alt:review.imageAlts[index],generated:true})));
+ result.images_json=JSON.stringify(JSON.parse(row.images_json).map((image,index)=>({...image,alt:review.imageAlts[index],generated:image.generated!==false})));
  result.reviewPassed=true;
 }catch(e){result.error=String(e.message).slice(0,1000);result.reviewPassed=false;}
 return [{json:result}];

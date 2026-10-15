@@ -26,7 +26,11 @@ for (const row of rows.filter(r=>canCorrect(r)||(r.status==='ready'&&(!config.ta
     // but give the writer only completed article scopes for semantic comparison.
     const existingTopics=activeRows.filter(r=>!['ready','candidate','generation_started'].includes(r.status)&&String(r.title||'').trim()&&Number(r.character_count)>=5000).slice(-80).map(r=>({...mapOf(r),articleId:r.article_id,category:r.category,intentKey:r.intent_key,title:r.title,keyword:r.keyword,status:r.status}));
     const correction=row.body_markdown?{previousMarkdown:String(row.body_markdown).slice(0,20000),visibleCharacters:Number(row.character_count||0),requiredAdditionalCharacters:Math.max(1800,6800-Number(row.character_count||0)),feedback:candidateMap.repairFeedback||row.error||'Complete and check the full article'}:candidateMap.repairFeedback;
-    const brief=JSON.stringify({keyword:row.keyword,category:row.category,sources,candidateTopic:candidateMap,existingTopics,existingTitles:existingTopics.map(r=>r.title).filter(Boolean),correction});
+    const sections=JSON.parse(config.navigation_sections_json||'[]');
+    const categoryOf=r=>sections.find(s=>s.articleCategories.includes(r.category))?.label||r.category;
+    const categoryLabel=categoryOf(row);
+    const categoryTopicMap={category:categoryLabel,existingTopics:existingTopics.filter(r=>categoryOf(r)===categoryLabel),plannedTopics:activeRows.filter(r=>r.status==='ready'&&categoryOf(r)===categoryLabel).map(r=>({articleId:r.article_id,intentKey:r.intent_key,...mapOf(r),status:'planned'}))};
+    const brief=JSON.stringify({keyword:row.keyword,category:row.category,sources,candidateTopic:candidateMap,categoryTopicMap,crossCategoryTopics:existingTopics.filter(r=>categoryOf(r)!==categoryLabel),existingTopics,existingTitles:existingTopics.map(r=>r.title).filter(Boolean),correction});
     if(brief.length>50000||sources.reduce((n,s)=>n+s.excerpt.length,0)<2000) continue;
     const topic_map_json=JSON.stringify({...candidateMap,automaticWritingAttempts:Number(candidateMap.automaticWritingAttempts||0)+1});
     return [{json:{...row,previous_status:row.status,topic_map_json,brief,revision:Number(row.revision||0)+1,reserved_usd:config.reserve_usd,actual_usd:Number(row.actual_usd||0),budget_month:month,generation_day:today,claim_id:String($execution.id)}}];

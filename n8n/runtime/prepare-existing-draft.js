@@ -1,0 +1,13 @@
+const input=$('Batch Input').first().json;
+const row=$input.all().map(i=>i.json).find(r=>r.article_id===input.article_id);
+if(row&&input.action==='resume_images'&&row.status==='text_ready'&&Number(row.character_count)>=5000&&JSON.parse(row.images_json||'[]').length<5&&!row.error)return [{json:row}];
+if(!row||row.status!=='needs_review'||Number(row.reserved_usd||0)!==0||Number(row.character_count)<5000||!row.body_markdown||!String(row.error||'').startsWith('Editorial review: '))return [];
+const issues=JSON.parse(row.error.slice('Editorial review: '.length));
+if(!Array.isArray(issues)||!issues.length||issues.some(s=>!(/^(?:이미지\s*\d+|\d+번\s*이미지)/.test(s))))return [];
+const indexes=[...new Set(issues.map(s=>Number(s.match(/\d+/)?.[0])-1))];
+const images=JSON.parse(row.images_json||'[]');
+if(images.length!==5||indexes.some(n=>!Number.isInteger(n)||n<0||n>=images.length))return [];
+const map=JSON.parse(row.topic_map_json||'{}');
+if(Number(map.imageRepairAttempts||0)>=1)return [];
+const selected=images.filter((_,index)=>!indexes.includes(index));
+return [{json:{...row,status:'text_ready',revision:Number(row.revision)+1,images_json:JSON.stringify(selected),reserved_usd:(5-selected.length)*.003,error:'',approved_revision:0,approved_by:'',approved_at:'',publish_payload:'',topic_map_json:JSON.stringify({...map,imageRepairAttempts:Number(map.imageRepairAttempts||0)+1,photoSearchQuery:map.photoSearchQuery||row.article_id.replace(/-\d{8}$/,'').replace(/-/g,' '),replacedImageIndexes:indexes})}}];

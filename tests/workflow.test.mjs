@@ -98,3 +98,24 @@ test('batch router excludes unrelated rows and never retries an uncertain charge
   const exhausted={...confirmed,topic_map_json:JSON.stringify({automaticWritingAttempts:2})};
   assert.equal(run('batch-router',[exhausted])[0].json.action,'finished');
 });
+
+test('category input separates queued scopes from completed same-category and cross-category articles',()=>{
+ const current={...row,article_id:'new-topic',category:'IT·디지털'};
+ const existing={...row,id:2,article_id:'actual',intent_key:'actual-intent',keyword:'다른 질문',category:'문서 작업',status:'published',title:'실제 발행한 다른 질문에 대한 글',character_count:6000};
+ const queued={...row,id:3,article_id:'queued',intent_key:'queued-intent',keyword:'대기 질문',category:'IT·디지털'};
+ const navigation_sections_json=JSON.stringify([{label:'IT·디지털',articleCategories:['문서 작업','IT·디지털']}]);
+ const brief=JSON.parse(run('select-draft',[current,existing,queued],{Configuration:{...config,navigation_sections_json}})[0].json.brief);
+ assert.equal(brief.categoryTopicMap.existingTopics[0].articleId,'actual');assert.equal(brief.categoryTopicMap.plannedTopics[0].articleId,'queued');assert.equal(brief.categoryTopicMap.plannedTopics[0].status,'planned');
+});
+
+test('stock selection keeps accepted images and uses only real licensed candidate metadata',()=>{
+ const accepted=Array.from({length:4},(_,i)=>({url:'https://fal.media/accepted-'+i+'.png',alt:'검토한 기존 장면 '+i,generated:true}));
+ const candidate={id:'actual-photo-id',url:'https://live.staticflickr.com/123/photo_b.jpg',title:'Laundry dryer',creator:'Actual photographer',pageUrl:'https://www.flickr.com/photos/author/123',license:'by',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',provider:'flickr'};
+ const prepared={...row,status:'text_ready',images_json:JSON.stringify(accepted),body_markdown:'## 필터 확인\n\n본문',candidates:[candidate],photoQuery:'clothes dryer',actual_usd:.1,reserved_usd:.003,topic_map_json:JSON.stringify({stockSearch:{checkedAt:'2026-10-15T08:00:00.000Z'}})};
+ const response={id:'actual-response',model:'gpt-5.4-mini-2026-03-17',status:'completed',usage:{input_tokens:100,output_tokens:50},output:[{content:[{type:'output_text',text:JSON.stringify({selected:[{index:0,alt:'세탁실에 놓인 의류 건조기',caption:'건조기 관리를 설명하는 자료 사진입니다.',sectionHeading:'필터 확인'}]})}]}]};
+ const out=run('merge-photo-selection',[response],{'Filter Photo Candidates':prepared})[0].json;
+ const images=JSON.parse(out.images_json);
+ assert.equal(out.status,'needs_review');assert.equal(images.length,5);assert.equal(images[0].url,accepted[0].url);assert.equal(images[4].generated,false);assert.equal(images[4].stock.creator,candidate.creator);assert.equal(images[4].sourceUrl,candidate.pageUrl);assert.equal(out.reserved_usd,0);
+ const unknown=run('merge-photo-selection',[{error:'timeout'}],{'Filter Photo Candidates':prepared})[0].json;
+ assert.equal(unknown.status,'stock_uncertain');assert.equal(unknown.reserved_usd,.033);assert.equal(JSON.parse(unknown.images_json).length,4);
+});

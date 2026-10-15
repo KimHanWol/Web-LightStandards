@@ -1,7 +1,7 @@
 ---
 const {image}=Astro.props;
 const stock=image.stock;
-const alt=image.generated?image.alt.replace(/\s*[—–-]\s*AI 생성 설명 이미지\s*$/,''):image.alt;
+const alt=image.generated?image.alt.replace(/\s*[—–-]\s*AI 생성 설명 이미지(?:\s*\d+)?\s*$/,''):image.alt;
 ---
 <figure>
   <img src={image.localPath} alt={alt} width={image.width||1024} height={image.height||768} data-kind={stock?'stock':image.generated?'generated':'capture'} loading={image.lead?'eager':'lazy'} fetchpriority={image.lead?'high':'auto'}/>
