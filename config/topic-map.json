@@ -159,6 +159,29 @@
       ]
     },
     {
+      "articleId": "docs-guide-37579-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "docs-answer-37579",
+      "status": "published",
+      "title": "Google Docs, Sheets, Slides, Forms를 공개로 설정하는 방법",
+      "coreQuestion": "Google Docs, Sheets, Slides, Forms를 공개로 설정하는 방법",
+      "scope": "Google Docs, Sheets, Slides, Forms 파일을 웹에 게시해 공개로 보이게 하는 방법을 정리합니다. 게시와 일반 공유의 차이, 자동 업데이트, 게시 중지, 삽입까지 함께 설명합니다.",
+      "coverage": [
+        "공개 설정은 무엇이 다른가",
+        "먼저 확인할 조건",
+        "문서와 슬라이드를 공개로 게시하기",
+        "자동 업데이트와 게시 중지",
+        "삽입할 때와 링크로 보낼 때",
+        "공개 전 마지막 점검"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Google Docs, Sheets, Slides, Forms를 공개로 설정하는 방법"
+      ]
+    },
+    {
       "articleId": "docs-guide-49114-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -973,6 +996,24 @@
           "outOfScope": [],
           "aliases": [
             "크롬 탭 그룹 만들기: PC에서 묶고 접고 다시 여는 방법"
+          ]
+        },
+        {
+          "articleId": "docs-guide-37579-20261016",
+          "intentKey": "docs-answer-37579",
+          "coreQuestion": "Google Docs, Sheets, Slides, Forms를 공개로 설정하는 방법",
+          "scope": "Google Docs, Sheets, Slides, Forms 파일을 웹에 게시해 공개로 보이게 하는 방법을 정리합니다. 게시와 일반 공유의 차이, 자동 업데이트, 게시 중지, 삽입까지 함께 설명합니다.",
+          "coverage": [
+            "공개 설정은 무엇이 다른가",
+            "먼저 확인할 조건",
+            "문서와 슬라이드를 공개로 게시하기",
+            "자동 업데이트와 게시 중지",
+            "삽입할 때와 링크로 보낼 때",
+            "공개 전 마지막 점검"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Google Docs, Sheets, Slides, Forms를 공개로 설정하는 방법"
           ]
         },
         {
