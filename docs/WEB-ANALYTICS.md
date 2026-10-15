@@ -2,7 +2,11 @@
 
 사이트: https://lightstandards.linkingmain.workers.dev/
 
-Cloudflare Web Analytics 연결 코드는 준비했으며, 현재 설정은 **비활성**이다. 계정에서 해당 hostname의 사이트를 등록하고 실제 공개 beacon token을 받아야 수집을 시작할 수 있다. 배포용 API token이나 계정 비밀번호를 설정 파일에 넣지 않는다.
+운영자 대시보드(Cloudflare 로그인 필요): https://dash.cloudflare.com/40b12740d554a2a64712de5562d42fd9/web-analytics/overview?siteTag~in=25fb1126b9104dd0bf9cc2c88daad963&excludeBots=Yes
+
+기본 화면은 최근 24시간, GMT+9, 봇 제외 필터다. 날짜 선택에서 조회 기간을 변경할 수 있다. Visits와 Page views를 구분해 읽고, 글별 수치는 Page views에서 확인한다.
+
+Cloudflare Web Analytics에 해당 hostname을 등록하고 실제 공개 beacon token으로 설정을 활성화했다. 배포용 API token이나 계정 비밀번호를 설정 파일에 넣지 않는다. 사이트 token은 브라우저 설치 코드에 공개되는 식별자다.
 
 1. 기존 Cloudflare 계정에 로그인한다.
 2. Analytics & Logs의 Web Analytics에서 기존 등록을 먼저 확인한다. 같은 hostname이 있으면 재사용한다.
@@ -23,4 +27,4 @@ Visits는 외부 사이트 또는 직접 유입에서 시작한 방문이고, �
 - https://developers.cloudflare.com/web-analytics/data-metrics/high-level-metrics/
 - https://developers.cloudflare.com/web-analytics/faq/
 
-2026-10-16 준비 시점에 기존 Cloudflare 탭은 로그인 화면과 로그인 오류를 표시했다. 재로그인 이후 계정 연결부터 이어서 진행한다. 현재 통계 수집이 켜졌다고 보고하지 않는다.
+2026-10-16 사용자 재로그인 후 블로그 hostname을 등록하고 수동 설치용 token을 연결했다. 이 날짜 이전 방문 기록을 새 통계로 복원한 것으로 해석하지 않는다.
