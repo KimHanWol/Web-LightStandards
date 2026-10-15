@@ -374,6 +374,29 @@
       ]
     },
     {
+      "articleId": "mail-guide-6593-20261016",
+      "category": "경제·일",
+      "categoryId": "money-work",
+      "categoryLabel": "경제·일",
+      "intentKey": "mail-answer-6593",
+      "status": "published",
+      "title": "Gmail에서 검색하기: 검색창, 칩, 고급검색으로 메일 찾는 법",
+      "coreQuestion": "Gmail에서 검색하기: 검색창, 칩, 고급검색으로 메일 찾는 법",
+      "scope": "Gmail에서 메일을 빠르게 찾는 방법을 PC 기준으로 정리합니다. 검색창 사용, 검색 칩, 연산자, 스팸·휴지통 검색, 검색 기록 정리까지 함께 봅니다.",
+      "coverage": [
+        "먼저 알아둘 검색의 기준",
+        "결과를 빠르게 좁히는 방법",
+        "연산자로 더 정확히 찾기",
+        "스팸함과 휴지통까지 찾는 법",
+        "검색 기록과 추천어를 다루는 법",
+        "이렇게 시작하면 덜 헤맵니다"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Gmail에서 검색하기: 검색창, 칩, 고급검색으로 메일 찾는 법"
+      ]
+    },
+    {
       "articleId": "maps-distance-measure-20261015",
       "category": "여행·이동",
       "categoryId": "travel",
@@ -1341,6 +1364,24 @@
           "outOfScope": [],
           "aliases": [
             "지메일 예약 발송과 취소 방법: PC에서 시간 바꾸고 다시 예약하기"
+          ]
+        },
+        {
+          "articleId": "mail-guide-6593-20261016",
+          "intentKey": "mail-answer-6593",
+          "coreQuestion": "Gmail에서 검색하기: 검색창, 칩, 고급검색으로 메일 찾는 법",
+          "scope": "Gmail에서 메일을 빠르게 찾는 방법을 PC 기준으로 정리합니다. 검색창 사용, 검색 칩, 연산자, 스팸·휴지통 검색, 검색 기록 정리까지 함께 봅니다.",
+          "coverage": [
+            "먼저 알아둘 검색의 기준",
+            "결과를 빠르게 좁히는 방법",
+            "연산자로 더 정확히 찾기",
+            "스팸함과 휴지통까지 찾는 법",
+            "검색 기록과 추천어를 다루는 법",
+            "이렇게 시작하면 덜 헤맵니다"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Gmail에서 검색하기: 검색창, 칩, 고급검색으로 메일 찾는 법"
           ]
         },
         {
