@@ -1,0 +1,59 @@
+{
+  "articleId": "mail-guide-18522-20261016",
+  "intentKey": "mail-answer-18522",
+  "title": "Gmail 받은편지함 레이아웃 변경하기: 기본 탭부터 여러 섹션까지",
+  "description": "PC Gmail에서 받은편지함 레이아웃을 바꾸는 방법을 정리합니다. 기본 탭, 중요 메일 먼저 보기, 읽지 않은 메일 먼저 보기, 별표 메일 먼저 보기, 여러 받은편지함의 차이도 함께 봅니다.",
+  "category": "경제·일",
+  "markdown": "Gmail 받은편지함 레이아웃은 컴퓨터에서 바꿀 수 있고, 선택한 방식에 따라 메일을 보는 기준이 달라집니다. 기본 탭으로 나눌지, 중요한 메일이나 읽지 않은 메일을 먼저 볼지, 여러 섹션으로 나눌지부터 고르면 됩니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n## 어떤 레이아웃을 고를지 먼저 정하기\n받은편지함 레이아웃은 보기 방식의 차이입니다. 메일이 들어오는 순서를 그대로 볼지, 중요한 메일을 앞에 둘지, 분류 탭으로 나눠 볼지에 따라 적합한 설정이 달라집니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 기본 탭이 맞는 경우\n`기본`을 선택하면 Gmail이 메일을 `기본`, `소셜`, `프로모션`, `업데이트` 같은 탭으로 자동 분류합니다. 자주 보는 개인 메일과 홍보성 메일을 먼저 나눠 보고 싶을 때 편합니다. [이메일을 카테고리별로 정리하기](https://support.google.com/mail/answer/3094499?hl=ko&co=GENIE.Platform%3DDesktop)\n\n기본 탭은 메일을 직접 정리하는 대신 Gmail의 분류 기준을 먼저 활용하고 싶을 때 맞습니다. 개인 메일과 홍보성 메일이 한 목록에 섞여 보이는 것보다, 처음부터 탭으로 갈라져 있으면 확인 순서를 정하기가 쉽습니다.\n\n1. 메일을 자주 놓치는 이유가 혼잡한 받은편지함인지 봅니다.\n2. 개인 메일과 자동 발송 메일을 나눠 보는 것이 편한지 판단합니다.\n3. 탭으로 나뉘는 구조가 맞다면 `기본`을 선택합니다.\n4. 나중에 다른 방식이 더 편하면 같은 설정에서 유형만 다시 바꿉니다.\n\n### 메일을 앞에 모아두고 싶을 때\n`중요한 메일 먼저 표시`, `읽지 않은 메일 먼저 표시`, `별표 표시한 메일 먼저 표시`는 받은편지함을 두 구역으로 나눕니다. 위쪽에는 우선 볼 메일이, 아래쪽에는 나머지 메일이 보이므로 확인 순서를 줄이고 싶을 때 맞습니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n이 유형들은 메일을 완전히 다른 상자로 보내는 것이 아니라, 받은편지함 안에서 우선순위 구역을 위아래로 나누는 방식입니다. 그래서 새 메일이 계속 들어와도 위쪽에서 먼저 처리할 대상을 빠르게 볼 수 있습니다.\n\n1. 먼저 무엇을 앞에 두고 싶은지 고릅니다: 중요 메일, 아직 안 읽은 메일, 직접 별표한 메일 중 하나입니다.\n2. 그 기준에 맞는 레이아웃을 선택합니다.\n3. 위쪽 구역에서 먼저 처리하고, 아래쪽 구역은 나중에 확인합니다.\n4. 기준이 맞지 않으면 같은 두 칸 구조 안에서 다른 유형으로 바꿉니다.\n\n### 섹션을 여러 개로 나눠 쓰고 싶을 때\n`받은편지함 여러 개 사용하기`와 `자동분류함`은 한 화면을 여러 섹션으로 나눕니다. 검색 연산자나 라벨을 기준으로 섹션을 만들 수 있어, 업무용 메일처럼 묶어서 보고 싶을 때 쓰기 좋습니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n## 컴퓨터에서 레이아웃 바꾸는 순서\n설정은 Gmail 웹에서 진행합니다. 모바일 앱이 아니라 컴퓨터 화면에서 빠른 설정을 열고 받은편지함 유형을 고르는 흐름입니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n1. 컴퓨터에서 Gmail을 엽니다.\n   - 받은편지함 화면에서 시작해야 설정을 바로 바꿀 수 있습니다.\n2. 오른쪽 상단의 `설정`을 클릭합니다.\n   - 빠른 설정 메뉴가 열리면 받은편지함 유형을 볼 수 있습니다.\n3. `받은편지함 유형`에서 원하는 레이아웃을 선택합니다.\n   - 여기서 기본, 중요 메일 먼저 보기, 읽지 않은 메일 먼저 보기, 별표 메일 먼저 보기, 여러 받은편지함, 자동분류함을 고릅니다.\n4. 필요하면 `맞춤설정`이나 추가 옵션을 확인한 뒤 `저장`합니다.\n   - 일부 받은편지함 스타일은 더 자세한 설정이 함께 나타납니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n## 각 레이아웃이 보여 주는 차이\n레이아웃 이름이 비슷해 보여도 실제로는 메일을 묶는 기준이 다릅니다. 이 차이를 먼저 이해하면 나중에 바꿔도 다시 헤매지 않습니다.\n\n| 레이아웃 | 화면 구성 | 맞는 상황 |\n|---|---|---|\n| 기본 | 탭으로 분류 | 개인 메일과 홍보성 메일을 나눠 보고 싶을 때 |\n| 중요한 메일 먼저 표시 | 중요 / 기타 | 처리 우선순위를 먼저 보고 싶을 때 |\n| 읽지 않은 메일 먼저 표시 | 읽지 않음 / 기타 | 아직 안 본 메일을 위에 두고 싶을 때 |\n| 별표 표시한 메일 먼저 표시 | 별표 / 기타 | 직접 표시한 메일만 앞에 두고 싶을 때 |\n| 받은편지함 여러 개 사용하기 | 추가 섹션 여러 개 | 기준별로 묶어 보관하듯 보고 싶을 때 |\n| 자동분류함 | 여러 섹션 | 자주 쓰는 묶음만 따로 보이게 하고 싶을 때 |\n\n`중요한 메일`과 `읽지 않은 메일`은 같은 두 칸 구조처럼 보여도 기준이 다릅니다. 전자는 Gmail이 중요하다고 판단한 메일을 앞에 두고, 후자는 아직 읽지 않은 메일을 앞에 둡니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n## 분류와 레이아웃을 함께 볼 때\n레이아웃을 바꾼 뒤에도 탭이나 카테고리, 라벨의 역할은 그대로 남습니다. 화면을 어떻게 보여 줄지와 메일을 어떤 기준으로 묶을지는 서로 다른 문제이기 때문입니다. [이메일을 카테고리별로 정리하기](https://support.google.com/mail/answer/3094499?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 기본 탭을 쓰면 생기는 변화\n`기본` 유형에서는 메일이 자동으로 카테고리 탭에 들어갑니다. 필요한 메일을 빠르게 찾는 데 도움이 되지만, 분류 기준은 Gmail이 정해 둔 카테고리 범위 안에서 움직입니다. 사용자가 새 카테고리를 직접 만드는 방식은 아닙니다. [이메일을 카테고리별로 정리하기](https://support.google.com/mail/answer/3094499?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 여러 받은편지함을 쓸 때 생각할 점\n`받은편지함 여러 개 사용하기`에서는 검색 연산자나 맞춤 라벨로 섹션을 만듭니다. 즉, 단순히 보기 모양을 바꾸는 수준이 아니라 어떤 메일을 한 칸에 모을지 기준을 정하는 작업이 함께 들어갑니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n여러 받은편지함은 섹션을 늘릴 수 있다는 점이 장점이지만, 무엇을 기준으로 묶을지 먼저 정하지 않으면 오히려 화면이 복잡해질 수 있습니다. 검색 연산자는 메일 내용을 조건으로 걸러내는 방식이고, 라벨은 사용자가 붙여 관리하는 표식이라는 점을 구분해 두면 섹션 설계가 쉬워집니다.\n\n1. 어떤 메일을 별도 섹션으로 보고 싶은지 먼저 정합니다.\n2. 그 메일을 찾을 기준으로 검색 연산자나 라벨을 선택합니다.\n3. 섹션을 만든 뒤에는 같은 종류의 메일이 계속 들어오는지 확인합니다.\n4. 기준이 자주 바뀌면 섹션 수를 늘리기보다 단순한 레이아웃이 더 보기 편할 수 있습니다.\n\n## 바꾼 뒤 확인할 것\n설정을 저장한 뒤에는 받은편지함이 선택한 구조로 다시 그려졌는지 보면 됩니다. 메일이 탭으로 보이는지, 두 구역으로 나뉘는지, 여러 섹션이 생겼는지 확인하면 됩니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n- 메일 목록이 선택한 유형에 맞게 나뉘었는지 봅니다.\n- 우선 보고 싶은 메일이 위쪽에 있는지 확인합니다.\n- 기본 탭을 썼다면 원하는 카테고리가 보이는지 살핍니다.\n- 여러 받은편지함을 썼다면 각 섹션에 기대한 메일이 들어오는지 확인합니다.\n\n레이아웃이 기대와 다르면 같은 설정 화면으로 돌아가 다른 유형으로 바꾸면 됩니다. 받은편지함의 모양을 바꾸는 작업이라, 메일 자체를 지우거나 옮기는 것과는 다릅니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n레이아웃을 바꾼 뒤 확인해야 하는 핵심은 메일이 실제로 어떻게 배치되었는지입니다. 설정값이 저장됐더라도 화면 구성이 기대와 다르면 다시 들어가서 유형을 바꾸면 되므로, 첫 확인에서는 결과 모양만 보면 됩니다.\n\n1. 목록이 탭, 두 구역, 여러 섹션 중 어느 형태로 바뀌었는지 봅니다.\n2. 우선 보고 싶던 메일이 위쪽이나 눈에 잘 띄는 자리에 있는지 확인합니다.\n3. 기본 탭을 썼다면 원하는 카테고리가 보이는지 살핍니다.\n4. 여러 받은편지함을 썼다면 각 섹션이 생각한 기준대로 채워지는지 확인합니다.\n\n## 왼쪽 메뉴를 좁게 보고 싶을 때\n받은편지함 레이아웃과 별개로, 왼쪽 메뉴는 숨길 수 있습니다. 화면 폭이 좁을 때 메뉴를 접어 두면 메일 목록을 더 넓게 볼 수 있습니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n왼쪽 상단의 메뉴 아이콘을 클릭하면 메뉴가 접히고, 다시 클릭하면 펼쳐집니다. 이 기능은 레이아웃 자체를 바꾸는 것이 아니라, 같은 화면에서 목록이 보이는 폭을 넓히는 방식입니다. [Gmail 받은편지함 레이아웃 변경하기](https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop)\n\n기준을 단순히 모양으로만 보면 바꾸고 나서 다시 헷갈리기 쉽습니다. 메일을 탭으로 나눌지, 우선순위대로 둘지, 섹션별로 모을지를 먼저 정하면 설정은 그다음입니다. [이메일을 카테고리별로 정리하기](https://support.google.com/mail/answer/3094499?hl=ko&co=GENIE.Platform%3DDesktop)",
+  "revision": 3,
+  "approvedRevision": 3,
+  "approvedBy": "Automated evidence and image review; user-authorized publication",
+  "approvedAt": "2026-10-15T17:30:49.352Z",
+  "publishedAt": "2026-10-15T17:30:49.352Z",
+  "sources": [
+    {
+      "title": "Gmail 받은편지함 레이아웃 변경하기",
+      "url": "https://support.google.com/mail/answer/18522?hl=ko&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "title": "이메일을 카테고리별로 정리하기",
+      "url": "https://support.google.com/mail/answer/3094499?hl=ko&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-16"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae8159/0fljDkL70strXhk-E_1gU.png",
+      "alt": "책상 위 노트북과 여러 서류함에 편지 봉투와 종이가 나뉘어 놓인 장면",
+      "generated": true,
+      "localPath": "/media/mail-guide-18522-20261016/c9390d838b656f62e9ff56e71efd0a5d4b1cce79936068de38e206b24575fdb4.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae815b/8M-AEB4T6RMRwP5dnucis.png",
+      "alt": "흰 배경 앞에 별표 모양 표시가 붙은 서류 더미와 펜이 놓인 장면",
+      "generated": true,
+      "localPath": "/media/mail-guide-18522-20261016/3a2d231d10ba67af4864a36a4e9146d23bf4ecebe92b0435b23c6b9d9974599e.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae815b/Rnemb39Xtx2enl2fu3QZd.png",
+      "alt": "서류함 세 개에 종이 묶음이 각각 들어 있고 가운데 칸이 열린 장면",
+      "generated": true,
+      "localPath": "/media/mail-guide-18522-20261016/53bb689d132392286bc1932232cfab3e5a61e333210a1bb03afd3f63e7e26a16.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae815e/gZskkB-JGO6Is7oTZwY8i.png",
+      "alt": "선반 위 세 개의 보관함에 색깔별 종이 묶음이 나뉘어 들어간 장면",
+      "generated": true,
+      "localPath": "/media/mail-guide-18522-20261016/7574bf8c8dad6fe8c500b3110cac20ff2ec3cf4e8af5bae86d65f003be941230.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae815f/bBBusWOOMaUuSO96El9Au.png",
+      "alt": "손이 서류함에서 종이 한 장을 집어 올리는 책상 위 정리 장면",
+      "generated": true,
+      "localPath": "/media/mail-guide-18522-20261016/2bdd10e3d804fff62568f8bc7630fb6f954745a72188cb2c0cab34a529bebc45.webp"
+    }
+  ],
+  "affiliates": [],
+  "demo": false
+}
