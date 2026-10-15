@@ -1,6 +1,8 @@
 # 원고 작성 프롬프트
 
-실제 프롬프트는 [article-system.txt](article-system.txt)입니다. n8n 본체 `Blog - 소소한 기준`의 `Write Original Draft` 시스템 메시지에 같은 내용을 저장합니다. 키워드·카테고리·근거·기존 제목은 `Select Draft`가 별도의 사용자 메시지로 전달합니다.
+기본 작성 프롬프트는 [article-system.txt](article-system.txt)입니다. n8n 본체 `Blog - 소소한 기준`의 `Configuration.article_system_prompt`에 저장하며 `Write Original Draft` 시스템 메시지가 참조합니다. 분량 보완·사실 수정은 같은 Configuration의 해당 프롬프트로 분기합니다. 키워드·카테고리·근거·기존 제목은 `Select Draft`가 별도의 사용자 메시지로 전달합니다.
+
+2026-10-16부터 [처음 접하는 독자를 위한 작성 기준](../../docs/BEGINNER-WRITING.md)을 적용합니다. 필수 준비·용어 풀이·행동 이유·결과 판단을 자연스럽게 연결하고, 부록 추가보다 본문 이해를 우선합니다. 검수도 같은 독자 기준을 사용하되 문체 취향만으로 재호출하지 않습니다.
 
 ## 편집 기준
 
