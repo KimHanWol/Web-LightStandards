@@ -113,6 +113,32 @@
       ]
     },
     {
+      "articleId": "dryer-efficient-use-20261015",
+      "category": "생활·주거",
+      "categoryId": "home",
+      "categoryLabel": "생활·주거",
+      "intentKey": "dryer-efficient-use",
+      "status": "published",
+      "title": "건조기 건조 시간 줄이기: 탈수·필터·적재부터 줄이는 방법",
+      "coreQuestion": "건조기 건조 시간 줄이기: 탈수·필터·적재부터 줄이는 방법",
+      "scope": "세탁 전 탈수, 보풀 필터 청소, 적재량 조절, 센서 건조 활용까지 건조 시간이 길어지는 원인을 순서대로 점검하는 방법을 정리합니다.",
+      "coverage": [
+        "먼저 빨라지는 원리부터 보기",
+        "세탁기에서 물을 먼저 줄이기",
+        "필터와 공기 흐름 점검하기",
+        "적재량을 맞춰 공기길 확보하기",
+        "센서 건조와 온도 선택하기",
+        "빨리 마른 결과를 확인하는 법",
+        "바로 적용할 점검 순서",
+        "건조 시간을 줄이기 어려운 경우",
+        "다음 회차에서 확인할 기준"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "건조기 건조 시간 줄이기: 탈수·필터·적재부터 줄이는 방법"
+      ]
+    },
+    {
       "articleId": "maps-location-sharing-20261015",
       "category": "여행·이동",
       "categoryId": "travel",
@@ -489,6 +515,27 @@
       "id": "home",
       "label": "생활·주거",
       "articles": [
+        {
+          "articleId": "dryer-efficient-use-20261015",
+          "intentKey": "dryer-efficient-use",
+          "coreQuestion": "건조기 건조 시간 줄이기: 탈수·필터·적재부터 줄이는 방법",
+          "scope": "세탁 전 탈수, 보풀 필터 청소, 적재량 조절, 센서 건조 활용까지 건조 시간이 길어지는 원인을 순서대로 점검하는 방법을 정리합니다.",
+          "coverage": [
+            "먼저 빨라지는 원리부터 보기",
+            "세탁기에서 물을 먼저 줄이기",
+            "필터와 공기 흐름 점검하기",
+            "적재량을 맞춰 공기길 확보하기",
+            "센서 건조와 온도 선택하기",
+            "빨리 마른 결과를 확인하는 법",
+            "바로 적용할 점검 순서",
+            "건조 시간을 줄이기 어려운 경우",
+            "다음 회차에서 확인할 기준"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "건조기 건조 시간 줄이기: 탈수·필터·적재부터 줄이는 방법"
+          ]
+        },
         {
           "articleId": "refrigerator-energy-use-20261015",
           "intentKey": "refrigerator-energy-use",
