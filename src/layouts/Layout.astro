@@ -7,6 +7,7 @@ import '../styles/magazine.css';
 import { site } from '../lib/site.mjs';
 import { sections } from '../lib/navigation.mjs';
 import searchVerification from '../../config/search-verification.json';
+import { webAnalytics } from '../lib/web-analytics.mjs';
 const {title=site.name,description=site.description,noindex=false,image='/brand/lightstandards-mark-v2.png'}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
 const googleVerification=import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION||searchVerification.google;
@@ -51,5 +52,6 @@ const naverVerification=import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION||searchVe
       <div class="footer-links"><a href="/about/">소개</a><a href="/contact/">문의</a><a href="/privacy/">개인정보처리방침</a><a href="/disclosure/">광고·제휴 안내</a><a href="/rss.xml">RSS</a></div>
       <small>© {new Date().getFullYear()} 소소한 기준</small>
     </footer>
+    {webAnalytics.enabled&&site.ready&&import.meta.env.PROD&&<script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({token:webAnalytics.token,spa:false})}></script>}
   </body>
 </html>
