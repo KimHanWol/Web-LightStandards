@@ -7,6 +7,7 @@
     {"id":"home-sidebar-recommendations","slot":"home-sidebar","categories":[],"type":"dynamic","widget":{"id":1038387,"template":"carousel","trackingCode":"AF1976226","tsource":""},"desktop":{"width":336,"height":280},"mobile":{"width":300,"height":250}},
     {"id":"article-recommendations","slot":"article-middle","categories":[],"type":"dynamic","widget":{"id":1038394,"template":"carousel","trackingCode":"AF1976226","tsource":""},"mobileWidget":{"id":1038387,"template":"carousel","trackingCode":"AF1976226","tsource":""},"desktop":{"width":728,"height":90},"mobile":{"width":300,"height":250}},
     {"id":"article-appliance-category-best","slot":"article-middle","categories":["생활·주거"],"type":"dynamic","widget":{"id":1039597,"template":"carousel","trackingCode":"AF1976226","tsource":""},"mobileWidget":{"id":1039598,"template":"carousel","trackingCode":"AF1976226","tsource":""},"desktop":{"width":728,"height":90},"mobile":{"width":300,"height":250}},
-    {"id":"article-following-recommendations","slot":"article-sidebar-top","categories":[],"type":"dynamic","widget":{"id":1038395,"template":"carousel","trackingCode":"AF1976226","tsource":""},"desktop":{"width":160,"height":600}}
+    {"id":"article-following-recommendations","slot":"article-sidebar-top","categories":[],"type":"dynamic","widget":{"id":1038395,"template":"carousel","trackingCode":"AF1976226","tsource":""},"desktop":{"width":160,"height":600}},
+    {"id":"page-following-recommendations","slot":"page-sidebar","categories":[],"type":"dynamic","widget":{"id":1038395,"template":"carousel","trackingCode":"AF1976226","tsource":""},"desktop":{"width":160,"height":600}}
   ]
 }

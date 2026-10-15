@@ -2,19 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import AffiliateBanner from '../components/AffiliateBanner.astro';
+import PageFrame from '../components/PageFrame.astro';
 import {getArticles,formatPublishedDate} from '../lib/articles.mjs';
 import {sections,articleSection,sectionArticles,sectionHighlights,isSectionFeatured,featuredArticles} from '../lib/navigation.mjs';
-import topicMap from '../../config/topic-map.json';
 const articles=getArticles();
 const [lead,secondary]=featuredArticles(articles);
-const mapped=new Map(topicMap.articles.map(topic=>[topic.articleId,topic]));
 const populated=sections.map(section=>({...section,articles:sectionArticles(articles,section.id)})).filter(section=>section.articles.length);
 const other=articles.filter(article=>articleSection(article).id==='other');
 if(other.length)populated.push({id:'other',label:'기타 정보',description:'다른 분야의 안내',topics:[],articleCategories:[],articles:other});
 const latest=articles.slice(0,3);
 ---
-<Layout>
-  <div class="magazine-shell wrap">
+<Layout wide>
+  <PageFrame class="home-page-frame"><div class="magazine-shell">
     <div data-home-module>
       <h1 class="screen-reader-title">소소한 기준 — 분야별 정보와 가이드</h1>
       {lead&&<section class="magazine-top" aria-label="주요 글과 최근 글">
@@ -31,7 +30,7 @@ const latest=articles.slice(0,3);
         </div>
         <div class="magazine-top-side">
           <div class="home-primary-ad"><AffiliateBanner slot="home-sidebar"/></div>
-          <section class="latest-rail" aria-labelledby="latest-title"><div class="magazine-section-heading"><h2 id="latest-title">최근 글</h2><a href="/?view=all#articles">전체 보기 <span aria-hidden="true">→</span></a></div><ol>{latest.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></li>)}</ol></section>
+          <section class="latest-rail" aria-labelledby="latest-title"><div class="magazine-section-heading"><h2 id="latest-title">최근 글</h2><a href="/articles/">전체 보기 <span aria-hidden="true">→</span></a></div><ol>{latest.map(article=><li><a href={`/notes/${article.articleId}/`}>{article.title}</a><time datetime={article.publishedAt}>{formatPublishedDate(article.publishedAt)}</time></li>)}</ol></section>
         </div>
       </section>}
       <section class="category-directory" aria-labelledby="directory-title">
@@ -43,33 +42,13 @@ const latest=articles.slice(0,3);
         <div class="guide-grid">{sectionHighlights(articles,section.id).slice(0,4).map(article=><ArticleCard article={article} featured={isSectionFeatured(article)}/>)}</div>
       </section>{index===1&&<div class="home-feed-ad"><AffiliateBanner slot="home-middle"/></div>}</>)}</div>
     </div>
-    <section id="articles" class="article-library" aria-labelledby="library-title" hidden>
-      <header class="library-heading"><h1 id="library-title">전체 글</h1><p id="library-count">{articles.length}개의 글</p></header>
-      <div class="guide-grid">{articles.map(article=><ArticleCard article={article} aliases={mapped.get(article.articleId)?.aliases||[]}/>)}</div>
-      <div id="library-empty" class="category-empty" role="status" hidden><h2>검색 결과가 없습니다.</h2><p>다른 검색어를 입력하거나 전체 글을 살펴보세요.</p><a href="/?view=all#articles">전체 글 보기 →</a></div>
-    </section>
     {articles.length===0&&<p class="category-empty">아직 발행된 글이 없습니다.</p>}
-  </div>
+  </div></PageFrame>
 </Layout>
 <script>
   const params=new URLSearchParams(window.location.search);
-  const query=(params.get('q')||'').trim().toLowerCase();
-  const requestedCategory=params.get('category')||'';
-  const cards=[...document.querySelectorAll<HTMLElement>('#articles [data-article]')];
-  const category=cards.some(card=>card.dataset.category===requestedCategory)?requestedCategory:'';
-  const libraryMode=params.get('view')==='all'||Boolean(query)||Boolean(category);
-  const input=document.querySelector<HTMLInputElement>('.site-search input');
-  if(input)input.value=params.get('q')||'';
-  document.querySelectorAll<HTMLElement>('[data-home-module]').forEach(module=>module.hidden=libraryMode);
-  const library=document.querySelector<HTMLElement>('#articles');
-  if(library)library.hidden=!libraryMode;
-  let visible=0;
-  cards.forEach(card=>{const matches=(!category||card.dataset.category===category)&&(card.dataset.search||'').toLowerCase().includes(query);card.hidden=!matches;if(matches)visible++;});
-  const title=document.querySelector<HTMLElement>('#library-title');
-  if(title)title.textContent=query?'검색 결과':category||'전체 글';
-  const count=document.querySelector<HTMLElement>('#library-count');
-  if(count)count.textContent=`${visible}개의 글`;
-  const empty=document.querySelector<HTMLElement>('#library-empty');
-  if(empty)empty.hidden=visible>0;
-  document.querySelectorAll<HTMLElement>('.site-navigation>.wrap>a').forEach(link=>{const url=new URL(link.getAttribute('href')||'/',location.origin);link.classList.toggle('active',url.searchParams.get('view')==='all'?libraryMode:!libraryMode&&url.pathname==='/');});
+  if(params.get('view')==='all'||params.has('q')||params.has('category')){
+    params.delete('view');const search=params.toString();
+    window.location.replace('/articles/'+(search?'?'+search:''));
+  }
 </script>

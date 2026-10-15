@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageFrame from '../../components/PageFrame.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import {getArticles} from '../../lib/articles.mjs';
+import {LIBRARY_PAGE_SIZE} from '../../lib/article-library.mjs';
+export function getStaticPaths({paginate}){return paginate(getArticles(),{pageSize:LIBRARY_PAGE_SIZE});}
+const {page}=Astro.props;
+const start=page.start;
+---
+<Layout wide title={page.currentPage===1?'전체 글':`전체 글 · ${page.currentPage}페이지`}>
+  <PageFrame>
+    <section id="articles" class="article-library" aria-labelledby="library-title" data-library data-start={start} data-total={page.total}>
+      <header class="library-heading"><h1 id="library-title">전체 글</h1><p id="library-count">{page.total}개의 글</p></header>
+      <div class="guide-grid" data-library-grid>{page.data.map(article=><ArticleCard article={article}/>)}</div>
+      <div id="library-empty" class="category-empty" hidden><h2>검색 결과가 없습니다.</h2><p>다른 검색어를 입력하거나 전체 글을 살펴보세요.</p><a href="/articles/">전체 글 보기 →</a></div>
+      <div class="library-controls">
+        <p data-library-status role="status" aria-live="polite">{page.total?`${start+1}–${start+page.data.length} / ${page.total}개 글`:'아직 발행된 글이 없습니다.'}</p>
+        <div class="library-sentinel" data-library-sentinel aria-hidden="true"></div>
+        <nav class="library-pagination" aria-label="글 목록 페이지">
+          {page.url.prev&&<a href={page.url.prev} data-library-prev rel="prev">이전 페이지</a>}
+          {page.url.next&&<a href={page.url.next} data-library-next rel="next">글 더 보기 <span aria-hidden="true">↓</span></a>}
+        </nav>
+      </div>
+    </section>
+  </PageFrame>
+</Layout>
+<script>
+  import {initialiseArticleLibrary} from '../../lib/article-library-client.mjs';
+  const root=document.querySelector<HTMLElement>('[data-library]');
+  if(root)initialiseArticleLibrary(root);
+</script>

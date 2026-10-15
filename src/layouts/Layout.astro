@@ -8,7 +8,7 @@ import { site } from '../lib/site.mjs';
 import { sections } from '../lib/navigation.mjs';
 import searchVerification from '../../config/search-verification.json';
 import { webAnalytics } from '../lib/web-analytics.mjs';
-const {title=site.name,description=site.description,noindex=false,image='/brand/lightstandards-mark-v2.png'}=Astro.props;
+const {title=site.name,description=site.description,noindex=false,image='/brand/lightstandards-mark-v2.png',wide=false}=Astro.props;
 const canonical=new URL(Astro.url.pathname,site.url).href;
 const googleVerification=import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION||searchVerification.google;
 const naverVerification=import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION||searchVerification.naver;
@@ -31,19 +31,19 @@ const naverVerification=import.meta.env.PUBLIC_NAVER_SITE_VERIFICATION||searchVe
     {naverVerification&&<meta name="naver-site-verification" content={naverVerification}/>}
     <slot name="head"/>
   </head>
-  <body>
+  <body class:list={{'wide-layout':wide}}>
     <a class="skip-link" href="#main">본문으로 바로가기</a>
     <header class="site-header wrap">
       <a href="/" class="wordmark" aria-label="소소한 기준 홈"><img class="brand-symbol" src="/brand/lightstandards-mark-v2.png?v=3" alt="" width="36" height="36"/><span class="brand-type">소소한 기준</span></a>
-      <form class="site-search" method="get" action="/#articles" role="search">
+      <form class="site-search" method="get" action="/articles/" role="search">
         <input type="search" name="q" placeholder="궁금한 내용을 검색하세요" aria-label="글 검색"/>
         <button type="submit" aria-label="검색"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button>
       </form>
     </header>
     <nav class="site-navigation" aria-label="주 메뉴"><div class="wrap">
       <a href="/" class={Astro.url.pathname==='/'?'active':''}>홈</a>
+      <a href="/articles/" class={Astro.url.pathname.startsWith('/articles/')?'active':''}>전체 글</a>
       {sections.map(section=><a href={`/categories/${section.id}/`} class={Astro.url.pathname===`/categories/${section.id}/`?'active':''}>{section.label}</a>)}
-      <a href="/?view=all#articles">전체 글</a>
       <div class="navigation-info"><a href="/about/">소개</a><a href="/contact/">문의</a></div>
     </div></nav>
     <main id="main"><slot/></main>

@@ -29,7 +29,7 @@ const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPost
   <Fragment slot="head"><script type="application/ld+json" set:html={jsonLd} />{adsEnabled && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossorigin="anonymous"></script>}</Fragment>
   <div class:list={['article-page','wrap',{'with-banner-sidebar':showSidebar}]}>
   <article class="article-layout">
-    <a class="back-link" href="/">← 전체 글</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
+    <a class="back-link" href="/articles/">← 전체 글</a><p class="eyebrow">{article.category}</p><h1>{article.title}</h1><p class="article-description">{article.description}</p>
     <div class="article-byline">{site.name} <span>·</span> {formatPublishedDate(article.publishedAt)}</div>
     {hasAffiliateContent&&<aside class="disclosure">{affiliateDisclosure}</aside>}
     {headings.length>0&&<nav class="article-toc" aria-label="이 글의 목차"><details><summary>목차 <span>{headings.length}개 항목</span></summary><ol>{headings.map(h=><li><a href={'#'+h.id}>{h.title}</a></li>)}</ol></details></nav>}

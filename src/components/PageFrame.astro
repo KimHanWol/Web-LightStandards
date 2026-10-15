@@ -1,0 +1,10 @@
+---
+import AffiliateBanner from './AffiliateBanner.astro';
+import {hasBanners} from '../lib/banners.mjs';
+const {class:className=''}=Astro.props;
+const sidebar=hasBanners(['page-sidebar']);
+---
+<div class:list={['page-frame','wrap',className,{'page-frame-with-rail':sidebar}]}>
+  <div class="page-content"><slot/></div>
+  {sidebar&&<aside class="page-rail" aria-label="추천 상품 광고"><div class="page-rail-inner"><AffiliateBanner slot="page-sidebar"/></div></aside>}
+</div>

@@ -3,6 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import { site } from '../lib/site.mjs';
 import { bannersEnabled } from '../lib/banners.mjs';
 import { webAnalytics } from '../lib/web-analytics.mjs';
+import PageFrame from '../components/PageFrame.astro';
+import InformationArt from '../components/InformationArt.astro';
+import {getArticles} from '../lib/articles.mjs';
+import {sections} from '../lib/navigation.mjs';
 const analyticsActive=webAnalytics.enabled&&site.ready&&import.meta.env.PROD;
 const pages = {
   contact:{title:'문의와 오류 제보',eyebrow:'CONTACT',paragraphs:['글에서 잘못된 정보나 설명이 부족한 부분을 발견하셨다면 알려주세요. 해당 글 주소와 확인이 필요한 내용을 함께 보내주시면 자료를 다시 살펴보겠습니다.','주민등록번호, 결제 정보, 비밀번호 등 민감한 정보는 보내지 마세요. 광고·제휴 문의도 같은 창구로 받습니다.']},
@@ -12,5 +16,31 @@ const pages = {
 };
 export function getStaticPaths(){return ['about','contact','privacy','disclosure'].map(page=>({params:{page}}));}
 const page=pages[Astro.params.page as keyof typeof pages];
+const kind=Astro.params.page;
+const intros={about:'찾고 싶은 정보에 조금 더 쉽게 닿도록.',contact:'궁금한 점과 고칠 부분을 알려주세요.',disclosure:'광고가 표시되는 방식과 제휴 관계를 안내합니다.',privacy:'사이트 이용 과정에서 처리되는 정보를 안내합니다.'};
 ---
-<Layout title={page.title}><section class="information-page wrap"><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><div class="information-copy">{page.paragraphs.map(p=><p>{p}</p>)}{Astro.params.page==='contact'&&<section><h2>이메일로 보내기</h2>{site.email?<a href={`mailto:${site.email}`}>{site.email}</a>:<p>문의 창구를 준비하고 있습니다.</p>}</section>}{Astro.params.page==='privacy'&&bannersEnabled&&<p><a href="https://privacy.coupang.com/ko/center/coupang/" target="_blank" rel="noopener noreferrer">쿠팡 개인정보처리방침 ↗</a></p>}{Astro.params.page==='about'&&<a href="/contact/">문의와 오류 제보 →</a>}</div><a class="back-link" href="/">← 소소한 기준으로 돌아가기</a></section></Layout>
+<Layout wide title={page.title} description={intros[kind]}>
+  <PageFrame><section class="info-page">
+    <header class="info-hero"><div><a class="info-brand" href="/"><img src="/brand/lightstandards-mark-v2.png?v=3" alt="" width="38" height="38"/><span>LIGHTSTANDARDS</span></a><h1>{page.title}</h1><p>{intros[kind]}</p></div><InformationArt kind={kind}/></header>
+    <div class="info-copy">
+      {kind==='about'&&<>
+        <section><h2>궁금한 내용부터 찾아보세요</h2><p>소소한 기준은 다양한 주제의 질문과 정보를 다루는 블로그입니다. 검색창에 궁금한 내용을 입력하거나, 분야별 목록에서 필요한 글을 찾아볼 수 있습니다.</p><p>현재 {getArticles().length}편의 글을 공개하고 있습니다. 전체 글에서는 최근에 발행한 글부터 살펴볼 수 있고, 목록을 내려가면 다음 글이 이어집니다.</p><div class="info-actions"><a class="info-primary" href="/articles/">전체 글 살펴보기 <span aria-hidden="true">→</span></a><a href="/rss.xml">RSS로 새 글 받기 ↗</a></div></section>
+        <section><h2>분야별로 둘러보기</h2><div class="info-topics">{sections.map(section=><a href={`/categories/${section.id}/`}><span>{section.label}</span><span aria-hidden="true">↗</span></a>)}</div></section>
+        <section><h2>글을 읽다가 더 확인하고 싶다면</h2><p>글에 표시된 확인 자료에서 원래 안내와 적용 조건을 살펴볼 수 있습니다. 앱의 메뉴, 서비스 정책, 제품 정보는 시간이 지나면서 달라질 수 있으니 중요한 작업 전에는 해당 서비스의 최신 안내도 함께 확인해 주세요.</p><p>일부 글과 설명 이미지 제작에는 AI 도구를 사용할 수 있습니다. 설명 이미지와 실제 사용·시험 결과는 구분하며, 직접 사용했다는 근거가 없는 내용을 실사용 후기로 제시하지 않습니다.</p><a class="info-text-link" href="/contact/">문의와 오류 제보 →</a></section>
+      </>}
+      {kind==='contact'&&<>
+        <section class="contact-address"><p class="info-label">문의 이메일</p><a class="contact-email" href={`mailto:${site.email}`}>{site.email}</a><p>정보 수정 요청, 이용 중 불편한 점, 광고·제휴 문의를 이 주소로 보내주세요.</p><a class="info-primary" href={`mailto:${site.email}`}>이메일 작성하기 <span aria-hidden="true">↗</span></a></section>
+        <section><h2>이렇게 알려주시면 확인하기 쉽습니다</h2><ol class="contact-steps"><li><strong>어느 글인지</strong><p>확인이 필요한 페이지 주소와 제목을 적어주세요.</p></li><li><strong>어떤 부분인지</strong><p>잘못된 문장, 찾을 수 없는 메뉴, 동작하지 않는 링크처럼 확인할 대상을 구체적으로 알려주세요.</p></li><li><strong>어떤 환경인지</strong><p>앱이나 기기의 문제라면 PC·모바일 구분과 제품·운영체제 정보를 가능한 범위에서 적어주세요. 참고할 공식 안내가 있으면 링크도 함께 보내주세요.</p></li></ol></section>
+        <section><h2>광고·제휴 문의</h2><p>관련 사이트와 제안 내용, 희망하는 게재 위치나 기간이 있다면 함께 알려주세요. 확인 전에는 게재 여부나 조건을 확정하지 않습니다.</p></section>
+        <aside class="info-note"><p>비밀번호, 인증번호, 주민등록번호, 결제 정보 등 민감한 정보는 보내지 마세요. 문의에 개인정보가 포함된다면 필요한 부분만 남겨 주세요.</p><a href="/privacy/">개인정보처리방침 →</a></aside>
+      </>}
+      {kind==='disclosure'&&<>
+        <section><h2>광고와 글을 구분해 표시합니다</h2><p>{page.paragraphs[0]}</p><p>화면의 ‘광고 · 쿠팡 파트너스’ 표시와 배너 아래 수수료 안내에서 광고 영역을 확인할 수 있습니다. 광고는 글 목록이나 본문과 구분한 공간에 배치합니다.</p></section>
+        <section class="disclosure-types"><div><span class="info-label">추천 배너</span><h2>쿠팡에서 제공하는 상품 광고</h2><p>쿠팡이 제공하는 추천 상품을 보여주는 배너입니다. 방문자와 광고 설정에 따라 표시되는 상품이 다를 수 있습니다. 배너 노출 자체가 소소한 기준의 개별 상품 사용 후기나 직접 추천을 뜻하지는 않습니다.</p></div><div><span class="info-label">글 안의 제휴 링크</span><h2>제품 설명과 함께 연결하는 링크</h2><p>글에 직접 제휴 링크가 포함된 경우에는 글 첫 부분에 경제적 관계를 안내합니다. 해당 링크를 통한 구매로 사이트에 일정액의 수수료가 지급될 수 있습니다.</p></div></section>
+        <section><h2>구매 전에는 판매 페이지를 확인해 주세요</h2><p>상품 가격, 재고, 배송 조건, 판매자 정보는 판매 페이지에서 최종 확인해 주세요. 광고 노출이나 제휴 관계가 특정 제품의 성능·품질 또는 개인의 사용 환경에 맞는지를 보장하지는 않습니다.</p><p>주문·결제·배송·반품에 관한 문의는 실제 거래한 판매처의 안내를 이용해 주세요. 이 사이트에 표시된 링크나 설명의 오류는 문의 창구로 알려주실 수 있습니다.</p></section>
+        <section><h2>광고 관련 정보와 문의</h2><p>외부 광고 서비스를 불러오는 과정과 방문 분석에 관한 내용은 개인정보처리방침에서 확인할 수 있습니다.</p><div class="info-actions"><a href="/privacy/">개인정보처리방침 →</a><a href="/contact/">광고·제휴 문의 →</a></div></section>
+      </>}
+      {kind==='privacy'&&<>{page.paragraphs.map(p=><p>{p}</p>)}{bannersEnabled&&<p><a href="https://privacy.coupang.com/ko/center/coupang/" target="_blank" rel="noopener noreferrer">쿠팡 개인정보처리방침 ↗</a></p>}</>}
+    </div><a class="back-link" href="/">← 소소한 기준으로 돌아가기</a>
+  </section></PageFrame>
+</Layout>

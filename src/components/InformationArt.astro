@@ -1,0 +1,30 @@
+---
+const {kind='about'}=Astro.props;
+---
+<svg class="information-art" viewBox="0 0 320 220" fill="none" aria-hidden="true">
+  <path d="M23 190h274" stroke="#dbe2ec" stroke-width="2"/>
+  {kind==='about'?<>
+    <rect x="46" y="41" width="181" height="134" rx="10" fill="#eef2fa"/>
+    <path d="M66 55h76c15 0 23 7 23 17v107c-6-9-14-12-26-12H66V55Z" fill="white" stroke="#22364a" stroke-width="2"/>
+    <path d="M165 72c0-10 8-17 23-17h67v112h-64c-12 0-20 3-26 12V72Z" fill="white" stroke="#22364a" stroke-width="2"/>
+    <path d="M84 84h49M84 104h58M84 124h40M187 87h48M187 107h48M187 127h33" stroke="#c2cbda" stroke-width="3" stroke-linecap="round"/>
+    <path d="M220 55V35h23v45l-11-7-12 7V55Z" fill="#476cf0"/>
+    <circle cx="55" cy="176" r="9" fill="#b7c8f5"/>
+  </>:kind==='contact'?<>
+    <rect x="75" y="27" width="142" height="136" rx="9" fill="white" stroke="#c2cbda" stroke-width="2"/>
+    <path d="M99 55h75M99 74h94M99 93h63" stroke="#c2cbda" stroke-width="3" stroke-linecap="round"/>
+    <path d="m44 107 109 64 109-64v80H44v-80Z" fill="#eef2fa" stroke="#22364a" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m44 187 78-52m140 52-78-52" stroke="#22364a" stroke-width="2"/>
+    <circle cx="248" cy="61" r="28" fill="#476cf0"/>
+    <path d="m236 61 8 8 16-17" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </>:<>
+    <rect x="42" y="38" width="233" height="144" rx="10" fill="white" stroke="#22364a" stroke-width="2"/>
+    <path d="M42 68h233" stroke="#dbe2ec" stroke-width="2"/>
+    <circle cx="60" cy="53" r="3" fill="#aab6c8"/><circle cx="73" cy="53" r="3" fill="#aab6c8"/><circle cx="86" cy="53" r="3" fill="#aab6c8"/>
+    <rect x="61" y="87" width="80" height="72" rx="5" fill="#eef2fa"/>
+    <path d="M163 94h87M163 112h69M163 130h43" stroke="#c2cbda" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="102" cy="123" r="20" fill="#d4def9"/>
+    <path d="m96 128 12-12m-17 7-2 2a9 9 0 0 0 13 13l6-6m-7-17 2-2a9 9 0 0 1 13 13l-4 4" stroke="#476cf0" stroke-width="3" stroke-linecap="round"/>
+    <path d="M163 150h65" stroke="#476cf0" stroke-width="6" stroke-linecap="round"/>
+  </>}
+</svg>

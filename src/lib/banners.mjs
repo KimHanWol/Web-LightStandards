@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import configuration from '../../config/affiliate-banners.json' with {type:'json'};
 
-export const bannerSlots = ['home-top','home-middle','home-bottom','home-sidebar','article-top','article-middle','article-bottom','article-sidebar-top','article-sidebar-bottom'];
+export const bannerSlots = ['home-top','home-middle','home-bottom','home-sidebar','article-top','article-middle','article-bottom','article-sidebar-top','article-sidebar-bottom','page-sidebar'];
 export const affiliateDisclosure='이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.';
 export const bannerDisclosure='이 배너는 쿠팡 파트너스 활동의 일환으로, 이를 통한 구매 시 일정액의 수수료를 제공받습니다.';
 const httpsUrl=z.string().url().refine(value=>{const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password&&!url.port;},'A public HTTPS URL is required');
