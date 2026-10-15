@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 function run(file,items,refs={}){
   const code=readFileSync(new URL('../n8n/runtime/'+file+'.js',import.meta.url),'utf8');
-  return vm.runInNewContext('(function(){'+code+'})()',{$input:{all:()=>items.map(json=>({json})),first:()=>({json:items[0]})},$:name=>({first:()=>({json:refs[name]})}),$execution:{id:'test'},$now:{setZone:()=>({toFormat:()=> '2026-10-13'})}});
+  return vm.runInNewContext('(function(){'+code+'})()',{$input:{all:()=>items.map(json=>({json})),first:()=>({json:items[0]})},$:name=>({first:()=>({json:refs[name]})}),$execution:{id:'test'},$runIndex:0,$now:{setZone:()=>({toFormat:format=>format==='yyyy-MM'?'2026-10':'2026-10-13'})}});
 }
 const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,reviewed:true,checkedAt:'2026-10-13',excerpt:'검증용 자료입니다. '.repeat(100)}));
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
@@ -77,4 +77,24 @@ test('image receipts accumulate to five scenes without duplicate charges',()=>{
 });
 test('approval cannot use a stale revision',()=>{
   assert.throws(()=>run('approve',[{...row,status:'needs_review',revision:2}],{Configuration:{article_id:row.article_id,revision:1,approved_by:'Test'}}),/current revision/);
+});
+
+test('automatic writing is scoped and stops after the bounded correction',()=>{
+  assert.equal(run('select-draft',[row],{Configuration:{...config,target_article_id:'different-article'}}).length,0);
+  const exhausted={...row,topic_map_json:JSON.stringify({automaticWritingAttempts:2})};
+  assert.equal(run('select-draft',[exhausted],{Configuration:config}).length,0);
+  const retry={...row,body_markdown:'A completed short response',character_count:4100,error:'Body length check failed',topic_map_json:JSON.stringify({automaticWritingAttempts:1})};
+  const next=run('select-draft',[retry],{Configuration:config})[0].json;
+  assert.equal(JSON.parse(next.topic_map_json).automaticWritingAttempts,2);
+  assert.equal(JSON.parse(next.brief).correction.previousMarkdown,retry.body_markdown);
+});
+
+test('batch router excludes unrelated rows and never retries an uncertain charge',()=>{
+  const uncertain={...row,id:4,article_id:'real-article',status:'needs_review',error:'timeout',openai_response_id:'',reserved_usd:.08};
+  const action=run('batch-router',[uncertain,{...row,id:80,article_id:'unrelated'}])[0].json;
+  assert.equal(action.action,'finished');
+  const confirmed={...uncertain,reserved_usd:0,openai_response_id:'confirmed-response',error:'Body length check failed'};
+  assert.equal(run('batch-router',[confirmed])[0].json.action,'repair');
+  const exhausted={...confirmed,topic_map_json:JSON.stringify({automaticWritingAttempts:2})};
+  assert.equal(run('batch-router',[exhausted])[0].json.action,'finished');
 });
