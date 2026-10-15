@@ -10,6 +10,30 @@ function run(file,items,refs={}){
 const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,reviewed:true,checkedAt:'2026-10-13',excerpt:'검증용 자료입니다. '.repeat(100)}));
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
+
+test('70 article batch is isolated, counts only its own publications and includes all monthly reservations',()=>{
+ const candidate={...row,id:37,article_id:'new-requested',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
+ const old={...row,id:4,article_id:'old-batch',status:'published',budget_month:'2026-10',actual_usd:3.2,reserved_usd:.08};
+ const next=run('batch-router',[old,candidate])[0].json;
+ assert.equal(next.article_id,candidate.article_id);assert.equal(next.target,70);assert.equal(next.completed,0);
+ const stopped=run('batch-router',[{...old,actual_usd:6.82},candidate])[0].json;
+ assert.equal(stopped.action,'finished');assert.match(stopped.reason,/Monthly budget/);
+ assert.equal(run('batch-router',[old,{...candidate,status:'published'}])[0].json.completed,1);
+});
+
+test('review budget and daily caps terminate the batch instead of polling refused calls',()=>{
+ const candidate={...row,id:37,article_id:'new-requested',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'}),status:'needs_review',error:'',character_count:4000,images_json:JSON.stringify([1,2,3,4,5])};
+ const cost={...row,id:2,article_id:'ledger',status:'cost_uncertain',budget_month:'2026-10',actual_usd:6.95,reserved_usd:.03};
+ assert.match(run('batch-router',[cost,candidate])[0].json.reason,/before review/);
+ const dayRows=Array.from({length:40},(_,i)=>({...row,id:100+i,article_id:'old-'+i,status:'published',generation_day:'2026-10-13'}));
+ assert.match(run('batch-router',[...dayRows,{...candidate,status:'ready'}])[0].json.reason,/Daily generation limit/);
+});
+
+test('writer topic context drops payment and image ledgers without dropping semantic scopes',()=>{
+ const previous={...row,id:2,article_id:'existing',intent_key:'existing',keyword:'다른 질문',title:'이미 작성한 글',status:'published',character_count:4000,topic_map_json:JSON.stringify({coreQuestion:'기존 질문',scope:'독립 범위',stockSearch:{huge:'x'.repeat(90000)},imageReplacementPlan:{indexes:[1]},aliases:['이전 질문']})};
+ const selected=run('select-draft',[row,previous],{Configuration:config})[0].json;
+ const brief=JSON.parse(selected.brief);assert.equal(brief.existingTopics[0].scope,'독립 범위');assert.equal(brief.existingTopics[0].stockSearch,undefined);assert.ok(selected.brief.length<10000);
+});
 test('generation refuses disabled budget, exhausted quota, duplicate intent and unreviewed evidence',()=>{
   assert.equal(run('select-draft',[row],{Configuration:config}).length,1);
   for(const c of [{...config,paid_enabled:false},{...config,monthly_budget_usd:.01},{...config,daily_limit:0}])assert.equal(run('select-draft',[row],{Configuration:c}).length,0);

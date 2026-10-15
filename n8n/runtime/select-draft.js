@@ -17,6 +17,7 @@ for (const row of rows.filter(r=>(!config.target_article_id||r.article_id===conf
     const normalize=v=>String(v||'').toLowerCase().replace(/[^a-z0-9가-힣]/g,'');
     const mapOf=r=>r.topic_map_json?JSON.parse(r.topic_map_json):{};
     const candidateMap=mapOf(row);
+    const topicSummary=r=>{const m=mapOf(r);return {articleId:r.article_id,category:r.category,intentKey:r.intent_key,title:r.title,keyword:r.keyword,coreQuestion:String(m.coreQuestion||'').slice(0,180),scope:String(m.scope||'').slice(0,320),coverage:(m.coverage||[]).slice(0,6).map(v=>String(v).slice(0,70)),aliases:(m.aliases||[]).slice(0,4),status:r.status};};
     const completionMode=canComplete(row);
     const factCorrectionMode=canFixFacts(row);
     if(completionMode?Number(candidateMap.completionAttempts||0)>=2:factCorrectionMode?Number(candidateMap.factCorrectionAttempts||0)>=2:Number(candidateMap.automaticWritingAttempts||0)>=2)continue;
@@ -28,12 +29,12 @@ for (const row of rows.filter(r=>(!config.target_article_id||r.article_id===conf
     if(!sources.every(s=>s.title&&/^https:\/\//.test(s.url)&&s.reviewed===true&&s.checkedAt&&s.excerpt?.length>=300)) continue;
     // A queued topic is not an existing article. Keep queue collision checks above,
     // but give the writer only completed article scopes for semantic comparison.
-    const existingTopics=activeRows.filter(r=>!['ready','candidate','generation_started'].includes(r.status)&&String(r.title||'').trim()&&Number(r.character_count)>=3500).slice(-80).map(r=>({...mapOf(r),articleId:r.article_id,category:r.category,intentKey:r.intent_key,title:r.title,keyword:r.keyword,status:r.status}));
+    const existingTopics=activeRows.filter(r=>!['ready','candidate','generation_started'].includes(r.status)&&String(r.title||'').trim()&&Number(r.character_count)>=3500).map(topicSummary);
     const correction=row.body_markdown?{previousMarkdown:String(row.body_markdown).slice(0,25000),visibleCharacters:Number(row.character_count||0),requiredAdditionalCharacters:Math.max(300,4000-Number(row.character_count||0)),feedback:completionMode?'actualHeadings 중 보완할 소제목을 선택해 아직 부족한 설명만 추가합니다. 기존 원고는 그대로 보존합니다.':factCorrectionMode?row.error:candidateMap.repairFeedback||row.error||'Complete and check the full article'}:candidateMap.repairFeedback;
     const sections=JSON.parse(config.navigation_sections_json||'[]');
     const categoryOf=r=>sections.find(s=>s.articleCategories.includes(r.category))?.label||r.category;
     const categoryLabel=categoryOf(row);
-    const categoryTopicMap={category:categoryLabel,existingTopics:existingTopics.filter(r=>categoryOf(r)===categoryLabel),plannedTopics:activeRows.filter(r=>r.status==='ready'&&categoryOf(r)===categoryLabel).map(r=>({articleId:r.article_id,intentKey:r.intent_key,...mapOf(r),status:'planned'}))};
+    const categoryTopicMap={category:categoryLabel,existingTopics:existingTopics.filter(r=>categoryOf(r)===categoryLabel),plannedTopics:activeRows.filter(r=>r.status==='ready'&&categoryOf(r)===categoryLabel).map(r=>({...topicSummary(r),status:'planned'}))};
     const actualParagraphs=factCorrectionMode?String(row.body_markdown).split(/\n\s*\n/).map((text,index)=>({index,text})):undefined;
     const brief=JSON.stringify({keyword:row.keyword,category:row.category,sources,candidateTopic:candidateMap,actualHeadings:[...String(row.body_markdown||'').matchAll(/^#{2,3}\s+(.+)$/gm)].map(m=>m[1]),actualParagraphs,categoryTopicMap,crossCategoryTopics:existingTopics.filter(r=>categoryOf(r)!==categoryLabel),existingTopics,existingTitles:existingTopics.map(r=>r.title).filter(Boolean),correction});
     if(brief.length>80000||sources.reduce((n,s)=>n+s.excerpt.length,0)<2000) continue;

@@ -7,6 +7,6 @@ if(images.length!==5||sources.length<2||!sources.every(s=>s.reviewed))return [];
 const month=$now.setZone('Asia/Seoul').toFormat('yyyy-MM');
 const used=rows.filter(r=>r.budget_month===month).reduce((s,r)=>s+Number(r.actual_usd||0)+Number(r.reserved_usd||0),0);
 if(used+.03>7)return [];
-const topics=rows.filter(r=>r.id!==row.id&&Number(r.character_count)>=3500&&r.title&&!r.article_id.startsWith('test-')).map(r=>({articleId:r.article_id,title:r.title,...JSON.parse(r.topic_map_json||'{}')}));
+const topics=rows.filter(r=>r.id!==row.id&&Number(r.character_count)>=3500&&r.title&&!r.article_id.startsWith('test-')).map(r=>{const m=JSON.parse(r.topic_map_json||'{}');return {articleId:r.article_id,title:r.title,coreQuestion:m.coreQuestion,scope:String(m.scope||'').slice(0,320),coverage:(m.coverage||[]).slice(0,6),aliases:(m.aliases||[]).slice(0,4)};});
 return [{json:{...row,reviewBrief:JSON.stringify({title:row.title,description:row.description,markdown:row.body_markdown,images:images.map((i,index)=>({index:index+1,kind:i.stock?'licensed_stock':i.generated?'illustration':'capture',caption:i.caption,sourceUrl:i.sourceUrl,stock:i.stock})),sources,topic:JSON.parse(row.topic_map_json||'{}'),existingTopics:topics}),reserved_usd:.03}}];
 
