@@ -145,7 +145,9 @@ test('batch router excludes unrelated rows and never retries an uncertain charge
 test('the requested example is routed without including unrelated rows after the original batch',()=>{
  const example={...row,id:35,article_id:'windows-screenshots-20261016',intent_key:'windows-screenshots',keyword:'윈도우 화면 캡처'};
  const action=run('batch-router',[example,{...example,id:36,article_id:'not-requested'}])[0].json;
- assert.equal(action.article_id,example.article_id);assert.equal(action.action,'generate');assert.equal(action.target,31);
+ assert.equal(action.article_id,example.article_id);assert.equal(action.action,'generate');assert.equal(action.target,32);
+ const next={...example,id:36,article_id:'gmail-schedule-send-20261016',intent_key:'gmail-schedule-send',keyword:'지메일 예약 발송'};
+ assert.equal(run('batch-router',[{...example,status:'published'},next])[0].json.article_id,next.article_id);
  const uncertain={...example,status:'needs_review',error:'timeout',reserved_usd:.12};
  assert.equal(run('batch-router',[uncertain])[0].json.action,'finished');
 });

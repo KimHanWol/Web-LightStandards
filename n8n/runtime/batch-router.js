@@ -1,6 +1,6 @@
 const rows=$input.all().map(i=>i.json);
 // Explicitly requested additions join the completed batch; unrelated rows stay excluded.
-const additionalArticleIds=['windows-screenshots-20261016'];
+const additionalArticleIds=['windows-screenshots-20261016','gmail-schedule-send-20261016'];
 const targetCount=30+additionalArticleIds.length;
 const targets=rows.filter(r=>((Number(r.id)>=4&&Number(r.id)<=33)||additionalArticleIds.includes(r.article_id))&&!r.article_id?.startsWith('test-'));
 const completed=targets.filter(r=>r.status==='published').length;
