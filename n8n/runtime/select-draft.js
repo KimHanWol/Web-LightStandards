@@ -9,7 +9,7 @@ if (rows.filter(r=>r.generation_day===today).length >= config.daily_limit) retur
 if(rows.some(r=>['generation_started','image_submitting'].includes(r.status))) return [];
 const canComplete=r=>String(r.body_markdown||'').length>=2000&&Number(r.character_count)<5000;
 const canFixFacts=r=>String(r.body_markdown||'').length>=2000&&Number(r.character_count)>=5000&&String(r.error||'').startsWith('Editorial review: ');
-const canCorrect=r=>config.batch_mode&&Number(r.id)>=4&&Number(r.id)<=33&&r.status==='needs_review'&&r.error&&r.openai_response_id&&Number(r.reserved_usd||0)===0&&(canComplete(r)?Number(JSON.parse(r.topic_map_json||'{}').completionAttempts||0)<2:canFixFacts(r)?Number(JSON.parse(r.topic_map_json||'{}').factCorrectionAttempts||0)<2:Number(JSON.parse(r.topic_map_json||'{}').automaticWritingAttempts||0)<2);
+const canCorrect=r=>config.batch_mode&&((Number(r.id)>=4&&Number(r.id)<=33)||(!!config.target_article_id&&r.article_id===config.target_article_id))&&r.status==='needs_review'&&r.error&&r.openai_response_id&&Number(r.reserved_usd||0)===0&&(canComplete(r)?Number(JSON.parse(r.topic_map_json||'{}').completionAttempts||0)<2:canFixFacts(r)?Number(JSON.parse(r.topic_map_json||'{}').factCorrectionAttempts||0)<2:Number(JSON.parse(r.topic_map_json||'{}').automaticWritingAttempts||0)<2);
 for (const row of rows.filter(r=>(!config.target_article_id||r.article_id===config.target_article_id)&&(canCorrect(r)||r.status==='ready')).sort((a,b)=>(canCorrect(a)?0:1)-(canCorrect(b)?0:1)||a.id-b.id)) {
   try {
     if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.article_id)||row.article_id.length>90||!row.intent_key||!row.keyword||!row.category) continue;

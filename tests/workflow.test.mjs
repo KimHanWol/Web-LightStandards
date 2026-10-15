@@ -124,6 +124,22 @@ test('batch router excludes unrelated rows and never retries an uncertain charge
   assert.equal(run('batch-router',[exhausted])[0].json.action,'finished');
 });
 
+test('the requested example is routed without including unrelated rows after the original batch',()=>{
+ const example={...row,id:35,article_id:'windows-screenshots-20261016',intent_key:'windows-screenshots',keyword:'윈도우 화면 캡처'};
+ const action=run('batch-router',[example,{...example,id:36,article_id:'not-requested'}])[0].json;
+ assert.equal(action.article_id,example.article_id);assert.equal(action.action,'generate');assert.equal(action.target,31);
+ const uncertain={...example,status:'needs_review',error:'timeout',reserved_usd:.12};
+ assert.equal(run('batch-router',[uncertain])[0].json.action,'finished');
+});
+
+test('corrections beyond the original row range require an explicit target and keep the retry cap',()=>{
+ const short={...row,id:35,article_id:'windows-screenshots-20261016',status:'needs_review',error:'Body length check failed',openai_response_id:'confirmed',reserved_usd:0,body_markdown:'설명이 있는 본문입니다. '.repeat(200),character_count:2800,topic_map_json:'{}'};
+ const scoped={...config,batch_mode:true,target_article_id:short.article_id};
+ assert.equal(run('select-draft',[short],{Configuration:scoped})[0].json.completionMode,true);
+ assert.equal(run('select-draft',[short],{Configuration:{...scoped,target_article_id:''}}).length,0);
+ assert.equal(run('select-draft',[{...short,topic_map_json:JSON.stringify({completionAttempts:2})}],{Configuration:scoped}).length,0);
+});
+
 test('category input separates queued scopes from completed same-category and cross-category articles',()=>{
  const current={...row,article_id:'new-topic',category:'IT·디지털'};
  const existing={...row,id:2,article_id:'actual',intent_key:'actual-intent',keyword:'다른 질문',category:'문서 작업',status:'published',title:'실제 발행한 다른 질문에 대한 글',character_count:6000};

@@ -1,8 +1,11 @@
 const rows=$input.all().map(i=>i.json);
-const targets=rows.filter(r=>Number(r.id)>=4&&Number(r.id)<=33&&!r.article_id?.startsWith('test-'));
+// Explicitly requested additions join the completed batch; unrelated rows stay excluded.
+const additionalArticleIds=['windows-screenshots-20261016'];
+const targetCount=30+additionalArticleIds.length;
+const targets=rows.filter(r=>((Number(r.id)>=4&&Number(r.id)<=33)||additionalArticleIds.includes(r.article_id))&&!r.article_id?.startsWith('test-'));
 const completed=targets.filter(r=>r.status==='published').length;
 const stageOnly=false;
-const base={batch:'additional-30-20261015',completed,target:30,requestedTotal:32};
+const base={batch:'additional-30-20261015',completed,target:targetCount,requestedTotal:targetCount+2};
 const mapOf=r=>JSON.parse(r.topic_map_json||'{}');
 const imagesOf=r=>JSON.parse(r.images_json||'[]');
 const imageOnly=r=>{try{const review=mapOf(r).reviewIssues;if(Number(review?.revision)===Number(r.revision))return review.type==='images';const issues=JSON.parse(r.error.slice('Editorial review: '.length));return issues.length>0&&issues.every(s=>/^(?:이미지\s*\d+|\d+번\s*이미지|\d+장\s*중)/.test(s));}catch{return false;}};
@@ -30,4 +33,4 @@ if(ready)return [{json:{...base,...ready,action:'generate',workflowId:'HUqCE3BE3
 const repair=targets.find(r=>r.status==='needs_review'&&r.error&&r.openai_response_id&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).automaticWritingAttempts||0)<2);
 if(repair)return [{json:{...base,...repair,action:'repair',status:'ready',error:'',topic_map_json:JSON.stringify({...mapOf(repair),repairFeedback:repair.error})}}];
 const staged=targets.filter(r=>r.status==='approved').length;
-return [{json:{...base,staged,complete:completed===30,action:'finished',reason:completed===30?'All requested articles published':stageOnly&&completed+staged===30?'All requested snapshots approved; awaiting batch publication':'No safely executable rows; inspect failed article checks',pending:targets.filter(r=>r.status!=='published').map(r=>({id:r.article_id,status:r.status,error:r.error}))}}];
+return [{json:{...base,staged,complete:completed===targetCount,action:'finished',reason:completed===targetCount?'All requested articles published':stageOnly&&completed+staged===targetCount?'All requested snapshots approved; awaiting batch publication':'No safely executable rows; inspect failed article checks',pending:targets.filter(r=>r.status!=='published').map(r=>({id:r.article_id,status:r.status,error:r.error}))}}];
