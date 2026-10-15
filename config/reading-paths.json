@@ -2,6 +2,7 @@
   "groups": [
     {"id":"chrome","label":"크롬 설정과 정리","intentPrefixes":["chrome-"],"intentKeys":["chrome-cache-clear-with-data-scope","chrome-notifications","chrome-bookmarks","chrome-tab-groups"]},
     {"id":"windows","label":"윈도우 설정","intentPrefixes":["windows-"],"intentKeys":["windows-clipboard-history","windows-storage-sense"]},
+    {"id":"gmail","label":"지메일 사용과 정리","intentPrefixes":["gmail-"],"intentKeys":["gmail-schedule-send","gmail-filter-labels"]},
     {"id":"sheets","label":"스프레드시트 작업","intentPrefixes":["sheets-"],"intentKeys":["sheets-data-cleanup","sheets-dropdown","sheets-conditional-format","sheets-filter-views","sheets-pivot-table","sheets-protect-ranges"]},
     {"id":"photos","label":"사진 백업과 정리","intentPrefixes":["photos-"],"intentKeys":["photos-backup","photos-albums","photos-archive","photos-editing","photos-sharing","photos-export"]},
     {"id":"maps","label":"지도와 여행 준비","intentPrefixes":["maps-"],"intentKeys":["maps-travel-lists","maps-street-view","maps-multiple-stops","maps-distance-measure","maps-offline","maps-location-sharing"]},
