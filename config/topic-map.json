@@ -113,6 +113,28 @@
       ]
     },
     {
+      "articleId": "dehumidifier-use-20261015",
+      "category": "생활·주거",
+      "categoryId": "home",
+      "categoryLabel": "생활·주거",
+      "intentKey": "dehumidifier-use",
+      "status": "published",
+      "title": "제습기 용량과 배치: 방 크기, 습한 정도, 배수까지 같이 보는 법",
+      "coreQuestion": "제습기 용량과 배치: 방 크기, 습한 정도, 배수까지 같이 보는 법",
+      "scope": "제습기 용량을 방 크기만으로 고르지 않고, 습한 정도·배수 방식·설치 위치의 온도와 공기 흐름까지 함께 판단하는 기준을 정리합니다.",
+      "coverage": [
+        "제습기 용량은 무엇으로 고르나",
+        "어디에 두어야 공기가 잘 흐르나",
+        "물통과 배수는 어떻게 나뉘나",
+        "교체할 때는 이전 수치와 바로 비교하지 않기",
+        "실제로 점검할 마지막 기준"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "제습기 용량과 배치: 방 크기, 습한 정도, 배수까지 같이 보는 법"
+      ]
+    },
+    {
       "articleId": "dryer-efficient-use-20261015",
       "category": "생활·주거",
       "categoryId": "home",
@@ -515,6 +537,23 @@
       "id": "home",
       "label": "생활·주거",
       "articles": [
+        {
+          "articleId": "dehumidifier-use-20261015",
+          "intentKey": "dehumidifier-use",
+          "coreQuestion": "제습기 용량과 배치: 방 크기, 습한 정도, 배수까지 같이 보는 법",
+          "scope": "제습기 용량을 방 크기만으로 고르지 않고, 습한 정도·배수 방식·설치 위치의 온도와 공기 흐름까지 함께 판단하는 기준을 정리합니다.",
+          "coverage": [
+            "제습기 용량은 무엇으로 고르나",
+            "어디에 두어야 공기가 잘 흐르나",
+            "물통과 배수는 어떻게 나뉘나",
+            "교체할 때는 이전 수치와 바로 비교하지 않기",
+            "실제로 점검할 마지막 기준"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "제습기 용량과 배치: 방 크기, 습한 정도, 배수까지 같이 보는 법"
+          ]
+        },
         {
           "articleId": "dryer-efficient-use-20261015",
           "intentKey": "dryer-efficient-use",
