@@ -1,0 +1,59 @@
+{
+  "articleId": "chrome-bookmarks-20261015",
+  "intentKey": "chrome-bookmarks",
+  "title": "크롬 북마크 정리 방법: 폴더·찾기·편집·동기화까지",
+  "description": "PC 크롬에서 북마크를 찾고, 이름과 폴더를 정리하고, 기기 간 동기화와 계정 저장 차이까지 한 번에 확인하는 안내입니다.",
+  "category": "IT·디지털",
+  "markdown": "# 크롬 북마크 정리 방법: 폴더·찾기·편집·동기화까지\n\n크롬 북마크는 단순히 저장만 해 두면 점점 찾기 어려워집니다. PC 크롬에서는 북마크바, 북마크 관리자, 주소창 검색을 함께 쓰면 정리와 확인을 한 번에 할 수 있습니다. 계정에 저장한 경우에는 같은 Google 계정으로 로그인한 다른 기기에서도 북마크를 사용할 수 있습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop), [Chrome 도움말: 기기 간 북마크와 동기화](https://support.google.com/chrome/answer/165139?hl=en&co=GENIE.Platform%3DDesktop)\n\n이 글은 **PC Chrome** 기준으로 북마크를 정리하는 방법만 다룹니다. 모바일 앱의 화면 구성이나 다른 브라우저의 메뉴는 제외했습니다. 북마크를 정리할 때는 “어디에 있는지 찾는 방법”, “이름과 폴더를 바꾸는 방법”, “기기 간에 같이 쓰는지 확인하는 방법”을 나눠서 보면 훨씬 덜 헷갈립니다.\n\n## 먼저 북마크를 찾는 방법\n\n북마크 정리의 첫 단계는 목록을 다시 여는 일입니다. Chrome은 북마크를 찾는 경로를 여러 가지로 제공합니다. 화면이 복잡해 보일 때는 하나만 외우기보다, 북마크바와 관리자 화면을 함께 알아두는 편이 편합니다.\n\n### 주소창에서 바로 찾기\n\n가장 빠른 방법은 주소창에서 `@bookmarks`를 쓰는 것입니다. PC에서 Chrome을 열고 주소창에 `@bookmarks`를 입력한 뒤 `Tab` 또는 `Space`를 누르면 북마크 검색으로 이어집니다. 검색 제안에 **Search bookmarks**가 보이면 그것을 선택해도 됩니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n이 방법은 북마크가 많을 때 특히 유용합니다. 폴더 이름을 기억하지 못해도 키워드 일부만 알면 찾을 수 있기 때문입니다. 예를 들어 사이트 이름이나 서비스 이름이 떠오르면 그 단어로 먼저 검색해 보시면 됩니다.\n\n### 북마크바에서 바로 열기\n\n북마크바는 주소창 아래에 보이는 바로가기 모음입니다. Chrome에서 **More > Bookmarks and lists > Show bookmarks bar**를 선택하면 보이도록 바꿀 수 있습니다. 북마크바가 켜져 있으면 자주 쓰는 사이트를 한 번 클릭해 바로 열 수 있어 정리 상태를 눈으로 확인하기 쉽습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n북마크바는 적은 수의 북마크를 빠르게 쓰는 데 맞습니다. 자주 여는 항목만 남기고 나머지는 폴더로 보내면, 화면이 덜 복잡해집니다. 북마크바에 모든 것을 두려 하지 말고, 바로 열 것만 남기는 기준을 먼저 세우는 편이 좋습니다.\n\n### 북마크 관리자에서 전체 보기\n\n전체 목록을 정리할 때는 **Bookmark Manager**를 여는 편이 낫습니다. Chrome 오른쪽 위의 **More > Bookmarks and lists > Bookmark Manager**로 들어가면 북마크를 목록 단위로 볼 수 있습니다. 여기서는 개별 항목뿐 아니라 폴더 구조도 함께 확인할 수 있습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n전체 목록 화면은 정리 작업의 기준점입니다. 북마크바에 무심코 쌓인 항목, 이름이 비슷해서 헷갈리는 항목, 오래된 폴더를 한 번에 살펴볼 수 있습니다. 정리 순서를 정하기 어렵다면 이 화면에서 먼저 “자주 쓰는 것”, “묶을 수 있는 것”, “지워도 되는 것”으로 나눠 보시면 됩니다.\n\n## 이름과 폴더를 정리하는 순서\n\n북마크는 이름과 위치가 같이 정리되어야 찾기 쉬워집니다. 이름만 바꾸면 목록은 여전히 흩어져 있고, 폴더만 옮기면 비슷한 이름이 남아 헷갈릴 수 있습니다. 그래서 보통은 이름 수정과 이동을 함께 생각하는 편이 낫습니다.\n\n### 이름을 알아보기 쉽게 바꾸기\n\nChrome 북마크는 편집 화면에서 이름을 수정할 수 있습니다. 북마크 관리자에서는 항목의 **More > Edit**를 선택해 이름을 바꿀 수 있고, 전체 보기 화면에서는 항목 위에 마우스를 올린 뒤 **More > Edit**를 통해 한 항목씩 수정할 수 있습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n이름은 짧아도 좋지만, 무엇을 위한 북마크인지 바로 떠올릴 수 있어야 합니다. 사이트 제목이 길거나 뜻이 모호하면, 내가 기억하기 쉬운 표현으로 바꾸는 편이 낫습니다. 다만 너무 축약하면 나중에 같은 이름끼리 겹칠 수 있으니, 구분이 될 정도만 줄이시는 것이 좋습니다.\n\n### 폴더로 묶어 찾기 쉽게 만들기\n\n폴더는 같은 성격의 북마크를 묶는 용도입니다. 북마크 관리자에서는 **More > Add new folder**로 새 폴더를 만들 수 있고, 북마크바를 쓰는 경우에는 북마크바를 마우스 오른쪽 버튼으로 눌러 **Add Folder**를 선택할 수 있습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n폴더를 만들 때는 기준을 너무 세분화하지 않는 편이 좋습니다. 예를 들어 “업무”, “개인”, “자주 보는 자료”처럼 실제로 나눠서 쓰는 기준이 있어야 나중에도 유지됩니다. 이름만 비슷한 폴더를 여러 개 만드는 방식은 잠깐은 깔끔해 보여도 오래가기 어렵습니다.\n\n### 폴더 안에서 순서를 바꾸기\n\n북마크 순서를 바꾸는 방법은 두 가지입니다. 북마크 관리자에서는 항목을 위아래로 드래그하거나 왼쪽 폴더로 끌어 넣을 수 있습니다. 북마크바를 쓰는 경우에도 원하는 순서로 끌어 놓아 배치할 수 있습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n순서를 정할 때는 자주 쓰는 것부터 앞쪽에 두는 편이 편합니다. 같은 폴더 안에서도 매번 여는 항목과 가끔 여는 항목이 다르기 때문입니다. 다만 너무 자주 위치를 바꾸면 오히려 손이 헷갈릴 수 있으니, 정리 기준을 먼저 정하고 한 번에 옮기는 편이 낫습니다.\n\n## 북마크를 한꺼번에 정리하는 방법\n\n북마크가 많아지면 하나씩만 손보는 방식으로는 끝이 잘 안 납니다. 이럴 때는 목록 정렬과 일괄 편집을 함께 써서 비슷한 항목을 묶어 보는 것이 효율적입니다. 정리 기준을 먼저 정한 뒤 화면의 정렬 기능을 쓰면 중복된 이름이나 오래된 항목을 찾기 쉽습니다.\n\n### 이름순이나 최근 기준으로 정렬하기\n\n북마크 관리 화면에서는 정렬 기준을 바꿀 수 있습니다. 북마크 관리자에서는 **Sort by name**을 사용할 수 있고, 전체 보기 화면에서는 **Organize**에서 `Sort by newest`, `Sort by oldest`, `Sort by last opened`, `Sort by A to Z`, `Sort by Z to A` 중 하나를 고를 수 있습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n정렬 기준은 목적에 따라 다르게 잡아야 합니다. 최근에 자주 연 항목을 찾고 싶다면 최근 사용 기준이 편하고, 비슷한 이름을 한꺼번에 보고 싶다면 알파벳 순서가 맞습니다. 정리 목적이 “오래된 것 제거”인지 “이름 통일”인지 먼저 정하면 기준이 흔들리지 않습니다.\n\n### 여러 항목을 함께 바꾸기\n\n전체 보기 화면에서는 여러 항목을 한 번에 편집할 수 있습니다. Chrome 도움말에는 전체 보기에서 **Edit**를 눌러 일괄 편집이 가능하다고 안내합니다. 한 개씩 클릭해서 바꾸는 방식보다, 비슷한 묶음을 한 번에 처리할 때 시간을 줄일 수 있습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n일괄 편집은 같은 규칙으로 이름을 바꾸고 싶을 때 적합합니다. 예를 들어 폴더 이름 체계를 통일하거나, 비슷한 서비스 이름을 같은 방식으로 맞출 때 유용합니다. 다만 섣불리 여러 개를 한꺼번에 바꾸면 구분이 더 어려워질 수 있으니, 변경 전후의 기준을 분명히 해 두는 것이 좋습니다.\n\n### 오래된 북마크를 지울지 남길지 판단하기\n\n삭제는 되돌릴 수 없는 작업입니다. Chrome 도움말은 북마크를 삭제한 뒤에는 다시 가져올 수 없다고 안내합니다. 그래서 삭제는 “안 쓰는지 확실한가”를 먼저 보고 결정하는 편이 안전합니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n판단이 어렵다면 먼저 폴더로 옮겨 두고 일정 기간 사용하지 않는지 확인하는 방법도 있습니다. 바로 지우는 것보다, 임시로 묶어 두고 실제로 열어보는지 보는 편이 덜 위험합니다. 삭제를 최종 선택으로 남기면 정리 실수도 줄일 수 있습니다.\n\n## 계정 저장과 기기 동기화 확인하기\n\n북마크 정리는 한 기기 안에서만 끝나지 않을 수 있습니다. 같은 Google 계정으로 Chrome에 로그인하면, 북마크를 다른 기기에서도 사용할 수 있습니다. 반대로 계정에 저장하지 않으면 해당 기기에만 남을 수 있으므로, 정리한 뒤 어디에 저장된 상태인지 확인하는 것이 필요합니다.\n\n### 다른 기기에서 같은 북마크를 쓰는 조건\n\nChrome 도움말에 따르면, Chrome에 로그인하면 북마크와 다른 정보가 Google 계정에 저장될 수 있고, 같은 계정으로 로그인한 다른 기기에서도 사용할 수 있습니다. 이때 동기화가 켜져 있으면 기기 간 사용이 더 자연스럽습니다. [Chrome 도움말: 기기 간 북마크와 동기화](https://support.google.com/chrome/answer/165139?hl=en&co=GENIE.Platform%3DDesktop)\n\n여기서 중요한 점은 “로그인했다”와 “무엇이 저장된다”가 같지 않다는 점입니다. Chrome은 사용자가 저장할 항목을 따로 선택할 수 있습니다. 그래서 북마크가 다른 기기에도 보이길 원한다면, 해당 정보가 계정에 저장되는지 확인해야 합니다.\n\n### 계정에 무엇을 저장하는지 고르기\n\nChrome에서는 **More > Settings > You and Google**에서 계정 이름을 선택한 뒤, Google 계정에 무엇을 저장할지 바꿀 수 있습니다. 새 북마크를 만들 때도 저장 방식이 달라질 수 있으니, 정리 후에는 저장 대상이 맞는지 점검하는 것이 좋습니다. [Chrome 도움말: 기기 간 북마크와 동기화](https://support.google.com/chrome/answer/165139?hl=en&co=GENIE.Platform%3DDesktop)\n\n이 설정은 북마크를 단순한 로컬 목록으로 둘지, 계정과 함께 관리할지에 영향을 줍니다. 같은 컴퓨터를 여러 사람이 쓰는 경우에는 계정과 프로필을 분리하는 편이 더 낫습니다. 반대로 개인 기기라면 계정 저장이 북마크 관리를 훨씬 편하게 만들어 줍니다.\n\n### 동기화가 잘 되는지 확인하는 법\n\n정리한 뒤에는 다른 기기에서 같은 계정으로 Chrome에 로그인해 북마크가 보이는지 확인하면 됩니다. 같은 계정인데도 북마크가 다르게 보인다면, 북마크가 계정에 저장되었는지와 동기화 상태를 다시 봐야 합니다. Chrome은 로그인 후 `Save x items in Account` 같은 안내를 통해 저장할 항목을 선택하게 합니다. [Chrome 도움말: 기기 간 북마크와 동기화](https://support.google.com/chrome/answer/165139?hl=en&co=GENIE.Platform%3DDesktop)\n\n여기서 확인할 것은 “정리한 북마크가 실제로 다른 기기에 나타나는가”입니다. 화면상으로만 정리된 것처럼 보이더라도, 계정 저장이 꺼져 있으면 다른 기기에는 그대로 남지 않을 수 있습니다. 정리 뒤에 한 번만 확인해 두면, 나중에 다시 같은 일을 반복하지 않아도 됩니다.\n\n## 지워졌을 때와 남아 있을 때를 구분하기\n\n북마크를 정리하다 보면 삭제와 이동을 헷갈리기 쉽습니다. 삭제는 목록에서 없애는 것이고, 이동은 다른 폴더로 옮기는 것입니다. 둘은 결과가 크게 다르므로, 작업 전에 무엇을 하려는지 먼저 정해야 합니다.\n\n### 삭제와 이동은 같은 작업이 아닙니다\n\n북마크를 삭제하면 다시 가져올 수 없다고 안내되어 있습니다. 반면 폴더로 옮기거나 순서를 바꾸는 것은 목록 구조만 손보는 작업입니다. 결과가 비슷해 보여도 복구 가능성은 다르므로, 처음부터 삭제 버튼을 누르기 전에 목적을 다시 확인하는 것이 좋습니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n실수 줄이기는 단순합니다. 지워야 할 항목은 따로 모아두고, 아직 판단이 끝나지 않은 항목은 폴더로 옮겨 두면 됩니다. 이렇게 하면 잘못 삭제하는 일을 줄일 수 있고, 나중에 다시 열어볼 여지도 남습니다.\n\n### 화면이 다르면 무엇부터 볼지\n\nChrome은 북마크바, 북마크 관리자, 전체 보기 화면에서 비슷하지만 조금 다른 메뉴를 제공합니다. 화면이 달라 보인다고 해서 기능이 없는 것은 아닙니다. 우선 `More > Bookmarks and lists` 아래에 있는 항목을 찾고, 그다음 `Bookmark Manager`와 `Show all bookmarks` 중 현재 필요한 화면을 고르면 됩니다. [Chrome 도움말: 북마크 만들기와 수정](https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop)\n\n정리할 때는 “빨리 여는 화면”과 “전체를 손보는 화면”을 구분하면 덜 막힙니다. 자주 여는 북마크는 북마크바로, 폴더와 이름 정리는 관리자 화면으로 나누는 식입니다. 이 분리만 해도 작업 속도와 실수 가능성이 함께 줄어듭니다.\n\n## 마무리 전에 확인할 항목\n\n정리한 뒤에는 다음만 확인하면 됩니다.\n\n- 자주 쓰는 북마크가 북마크바나 상위 폴더에 있는지\n- 이름만 봐도 무엇인지 알아볼 수 있는지\n- 비슷한 항목이 같은 폴더에 너무 많이 쌓이지 않았는지\n- 다른 기기에서도 같은 계정으로 북마크가 보이는지\n- 지운 항목이 정말 다시 필요 없는지\n\n이 다섯 가지를 확인하면, 북마크가 다시 흩어져도 다음 정리 기준을 잡기 쉬워집니다. 북마크 정리는 한 번에 완벽하게 끝내기보다, 찾기 쉬운 구조를 유지하는 쪽이 더 실용적입니다.\n",
+  "revision": 3,
+  "approvedRevision": 3,
+  "approvedBy": "Automated evidence and image review; user-authorized publication",
+  "approvedAt": "2026-10-15T06:23:46.582Z",
+  "publishedAt": "2026-10-15T06:23:46.582Z",
+  "sources": [
+    {
+      "title": "Chrome: create and edit bookmarks",
+      "url": "https://support.google.com/chrome/answer/188842?hl=en&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-14T16:12:45.194Z"
+    },
+    {
+      "title": "Chrome: bookmarks across devices",
+      "url": "https://support.google.com/chrome/answer/165139?hl=en&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-14T16:12:45.161Z"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae71b3/SvdxvMaXsAuON_7_w675O.png",
+      "alt": "흰색 상자에 ‘BOOKMARK’ 카드가 꽂혀 있고 손이 그 카드를 넣는 장면",
+      "generated": true,
+      "localPath": "/media/chrome-bookmarks-20261015/ac3f962c179fab25b673f9432c13b90bac14dd5d055263cb63a7ecd861fb254a.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae71b5/jEuyNNH_OOrOiS17tTZxz.png",
+      "alt": "색깔별 바인더와 서류철이 책장에 정리돼 있는 모습",
+      "generated": true,
+      "localPath": "/media/chrome-bookmarks-20261015/90f0bed93f155fd77040108c54d37bc8f27683e176a5ac105058e60ac336df78.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae71b6/mNVlQhZSB6Q-3Ap-4z1AG.png",
+      "alt": "돋보기 아래와 주변에 흩어진 흰 종이 카드와 묶음 종이가 놓인 장면",
+      "generated": true,
+      "localPath": "/media/chrome-bookmarks-20261015/d4e8c8ae799a229864110c5bd79309ffb03a3814362b5776251df94d7d3a7c3e.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae71b8/Yw1CtMm-G4RHuqYCxnEAm.png",
+      "alt": "나무 책상 위에 스프링 노트 두 권과 가죽 지갑형 수첩, 펜이 놓인 작업 공간",
+      "generated": true,
+      "localPath": "/media/chrome-bookmarks-20261015/f43975b06d63ccd915e0317c1894a82aba9576194a3ab31839ce0ef067fb234b.webp"
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae71ba/qpNPBKTttApb_h3Hsnd3h.png",
+      "alt": "‘Delete’와 ‘Move’라고 적힌 종이가 휴지통에 들어가며 삭제와 이동을 구분하는 개념 이미지",
+      "generated": true,
+      "localPath": "/media/chrome-bookmarks-20261015/7b4d35abf303212c7e005bcb9b22a5b412453c3f95b160c1b2ab42c6fcc093bf.webp"
+    }
+  ],
+  "affiliates": [],
+  "demo": false
+}
