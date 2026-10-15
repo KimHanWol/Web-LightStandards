@@ -1,0 +1,12 @@
+---
+const {image}=Astro.props;
+const stock=image.stock;
+const alt=image.generated?image.alt.replace(/\s*[—–-]\s*AI 생성 설명 이미지\s*$/,''):image.alt;
+---
+<figure>
+  <img src={image.localPath} alt={alt} width={image.width||1024} height={image.height||768} data-kind={stock?'stock':image.generated?'generated':'capture'} loading={image.lead?'eager':'lazy'} fetchpriority={image.lead?'high':'auto'}/>
+  <figcaption>
+    {image.caption||(stock?'본문과 관련된 자료 사진입니다.':image.generated?'본문 이해를 돕는 설명 이미지입니다.':'검토한 실제 화면 캡처입니다.')}
+    {stock?<><br/>사진: {stock.creator} · <a href={stock.pageUrl} target="_blank" rel="noopener noreferrer">{stock.title} / {stock.provider==='flickr'?'Flickr':'Wikimedia Commons'} ↗</a> · <a href={stock.licenseUrl} target="_blank" rel="noopener noreferrer">{stock.license==='cc0'?'CC0':'CC BY'} ↗</a> · 크기·형식 최적화</>:!image.generated&&image.sourceUrl&&<> <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer">출처 확인 ↗</a> · <a href={image.localPath} target="_blank" rel="noopener noreferrer">원본 크게 보기 ↗</a></>}
+  </figcaption>
+</figure>

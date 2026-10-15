@@ -13,7 +13,7 @@ export function preserveImported({ cwd = process.cwd(), maxAttempts = 4, beforeP
     if (result.status !== 0) throw new Error(`git ${args[0]} failed: ${result.stderr.trim()}`);
     return result.stdout;
   };
-  checked('add', '--', 'content/articles', 'content/markdown', 'public/media');
+  checked('add', '--', 'content/articles', 'content/markdown', 'public/media', 'config/topic-map.json');
   const diff = git('diff', '--cached', '--quiet');
   if (diff.status === 0) return { committed: false, attempts: 0 };
   if (diff.status !== 1) throw new Error(`Could not inspect staged content: ${diff.stderr}`);

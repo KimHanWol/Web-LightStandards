@@ -13,6 +13,8 @@ test('publication preserves article assets when main changes between rebase and 
   git(root, 'init', '--bare', '--initial-branch=main', remote);
   git(root, 'clone', remote, publisher);
   git(publisher, 'config', 'core.autocrlf', 'false');
+  mkdirSync(join(publisher,'config'));
+  writeFileSync(join(publisher,'config/topic-map.json'),'{}\n');
   for (const path of ['content/articles', 'content/markdown', 'public/media']) {
     mkdirSync(join(publisher, path), { recursive: true });
     writeFileSync(join(publisher, path, '.gitkeep'), '');

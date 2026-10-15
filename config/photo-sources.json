@@ -1,0 +1,12 @@
+{
+  "priority": "licensed_stock_before_generation",
+  "selection": "Accept only relevant, visually reviewed photographs; never use a search result merely to fill an image count.",
+  "active": [{"name":"Openverse","url":"https://openverse.org/","api":"https://api.openverse.org/v1/images/","sources":["flickr","wikimedia"],"licenses":["cc0","by"],"credentialRequired":false}],
+  "candidates": [
+    {"name":"Pexels","url":"https://www.pexels.com/","apiDocs":"https://www.pexels.com/api/documentation/","status":"requires_free_api_key","note":"Show provider and photographer credits for API usage."},
+    {"name":"Pixabay","url":"https://pixabay.com/","apiDocs":"https://pixabay.com/api/docs/","status":"not_connected","note":"Requires key and provider review of automated usage; cache queries for 24 hours and store used images locally."},
+    {"name":"Unsplash","url":"https://unsplash.com/","apiDocs":"https://unsplash.com/documentation","status":"not_connected","note":"API requires hotlinking and download tracking; do not use the local-download adapter unchanged."},
+    {"name":"Wikimedia Commons","url":"https://commons.wikimedia.org/","status":"available_through_openverse"},
+    {"name":"Flickr Creative Commons","url":"https://www.flickr.com/creativecommons/","status":"available_through_openverse","note":"Only explicitly permitted individual licenses; a Flickr URL alone is not permission."}
+  ]
+}
