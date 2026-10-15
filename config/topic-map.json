@@ -467,6 +467,28 @@
       ]
     },
     {
+      "articleId": "mail-guide-5900-20261016",
+      "category": "경제·일",
+      "categoryId": "money-work",
+      "categoryLabel": "경제·일",
+      "intentKey": "mail-answer-5900",
+      "status": "published",
+      "title": "지메일 이메일을 대화로 그룹화하기: PC에서 보기 방식 바꾸는 법",
+      "coreQuestion": "지메일 이메일을 대화로 그룹화하기: PC에서 보기 방식 바꾸는 법",
+      "scope": "Gmail에서 메일을 대화로 묶어 보는 설정을 PC에서 바꾸는 방법을 정리합니다. 대화형식의 의미, 바뀌는 표시 방식, 설정 후 확인할 점까지 함께 봅니다.",
+      "coverage": [
+        "대화로 묶이는 기준 이해하기",
+        "PC에서 설정을 바꾸는 방법",
+        "중요한 메일 올리기와 함께 볼 점",
+        "라벨과 함께 볼 때 헷갈리지 않기",
+        "바꾼 뒤 확인할 것"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "지메일 이메일을 대화로 그룹화하기: PC에서 보기 방식 바꾸는 법"
+      ]
+    },
+    {
       "articleId": "mail-guide-6593-20261016",
       "category": "경제·일",
       "categoryId": "money-work",
@@ -1530,6 +1552,23 @@
           "outOfScope": [],
           "aliases": [
             "Gmail 받은편지함 레이아웃 변경하기: 기본 탭부터 여러 섹션까지"
+          ]
+        },
+        {
+          "articleId": "mail-guide-5900-20261016",
+          "intentKey": "mail-answer-5900",
+          "coreQuestion": "지메일 이메일을 대화로 그룹화하기: PC에서 보기 방식 바꾸는 법",
+          "scope": "Gmail에서 메일을 대화로 묶어 보는 설정을 PC에서 바꾸는 방법을 정리합니다. 대화형식의 의미, 바뀌는 표시 방식, 설정 후 확인할 점까지 함께 봅니다.",
+          "coverage": [
+            "대화로 묶이는 기준 이해하기",
+            "PC에서 설정을 바꾸는 방법",
+            "중요한 메일 올리기와 함께 볼 점",
+            "라벨과 함께 볼 때 헷갈리지 않기",
+            "바꾼 뒤 확인할 것"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "지메일 이메일을 대화로 그룹화하기: PC에서 보기 방식 바꾸는 법"
           ]
         },
         {
