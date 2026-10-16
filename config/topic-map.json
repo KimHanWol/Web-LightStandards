@@ -413,6 +413,29 @@
       ]
     },
     {
+      "articleId": "docs-guide-6281888-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "docs-answer-6281888",
+      "status": "published",
+      "title": "Google 설문지 사용 방법: 만들기부터 응답 확인까지 PC에서 정리하기",
+      "coreQuestion": "Google 설문지 사용 방법: 만들기부터 응답 확인까지 PC에서 정리하기",
+      "scope": "Google 설문지로 새 양식을 만들고, 질문을 수정한 뒤, 응답을 보내고 확인하는 흐름을 PC 기준으로 정리합니다. 게시와 공유, 응답 제한과 수정 허용도 함께 봅니다.",
+      "coverage": [
+        "새 양식 만들기",
+        "질문과 형식 다듬기",
+        "게시와 공유 설정",
+        "응답 확인과 분석",
+        "공유할 때 자주 헷갈리는 점",
+        "바로 시작할 때 기억할 순서"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Google 설문지 사용 방법: 만들기부터 응답 확인까지 PC에서 정리하기"
+      ]
+    },
+    {
       "articleId": "docs-guide-97447-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1517,6 +1540,24 @@
           "outOfScope": [],
           "aliases": [
             "구글 스프레드시트 숫자 형식 지정: 통화·날짜·맞춤 형식까지"
+          ]
+        },
+        {
+          "articleId": "docs-guide-6281888-20261016",
+          "intentKey": "docs-answer-6281888",
+          "coreQuestion": "Google 설문지 사용 방법: 만들기부터 응답 확인까지 PC에서 정리하기",
+          "scope": "Google 설문지로 새 양식을 만들고, 질문을 수정한 뒤, 응답을 보내고 확인하는 흐름을 PC 기준으로 정리합니다. 게시와 공유, 응답 제한과 수정 허용도 함께 봅니다.",
+          "coverage": [
+            "새 양식 만들기",
+            "질문과 형식 다듬기",
+            "게시와 공유 설정",
+            "응답 확인과 분석",
+            "공유할 때 자주 헷갈리는 점",
+            "바로 시작할 때 기억할 순서"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Google 설문지 사용 방법: 만들기부터 응답 확인까지 PC에서 정리하기"
           ]
         },
         {
