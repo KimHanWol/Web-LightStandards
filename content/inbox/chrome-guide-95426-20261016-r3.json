@@ -1,0 +1,54 @@
+{
+  "articleId": "chrome-guide-95426-20261016",
+  "intentKey": "chrome-answer-95426",
+  "title": "크롬 기본 검색엔진과 사이트 검색 바로가기 설정하는 방법",
+  "description": "PC 크롬에서 기본 검색엔진을 바꾸고, 자주 쓰는 사이트 검색 바로가기를 추가·수정·비활성화·삭제하는 순서를 공식 도움말 기준으로 정리합니다.",
+  "category": "IT·디지털",
+  "markdown": "Chrome의 기본 검색엔진은 주소 표시줄에서 검색할 때 기본으로 쓰이는 검색 서비스입니다. 사이트 검색 바로가기는 특정 사이트 안에서 검색할 때 쓰는 짧은 명령처럼 사용할 수 있습니다. PC 크롬에서는 이 두 설정을 서로 구분해서 관리해야 원하는 검색 동작을 만들 수 있습니다.\n\n## 먼저 구분할 것\n기본 검색엔진은 주소 표시줄에 검색어를 바로 넣었을 때 어떤 검색 서비스로 보낼지 정하는 설정입니다. 사이트 검색 바로가기는 특정 사이트 이름을 짧게 입력해 그 사이트 안의 검색을 빠르게 여는 기능입니다.\n\n이 둘은 역할이 다릅니다. 기본 검색엔진을 바꾸지 않아도 사이트 검색 바로가기는 따로 추가할 수 있고, 반대로 사이트 검색 바로가기를 손봐도 기본 검색엔진 자체는 그대로 둘 수 있습니다. Chrome 도움말은 이 둘을 같은 설정 화면에서 함께 관리할 수 있다고 설명합니다. [Chrome 도움말: 기본 검색엔진 및 사이트 검색 바로가기 설정하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 이런 경우에 각각 필요합니다\n- 주소창에서 입력한 검색을 다른 검색 서비스로 보내고 싶을 때: 기본 검색엔진을 바꿉니다.\n- 자주 가는 사이트 내부 검색을 빠르게 열고 싶을 때: 사이트 검색 바로가기를 추가하거나 수정합니다.\n- 사이트 검색 바로가기가 많아져서 헷갈릴 때: 비활성화하거나 삭제해 정리합니다.\n\n## 기본 검색엔진 바꾸기\n기본 검색엔진을 바꾸려면 Chrome의 검색엔진 설정으로 들어가 새로운 기본값을 선택하면 됩니다. 공식 도움말은 PC에서 Chrome을 열고, 오른쪽 상단의 더보기에서 설정으로 들어간 뒤 검색엔진을 선택하라고 안내합니다. [Chrome 도움말: 기본 검색엔진 설정하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n1. Chrome을 엽니다.\n2. 오른쪽 상단의 더보기에서 `설정`을 엽니다.\n3. `검색엔진`을 선택합니다.\n4. `검색엔진` 항목에서 `변경`을 선택합니다.\n5. 원하는 검색엔진을 기본값으로 고릅니다.\n\n바꾼 뒤에는 주소 표시줄에 검색어를 입력했을 때 선택한 검색엔진 결과가 열리는지 보면 됩니다. 이 동작이 바뀌지 않으면, 설정이 저장되지 않았거나 다른 프로그램의 영향을 받았을 수 있습니다. 도움말은 검색엔진이 예상치 못하게 바뀌었다면 멀웨어가 원인일 수도 있다고 안내합니다. 이 경우에는 검색엔진 설정만 다시 고치는 것으로 끝나지 않을 수 있습니다. [Chrome 도움말: 원치 않는 광고, 팝업, 멀웨어 삭제하기](https://support.google.com/chrome/answer/2765944?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 이런 점은 따로 봐야 합니다\n직장이나 학교에서 관리되는 Chrome은 네트워크 관리자가 기본 검색엔진을 정해 둘 수 있습니다. 이런 환경에서는 내가 바꿔도 원래 값으로 돌아가거나 변경이 막힐 수 있습니다. 도움말에 나온 대로 관리 대상 Chrome인지 확인해야 합니다. [Chrome 도움말: 기본 검색엔진 및 사이트 검색 바로가기 설정하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n또 하나 구분할 점이 있습니다. 도움말에는 기본 검색엔진을 수정 또는 삭제하거나 Gemini를 기본 검색엔진으로 설정할 수 없다고 나옵니다. 즉, 사용자가 할 수 있는 것은 보통 기본 검색엔진을 선택하는 쪽입니다. 삭제나 일부 변경이 안 된다고 해서 설정이 고장난 것은 아닙니다. [Chrome 도움말: 기본 검색엔진 및 사이트 검색 바로가기 설정하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n## 사이트 검색 바로가기 추가하기\n사이트 검색 바로가기는 특정 사이트를 검색할 때 쓰는 짧은 이름과 주소 규칙을 함께 저장하는 기능입니다. 도움말은 `사이트 검색` 오른쪽의 `추가`로 새 바로가기를 만들 수 있다고 설명합니다. 사이트 검색 결과 주소에는 검색어가 들어갈 자리를 `%s`로 표시합니다. [Chrome 도움말: 사이트 검색 바로가기 관리하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n1. Chrome을 엽니다.\n2. 오른쪽 상단의 더보기에서 `설정`을 엽니다.\n3. 왼쪽에서 `검색엔진`을 선택합니다.\n4. `검색엔진 및 사이트 검색 관리`로 들어갑니다.\n5. `사이트 검색` 오른쪽의 `추가`를 선택합니다.\n6. `검색엔진`, `바로가기`, `URL(검색어 자리에 %s 입력)`을 채웁니다.\n7. `추가`를 눌러 저장합니다.\n\n여기서 중요한 것은 세 칸의 역할이 다르다는 점입니다. `검색엔진`은 그 사이트 이름, `바로가기`는 주소창에서 쓸 짧은 입력어, `URL`은 검색어가 들어갈 주소 형식입니다. 검색결과 페이지 주소를 그대로 쓰면 안 되고, 검색어가 들어가야 할 자리에 `%s`를 넣어야 합니다. 예를 들어 검색결과 주소가 `...q=soccer`라면, 검색어 부분을 `%s`로 바꿔 `...q=%s`처럼 써야 합니다. [Chrome 도움말: 사이트 검색 바로가기 관리하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 바로가기 주소를 만들 때 기억할 점\n사이트 검색 주소는 일반 웹페이지 주소와 다릅니다. 검색한 결과 화면의 주소를 복사한 뒤, 그 안에서 검색어 부분만 `%s`로 바꿔야 합니다. 이 과정이 빠지면 Chrome이 검색어를 넣을 위치를 찾지 못해 바로가기가 제대로 작동하지 않습니다. [Chrome 도움말: 텍스트 입력란 작성하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n## 바로가기 수정·비활성화·삭제하기\n이미 만든 사이트 검색 바로가기는 나중에 바꿀 수 있습니다. 도움말은 각 바로가기 오른쪽의 더보기에서 수정, 비활성화, 삭제를 나눠 제공합니다. 이 셋은 결과가 다르므로 원하는 상태에 맞게 골라야 합니다. [Chrome 도움말: 사이트 검색 바로가기 관리하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 바로가기별로 할 수 있는 일\n| 작업 | 의미 | 결과 |\n|---|---|---|\n| 수정 | 이름이나 주소 규칙을 고침 | 기존 바로가기를 유지한 채 내용만 바뀜 |\n| 기본으로 설정 | 그 바로가기를 기본 검색 동작으로 사용 | 선택한 사이트 검색이 더 앞에 옴 |\n| 비활성화 | 바로가기를 잠시 사용하지 않음 | `비활성 바로가기` 섹션으로 이동 |\n| 삭제 | 바로가기를 목록에서 지움 | 다시 쓰려면 새로 추가해야 함 |\n\n비활성화한 바로가기는 `비활성 바로가기` 섹션으로 옮겨집니다. 도움말은 그곳에서 추천 사이트를 볼 수 있고, 필요하면 활성화해서 다시 쓸 수 있다고 설명합니다. 자주 쓰지 않는 사이트를 완전히 지우기보다 잠시 꺼 두고 싶을 때 이 방식이 더 맞을 수 있습니다. [Chrome 도움말: 사이트 검색 바로가기 관리하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 삭제 전에 생각할 것\n열린 탭, 북마크, 방문 기록에 대한 사이트 검색 바로가기는 수정하거나 사용 중지할 수 있지만 삭제할 수는 없다고 도움말에 나와 있습니다. 즉, 모든 바로가기가 똑같이 삭제되는 것은 아닙니다. 목록에 보이는 항목의 종류를 먼저 보고, 편집 가능한지부터 확인해야 합니다. [Chrome 도움말: 사이트 검색 바로가기 관리하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)\n\n## 제대로 적용됐는지 확인하기\n설정을 바꾼 뒤에는 주소 표시줄에서 바로 확인할 수 있습니다. 기본 검색엔진을 바꿨다면 평소처럼 검색어를 입력했을 때 선택한 검색 서비스 결과가 열려야 합니다. 사이트 검색 바로가기를 추가했다면, 정한 바로가기 글자를 입력했을 때 해당 사이트의 검색으로 연결되는지 보면 됩니다.\n\n확인할 때는 두 가지를 같이 봐야 합니다. 첫째, 입력한 바로가기나 검색어가 의도한 검색 서비스로 가는지 봅니다. 둘째, 예전에 쓰던 검색 결과가 계속 나온다면 프로필이나 관리 정책, 멀웨어 같은 다른 원인이 있는지 생각해 봅니다. Chrome 도움말은 검색엔진이 예상치 못하게 바뀌는 경우 멀웨어 점검도 함께 보라고 안내합니다. [Chrome 도움말: 원치 않는 광고, 팝업, 멀웨어 삭제하기](https://support.google.com/chrome/answer/2765944?hl=ko&co=GENIE.Platform%3DDesktop)\n\n### 이런 경우엔 다시 점검합니다\n- 기본 검색엔진을 바꿨는데 주소 표시줄 검색이 그대로일 때\n- 사이트 검색 바로가기를 저장했는데 검색어가 반영되지 않을 때\n- 회사나 학교 PC라서 설정이 되돌아갈 때\n- 검색엔진 목록이 예상과 다르게 바뀌어 있을 때\n\n이 경우에는 먼저 설정 화면에서 값이 실제로 저장됐는지 보고, 그다음 관리 대상 Chrome인지, 마지막으로 원치 않는 프로그램이 있는지 확인하는 흐름이 맞습니다. 검색 설정 문제처럼 보여도 원인은 브라우저 밖에 있을 수 있기 때문입니다. [Chrome 도움말: 기본 검색엔진 및 사이트 검색 바로가기 설정하기](https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop)",
+  "revision": 3,
+  "approvedRevision": 3,
+  "approvedBy": "Automated evidence and image review; user-authorized publication",
+  "approvedAt": "2026-10-16T00:31:00.880Z",
+  "publishedAt": "2026-10-16T00:31:00.880Z",
+  "sources": [
+    {
+      "title": "기본 검색엔진 및 사이트 검색 바로가기 설정하기",
+      "url": "https://support.google.com/chrome/answer/95426?hl=ko&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-16"
+    },
+    {
+      "title": "원치 않는 광고, 팝업, 멀웨어 삭제하기",
+      "url": "https://support.google.com/chrome/answer/2765944?hl=ko&co=GENIE.Platform%3DDesktop",
+      "checkedAt": "2026-10-16"
+    }
+  ],
+  "images": [
+    {
+      "url": "https://v3b.fal.media/files/b/0aae8b2d/zE6cchtGH1o4yx0DIRR_b.png",
+      "alt": "검색 결과가 열린 데스크톱 모니터와 키보드가 있는 작업용 책상",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae8b36/UqgTeKFZunKK1eWtnKWDs.png",
+      "alt": "노트북과 마우스, 메모장과 돋보기가 놓인 밝은 책상 풍경",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae8b36/QBMJwcOYol2fNbEGrOX65.png",
+      "alt": "비어 있는 모니터와 키보드, 작은 화분이 있는 흰색 책상",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae8b37/SHhfXI-mgIf0e7Ygx0m7o.png",
+      "alt": "빈 화면의 모니터와 키보드, 나무 블록과 카메라가 놓인 책상",
+      "generated": true
+    },
+    {
+      "url": "https://v3b.fal.media/files/b/0aae8b38/KEXNplK3XzPAvAn_4xRVu.png",
+      "alt": "두 대의 모니터와 화살표 모양 표지, 키보드와 마우스가 있는 작업 공간",
+      "generated": true
+    }
+  ],
+  "affiliates": [],
+  "demo": false
+}
