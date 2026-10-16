@@ -86,6 +86,29 @@
       ]
     },
     {
+      "articleId": "chrome-guide-2664769-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "chrome-answer-2664769",
+      "status": "published",
+      "title": "크롬 확장 프로그램 설치 및 관리: PC에서 추가·고정·삭제까지",
+      "coreQuestion": "크롬 확장 프로그램 설치 및 관리: PC에서 추가·고정·삭제까지",
+      "scope": "Chrome 웹 스토어에서 확장 프로그램을 설치하고, 아이콘 고정·권한 조정·삭제·복구까지 PC에서 어떻게 다루는지 차근차근 정리합니다.",
+      "coverage": [
+        "먼저 구분할 것",
+        "설치는 어디서 하나",
+        "아이콘과 권한을 관리하는 법",
+        "사용 중 문제를 고치는 순서",
+        "삭제와 정리는 이렇게 합니다",
+        "로그인과 동기화도 함께 보기"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "크롬 확장 프로그램 설치 및 관리: PC에서 추가·고정·삭제까지"
+      ]
+    },
+    {
       "articleId": "chrome-guide-95414-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1251,6 +1274,24 @@
           "outOfScope": [],
           "aliases": [
             "Chrome 성능 맞춤설정하기: 메모리·배터리·탭 비활성화 조정법"
+          ]
+        },
+        {
+          "articleId": "chrome-guide-2664769-20261016",
+          "intentKey": "chrome-answer-2664769",
+          "coreQuestion": "크롬 확장 프로그램 설치 및 관리: PC에서 추가·고정·삭제까지",
+          "scope": "Chrome 웹 스토어에서 확장 프로그램을 설치하고, 아이콘 고정·권한 조정·삭제·복구까지 PC에서 어떻게 다루는지 차근차근 정리합니다.",
+          "coverage": [
+            "먼저 구분할 것",
+            "설치는 어디서 하나",
+            "아이콘과 권한을 관리하는 법",
+            "사용 중 문제를 고치는 순서",
+            "삭제와 정리는 이렇게 합니다",
+            "로그인과 동기화도 함께 보기"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "크롬 확장 프로그램 설치 및 관리: PC에서 추가·고정·삭제까지"
           ]
         },
         {
