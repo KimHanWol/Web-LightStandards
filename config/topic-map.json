@@ -323,6 +323,29 @@
       ]
     },
     {
+      "articleId": "docs-guide-97447-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "docs-answer-97447",
+      "status": "published",
+      "title": "구글 문서 도구에서 이미지와 동영상 넣고 지우는 방법",
+      "coreQuestion": "구글 문서 도구에서 이미지와 동영상 넣고 지우는 방법",
+      "scope": "Google Docs와 Slides에서 이미지를 넣거나 바꾸고, 문서와 프레젠테이션에서 동영상을 추가·삭제하는 기준을 PC 기준으로 정리합니다. 페이지 없음 모드와 페이지 형식 차이도 함께 봅니다.",
+      "coverage": [
+        "문서와 슬라이드에서 먼저 구분할 것",
+        "이미지 넣는 기본 순서",
+        "이미지 위치와 바꾸기, 삭제하기",
+        "동영상과 오디오 삽입 기준",
+        "Sheets에서 이미지를 넣을 때 다른 점",
+        "넣은 뒤 마지막으로 볼 것"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "구글 문서 도구에서 이미지와 동영상 넣고 지우는 방법"
+      ]
+    },
+    {
       "articleId": "docs-page-numbers-20261015",
       "category": "경제·일",
       "categoryId": "money-work",
@@ -1334,6 +1357,24 @@
           "outOfScope": [],
           "aliases": [
             "구글 스프레드시트 숫자 형식 지정: 통화·날짜·맞춤 형식까지"
+          ]
+        },
+        {
+          "articleId": "docs-guide-97447-20261016",
+          "intentKey": "docs-answer-97447",
+          "coreQuestion": "구글 문서 도구에서 이미지와 동영상 넣고 지우는 방법",
+          "scope": "Google Docs와 Slides에서 이미지를 넣거나 바꾸고, 문서와 프레젠테이션에서 동영상을 추가·삭제하는 기준을 PC 기준으로 정리합니다. 페이지 없음 모드와 페이지 형식 차이도 함께 봅니다.",
+          "coverage": [
+            "문서와 슬라이드에서 먼저 구분할 것",
+            "이미지 넣는 기본 순서",
+            "이미지 위치와 바꾸기, 삭제하기",
+            "동영상과 오디오 삽입 기준",
+            "Sheets에서 이미지를 넣을 때 다른 점",
+            "넣은 뒤 마지막으로 볼 것"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "구글 문서 도구에서 이미지와 동영상 넣고 지우는 방법"
           ]
         },
         {
