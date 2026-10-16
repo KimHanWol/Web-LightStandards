@@ -206,6 +206,29 @@
       ]
     },
     {
+      "articleId": "docs-guide-12319513-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "docs-answer-12319513",
+      "status": "published",
+      "title": "Google Sheets에 스마트 칩 삽입하기: PC에서 넣고 확인하는 방법",
+      "coreQuestion": "Google Sheets에 스마트 칩 삽입하기: PC에서 넣고 확인하는 방법",
+      "scope": "Google Sheets에서 스마트 칩을 넣는 기본 방법과 메뉴로 변환하는 흐름, 날짜·사용자·파일·일정·장소·금융·평점 칩의 차이, 공유와 권한에서 주의할 점을 함께 정리합니다.",
+      "coverage": [
+        "스마트 칩이 무엇인지 먼저 보기",
+        "가장 쉬운 삽입 방법",
+        "종류별로 넣는 방식 구분하기",
+        "날짜 칩과 드롭다운 칩 다루기",
+        "서식 바꾸기와 공유할 때 주의할 점",
+        "넣은 뒤 무엇을 확인하면 되는지"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Google Sheets에 스마트 칩 삽입하기: PC에서 넣고 확인하는 방법"
+      ]
+    },
+    {
       "articleId": "docs-guide-13524011-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1219,6 +1242,24 @@
           "outOfScope": [],
           "aliases": [
             "크롬 탭 그룹 만들기: PC에서 묶고 접고 다시 여는 방법"
+          ]
+        },
+        {
+          "articleId": "docs-guide-12319513-20261016",
+          "intentKey": "docs-answer-12319513",
+          "coreQuestion": "Google Sheets에 스마트 칩 삽입하기: PC에서 넣고 확인하는 방법",
+          "scope": "Google Sheets에서 스마트 칩을 넣는 기본 방법과 메뉴로 변환하는 흐름, 날짜·사용자·파일·일정·장소·금융·평점 칩의 차이, 공유와 권한에서 주의할 점을 함께 정리합니다.",
+          "coverage": [
+            "스마트 칩이 무엇인지 먼저 보기",
+            "가장 쉬운 삽입 방법",
+            "종류별로 넣는 방식 구분하기",
+            "날짜 칩과 드롭다운 칩 다루기",
+            "서식 바꾸기와 공유할 때 주의할 점",
+            "넣은 뒤 무엇을 확인하면 되는지"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Google Sheets에 스마트 칩 삽입하기: PC에서 넣고 확인하는 방법"
           ]
         },
         {
