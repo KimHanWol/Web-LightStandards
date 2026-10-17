@@ -11,6 +11,15 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('user-confirmed funding recovers only the inspected rejected request once',()=>{
+ const declined={...row,id:73,article_id:'chrome-guide-95472-20261016',status:'image_uncertain',revision:2,images_json:'[{}]',fal_request_id:'',reserved_usd:.012,topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
+ const action=run('batch-router',[declined])[0].json;
+ assert.equal(action.action,'repair');assert.equal(action.status,'text_ready');assert.equal(action.previous_status,'image_uncertain');
+ const map=JSON.parse(action.topic_map_json);assert.equal(map.providerRecovery.receiptExecutionId,'4340');assert.equal(map.providerRecovery.requestAccepted,false);
+ assert.equal(run('batch-router',[{...declined,topic_map_json:action.topic_map_json}])[0].json.action,'finished');
+ assert.equal(run('batch-router',[{...declined,revision:3}])[0].json.action,'finished');
+});
+
 test('uncertain image charges and explicit provider blocks prevent further paid batch stages',()=>{
  const waiting={...row,id:37,article_id:'waiting',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
  for(const status of ['image_uncertain','provider_blocked']){

@@ -19,6 +19,9 @@ const imageOnly=r=>{try{const review=mapOf(r).reviewIssues;if(Number(review?.rev
 if($runIndex>2400)throw new Error('Batch polling limit reached; inspect state before continuing');
 const publishing=targets.find(r=>['approved','publishing'].includes(r.status));
 if(!stageOnly&&publishing)return [{json:{...base,...publishing,action:'publish',workflowId:'yihoqk3fpBOC8P04'}}];
+// One-time recovery of the inspected HTTP 403 decline; the user confirmed funding.
+const funded=targets.find(r=>r.article_id==='chrome-guide-95472-20261016'&&r.status==='image_uncertain'&&Number(r.revision)===2&&imagesOf(r).length===1&&!r.fal_request_id&&!mapOf(r).providerRecovery);
+if(funded)return [{json:{...base,action:'repair',id:funded.id,article_id:funded.article_id,status:'text_ready',previous_status:'image_uncertain',error:'',reserved_usd:Number(funded.reserved_usd||0),topic_map_json:JSON.stringify({...mapOf(funded),providerRecovery:{receiptExecutionId:'4340',httpStatus:403,reason:'Exhausted balance',requestAccepted:false,userFundingConfirmedAt:'2026-10-17'}})}}];
 const blocked=targets.find(r=>['image_uncertain','provider_blocked'].includes(r.status));
 if(blocked)return [{json:{...base,action:'finished',reason:blocked.status==='provider_blocked'?'Image provider unavailable; payment or account action required':'Image request requires reconciliation; no further paid stages will run',used,pending:[{id:blocked.article_id,status:blocked.status,error:blocked.error}]}}];
 const image=targets.find(r=>r.status==='image_pending');
@@ -48,3 +51,4 @@ return [{json:{...base,staged,complete:completed===targetCount,action:'finished'
 // Only the selected identifiers cross the sub-workflow boundary.
 const keep=['batch','completed','target','requestedTotal','action','workflowId','article_id','revision','approved_by','scheduled_at','complete','staged','reason','used','pending'];
 return chooseNextAction().map(({json})=>({json:Object.fromEntries([...keep,...(json.action==='repair'?['id','status','previous_status','error','topic_map_json','reserved_usd']:[])].filter(key=>json[key]!==undefined).map(key=>[key,json[key]]))}));
+
