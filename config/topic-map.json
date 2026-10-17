@@ -387,6 +387,28 @@
       ]
     },
     {
+      "articleId": "docs-guide-143346-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "docs-answer-143346",
+      "status": "published",
+      "title": "구글 문서 도구 파일 인쇄하기: PC에서 바로 출력하는 방법",
+      "coreQuestion": "구글 문서 도구 파일 인쇄하기: PC에서 바로 출력하는 방법",
+      "scope": "Google Docs 문서를 컴퓨터에서 인쇄하는 기본 순서와, 페이지 형식·페이지 없음 형식에서 달라지는 점을 함께 정리합니다. 인쇄 전 확인할 설정도 같이 볼 수 있습니다.",
+      "coverage": [
+        "먼저 인쇄 흐름부터 잡기",
+        "페이지 형식과 페이지 없음 구분하기",
+        "인쇄 전에 맞춰 볼 설정",
+        "출력 결과를 보고 판단하기",
+        "인쇄가 어색할 때 다시 볼 순서"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "구글 문서 도구 파일 인쇄하기: PC에서 바로 출력하는 방법"
+      ]
+    },
+    {
       "articleId": "docs-guide-1663349-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1609,6 +1631,23 @@
           "outOfScope": [],
           "aliases": [
             "Google Sheets 스마트 칩에서 데이터 추출하기: PC에서 새 열로 꺼내는 방법"
+          ]
+        },
+        {
+          "articleId": "docs-guide-143346-20261016",
+          "intentKey": "docs-answer-143346",
+          "coreQuestion": "구글 문서 도구 파일 인쇄하기: PC에서 바로 출력하는 방법",
+          "scope": "Google Docs 문서를 컴퓨터에서 인쇄하는 기본 순서와, 페이지 형식·페이지 없음 형식에서 달라지는 점을 함께 정리합니다. 인쇄 전 확인할 설정도 같이 볼 수 있습니다.",
+          "coverage": [
+            "먼저 인쇄 흐름부터 잡기",
+            "페이지 형식과 페이지 없음 구분하기",
+            "인쇄 전에 맞춰 볼 설정",
+            "출력 결과를 보고 판단하기",
+            "인쇄가 어색할 때 다시 볼 순서"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "구글 문서 도구 파일 인쇄하기: PC에서 바로 출력하는 방법"
           ]
         },
         {
