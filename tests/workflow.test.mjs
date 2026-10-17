@@ -11,6 +11,14 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('compact image repair dispatch reloads the actual review instead of calling the writer',()=>{
+ const draft={...row,id:37,article_id:'compact-visual-repair',status:'needs_review',revision:2,reserved_usd:0,character_count:4000,body_markdown:'보존할 원고',error:'Editorial review: ["이미지 3: 가짜 글자"]',image_prompt:'["scene one","scene two","replacement scene"]',images_json:'[{"url":"one"},{"url":"two"},{"url":"three"}]',topic_map_json:JSON.stringify({batchId:'additional-70-20261016',reviewIssues:{revision:2,type:'images',responseId:'accepted-review'},imageReplacementPlan:{responseId:'accepted-review',indexes:[3]}})};
+ const compact=run('batch-router',[draft])[0].json;assert.equal(compact.action,'repair_images');assert.equal(compact.error,undefined);
+ const scope=run('identify-repair-scope',[compact])[0].json;assert.equal(scope.imageOnlyRepair,true);
+ const replacement=run('prepare-existing-draft',[draft],{'Batch Input':scope})[0].json;assert.equal(replacement.body_markdown,draft.body_markdown);assert.equal(replacement.status,'text_ready');assert.equal(JSON.parse(replacement.images_json).length,2);assert.equal(replacement.reserved_usd,.003);assert.equal(JSON.parse(replacement.topic_map_json).factCorrectionAttempts,undefined);
+ assert.equal(run('prepare-existing-draft',[{...draft,error:'Editorial review: ["본문이 근거와 다릅니다."]',topic_map_json:'{}'}],{'Batch Input':scope}).length,0);
+});
+
 test('exhausted paragraph or image repairs cannot fall back to a full paid rewrite',()=>{
  for(const error of ['Editorial review: ["이미지 3: 문제가 남음"]','근거가 본문을 뒷받침하지 못합니다.']){
   const item={...row,id:74,article_id:'bounded-repair',status:'needs_review',character_count:4000,body_markdown:'이미 작성한 본문입니다. '.repeat(400),openai_response_id:'accepted',reserved_usd:0,error,topic_map_json:JSON.stringify({batchId:'additional-70-20261016',automaticWritingAttempts:1,factCorrectionAttempts:2,imageRepairAttempts:2,reviewIssues:{revision:1,type:'images'}}),revision:1};
@@ -135,7 +143,7 @@ test('batch coordinator persists waits and isolates full-table reads in a short 
  const delay=(action,iteration)=>vm.runInNewContext(wait.parameters.amount.slice(3,-2).trim(),{$runIndex:iteration,$json:{previous_action:action}});
  assert.equal(delay('generate',0),1);assert.equal(delay('review',1),1);assert.equal(delay('images',2),5);assert.equal(delay('publish',3),20);assert.equal(delay('wait',4),10);
  assert.equal(delay('generate',7),70);assert.equal(delay('images',15),70);
- const checkpoint=router.nodes.find(n=>n.name==='Keep Batch Checkpoint').parameters.assignments.assignments;assert.equal(checkpoint.find(a=>a.name==='runner_version').value,'paced-v1');
+ const checkpoint=router.nodes.find(n=>n.name==='Keep Batch Checkpoint').parameters.assignments.assignments;assert.equal(checkpoint.find(a=>a.name==='runner_version').value,'paced-v2');
  assert.equal(router.nodes.filter(n=>n.type==='n8n-nodes-base.dataTable'&&n.parameters.operation==='get').length,0);
  const action=router.nodes.find(n=>n.name==='Choose Next Safe Action');assert.equal(action.type,'n8n-nodes-base.executeWorkflow');
  const helper=workflows.find(w=>w.id===action.parameters.workflowId.value);
@@ -147,7 +155,7 @@ test('batch coordinator persists waits and isolates full-table reads in a short 
 test('a legacy runner finishes before another paid stage while a paced runner proceeds',()=>{
  const candidate={...row,id:37,article_id:'next-row',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
  const old=run('batch-router',[candidate],{'Batch Input':{checkpoint_at:'2026-10-17T08:30:00Z'}})[0].json;assert.equal(old.action,'finished');assert.equal(old.complete,false);assert.match(old.reason,/safe handoff/);
- const next=run('batch-router',[candidate],{'Batch Input':{checkpoint_at:'2026-10-17T08:30:00Z',runner_version:'paced-v1'}})[0].json;assert.equal(next.action,'generate');
+ const next=run('batch-router',[candidate],{'Batch Input':{checkpoint_at:'2026-10-17T08:30:00Z',runner_version:'paced-v2'}})[0].json;assert.equal(next.action,'generate');
 });
 
 test('70 article batch is isolated, counts only its own publications and includes all monthly reservations',()=>{
