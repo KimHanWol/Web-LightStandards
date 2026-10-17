@@ -62,6 +62,28 @@
       "title": "크롬 캐시 삭제 방법: PC·모바일에서 지울 항목 고르기"
     },
     {
+      "articleId": "chrome-guide-10051760-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "chrome-answer-10051760",
+      "status": "published",
+      "title": "Chrome에서 탭 공유하기: 다른 사람과 보내고 내 기기로 전송하는 방법",
+      "coreQuestion": "Chrome에서 탭 공유하기: 다른 사람과 보내고 내 기기로 전송하는 방법",
+      "scope": "Chrome에서 현재 탭을 다른 사람에게 보내는 방법과 QR 코드 공유, 같은 Google 계정으로 로그인한 다른 기기에 탭을 전송하는 순서를 PC 기준으로 정리합니다.",
+      "coverage": [
+        "먼저 공유 목적을 구분하세요",
+        "다른 사람에게 현재 탭 보내기",
+        "내 다른 기기로 탭 전송하기",
+        "QR 코드로 탭 공유하기",
+        "공유가 잘못되지 않았는지 확인하는 순서"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Chrome에서 탭 공유하기: 다른 사람과 보내고 내 기기로 전송하는 방법"
+      ]
+    },
+    {
       "articleId": "chrome-guide-11032183-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1756,6 +1778,23 @@
             "크롬 캐시 지우기",
             "크롬 임시 파일 삭제",
             "크롬 캐시 삭제 방법: PC·모바일에서 지울 항목 고르기"
+          ]
+        },
+        {
+          "articleId": "chrome-guide-10051760-20261016",
+          "intentKey": "chrome-answer-10051760",
+          "coreQuestion": "Chrome에서 탭 공유하기: 다른 사람과 보내고 내 기기로 전송하는 방법",
+          "scope": "Chrome에서 현재 탭을 다른 사람에게 보내는 방법과 QR 코드 공유, 같은 Google 계정으로 로그인한 다른 기기에 탭을 전송하는 순서를 PC 기준으로 정리합니다.",
+          "coverage": [
+            "먼저 공유 목적을 구분하세요",
+            "다른 사람에게 현재 탭 보내기",
+            "내 다른 기기로 탭 전송하기",
+            "QR 코드로 탭 공유하기",
+            "공유가 잘못되지 않았는지 확인하는 순서"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Chrome에서 탭 공유하기: 다른 사람과 보내고 내 기기로 전송하는 방법"
           ]
         },
         {
