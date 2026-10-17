@@ -11,6 +11,14 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('exhausted paragraph or image repairs cannot fall back to a full paid rewrite',()=>{
+ for(const error of ['Editorial review: ["이미지 3: 문제가 남음"]','근거가 본문을 뒷받침하지 못합니다.']){
+  const item={...row,id:74,article_id:'bounded-repair',status:'needs_review',character_count:4000,body_markdown:'이미 작성한 본문입니다. '.repeat(400),openai_response_id:'accepted',reserved_usd:0,error,topic_map_json:JSON.stringify({batchId:'additional-70-20261016',automaticWritingAttempts:1,factCorrectionAttempts:2,imageRepairAttempts:2,reviewIssues:{revision:1,type:'images'}}),revision:1};
+  assert.equal(run('batch-router',[item])[0].json.action,'finished');
+  assert.equal(run('select-draft',[item],{Configuration:{...config,batch_mode:true,target_article_id:item.article_id}}).length,0);
+ }
+});
+
 test('confirmed recovery clears only the inspected provider hold before resuming',()=>{
  const completed={...row,id:73,article_id:'chrome-guide-95472-20261016',status:'needs_review',revision:4,character_count:4000,error:'',image_prompt:'["a","b","c"]',images_json:'[{},{},{}]',topic_map_json:JSON.stringify({batchId:'additional-70-20261016',providerUnavailable:{receiptExecutionId:'4449'}})};
  const action=run('batch-router',[completed])[0].json;assert.equal(action.action,'repair');assert.equal(action.status,'needs_review');
@@ -113,7 +121,7 @@ test('batch action crosses the workflow boundary without full article payloads',
  assert.equal(action.article_id,item.article_id);assert.equal(action.action,'generate');
  assert.equal(action.sources_json,undefined);assert.equal(action.body_markdown,undefined);assert.equal(action.publish_payload,undefined);
  assert.ok(JSON.stringify(action).length<1000);
- const held={...item,status:'needs_review',error:'Confirmed response needs correction',openai_response_id:'confirmed',reserved_usd:0};
+ const held={...item,status:'needs_review',body_markdown:'',error:'Confirmed response needs correction',openai_response_id:'confirmed',reserved_usd:0};
  const correction=run('batch-router',[held])[0].json;
  assert.equal(correction.action,'repair');assert.equal(correction.id,held.id);
  assert.equal(JSON.parse(correction.topic_map_json).batchId,'additional-70-20261016');

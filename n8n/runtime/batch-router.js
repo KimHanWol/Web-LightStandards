@@ -51,7 +51,7 @@ const completion=targets.find(r=>r.status==='needs_review'&&r.error&&r.openai_re
 if(completion)return [{json:{...base,...completion,action:'generate',workflowId:'HUqCE3BE3JSNPhI3'}}];
 const ready=targets.find(r=>r.status==='ready'&&Number(mapOf(r).automaticWritingAttempts||0)<2);
 if(ready)return [{json:{...base,...ready,action:'generate',workflowId:'HUqCE3BE3JSNPhI3'}}];
-const repair=targets.find(r=>r.status==='needs_review'&&r.error&&r.openai_response_id&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).automaticWritingAttempts||0)<2);
+const repair=targets.find(r=>r.status==='needs_review'&&r.error&&r.openai_response_id&&Number(r.reserved_usd||0)===0&&String(r.body_markdown||'').length<2000&&Number(mapOf(r).automaticWritingAttempts||0)<2);
 if(repair)return [{json:{...base,...repair,action:'repair',status:'ready',error:'',topic_map_json:JSON.stringify({...mapOf(repair),repairFeedback:repair.error})}}];
 const staged=targets.filter(r=>r.status==='approved').length;
 return [{json:{...base,staged,complete:completed===targetCount,action:'finished',reason:completed===targetCount?'All requested articles published':stageOnly&&completed+staged===targetCount?'All requested snapshots approved; awaiting batch publication':'No safely executable rows; inspect failed article checks',pending:targets.filter(r=>r.status!=='published').map(r=>({id:r.article_id,status:r.status,error:r.error}))}}];
