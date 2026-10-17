@@ -131,13 +131,23 @@ test('batch coordinator persists waits and isolates full-table reads in a short 
  const workflows=JSON.parse(readFileSync(new URL('../n8n/generated/current-workflows.json',import.meta.url),'utf8'));
  const router=workflows.find(w=>w.id==='thOXjRSewyYeWfRS');
  assert.ok(router.settings.saveExecutionProgress);
- const wait=router.nodes.find(n=>n.name==='Wait Before State Check');assert.equal(wait.parameters.unit,'seconds');assert.ok(wait.parameters.amount>=65);
+ const wait=router.nodes.find(n=>n.name==='Wait Before State Check');assert.equal(wait.parameters.unit,'seconds');
+ const delay=(action,iteration)=>vm.runInNewContext(wait.parameters.amount.slice(3,-2).trim(),{$runIndex:iteration,$json:{previous_action:action}});
+ assert.equal(delay('generate',0),1);assert.equal(delay('review',1),1);assert.equal(delay('images',2),5);assert.equal(delay('publish',3),20);assert.equal(delay('wait',4),10);
+ assert.equal(delay('generate',7),70);assert.equal(delay('images',15),70);
+ const checkpoint=router.nodes.find(n=>n.name==='Keep Batch Checkpoint').parameters.assignments.assignments;assert.equal(checkpoint.find(a=>a.name==='runner_version').value,'paced-v1');
  assert.equal(router.nodes.filter(n=>n.type==='n8n-nodes-base.dataTable'&&n.parameters.operation==='get').length,0);
  const action=router.nodes.find(n=>n.name==='Choose Next Safe Action');assert.equal(action.type,'n8n-nodes-base.executeWorkflow');
  const helper=workflows.find(w=>w.id===action.parameters.workflowId.value);
  assert.ok(helper.nodes.some(n=>n.type==='n8n-nodes-base.dataTable'&&n.parameters.returnAll));
  assert.ok(!helper.nodes.some(n=>/openAi|httpRequest|scheduleTrigger/.test(n.type)));
  assert.ok(helper.settings.executionTimeout<=120);
+});
+
+test('a legacy runner finishes before another paid stage while a paced runner proceeds',()=>{
+ const candidate={...row,id:37,article_id:'next-row',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
+ const old=run('batch-router',[candidate],{'Batch Input':{checkpoint_at:'2026-10-17T08:30:00Z'}})[0].json;assert.equal(old.action,'finished');assert.equal(old.complete,false);assert.match(old.reason,/safe handoff/);
+ const next=run('batch-router',[candidate],{'Batch Input':{checkpoint_at:'2026-10-17T08:30:00Z',runner_version:'paced-v1'}})[0].json;assert.equal(next.action,'generate');
 });
 
 test('70 article batch is isolated, counts only its own publications and includes all monthly reservations',()=>{

@@ -10,6 +10,9 @@ const targets=rows.filter(r=>(newBatch?mapOf(r).batchId===newBatchId:((Number(r.
 const completed=targets.filter(r=>r.status==='published').length;
 const stageOnly=false;
 const base={batch:newBatch?newBatchId:'additional-30-20261015',completed,target:targetCount,requestedTotal:targetCount+(newBatch?34:2)};
+// Older in-flight coordinators finish at a read-only boundary before a paced restart.
+const runnerInput=$('Batch Input').first().json||{};
+if(runnerInput.checkpoint_at&&runnerInput.runner_version!=='paced-v1')return [{json:{...base,action:'finished',complete:false,reason:'Coordinator pacing upgrade: safe handoff before another paid stage'}}];
 const month=$now.setZone('Asia/Seoul').toFormat('yyyy-MM');
 const today=$now.setZone('Asia/Seoul').toFormat('yyyy-MM-dd');
 const used=rows.filter(r=>r.budget_month===month).reduce((s,r)=>s+Number(r.actual_usd||0)+Number(r.reserved_usd||0),0);
