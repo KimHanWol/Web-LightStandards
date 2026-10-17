@@ -11,6 +11,36 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('three and four image plans stop generation at the planned count and reserve only missing images',()=>{
+ for(const target of [3,4]){
+  let current={...row,image_prompt:JSON.stringify(Array.from({length:target},(_,i)=>'Scene '+i)),images_json:'[]',actual_usd:0,reserved_usd:target*.003};
+  for(let i=0;i<target;i++){
+   current=run('parse-image',[{images:[{url:'https://fal.media/planned-'+i+'.png'}]}],{'Select Image Request':current})[0].json;
+   assert.equal(JSON.parse(current.images_json).length,i+1);
+   assert.equal(current.status,i===target-1?'needs_review':'image_more_needed');
+   assert.ok(Math.abs(current.reserved_usd-(target-i-1)*.003)<1e-9);
+  }
+  assert.ok(Math.abs(current.actual_usd-target*.003)<1e-9);
+  assert.throws(()=>run('parse-image',[{images:[{url:'https://fal.media/extra.png'}]}],{'Select Image Request':current}),/remaining illustration/);
+  const article={...current,article_id:'actual-plan-'+target,status:'needs_review',revision:1,title:'근거에 따른 검토 대상 원고',character_count:4000,error:'',sources_json:JSON.stringify(sources)};
+  const selected=run('select-review',[article],{Configuration:{article_id:article.article_id,revision:1,approved_by:'Offline check'}})[0].json;
+  const schema=JSON.parse(selected.imageReviewSchema);
+  assert.equal(schema.properties.imageAlts.minItems,target);assert.equal(schema.properties.imageAlts.maxItems,target);
+  assert.equal(schema.properties.replacementPrompts.items.properties.index.maximum,target);
+ }
+});
+
+test('licensed photos fill a three-image plan before generated fallback is requested',()=>{
+ const candidate={id:'licensed-id',url:'https://live.staticflickr.com/123/photo_b.jpg',title:'Relevant scene',creator:'Photographer',pageUrl:'https://www.flickr.com/photos/author/123',license:'by',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',provider:'flickr'};
+ const prepared={...row,image_prompt:'["a","b","c"]',images_json:JSON.stringify([1,2].map(i=>({url:'https://fal.media/accepted-'+i+'.png',generated:true}))),body_markdown:'## 확인\n\n설명',candidates:[candidate],actual_usd:.1,reserved_usd:.003,topic_map_json:JSON.stringify({stockSearch:{checkedAt:'2026-10-17T00:00:00.000Z'}})};
+ const response={model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:10,output_tokens:10},output:[{content:[{type:'output_text',text:{selected:[{index:0,alt:'실제 관련 사진',caption:'설명에 필요한 자료 사진',sectionHeading:'확인'}]}}]}]};
+ const result=run('merge-photo-selection',[response],{'Filter Photo Candidates':prepared})[0].json;
+ assert.equal(result.status,'needs_review');assert.equal(result.reserved_usd,0);
+ const photos=JSON.parse(result.images_json);assert.equal(photos.length,3);assert.equal(photos[2].generated,false);assert.equal(photos[2].stock.creator,candidate.creator);
+ const brief=JSON.parse(run('build-photo-review-request',[prepared],{'Filter Photo Candidates':prepared})[0].json.photoRequestBody);
+ assert.equal(brief.text.format.schema.properties.selected.maxItems,1);
+});
+
 test('user-confirmed funding recovers only the inspected rejected request once',()=>{
  const declined={...row,id:73,article_id:'chrome-guide-95472-20261016',status:'image_uncertain',revision:2,images_json:'[{}]',fal_request_id:'',reserved_usd:.012,topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
  const action=run('batch-router',[declined])[0].json;
@@ -75,7 +105,7 @@ test('70 article batch is isolated, counts only its own publications and include
 });
 
 test('review budget and daily caps terminate the batch instead of polling refused calls',()=>{
- const candidate={...row,id:37,article_id:'new-requested',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'}),status:'needs_review',error:'',character_count:4000,images_json:JSON.stringify([1,2,3,4,5])};
+ const candidate={...row,id:37,article_id:'new-requested',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'}),status:'needs_review',error:'',character_count:4000,image_prompt:JSON.stringify([1,2,3,4,5]),images_json:JSON.stringify([1,2,3,4,5])};
  const cost={...row,id:2,article_id:'ledger',status:'cost_uncertain',budget_month:'2026-10',actual_usd:6.95,reserved_usd:.03};
  assert.match(run('batch-router',[cost,candidate])[0].json.reason,/before review/);
  const dayRows=Array.from({length:40},(_,i)=>({...row,id:100+i,article_id:'old-'+i,status:'published',generation_day:'2026-10-13'}));
@@ -119,7 +149,7 @@ test('queued and rejected empty drafts do not masquerade as existing articles',(
 });
 test('draft validation accepts parsed n8n JSON objects and raw API JSON strings',()=>{
   const markdown=['## 첫 확인','## 다음 확인','## 마지막 확인'].map((heading,index)=>heading+'\n\n'+Array.from({length:20},(_,paragraph)=>`${index}-${paragraph} 검증 자료에서 확인한 조건과 적용 범위를 구체적으로 설명합니다. `.repeat(4)).join('\n\n')).join('\n\n')+'\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
-  const draft={canWrite:true,title:'서로 다른 조건을 확인하는 검증용 원고',description:'실제 게시하지 않는 응답 형식 검증용 원고의 설명입니다.',markdown,imagePrompts:Array.from({length:5},(_,i)=>'Distinct educational still life scene '+i+' without words or logos.')};
+  const draft={canWrite:true,title:'서로 다른 조건을 확인하는 검증용 원고',description:'실제 게시하지 않는 응답 형식 검증용 원고의 설명입니다.',markdown,imagePrompts:Array.from({length:3},(_,i)=>'Distinct educational still life scene '+i+' without words or logos.')};
   for(const text of [draft,JSON.stringify(draft)]){
     const response={id:'response-fixture',model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:100,output_tokens:1000},output:[{content:[{type:'output_text',text}]}]};
     const result=run('parse-draft',[response],{'Select Draft':{...row,actual_usd:.004},Configuration:{input_usd_per_million:.75,cached_input_usd_per_million:.075,output_usd_per_million:4.5}})[0].json;
@@ -133,8 +163,8 @@ test('draft, independent review, approval and routing agree on the 3500 minimum'
  const prefix='## 시작\n\n## 실행\n\n## 결과\n\n[첫 근거](https://example.com/1) [둘째 근거](https://example.com/2)';
  for(const size of [3499,3500,4000]){
   const markdown=prefix+'\n\n'+'가'.repeat(size-[...plainText(prefix)].length-1);
-  const article={...row,id:35,article_id:'windows-screenshots-20261016',intent_key:'screenshots',revision:1,title:'길이 경계를 확인하는 검증용 원고',description:'실제로 발행하거나 유료 생성하지 않는 길이 경계 검사입니다.',body_markdown:markdown,character_count:size,status:'needs_review',images_json:JSON.stringify(Array.from({length:5},(_,i)=>({url:'https://fal.media/fixture-'+i+'.png',alt:'검증용 이미지',generated:true}))),error:'',reserved_usd:0};
-  const draft={canWrite:true,title:article.title,description:article.description,markdown,imagePrompts:Array.from({length:5},(_,i)=>'Distinct physical objects for educational scene '+i+' without lettering.')};
+  const article={...row,id:35,article_id:'windows-screenshots-20261016',intent_key:'screenshots',revision:1,title:'길이 경계를 확인하는 검증용 원고',description:'실제로 발행하거나 유료 생성하지 않는 길이 경계 검사입니다.',body_markdown:markdown,character_count:size,status:'needs_review',image_prompt:JSON.stringify([1,2,3]),images_json:JSON.stringify(Array.from({length:3},(_,i)=>({url:'https://fal.media/fixture-'+i+'.png',alt:'검증용 이미지',generated:true}))),error:'',reserved_usd:0};
+  const draft={canWrite:true,title:article.title,description:article.description,markdown,imagePrompts:Array.from({length:3},(_,i)=>'Distinct physical objects for educational scene '+i+' without lettering.')};
   const response={id:'fixture-response',model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:100,output_tokens:100},output:[{content:[{type:'output_text',text:draft}]}]};
   const parsed=run('parse-draft',[response],{'Select Draft':article,Configuration:{input_usd_per_million:.75,cached_input_usd_per_million:.075,output_usd_per_million:4.5}})[0].json;
   assert.equal(parsed.character_count,size);assert.equal(parsed.error,size<3500?'Body length check failed':'');
@@ -183,7 +213,7 @@ test('fal receipt validation works without URL global and rejects credentials se
 });
 
 test('image receipts accumulate to five scenes without duplicate charges',()=>{
-  let current={...row,images_json:'[]',actual_usd:0.01,reserved_usd:0.015};
+  let current={...row,image_prompt:JSON.stringify([1,2,3,4,5]),images_json:'[]',actual_usd:0.01,reserved_usd:0.015};
   for(let index=0;index<5;index++){
     const receipt={images:[{url:'https://fal.media/image-'+index+'.png'}],has_nsfw_concepts:[false]};
     current=run('parse-image',[receipt],{'Select Image Request':current})[0].json;
@@ -243,13 +273,13 @@ test('category input separates queued scopes from completed same-category and cr
  const queued={...row,id:3,article_id:'queued',intent_key:'queued-intent',keyword:'대기 질문',category:'IT·디지털'};
  const navigation_sections_json=JSON.stringify([{label:'IT·디지털',articleCategories:['문서 작업','IT·디지털']}]);
  const brief=JSON.parse(run('select-draft',[current,existing,queued],{Configuration:{...config,navigation_sections_json}})[0].json.brief);
- assert.equal(brief.categoryTopicMap.existingTopics[0].articleId,'actual');assert.equal(brief.categoryTopicMap.plannedTopics[0].articleId,'queued');assert.equal(brief.categoryTopicMap.plannedTopics[0].status,'planned');
+ assert.equal(brief.categoryTopicMap.existingTopicIds[0],'actual');assert.equal(brief.categoryTopicMap.plannedTopics[0].articleId,'queued');assert.equal(brief.categoryTopicMap.plannedTopics[0].status,'planned');
 });
 
 test('stock selection keeps accepted images and uses only real licensed candidate metadata',()=>{
  const accepted=Array.from({length:4},(_,i)=>({url:'https://fal.media/accepted-'+i+'.png',alt:'검토한 기존 장면 '+i,generated:true}));
  const candidate={id:'actual-photo-id',url:'https://live.staticflickr.com/123/photo_b.jpg',title:'Laundry dryer',creator:'Actual photographer',pageUrl:'https://www.flickr.com/photos/author/123',license:'by',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',provider:'flickr'};
- const prepared={...row,status:'text_ready',images_json:JSON.stringify(accepted),body_markdown:'## 필터 확인\n\n본문',candidates:[candidate],photoQuery:'clothes dryer',actual_usd:.1,reserved_usd:.003,topic_map_json:JSON.stringify({stockSearch:{checkedAt:'2026-10-15T08:00:00.000Z'}})};
+ const prepared={...row,image_prompt:JSON.stringify([1,2,3,4,5]),status:'text_ready',images_json:JSON.stringify(accepted),body_markdown:'## 필터 확인\n\n본문',candidates:[candidate],photoQuery:'clothes dryer',actual_usd:.1,reserved_usd:.003,topic_map_json:JSON.stringify({stockSearch:{checkedAt:'2026-10-15T08:00:00.000Z'}})};
  const response={id:'actual-response',model:'gpt-5.4-mini-2026-03-17',status:'completed',usage:{input_tokens:100,output_tokens:50},output:[{content:[{type:'output_text',text:JSON.stringify({selected:[{index:0,alt:'세탁실에 놓인 의류 건조기',caption:'건조기 관리를 설명하는 자료 사진입니다.',sectionHeading:'필터 확인'}]})}]}]};
  const out=run('merge-photo-selection',[response],{'Filter Photo Candidates':prepared})[0].json;
  const images=JSON.parse(out.images_json);

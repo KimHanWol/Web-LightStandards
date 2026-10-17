@@ -11,9 +11,12 @@ test('3500 is accepted while 3499 and padding with a long URL are rejected',()=>
 });
 test('untrusted markup and media cannot enter published content',()=>{assert.throws(()=>validateArticle({...fixture(),markdown:fixture().markdown+'<script>alert(1)</script>'}),/Raw HTML/);assert.throws(()=>validateArticle({...fixture(),articleId:'../escape'}));const html=renderMarkdown('[unsafe](javascript:alert(1)) <script>alert(1)</script>');assert.ok(!html.includes('javascript:'));assert.ok(!html.includes('<script'));assert.ok(!allowedMedia('https://fal.media.evil.example/a.png'));assert.ok(!allowedMedia('http://fal.media/a.png'));assert.ok(!allowedMedia('https://user@fal.media/a.png'));assert.ok(allowedMedia('https://v3.fal.media/files/a.png'));});
 test('visible character count excludes Markdown URLs and formatting',()=>{assert.equal(plainText('## 제목\n\n[설명](https://example.com/very-long-link)'), '제목 설명');});
-test('removing unwanted images requires an explicit reviewed exception',()=>{
+test('current policy accepts three or four images and preserves legacy published articles',()=>{
   const article={...fixture(),images:fixture().images.slice(0,3)};
-  assert.throws(()=>validateArticle(article),/editorial exception/);
+  assert.equal(validateArticle({...article,imagePolicy:'3-default-4-max'}).images.length,3);
+  assert.equal(validateArticle({...fixture(),images:fixture().images.slice(0,4),imagePolicy:'3-default-4-max'}).images.length,4);
+  assert.throws(()=>validateArticle({...fixture(),imagePolicy:'3-default-4-max'}),/three or four/);
+  assert.equal(validateArticle(fixture()).images.length,5);
   assert.equal(validateArticle({...article,imageCountException:'사용자가 불필요한 도움말 문장 캡처 제거를 요청하여 기존 설명 이미지 3장만 유지합니다.'}).images.length,3);
   assert.throws(()=>validateArticle({...article,images:article.images.slice(0,2),imageCountException:'검토한 이미지 편집 예외입니다.'}));
 });

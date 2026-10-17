@@ -5,8 +5,8 @@ if(!row||row.status!=='needs_review'||Number(row.revision)!==Number(c.revision))
 if(row.article_id.startsWith('test-'))throw new Error('Test articles cannot be approved for publication');
 if(row.error||Number(row.character_count)<3500)throw new Error('Resolve editorial errors before approval');
 const images=JSON.parse(row.images_json||'[]'),sources=JSON.parse(row.sources_json||'[]'),affiliates=JSON.parse(row.affiliate_json||'[]');
-if(images.length<5||images.length>8||sources.length<2||!sources.every(s=>s.reviewed===true))throw new Error('Review at least five images and sources first');
+if(images.length<3||images.length>Math.min(5,Math.max(3,JSON.parse(row.image_prompt||'[]').length))||sources.length<2||!sources.every(s=>s.reviewed===true))throw new Error('Review the three-to-four image plan and sources first');
 const date=c.scheduled_at?new Date(c.scheduled_at):new Date();if(!Number.isFinite(date.getTime()))throw new Error('Invalid scheduled date');
 const at=new Date().toISOString();
-const payload={articleId:row.article_id,intentKey:row.intent_key,title:row.title,description:row.description,category:row.category,markdown:row.body_markdown,revision:Number(row.revision),approvedRevision:Number(row.revision),approvedBy:c.approved_by,approvedAt:at,publishedAt:date.toISOString(),sources:sources.map(({title,url,checkedAt})=>({title,url,checkedAt})),images,affiliates,demo:false};
+const payload={articleId:row.article_id,intentKey:row.intent_key,title:row.title,description:row.description,category:row.category,markdown:row.body_markdown,revision:Number(row.revision),approvedRevision:Number(row.revision),approvedBy:c.approved_by,approvedAt:at,publishedAt:date.toISOString(),sources:sources.map(({title,url,checkedAt})=>({title,url,checkedAt})),images,affiliates,...(JSON.parse(row.image_prompt||'[]').length<=4?{imagePolicy:'3-default-4-max'}:{}),demo:false};
 return [{json:{...row,status:'approved',approved_revision:Number(row.revision),approved_by:c.approved_by,approved_at:at,scheduled_at:date.toISOString(),publish_payload:JSON.stringify(payload,null,2)}}];

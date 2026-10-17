@@ -57,12 +57,12 @@ try {
   const paragraphs=md.split(/\n\s*\n/).map(p=>p.trim()).filter(p=>p.length>100);
   if(new Set(paragraphs).size!==paragraphs.length) throw new Error('Repeated paragraphs');
   const plans=JSON.parse(result.image_prompt);
-  if(plans.length!==5||!plans.every(p=>typeof p==='string'&&p.length>=20&&p.length<=1500))throw new Error('Five distinct image briefs required');
+  if((![3,4].includes(plans.length)&&!((row.completionMode||row.factCorrectionMode)&&plans.length===5))||!plans.every(p=>typeof p==='string'&&p.length>=20&&p.length<=1500))throw new Error('Three image briefs required; a fourth needs a distinct explanatory purpose');
   const topic=JSON.parse(row.topic_map_json||'{}');
   result.topic_map_json=JSON.stringify({...topic,coverage:[...md.matchAll(/^##\s+(.+)$/gm)].map(m=>m[1]),photoSearchQuery:String(draft.photoSearchQuery||row.article_id.replace(/-\d{8}$/,'').replace(/-/g,' ')).trim().slice(0,150)});
   result.images_json=row.completionMode||row.factCorrectionMode?(row.images_json||'[]'):'[]';
   if(!Number.isFinite(input)||!Number.isFinite(output)) throw new Error('Usage could not be reconciled');
-  const remaining=5-JSON.parse(result.images_json).length;
+  const remaining=Math.max(0,plans.length-JSON.parse(result.images_json).length);
   result.status=remaining===0?'needs_review':'text_ready';result.reserved_usd=remaining*.003;
 } catch(e) {result.error=String(e.message).slice(0,1000);}
 return [{json:result}];

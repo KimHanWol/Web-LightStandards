@@ -13,11 +13,11 @@ try{
  const inferred=Array.isArray(review.issues)&&review.issues.every(s=>/^(?:이미지\s*\d+|\d+번\s*이미지|\d+장\s*중)/.test(s))?'images':'text';
  result.topic_map_json=JSON.stringify({...reviewMap,reviewIssues:{revision:Number(row.revision),responseId:response.id,type:review.issueType||(review.approved?'none':inferred)},imageReplacementPlan:{responseId:response.id,indexes:[]}});
  if(review.approved!==true&&Array.isArray(review.replacementPrompts)){
-   const plans=JSON.parse(row.image_prompt||'[]'),replacements=review.replacementPrompts.filter(p=>Number.isInteger(p.index)&&p.index>=1&&p.index<=5&&typeof p.prompt==='string'&&p.prompt.length>=50&&p.prompt.length<=700);
-   if(plans.length===5&&replacements.length){for(const p of replacements)plans[p.index-1]=p.prompt;result.image_prompt=JSON.stringify(plans);result.topic_map_json=JSON.stringify({...JSON.parse(result.topic_map_json||'{}'),imageReplacementPlan:{responseId:response.id,indexes:replacements.map(p=>p.index)}});}
+   const plans=JSON.parse(row.image_prompt||'[]'),replacements=review.replacementPrompts.filter(p=>Number.isInteger(p.index)&&p.index>=1&&p.index<=JSON.parse(row.images_json||'[]').length&&typeof p.prompt==='string'&&p.prompt.length>=50&&p.prompt.length<=700);
+   if(plans.length>=3&&plans.length<=5&&replacements.length){for(const p of replacements)plans[p.index-1]=p.prompt;result.image_prompt=JSON.stringify(plans);result.topic_map_json=JSON.stringify({...JSON.parse(result.topic_map_json||'{}'),imageReplacementPlan:{responseId:response.id,indexes:replacements.map(p=>p.index)}});}
  }
  if(review.approved!==true)throw new Error('Editorial review: '+JSON.stringify(review.issues||[]));
- if(!Array.isArray(review.imageAlts)||review.imageAlts.length!==5||review.imageAlts.some(a=>typeof a!=='string'||a.length<4||a.length>250))throw new Error('Review image descriptions missing');
+ if(!Array.isArray(review.imageAlts)||review.imageAlts.length!==JSON.parse(row.images_json||'[]').length||review.imageAlts.some(a=>typeof a!=='string'||a.length<4||a.length>250))throw new Error('Review image descriptions missing');
  result.images_json=JSON.stringify(JSON.parse(row.images_json).map((image,index)=>({...image,alt:review.imageAlts[index],generated:image.generated!==false})));
  result.reviewPassed=true;
 }catch(e){result.error=String(e.message).slice(0,1000);result.reviewPassed=false;}
