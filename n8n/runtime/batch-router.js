@@ -1,3 +1,4 @@
+const chooseNextAction=()=>{
 const rows=$input.all().map(i=>i.json);
 // Explicitly requested additions join the completed batch; unrelated rows stay excluded.
 const additionalArticleIds=['windows-screenshots-20261016','gmail-schedule-send-20261016'];
@@ -18,6 +19,8 @@ const imageOnly=r=>{try{const review=mapOf(r).reviewIssues;if(Number(review?.rev
 if($runIndex>2400)throw new Error('Batch polling limit reached; inspect state before continuing');
 const publishing=targets.find(r=>['approved','publishing'].includes(r.status));
 if(!stageOnly&&publishing)return [{json:{...base,...publishing,action:'publish',workflowId:'yihoqk3fpBOC8P04'}}];
+const blocked=targets.find(r=>['image_uncertain','provider_blocked'].includes(r.status));
+if(blocked)return [{json:{...base,action:'finished',reason:blocked.status==='provider_blocked'?'Image provider unavailable; payment or account action required':'Image request requires reconciliation; no further paid stages will run',used,pending:[{id:blocked.article_id,status:blocked.status,error:blocked.error}]}}];
 const image=targets.find(r=>r.status==='image_pending');
 if(image)return [{json:{...base,...image,action:'images',workflowId:'FeZGGPZKq5IFwDJ9'}}];
 if(targets.some(r=>['generation_started','image_submitting','review_started','stock_selecting'].includes(r.status)))return [{json:{...base,action:'wait'}}];
@@ -40,3 +43,8 @@ const repair=targets.find(r=>r.status==='needs_review'&&r.error&&r.openai_respon
 if(repair)return [{json:{...base,...repair,action:'repair',status:'ready',error:'',topic_map_json:JSON.stringify({...mapOf(repair),repairFeedback:repair.error})}}];
 const staged=targets.filter(r=>r.status==='approved').length;
 return [{json:{...base,staged,complete:completed===targetCount,action:'finished',reason:completed===targetCount?'All requested articles published':stageOnly&&completed+staged===targetCount?'All requested snapshots approved; awaiting batch publication':'No safely executable rows; inspect failed article checks',pending:targets.filter(r=>r.status!=='published').map(r=>({id:r.article_id,status:r.status,error:r.error}))}}];
+
+};
+// Only the selected identifiers cross the sub-workflow boundary.
+const keep=['batch','completed','target','requestedTotal','action','workflowId','article_id','revision','approved_by','scheduled_at','complete','staged','reason','used','pending'];
+return chooseNextAction().map(({json})=>({json:Object.fromEntries([...keep,...(json.action==='repair'?['id','status','previous_status','error','topic_map_json','reserved_usd']:[])].filter(key=>json[key]!==undefined).map(key=>[key,json[key]]))}));

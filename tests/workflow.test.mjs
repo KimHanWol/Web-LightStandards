@@ -11,6 +11,50 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('uncertain image charges and explicit provider blocks prevent further paid batch stages',()=>{
+ const waiting={...row,id:37,article_id:'waiting',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
+ for(const status of ['image_uncertain','provider_blocked']){
+  const stopped=run('batch-router',[waiting,{...waiting,id:38,article_id:'blocked',status,reserved_usd:.012}])[0].json;
+  assert.equal(stopped.action,'finished');assert.match(stopped.reason,/provider|reconciliation/i);
+ }
+ const approved={...waiting,status:'approved'};
+ assert.equal(run('batch-router',[approved,{...waiting,id:38,article_id:'blocked',status:'provider_blocked'}])[0].json.action,'publish');
+});
+
+test('explicit fal balance rejection is distinct from an uncertain paid request',()=>{
+ const blocked={error:{status:403,message:'User is locked. Reason: Exhausted balance.'},details:{httpCode:'403',body:{detail:'User is locked. Reason: Exhausted balance.'}}};
+ const input={...row,reserved_usd:.012};
+ for(const [file,ref] of [['save-fal-request','Find Free Photos'],['save-next-fal-request','Validate Images']]){
+  const result=run(file,[blocked],{[ref]:input})[0].json;assert.equal(result.status,'provider_blocked');assert.equal(result.reserved_usd,0);assert.match(result.error,/balance/);
+  const uncertain=run(file,[{error:{message:'timeout'}}],{[ref]:input})[0].json;assert.equal(uncertain.status,'image_uncertain');assert.equal(uncertain.reserved_usd,.012);
+ }
+});
+
+test('batch action crosses the workflow boundary without full article payloads',()=>{
+ const item={...row,id:37,article_id:'requested-new',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'}),sources_json:'x'.repeat(100000),body_markdown:'x'.repeat(100000),publish_payload:'x'.repeat(100000)};
+ const action=run('batch-router',[item])[0].json;
+ assert.equal(action.article_id,item.article_id);assert.equal(action.action,'generate');
+ assert.equal(action.sources_json,undefined);assert.equal(action.body_markdown,undefined);assert.equal(action.publish_payload,undefined);
+ assert.ok(JSON.stringify(action).length<1000);
+ const held={...item,status:'needs_review',error:'Confirmed response needs correction',openai_response_id:'confirmed',reserved_usd:0};
+ const correction=run('batch-router',[held])[0].json;
+ assert.equal(correction.action,'repair');assert.equal(correction.id,held.id);
+ assert.equal(JSON.parse(correction.topic_map_json).batchId,'additional-70-20261016');
+});
+
+test('batch coordinator persists waits and isolates full-table reads in a short helper',()=>{
+ const workflows=JSON.parse(readFileSync(new URL('../n8n/generated/current-workflows.json',import.meta.url),'utf8'));
+ const router=workflows.find(w=>w.id==='thOXjRSewyYeWfRS');
+ assert.ok(router.settings.saveExecutionProgress);
+ const wait=router.nodes.find(n=>n.name==='Wait Before State Check');assert.equal(wait.parameters.unit,'seconds');assert.ok(wait.parameters.amount>=65);
+ assert.equal(router.nodes.filter(n=>n.type==='n8n-nodes-base.dataTable'&&n.parameters.operation==='get').length,0);
+ const action=router.nodes.find(n=>n.name==='Choose Next Safe Action');assert.equal(action.type,'n8n-nodes-base.executeWorkflow');
+ const helper=workflows.find(w=>w.id===action.parameters.workflowId.value);
+ assert.ok(helper.nodes.some(n=>n.type==='n8n-nodes-base.dataTable'&&n.parameters.returnAll));
+ assert.ok(!helper.nodes.some(n=>/openAi|httpRequest|scheduleTrigger/.test(n.type)));
+ assert.ok(helper.settings.executionTimeout<=120);
+});
+
 test('70 article batch is isolated, counts only its own publications and includes all monthly reservations',()=>{
  const candidate={...row,id:37,article_id:'new-requested',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
  const old={...row,id:4,article_id:'old-batch',status:'published',budget_month:'2026-10',actual_usd:3.2,reserved_usd:.08};
@@ -124,8 +168,8 @@ test('test-only drafts cannot be approved or selected for publication',()=>{
 });
 test('fal receipt validation works without URL global and rejects credentials sent to other hosts',()=>{
   const receipt={request_id:'abc-123',response_url:'https://queue.fal.run/fal-ai/flux/requests/abc-123',status_url:'https://queue.fal.run/fal-ai/flux/requests/abc-123/status'};
-  assert.equal(run('save-fal-request',[receipt],{'Check Draft':row})[0].json.status,'image_pending');
-  assert.equal(run('save-fal-request',[{...receipt,status_url:receipt.status_url.replace('queue.fal.run','evil.example')}],{'Check Draft':row})[0].json.status,'image_uncertain');
+  assert.equal(run('save-fal-request',[receipt],{'Find Free Photos':row})[0].json.status,'image_pending');
+  assert.equal(run('save-fal-request',[{...receipt,status_url:receipt.status_url.replace('queue.fal.run','evil.example')}],{'Find Free Photos':row})[0].json.status,'image_uncertain');
   assert.throws(()=>run('parse-image',[{images:[{url:'https://fal.media@evil.example/a.webp'}]}],{'Select Image Request':row}),/Unexpected image host/);
 });
 
