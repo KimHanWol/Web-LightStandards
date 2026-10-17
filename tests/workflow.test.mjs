@@ -23,7 +23,11 @@ test('citation repair sends the original paragraphs once and preserves all evide
  const item={...row,id:74,article_id:'citation-repair',status:'needs_review',character_count:4000,body_markdown:manuscript,openai_response_id:'accepted',reserved_usd:0,error:'Sources missing or unexpected links',topic_map_json:JSON.stringify({batchId:'additional-70-20261016',coreQuestion:'독립 질문',providerRecovery:{verbose:'internal state'}})};
  const action=run('batch-router',[item])[0].json;assert.equal(action.action,'generate');
  const selected=run('select-draft',[item],{Configuration:{...config,batch_mode:true,target_article_id:item.article_id}})[0].json;
- const brief=JSON.parse(selected.brief);assert.equal(selected.factCorrectionMode,true);assert.equal(brief.correction.previousMarkdown,undefined);assert.equal(brief.actualParagraphs.map(p=>p.text).join('\n\n'),manuscript);assert.deepEqual(brief.sources,JSON.parse(item.sources_json));assert.equal(brief.candidateTopic.providerRecovery,undefined);assert.equal(brief.existingTitles,undefined);
+ const brief=JSON.parse(selected.brief);assert.equal(selected.factCorrectionMode,true);assert.equal(brief.correction.previousMarkdown,undefined);assert.equal(brief.actualParagraphs.map(p=>p.text).join('\n\n'),manuscript);assert.deepEqual(brief.sources,JSON.parse(item.sources_json));assert.equal(brief.candidateTopic.providerRecovery,undefined);assert.equal(brief.existingTitles,undefined);assert.equal(brief.existingTopics,undefined);assert.equal(brief.categoryTopicMap,undefined);assert.equal(brief.correction.citationCheck.missingSourceUrls.length,2);
+ const retry={...item,error:'Expected specific factual corrections',topic_map_json:JSON.stringify({...JSON.parse(item.topic_map_json),factCorrectionAttempts:1})};
+ assert.equal(run('batch-router',[retry])[0].json.action,'generate');
+ const next=run('select-draft',[retry],{Configuration:{...config,batch_mode:true,target_article_id:item.article_id}})[0].json;assert.equal(next.factCorrectionMode,true);assert.equal(JSON.parse(next.topic_map_json).factCorrectionAttempts,2);
+ assert.equal(run('select-draft',[{...retry,topic_map_json:next.topic_map_json}],{Configuration:{...config,batch_mode:true,target_article_id:item.article_id}}).length,0);
 });
 
 test('compact photo selection reuses the description as caption and retains licensing',()=>{

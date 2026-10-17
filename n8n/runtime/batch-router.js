@@ -43,7 +43,7 @@ if(resumeImages)return [{json:{...base,...resumeImages,action:'resume_images',wo
 if(rows.filter(r=>r.generation_day===today).length>=40)return [{json:{...base,action:'finished',reason:'Daily generation limit reached; no automatic next-day restart',used}}];
 const factRepair=targets.find(r=>r.status==='needs_review'&&r.openai_response_id&&String(r.error||'').startsWith('Editorial review: ')&&Number(r.character_count)>=3500&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).factCorrectionAttempts||0)<2&&!imageOnly(r));
 if(factRepair)return [{json:{...base,...factRepair,action:'generate',workflowId:'HUqCE3BE3JSNPhI3'}}];
-const linkRepair=targets.find(r=>r.status==='needs_review'&&r.error==='Sources missing or unexpected links'&&r.openai_response_id&&Number(r.character_count)>=3500&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).factCorrectionAttempts||0)<2);
+const linkRepair=targets.find(r=>r.status==='needs_review'&&['Sources missing or unexpected links','Expected specific factual corrections'].includes(r.error)&&new Set([...String(r.body_markdown||'').matchAll(/\]\((https?:\/\/[^\s)]+)\)/g)].map(m=>m[1])).size<2&&r.openai_response_id&&Number(r.character_count)>=3500&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).factCorrectionAttempts||0)<2);
 if(linkRepair)return [{json:{...base,...linkRepair,action:'generate',workflowId:'HUqCE3BE3JSNPhI3'}}];
 const imageRepair=targets.find(r=>r.status==='needs_review'&&String(r.error||'').startsWith('Editorial review: ')&&Number(r.character_count)>=3500&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).imageRepairAttempts||0)<2&&imageOnly(r));
 if(imageRepair)return [{json:{...base,...imageRepair,action:'repair_images',workflowId:'HUqCE3BE3JSNPhI3'}}];
