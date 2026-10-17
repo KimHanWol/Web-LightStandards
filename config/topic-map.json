@@ -154,6 +154,29 @@
       ]
     },
     {
+      "articleId": "chrome-guide-95472-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "chrome-answer-95472",
+      "status": "published",
+      "title": "Chrome에서 팝업을 차단 또는 허용하는 방법",
+      "coreQuestion": "Chrome에서 팝업을 차단 또는 허용하는 방법",
+      "scope": "Chrome에서 팝업을 기본 차단하거나 특정 사이트만 허용하는 방법을 PC 기준으로 정리합니다. 차단 표시를 확인하는 법과 계속 뜰 때 함께 볼 알림 설정도 함께 설명합니다.",
+      "coverage": [
+        "먼저 차단과 허용을 구분하기",
+        "PC에서 팝업 허용하기",
+        "특정 사이트만 차단하기",
+        "팝업이 계속 뜰 때 살펴볼 것",
+        "관리 Chrome 기기에서의 제한",
+        "마지막으로 확인할 순서"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Chrome에서 팝업을 차단 또는 허용하는 방법"
+      ]
+    },
+    {
       "articleId": "chrome-notifications-20261015",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1372,6 +1395,24 @@
           "outOfScope": [],
           "aliases": [
             "크롬 기본 검색엔진과 사이트 검색 바로가기 설정하는 방법"
+          ]
+        },
+        {
+          "articleId": "chrome-guide-95472-20261016",
+          "intentKey": "chrome-answer-95472",
+          "coreQuestion": "Chrome에서 팝업을 차단 또는 허용하는 방법",
+          "scope": "Chrome에서 팝업을 기본 차단하거나 특정 사이트만 허용하는 방법을 PC 기준으로 정리합니다. 차단 표시를 확인하는 법과 계속 뜰 때 함께 볼 알림 설정도 함께 설명합니다.",
+          "coverage": [
+            "먼저 차단과 허용을 구분하기",
+            "PC에서 팝업 허용하기",
+            "특정 사이트만 차단하기",
+            "팝업이 계속 뜰 때 살펴볼 것",
+            "관리 Chrome 기기에서의 제한",
+            "마지막으로 확인할 순서"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Chrome에서 팝업을 차단 또는 허용하는 방법"
           ]
         },
         {
