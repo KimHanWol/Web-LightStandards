@@ -1962,7 +1962,8 @@
                 "imageType": "url",
                 "imageUrl": "={{ JSON.parse($('Select Review').first().json.images_json)[3]?.url || '' }}",
                 "imageDetail": "low",
-                "content": "추가 이미지 없음. 실제 첨부된 사진만 검수합니다."
+                "content": "추가 이미지 없음. 실제 첨부된 사진만 검수합니다.",
+                "fileType": "url"
               },
               {
                 "type": "={{ JSON.parse($('Select Review').first().json.images_json).length > 4 ? 'image' : 'text' }}",
@@ -1970,7 +1971,8 @@
                 "imageType": "url",
                 "imageUrl": "={{ JSON.parse($('Select Review').first().json.images_json)[4]?.url || '' }}",
                 "imageDetail": "low",
-                "content": "추가 이미지 없음. 실제 첨부된 사진만 검수합니다."
+                "content": "추가 이미지 없음. 실제 첨부된 사진만 검수합니다.",
+                "fileType": "url"
               }
             ]
           },
