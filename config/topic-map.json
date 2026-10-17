@@ -86,6 +86,26 @@
       ]
     },
     {
+      "articleId": "chrome-guide-14218344-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "chrome-answer-14218344",
+      "status": "published",
+      "title": "Chrome에서 읽기 모드 사용하기: 열기, 고정, 글자·음성 조절까지",
+      "coreQuestion": "Chrome에서 읽기 모드 사용하기: 열기, 고정, 글자·음성 조절까지",
+      "scope": "Chrome 읽기 모드는 웹페이지의 텍스트를 보기 쉽게 정리해 주는 기능입니다. PC에서 여는 방법, 고정해서 쓰는 법, 글꼴·간격·음성 설정, 안 될 때 확인할 점까지 정리합니다.",
+      "coverage": [
+        "읽기 모드 여는 기본 방법",
+        "읽기 모드 화면을 보기 편하게 조절하기",
+        "자주 쓰면 고정하고, 안 되면 조건을 확인하기"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Chrome에서 읽기 모드 사용하기: 열기, 고정, 글자·음성 조절까지"
+      ]
+    },
+    {
       "articleId": "chrome-guide-2664769-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1366,6 +1386,21 @@
           "outOfScope": [],
           "aliases": [
             "Chrome 성능 맞춤설정하기: 메모리·배터리·탭 비활성화 조정법"
+          ]
+        },
+        {
+          "articleId": "chrome-guide-14218344-20261016",
+          "intentKey": "chrome-answer-14218344",
+          "coreQuestion": "Chrome에서 읽기 모드 사용하기: 열기, 고정, 글자·음성 조절까지",
+          "scope": "Chrome 읽기 모드는 웹페이지의 텍스트를 보기 쉽게 정리해 주는 기능입니다. PC에서 여는 방법, 고정해서 쓰는 법, 글꼴·간격·음성 설정, 안 될 때 확인할 점까지 정리합니다.",
+          "coverage": [
+            "읽기 모드 여는 기본 방법",
+            "읽기 모드 화면을 보기 편하게 조절하기",
+            "자주 쓰면 고정하고, 안 되면 조건을 확인하기"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Chrome에서 읽기 모드 사용하기: 열기, 고정, 글자·음성 조절까지"
           ]
         },
         {
