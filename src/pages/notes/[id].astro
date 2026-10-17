@@ -25,7 +25,7 @@ const showSidebar=hasBanners(['article-sidebar-top','article-sidebar-bottom'],ar
 const hasAffiliateContent=article.affiliates.length>0;
 const jsonLd = JSON.stringify({'@context':'https://schema.org','@type':'BlogPosting',headline:article.title,description:article.description,datePublished:article.publishedAt,dateModified:article.approvedAt,author:{'@type':'Organization',name:site.name,url:site.url},mainEntityOfPage:new URL(`/notes/${article.articleId}/`,site.url).href,image:article.images.filter(i=>i.localPath).map(i=>new URL(i.localPath,site.url).href)}).replaceAll('<','\\u003c');
 ---
-<Layout title={article.title} description={article.description}>
+<Layout title={article.title} description={article.description} image={article.images[0]?.localPath} type="article">
   <Fragment slot="head"><script type="application/ld+json" set:html={jsonLd} />{adsEnabled && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossorigin="anonymous"></script>}</Fragment>
   <div class:list={['article-page','wrap',{'with-banner-sidebar':showSidebar}]}>
   <article class="article-layout">

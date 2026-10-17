@@ -1,0 +1,176 @@
+{
+  "reviewedAt": "2026-10-17",
+  "basis": "User-authorized editorial title improvements, matched to published content. No search query performance is available yet.",
+  "articles": {
+    "chrome-guide-10051760-20261016": {
+      "revision": 1,
+      "sourceTitle": "Chrome에서 탭 공유하기: 다른 사람과 보내고 내 기기로 전송하는 방법",
+      "title": "크롬 탭 공유 방법: 링크·QR 코드·다른 기기로 보내기"
+    },
+    "chrome-guide-12929150-20261016": {
+      "revision": 2,
+      "sourceTitle": "Chrome 성능 맞춤설정하기: 메모리·배터리·탭 비활성화 조정법",
+      "title": "크롬 성능 설정: 메모리·배터리 절약 모드 사용법"
+    },
+    "chrome-guide-13514529-20261016": {
+      "revision": 1,
+      "sourceTitle": "크롬 휴대기기 데스크톱 모드 설정: 기본값과 사이트별 예외 관리",
+      "title": "크롬 데스크톱 모드 설정: 안드로이드에서 PC 화면 열기"
+    },
+    "chrome-guide-14218344-20261016": {
+      "revision": 1,
+      "sourceTitle": "Chrome에서 읽기 모드 사용하기: 열기, 고정, 글자·음성 조절까지",
+      "title": "크롬 읽기 모드 사용법: 글자 크기·간격·음성 설정"
+    },
+    "chrome-guide-15086890-20261016": {
+      "revision": 3,
+      "sourceTitle": "Chrome의 Google 렌즈로 검색하는 방법: 탭·이미지·선택 영역으로 찾기",
+      "title": "크롬 구글 렌즈 사용법: 이미지와 화면 일부 검색하기"
+    },
+    "chrome-guide-16971124-20261016": {
+      "revision": 1,
+      "sourceTitle": "Chrome 분할 뷰 사용법: 한 창에서 두 웹사이트를 동시에 보는 방법",
+      "title": "크롬 분할 화면 사용법: 두 웹사이트 나란히 보기"
+    },
+    "dehumidifier-use-20261015": {
+      "revision": 3,
+      "sourceTitle": "제습기 용량과 배치: 방 크기, 습한 정도, 배수까지 같이 보는 법",
+      "title": "제습기 용량 고르기: 방 크기·설치 위치·배수 확인"
+    },
+    "dishwasher-efficient-use-20261015": {
+      "revision": 7,
+      "sourceTitle": "식기세척기 효율적으로 사용하기: 적재·코스·건조 설정을 고르는 기준",
+      "title": "식기세척기 사용법: 식기 넣기·코스 선택·건조 설정"
+    },
+    "docs-guide-10296604-20261016": {
+      "revision": 4,
+      "sourceTitle": "Google 문서에서 페이지 설정 변경하기: 방향·용지·여백 바꾸는 법",
+      "title": "구글 문서 페이지 설정: 용지 방향·크기·여백 바꾸기"
+    },
+    "docs-guide-11526892-20261016": {
+      "revision": 3,
+      "sourceTitle": "구글 문서 도구에서 페이지 나누기와 여백 이동하는 방법",
+      "title": "구글 문서 페이지 나누기와 구역별 여백 설정 방법"
+    },
+    "docs-guide-12319513-20261016": {
+      "revision": 2,
+      "sourceTitle": "Google Sheets에 스마트 칩 삽입하기: PC에서 넣고 확인하는 방법",
+      "title": "구글 스프레드시트 스마트 칩 삽입 방법"
+    },
+    "docs-guide-13524011-20261016": {
+      "revision": 3,
+      "sourceTitle": "Google Sheets 스마트 칩에서 데이터 추출하기: PC에서 새 열로 꺼내는 방법",
+      "title": "구글 스프레드시트 스마트 칩 데이터 추출 방법"
+    },
+    "docs-guide-13820512-20261016": {
+      "revision": 4,
+      "sourceTitle": "Google Docs 줄 번호 사용하기: 페이지 형식에서 표시·재시작·구역 적용하기",
+      "title": "구글 문서 줄 번호 넣기: 표시·재시작·구역별 설정"
+    },
+    "docs-guide-143346-20261016": {
+      "revision": 4,
+      "sourceTitle": "구글 문서 도구 파일 인쇄하기: PC에서 바로 출력하는 방법",
+      "title": "구글 문서 인쇄 방법: PC에서 출력 설정 확인하기"
+    },
+    "docs-guide-1663349-20261016": {
+      "revision": 2,
+      "sourceTitle": "구글 문서 도구에서 단락과 글꼴 모양 바꾸는 방법",
+      "title": "구글 문서 글꼴·단락 서식 변경 방법"
+    },
+    "docs-guide-1694830-20261016": {
+      "revision": 2,
+      "sourceTitle": "구글 슬라이드 추가·삭제·정렬 방법: PC에서 순서까지 정리하기",
+      "title": "구글 슬라이드 추가·삭제·순서 바꾸는 방법"
+    },
+    "docs-guide-2839588-20261016": {
+      "revision": 3,
+      "sourceTitle": "구글 설문지 게시와 응답자 공유 방법: 링크 주기 전에 먼저 볼 것",
+      "title": "구글 설문지 게시·공유 방법: 응답 링크 보내기"
+    },
+    "docs-guide-2917111-20261016": {
+      "revision": 2,
+      "sourceTitle": "구글 문서 도구 공동작업자와 설문지 공유하는 방법",
+      "title": "구글 설문지 공동작업자 추가와 편집 권한 설정"
+    },
+    "docs-guide-37579-20261016": {
+      "revision": 3,
+      "sourceTitle": "Google Docs, Sheets, Slides, Forms를 공개로 설정하는 방법",
+      "title": "구글 문서·시트·슬라이드 웹에 게시하기와 게시 중지"
+    },
+    "docs-guide-49114-20261016": {
+      "revision": 1,
+      "sourceTitle": "구글 문서 도구 파일 만들기, 보기, 다운로드하기 방법 정리",
+      "title": "구글 문서 도구 파일 만들기·열기·다운로드 방법"
+    },
+    "docs-guide-58515-20261016": {
+      "revision": 1,
+      "sourceTitle": "구글 스프레드시트 위치·계산 설정 바꾸기: 언어와 시간대부터 재계산까지",
+      "title": "구글 스프레드시트 지역·시간대·계산 설정 방법"
+    },
+    "docs-guide-6281888-20261016": {
+      "revision": 3,
+      "sourceTitle": "Google 설문지 사용 방법: 만들기부터 응답 확인까지 PC에서 정리하기",
+      "title": "구글 설문지 만들기: 질문 추가부터 응답 확인까지"
+    },
+    "docs-guide-63175-20261016": {
+      "revision": 2,
+      "sourceTitle": "구글 스프레드시트 셀 범위 이름 지정 방법과 수식 활용 기준",
+      "title": "구글 스프레드시트 범위 이름 지정: 만들기·수식에 쓰기·수정"
+    },
+    "docs-guide-97447-20261016": {
+      "revision": 2,
+      "sourceTitle": "구글 문서 도구에서 이미지와 동영상 넣고 지우는 방법",
+      "title": "구글 문서 이미지·슬라이드 동영상 삽입 방법"
+    },
+    "docs-page-numbers-20261015": {
+      "revision": 4,
+      "sourceTitle": "구글 문서 페이지 번호 넣는 법: Pages 형식과 구역별 적용",
+      "title": "구글 문서 페이지 번호 넣기: 페이지 형식과 구역별 설정"
+    },
+    "drive-guide-2375091-20261016": {
+      "revision": 2,
+      "sourceTitle": "구글 드라이브에서 파일 정리하기: 폴더·이동·바로가기까지 쉽게 이해하기",
+      "title": "구글 드라이브 파일 정리: 폴더 만들기·이동·바로가기"
+    },
+    "drive-guide-2494892-20261016": {
+      "revision": 3,
+      "sourceTitle": "구글 드라이브에서 다른 사용자를 내 파일의 소유자로 설정하는 방법",
+      "title": "구글 드라이브 소유권 이전 방법과 제한 조건"
+    },
+    "drive-sharing-permissions-20261015": {
+      "revision": 8,
+      "sourceTitle": "구글 드라이브 공유 권한: 링크 범위와 Viewer·Commenter·Editor 차이",
+      "title": "구글 드라이브 공유 권한: 보기·댓글·편집과 링크 공개 범위"
+    },
+    "mail-guide-18522-20261016": {
+      "revision": 3,
+      "sourceTitle": "Gmail 받은편지함 레이아웃 변경하기: 기본 탭부터 여러 섹션까지",
+      "title": "지메일 받은편지함 레이아웃 변경 방법"
+    },
+    "mail-guide-5900-20261016": {
+      "revision": 2,
+      "sourceTitle": "지메일 이메일을 대화로 그룹화하기: PC에서 보기 방식 바꾸는 법",
+      "title": "지메일 대화형식 설정: 메일 묶음 보기 켜기·끄기"
+    },
+    "mail-guide-6593-20261016": {
+      "revision": 3,
+      "sourceTitle": "Gmail에서 검색하기: 검색창, 칩, 고급검색으로 메일 찾는 법",
+      "title": "지메일 검색 방법: 검색어·검색 옵션·연산자 사용하기"
+    },
+    "photos-export-20261015": {
+      "revision": 6,
+      "sourceTitle": "구글 포토 사진 다운로드 방법: PC에서 개별 저장과 전체 내보내기 구분하기",
+      "title": "구글 포토 사진 다운로드: 개별 저장과 전체 내보내기"
+    },
+    "windows-clipboard-history-20261015": {
+      "revision": 7,
+      "sourceTitle": "윈도우 11 클립보드 기록 켜기부터 삭제까지 한 번에 정리",
+      "title": "윈도우 11 클립보드 기록: 켜기·고정·삭제 방법"
+    },
+    "windows-storage-sense-20261015": {
+      "revision": 2,
+      "sourceTitle": "윈도우 11 저장 공간 정리 방법: Storage Sense 범위와 수동 정리",
+      "title": "윈도우 11 저장 공간 정리: 자동·수동으로 파일 지우기"
+    }
+  }
+}
