@@ -21,3 +21,10 @@
 검증: 자동 테스트 69개, 승인 원고 73개 검증과 사이트 빌드·자원 용량 검사, 수정한 34개 글의 title/H1/og:title/구조화 데이터 일치 확인. 공개 재점검에는 `node scripts/audit-search.mjs`를 쓴다. 개별 응답 상세는 비공개 `.local/search-audit.json`에 저장한다.
 
 기준: https://developers.google.com/search/docs/appearance/title-link?hl=ko
+
+## 배포와 제출 확인
+
+- 변경 커밋 `c459bec9ecb644614be4cc439412adb145b8ca76`, GitHub Actions `39023565722`가 성공했다. 실제 공개 34개 글에서 새 H1 일치를 확인했고 배포 후 90개 URL 응답 검사도 통과했다.
+- 검증한 `sitemap-index.xml`을 한 번 재제출했고 Search Console의 '사이트맵이 제출됨' 확인을 받았다. 제출 접수는 XML 수집 성공이나 색인 완료와 같지 않다.
+- 아직 Google에 알려지지 않은 시험 글 `docs-guide-63175-20261016`에 색인 생성을 한 번 요청했다. '색인 생성 요청됨 / 우선순위 크롤링 대기열에 추가' 확인을 받았다. 반복 제출이나 전체 URL 일괄 요청은 하지 않았다.
+- 계정 화면 증거는 `.local/sitemap-resubmitted-20261017.png`, `.local/index-requested-20261017.png`로 비공개 보관한다. Google의 색인 완료와 사이트맵 정상 처리 여부는 아직 확정하지 못했다.
