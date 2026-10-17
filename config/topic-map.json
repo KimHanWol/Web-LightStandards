@@ -455,6 +455,28 @@
       ]
     },
     {
+      "articleId": "docs-guide-13820512-20261016",
+      "category": "IT·디지털",
+      "categoryId": "digital",
+      "categoryLabel": "IT·디지털",
+      "intentKey": "docs-answer-13820512",
+      "status": "published",
+      "title": "Google Docs 줄 번호 사용하기: 페이지 형식에서 표시·재시작·구역 적용하기",
+      "coreQuestion": "Google Docs 줄 번호 사용하기: 페이지 형식에서 표시·재시작·구역 적용하기",
+      "scope": "Google Docs에서 줄 번호를 켜는 방법과 페이지 형식이 필요한 이유, 페이지·구역별 재시작, 특정 구역만 표시하는 방법을 정리합니다.",
+      "coverage": [
+        "줄 번호는 페이지 형식에서만 쓸 수 있습니다",
+        "줄 번호를 켜는 기본 순서",
+        "번호를 다시 시작하는 기준 정하기",
+        "특정 구역만 줄 번호 보이기",
+        "번호가 안 보일 때 먼저 볼 점"
+      ],
+      "outOfScope": [],
+      "aliases": [
+        "Google Docs 줄 번호 사용하기: 페이지 형식에서 표시·재시작·구역 적용하기"
+      ]
+    },
+    {
       "articleId": "docs-guide-143346-20261016",
       "category": "IT·디지털",
       "categoryId": "digital",
@@ -1752,6 +1774,23 @@
           "outOfScope": [],
           "aliases": [
             "Google Sheets 스마트 칩에서 데이터 추출하기: PC에서 새 열로 꺼내는 방법"
+          ]
+        },
+        {
+          "articleId": "docs-guide-13820512-20261016",
+          "intentKey": "docs-answer-13820512",
+          "coreQuestion": "Google Docs 줄 번호 사용하기: 페이지 형식에서 표시·재시작·구역 적용하기",
+          "scope": "Google Docs에서 줄 번호를 켜는 방법과 페이지 형식이 필요한 이유, 페이지·구역별 재시작, 특정 구역만 표시하는 방법을 정리합니다.",
+          "coverage": [
+            "줄 번호는 페이지 형식에서만 쓸 수 있습니다",
+            "줄 번호를 켜는 기본 순서",
+            "번호를 다시 시작하는 기준 정하기",
+            "특정 구역만 줄 번호 보이기",
+            "번호가 안 보일 때 먼저 볼 점"
+          ],
+          "outOfScope": [],
+          "aliases": [
+            "Google Docs 줄 번호 사용하기: 페이지 형식에서 표시·재시작·구역 적용하기"
           ]
         },
         {
