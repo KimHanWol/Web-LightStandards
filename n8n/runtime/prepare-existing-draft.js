@@ -1,6 +1,11 @@
 const input=$('Batch Input').first().json;
 const row=$input.all().map(i=>i.json).find(r=>r.article_id===input.article_id);
 const target=row?Math.min(5,Math.max(3,JSON.parse(row.image_prompt||'[]').length)):3;
+// Execution 4449 explicitly rejected the fourth request. Preserve all three paid results.
+if(row&&input.action==='apply_image_policy'&&row.id===73&&row.article_id==='chrome-guide-95472-20261016'&&row.status==='image_submitting'&&Number(row.revision)===2&&row.fal_request_id==='01a14884-1a28-75b1-b0f6-845fc34fc609'&&JSON.parse(row.images_json||'[]').length===3&&target===5&&Number(row.character_count)>=3500&&!row.error){
+ const map=JSON.parse(row.topic_map_json||'{}');
+ return [{json:{...row,status:'needs_review',revision:3,image_prompt:JSON.stringify(JSON.parse(row.image_prompt).slice(0,3)),reserved_usd:0,approved_revision:0,approved_by:'',approved_at:'',publish_payload:'',topic_map_json:JSON.stringify({...map,imagePolicy:'3-default-4-max',providerUnavailable:{receiptExecutionId:'4449',httpStatus:403,requestAccepted:false,reason:'Exhausted balance; dashboard balance requires account reconciliation'}})}}];
+}
 if(row&&input.action==='resume_images'&&row.status==='text_ready'&&Number(row.character_count)>=3500&&JSON.parse(row.images_json||'[]').length<target&&!row.error)return [{json:row}];
 if(!row||row.status!=='needs_review'||Number(row.reserved_usd||0)!==0||Number(row.character_count)<3500||!row.body_markdown||!String(row.error||'').startsWith('Editorial review: '))return [];
 const issues=JSON.parse(row.error.slice('Editorial review: '.length));

@@ -20,6 +20,8 @@ const imageOnly=r=>{try{const review=mapOf(r).reviewIssues;if(Number(review?.rev
 if($runIndex>2400)throw new Error('Batch polling limit reached; inspect state before continuing');
 const publishing=targets.find(r=>['approved','publishing'].includes(r.status));
 if(!stageOnly&&publishing)return [{json:{...base,...publishing,action:'publish',workflowId:'yihoqk3fpBOC8P04'}}];
+const salvage=targets.find(r=>r.id===73&&r.article_id==='chrome-guide-95472-20261016'&&r.status==='image_submitting'&&Number(r.revision)===2&&imagesOf(r).length===3&&targetOf(r)===5&&r.fal_request_id==='01a14884-1a28-75b1-b0f6-845fc34fc609'&&!r.error);
+if(salvage)return [{json:{...base,...salvage,action:'apply_image_policy',workflowId:'HUqCE3BE3JSNPhI3'}}];
 // One-time recovery of the inspected HTTP 403 decline; the user confirmed funding.
 const funded=targets.find(r=>r.article_id==='chrome-guide-95472-20261016'&&r.status==='image_uncertain'&&Number(r.revision)===2&&imagesOf(r).length===1&&!r.fal_request_id&&!mapOf(r).providerRecovery);
 if(funded)return [{json:{...base,action:'repair',id:funded.id,article_id:funded.article_id,status:'text_ready',previous_status:'image_uncertain',error:'',reserved_usd:Number(funded.reserved_usd||0),topic_map_json:JSON.stringify({...mapOf(funded),providerRecovery:{receiptExecutionId:'4340',httpStatus:403,reason:'Exhausted balance',requestAccepted:false,userFundingConfirmedAt:'2026-10-17'}})}}];
@@ -31,6 +33,7 @@ if(targets.some(r=>['generation_started','image_submitting','review_started','st
 const review=targets.find(r=>r.status==='needs_review'&&!r.error&&Number(r.character_count)>=3500&&imagesOf(r).length>=3&&imagesOf(r).length<=targetOf(r));
 if(review&&used+.03>7)return [{json:{...base,action:'finished',reason:'Monthly budget reached before review',used}}];
 if(review)return [{json:{...base,...review,action:'review',workflowId:'FQg1yF0O4shWkDbQ',approved_by:'Automated evidence and image review; user-authorized publication'}}];
+if(targets.some(r=>mapOf(r).providerUnavailable))return [{json:{...base,action:'finished',reason:'Image API declined despite funded dashboard; reconcile account before new paid generation',used}}];
 if(used+.12>7)return [{json:{...base,action:'finished',reason:'Monthly budget reached',used}}];
 const resumeImages=targets.find(r=>r.status==='text_ready'&&!r.error&&Number(r.character_count)>=3500&&imagesOf(r).length<targetOf(r));
 if(resumeImages)return [{json:{...base,...resumeImages,action:'resume_images',workflowId:'HUqCE3BE3JSNPhI3'}}];

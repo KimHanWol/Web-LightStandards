@@ -11,6 +11,17 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('inspected fourth-image decline reuses three paid images without another generation request',()=>{
+ const input={...row,id:73,article_id:'chrome-guide-95472-20261016',status:'image_submitting',revision:2,character_count:4000,body_markdown:'Existing paid manuscript',image_prompt:'["a","b","c","d","e"]',images_json:'[{"url":"one"},{"url":"two"},{"url":"three"}]',fal_request_id:'01a14884-1a28-75b1-b0f6-845fc34fc609',error:'',actual_usd:.09,reserved_usd:.006,topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
+ const action=run('batch-router',[input])[0].json;assert.equal(action.action,'apply_image_policy');
+ const saved=run('prepare-existing-draft',[input],{'Batch Input':action})[0].json;
+ assert.equal(saved.status,'needs_review');assert.equal(saved.revision,3);assert.equal(saved.reserved_usd,0);assert.equal(saved.images_json,input.images_json);assert.equal(saved.body_markdown,input.body_markdown);assert.equal(saved.actual_usd,input.actual_usd);assert.equal(JSON.parse(saved.image_prompt).length,3);
+ assert.equal(run('batch-router',[saved])[0].json.action,'review');
+ assert.equal(run('batch-router',[{...saved,error:'Editorial review: ["Needs correction"]'}])[0].json.action,'finished');
+ assert.equal(run('batch-router',[{...saved,status:'approved'}])[0].json.action,'publish');
+ assert.equal(run('prepare-existing-draft',[{...input,revision:3}],{'Batch Input':action}).length,0);
+});
+
 test('three and four image plans stop generation at the planned count and reserve only missing images',()=>{
  for(const target of [3,4]){
   let current={...row,image_prompt:JSON.stringify(Array.from({length:target},(_,i)=>'Scene '+i)),images_json:'[]',actual_usd:0,reserved_usd:target*.003};
