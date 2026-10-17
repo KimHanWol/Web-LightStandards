@@ -20,6 +20,9 @@ const imageOnly=r=>{try{const review=mapOf(r).reviewIssues;if(Number(review?.rev
 if($runIndex>2400)throw new Error('Batch polling limit reached; inspect state before continuing');
 const publishing=targets.find(r=>['approved','publishing'].includes(r.status));
 if(!stageOnly&&publishing)return [{json:{...base,...publishing,action:'publish',workflowId:'yihoqk3fpBOC8P04'}}];
+// A real paid request (4465) and completed image receipt (4467) confirmed recovery.
+const recovered=targets.find(r=>r.id===73&&r.article_id==='chrome-guide-95472-20261016'&&r.status==='needs_review'&&Number(r.revision)===4&&imagesOf(r).length===3&&!r.error&&mapOf(r).providerUnavailable?.receiptExecutionId==='4449');
+if(recovered){const map=mapOf(recovered);delete map.providerUnavailable;return [{json:{...base,action:'repair',id:recovered.id,article_id:recovered.article_id,status:'needs_review',previous_status:'needs_review',reserved_usd:Number(recovered.reserved_usd||0),error:'',topic_map_json:JSON.stringify({...map,providerRestored:{requestExecutionId:'4465',resultExecutionId:'4467',checkedAt:'2026-10-17',status:'COMPLETED'}})}}];}
 const salvage=targets.find(r=>r.id===73&&r.article_id==='chrome-guide-95472-20261016'&&r.status==='image_submitting'&&Number(r.revision)===2&&imagesOf(r).length===3&&targetOf(r)===5&&r.fal_request_id==='01a14884-1a28-75b1-b0f6-845fc34fc609'&&!r.error);
 if(salvage)return [{json:{...base,...salvage,action:'apply_image_policy',workflowId:'HUqCE3BE3JSNPhI3'}}];
 // One-time recovery of the inspected HTTP 403 decline; the user confirmed funding.
@@ -40,6 +43,8 @@ if(resumeImages)return [{json:{...base,...resumeImages,action:'resume_images',wo
 if(rows.filter(r=>r.generation_day===today).length>=40)return [{json:{...base,action:'finished',reason:'Daily generation limit reached; no automatic next-day restart',used}}];
 const factRepair=targets.find(r=>r.status==='needs_review'&&r.openai_response_id&&String(r.error||'').startsWith('Editorial review: ')&&Number(r.character_count)>=3500&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).factCorrectionAttempts||0)<2&&!imageOnly(r));
 if(factRepair)return [{json:{...base,...factRepair,action:'generate',workflowId:'HUqCE3BE3JSNPhI3'}}];
+const linkRepair=targets.find(r=>r.status==='needs_review'&&r.error==='Sources missing or unexpected links'&&r.openai_response_id&&Number(r.character_count)>=3500&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).factCorrectionAttempts||0)<2);
+if(linkRepair)return [{json:{...base,...linkRepair,action:'generate',workflowId:'HUqCE3BE3JSNPhI3'}}];
 const imageRepair=targets.find(r=>r.status==='needs_review'&&String(r.error||'').startsWith('Editorial review: ')&&Number(r.character_count)>=3500&&Number(r.reserved_usd||0)===0&&Number(mapOf(r).imageRepairAttempts||0)<2&&imageOnly(r));
 if(imageRepair)return [{json:{...base,...imageRepair,action:'repair_images',workflowId:'HUqCE3BE3JSNPhI3'}}];
 const completion=targets.find(r=>r.status==='needs_review'&&r.error&&r.openai_response_id&&Number(r.reserved_usd||0)===0&&String(r.body_markdown||'').length>=2000&&Number(r.character_count)<3500&&Number(mapOf(r).completionAttempts||0)<2);

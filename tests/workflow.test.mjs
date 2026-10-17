@@ -11,6 +11,29 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('confirmed recovery clears only the inspected provider hold before resuming',()=>{
+ const completed={...row,id:73,article_id:'chrome-guide-95472-20261016',status:'needs_review',revision:4,character_count:4000,error:'',image_prompt:'["a","b","c"]',images_json:'[{},{},{}]',topic_map_json:JSON.stringify({batchId:'additional-70-20261016',providerUnavailable:{receiptExecutionId:'4449'}})};
+ const action=run('batch-router',[completed])[0].json;assert.equal(action.action,'repair');assert.equal(action.status,'needs_review');
+ const map=JSON.parse(action.topic_map_json);assert.equal(map.providerUnavailable,undefined);assert.equal(map.providerRestored.resultExecutionId,'4467');
+ assert.notEqual(run('batch-router',[{...completed,revision:5}])[0].json.action,'repair');
+});
+
+test('citation repair sends the original paragraphs once and preserves all evidence',()=>{
+ const manuscript='## 조건\n\n'+('기존의 올바른 설명을 보존합니다. '.repeat(180))+'\n\n## 방법\n\n절차입니다.\n\n## 확인\n\n확인합니다.';
+ const item={...row,id:74,article_id:'citation-repair',status:'needs_review',character_count:4000,body_markdown:manuscript,openai_response_id:'accepted',reserved_usd:0,error:'Sources missing or unexpected links',topic_map_json:JSON.stringify({batchId:'additional-70-20261016',coreQuestion:'독립 질문',providerRecovery:{verbose:'internal state'}})};
+ const action=run('batch-router',[item])[0].json;assert.equal(action.action,'generate');
+ const selected=run('select-draft',[item],{Configuration:{...config,batch_mode:true,target_article_id:item.article_id}})[0].json;
+ const brief=JSON.parse(selected.brief);assert.equal(selected.factCorrectionMode,true);assert.equal(brief.correction.previousMarkdown,undefined);assert.equal(brief.actualParagraphs.map(p=>p.text).join('\n\n'),manuscript);assert.deepEqual(brief.sources,JSON.parse(item.sources_json));assert.equal(brief.candidateTopic.providerRecovery,undefined);assert.equal(brief.existingTitles,undefined);
+});
+
+test('compact photo selection reuses the description as caption and retains licensing',()=>{
+ const candidate={id:'real',url:'https://live.staticflickr.com/123/photo_b.jpg',title:'Real subject',creator:'Photographer',pageUrl:'https://www.flickr.com/photos/author/123',license:'by',licenseUrl:'https://creativecommons.org/licenses/by/4.0/',provider:'flickr'};
+ const prepared={...row,image_prompt:'["a","b","c"]',images_json:'[]',body_markdown:'## 장면\n\n본문',candidates:[candidate],actual_usd:.1,reserved_usd:.009,topic_map_json:JSON.stringify({stockSearch:{checkedAt:'2026-10-17T00:00:00Z'}})};
+ const request=JSON.parse(run('build-photo-review-request',[prepared],{'Filter Photo Candidates':prepared})[0].json.photoRequestBody);assert.equal(request.reasoning.effort,'low');assert.equal(request.max_output_tokens,1000);assert.equal(request.text.format.schema.properties.selected.items.properties.index.maximum,0);assert.ok(!request.text.format.schema.properties.selected.items.required.includes('caption'));
+ const response={model:'gpt-5.4-mini',status:'completed',usage:{input_tokens:10,output_tokens:10},output:[{content:[{type:'output_text',text:{selected:[{index:0,alt:'설명에 실제로 관련된 장면',sectionHeading:'장면'}]}}]}]};
+ const result=run('merge-photo-selection',[response],{'Filter Photo Candidates':prepared})[0].json,image=JSON.parse(result.images_json)[0];assert.equal(result.error,'');assert.equal(image.caption,image.alt);assert.equal(image.stock.creator,candidate.creator);assert.equal(result.reserved_usd,.006);
+});
+
 test('inspected fourth-image decline reuses three paid images without another generation request',()=>{
  const input={...row,id:73,article_id:'chrome-guide-95472-20261016',status:'image_submitting',revision:2,character_count:4000,body_markdown:'Existing paid manuscript',image_prompt:'["a","b","c","d","e"]',images_json:'[{"url":"one"},{"url":"two"},{"url":"three"}]',fal_request_id:'01a14884-1a28-75b1-b0f6-845fc34fc609',error:'',actual_usd:.09,reserved_usd:.006,topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
  const action=run('batch-router',[input])[0].json;assert.equal(action.action,'apply_image_policy');

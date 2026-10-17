@@ -15,9 +15,10 @@ try{
  const selected=[],seen=new Set(),headings=[...row.body_markdown.matchAll(/^##\s+(.+)$/gm)].map(m=>m[1]);
  const map=JSON.parse(row.topic_map_json||'{}');
  for(const pick of data.selected.slice(0,remaining)){
-  if(!Number.isInteger(pick.index)||pick.index<0||pick.index>=row.candidates.length||seen.has(pick.index)||typeof pick.alt!=='string'||pick.alt.length<4||pick.alt.length>250||typeof pick.caption!=='string'||pick.caption.length<3||pick.caption.length>250)throw new Error('Photo selection must use actual candidate metadata');
+  const caption=pick.caption??pick.alt;
+  if(!Number.isInteger(pick.index)||pick.index<0||pick.index>=row.candidates.length||seen.has(pick.index)||typeof pick.alt!=='string'||pick.alt.length<4||pick.alt.length>250||typeof caption!=='string'||caption.length<3||caption.length>250)throw new Error('Photo selection must use actual candidate metadata');
   seen.add(pick.index);const c=row.candidates[pick.index];
-  selected.push({url:c.url,alt:pick.alt,generated:false,sourceUrl:c.pageUrl,caption:pick.caption,...(headings.includes(pick.sectionHeading)?{sectionHeading:pick.sectionHeading}:{}),stock:{provider:c.provider,assetId:c.id,title:c.title,creator:c.creator,pageUrl:c.pageUrl,license:c.license,licenseUrl:c.licenseUrl,checkedAt:map.stockSearch.checkedAt,query:row.photoQuery}});
+  selected.push({url:c.url,alt:pick.alt,generated:false,sourceUrl:c.pageUrl,caption,...(headings.includes(pick.sectionHeading)?{sectionHeading:pick.sectionHeading}:{}),stock:{provider:c.provider,assetId:c.id,title:c.title,creator:c.creator,pageUrl:c.pageUrl,license:c.license,licenseUrl:c.licenseUrl,checkedAt:map.stockSearch.checkedAt,query:row.photoQuery}});
  }
  const combined=[...existing,...selected];
  result.images_json=JSON.stringify(combined);result.status=combined.length>=target?'needs_review':'text_ready';result.reserved_usd=Math.max(0,target-combined.length)*.003;
