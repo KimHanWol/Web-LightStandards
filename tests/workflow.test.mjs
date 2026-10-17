@@ -11,6 +11,31 @@ const sources=[1,2].map(n=>({title:'Test '+n,url:'https://example.com/'+n,review
 const row={id:1,article_id:'test-article',intent_key:'test-intent',keyword:'테스트',category:'생활 도구',status:'ready',sources_json:JSON.stringify(sources),revision:0};
 const config={paid_enabled:true,reserve_usd:.08,monthly_budget_usd:7,daily_limit:2};
 
+test('the pilot editorial correction cannot reopen a changed manuscript',()=>{
+ const changed={...row,id:86,article_id:'docs-guide-63175-20261016',status:'published',revision:1,body_markdown:'changed',topic_map_json:JSON.stringify({batchId:'additional-70-20261016'})};
+ assert.notEqual(run('batch-router',[changed])[0].json.action,'repair');
+});
+
+test('the lower-cost writer pilot is scoped and records cache-write costs without losing holds',()=>{
+ const pilot={...row,article_id:'economy-pilot'};
+ const selected=run('select-draft',[pilot],{Configuration:{...config,economy_pilot_article_id:pilot.article_id}})[0].json;
+ assert.equal(selected.billing_model,'gpt-5.6-luna');assert.equal(selected.billing_rates.output,1.2);
+ assert.equal(run('select-draft',[pilot],{Configuration:{...config,economy_pilot_article_id:'another'}})[0].json.billing_model,'gpt-5.4-mini');
+ assert.equal(run('select-draft',[pilot],{Configuration:{...config,economy_enabled:true}})[0].json.billing_model,'gpt-5.6-luna');
+ const response={id:'economy-receipt',model:'gpt-5.6-luna',status:'completed',usage:{input_tokens:1000,input_tokens_details:{cached_tokens:200,cache_write_tokens:100},output_tokens:500},output:[{content:[{type:'output_text',text:{canWrite:false,holdReason:'확인된 근거가 부족합니다.'}}]}]};
+ const result=run('parse-draft',[response],{'Select Draft':{...selected,actual_usd:.01},Configuration:{}})[0].json;
+ assert.ok(Math.abs(result.actual_usd-.010769)<1e-10);assert.equal(result.reserved_usd,0);assert.equal(result.error,'확인된 근거가 부족합니다.');assert.equal(JSON.parse(result.topic_map_json).writingReceipts[0].cacheWriteTokens,100);
+ assert.throws(()=>run('parse-draft',[{...response,model:'unpriced-model'}],{'Select Draft':selected,Configuration:{}}),/Unexpected model pricing/);
+});
+
+test('an unchanged rejected photo query is not sent to paid selection again during image repair',()=>{
+ const stockSearch={query:'physical photo subject',checkedAt:new Date().toISOString(),outcome:'selected',selected:0,responseId:'previous-photo-check'};
+ const item={...row,status:'text_ready',images_json:'[]',topic_map_json:JSON.stringify({photoSearchQuery:stockSearch.query,imageRepairAttempts:1,stockSearch})};
+ const selected=run('prepare-photo-search',[item],{'Batch Input':item})[0].json;assert.equal(selected.reusePhotoDecision,true);assert.equal(selected.photoSelectionAllowed,false);
+ const filtered=run('filter-photo-candidates',[{results:[]}],{'Prepare Photo Search':selected})[0].json;assert.equal(filtered.hasPhotoCandidates,false);assert.equal(JSON.parse(filtered.topic_map_json).stockSearch.responseId,stockSearch.responseId);
+ const changed={...item,topic_map_json:JSON.stringify({photoSearchQuery:'different physical subject',imageRepairAttempts:1,stockSearch})};assert.equal(run('prepare-photo-search',[changed],{'Batch Input':changed})[0].json.photoSelectionAllowed,true);
+});
+
 test('compact image repair dispatch reloads the actual review instead of calling the writer',()=>{
  const draft={...row,id:37,article_id:'compact-visual-repair',status:'needs_review',revision:2,reserved_usd:0,character_count:4000,body_markdown:'보존할 원고',error:'Editorial review: ["이미지 3: 가짜 글자"]',image_prompt:'["scene one","scene two","replacement scene"]',images_json:'[{"url":"one"},{"url":"two"},{"url":"three"}]',topic_map_json:JSON.stringify({batchId:'additional-70-20261016',reviewIssues:{revision:2,type:'images',responseId:'accepted-review'},imageReplacementPlan:{responseId:'accepted-review',indexes:[3]}})};
  const compact=run('batch-router',[draft])[0].json;assert.equal(compact.action,'repair_images');assert.equal(compact.error,undefined);

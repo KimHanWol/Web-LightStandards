@@ -44,7 +44,10 @@ for (const row of rows.filter(r=>(!config.target_article_id||r.article_id===conf
     const common={canWrite:{type:'boolean'},holdReason:{type:'string'},photoSearchQuery:{type:'string'}};
     const properties=factCorrectionMode?{...common,replacements:{type:'array',maxItems:5,items:{type:'object',additionalProperties:false,required:['paragraphIndex','replacementMarkdown'],properties:{paragraphIndex:{type:'integer',enum:actualParagraphs.map(p=>p.index)},replacementMarkdown:{type:'string',maxLength:4000}}}}}:completionMode?{...common,additions:{type:'array',maxItems:8,items:{type:'object',additionalProperties:false,required:['afterHeading','markdown'],properties:{afterHeading:{type:'string',enum:[...new Set(headings)]},markdown:{type:'string',minLength:100,maxLength:12000}}}}}:{...common,title:{type:'string'},description:{type:'string'},markdown:{type:'string'},imagePrompts:{type:'array',minItems:3,maxItems:4,items:{type:'string'}},editorialChecks:{type:'array',items:{type:'string'}}};
     const responseSchema=JSON.stringify({type:'object',additionalProperties:false,required:Object.keys(properties),properties});
-    return [{json:{...row,previous_status:row.status,completionMode,factCorrectionMode,responseSchema,topic_map_json,brief,revision:Number(row.revision||0)+1,reserved_usd:config.reserve_usd,actual_usd:Number(row.actual_usd||0),budget_month:month,generation_day:today,claim_id:String($execution.id)}}];
+    const economy=config.economy_enabled===true||config.economy_pilot_article_id===row.article_id;
+    const billing_model=economy?'gpt-5.6-luna':(config.text_model||'gpt-5.4-mini');
+    const billing_rates=economy?{input:.2,cached:.02,output:1.2,cacheWriteMultiplier:1.25}:{input:config.input_usd_per_million,cached:config.cached_input_usd_per_million,output:config.output_usd_per_million,cacheWriteMultiplier:1};
+    return [{json:{...row,previous_status:row.status,completionMode,factCorrectionMode,responseSchema,topic_map_json,brief,billing_model,billing_rates,revision:Number(row.revision||0)+1,reserved_usd:config.reserve_usd,actual_usd:Number(row.actual_usd||0),budget_month:month,generation_day:today,claim_id:String($execution.id)}}];
   } catch { continue; }
 }
 return [];

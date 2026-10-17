@@ -9,6 +9,6 @@ const candidates=(Array.isArray(response.results)?response.results:[]).filter(i=
  seen.add(i.url);return true;
 }).slice(0,4).map(i=>({id:i.id,title:String(i.title).replace(/<[^>]+>/g,'').slice(0,500),creator:String(i.creator).replace(/<[^>]+>/g,'').slice(0,300),url:i.url,pageUrl:i.foreign_landing_url,license:i.license,licenseUrl:i.license_url,provider:i.source}));
 const map=JSON.parse(row.topic_map_json||'{}');
-const stockSearch={query:row.photoQuery,checkedAt:new Date().toISOString(),provider:'openverse',eligibleCandidates:candidates.length,outcome:response.error?'search_unavailable':candidates.length?'candidates':'no_eligible_photos'};
+const stockSearch=row.reusePhotoDecision?{...map.stockSearch,reusedAt:new Date().toISOString()}:{query:row.photoQuery,checkedAt:new Date().toISOString(),provider:'openverse',eligibleCandidates:candidates.length,outcome:response.error?'search_unavailable':candidates.length?'candidates':'no_eligible_photos'};
 return [{json:{...row,candidates,hasPhotoCandidates:candidates.length>0&&row.photoSelectionAllowed,topic_map_json:JSON.stringify({...map,stockSearch})}}];
 

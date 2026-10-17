@@ -5,10 +5,15 @@ const input=Number(response.usage?.input_tokens),output=Number(response.usage?.o
 if(Number.isFinite(input)&&Number.isFinite(output)){
   const c=$('Configuration').first().json;
   const cached=Math.min(input,Math.max(0,Number(response.usage?.input_tokens_details?.cached_tokens||0)));
-  const knownModel=String(response.model||'').startsWith('gpt-5.4-mini');
+  const expectedModel=row.billing_model||c.text_model||'gpt-5.4-mini';
+  const knownModel=String(response.model||'')===expectedModel||String(response.model||'').startsWith(expectedModel+'-');
   if(!knownModel)throw new Error('Unexpected model pricing; preserve reservation and inspect usage');
-  result.actual_usd=Number(row.actual_usd||0)+((input-cached)*c.input_usd_per_million+cached*c.cached_input_usd_per_million+output*c.output_usd_per_million)/1000000;
+  const rates={input:row.billing_rates?.input??c.input_usd_per_million,cached:row.billing_rates?.cached??c.cached_input_usd_per_million,output:row.billing_rates?.output??c.output_usd_per_million,cacheWriteMultiplier:row.billing_rates?.cacheWriteMultiplier??1};
+  const cacheWrites=Math.min(input-cached,Math.max(0,Number(response.usage?.input_tokens_details?.cache_write_tokens||0)));
+  const costUsd=((input-cached-cacheWrites)*rates.input+cacheWrites*rates.input*(rates.cacheWriteMultiplier||1)+cached*rates.cached+output*rates.output)/1000000;
+  result.actual_usd=Number(row.actual_usd||0)+costUsd;
   result.reserved_usd=0;
+  const ledger=JSON.parse(row.topic_map_json||'{}');result.topic_map_json=JSON.stringify({...ledger,writingReceipts:[...(ledger.writingReceipts||[]),{revision:Number(row.revision),model:response.model,responseId:response.id,inputTokens:input,cachedTokens:cached,cacheWriteTokens:cacheWrites,outputTokens:output,costUsd}]});
 }
 try {
   if(response.error||response.status!=='completed') throw new Error('OpenAI result incomplete; inspect execution before retry');
@@ -58,7 +63,7 @@ try {
   if(new Set(paragraphs).size!==paragraphs.length) throw new Error('Repeated paragraphs');
   const plans=JSON.parse(result.image_prompt);
   if((![3,4].includes(plans.length)&&!((row.completionMode||row.factCorrectionMode)&&plans.length===5))||!plans.every(p=>typeof p==='string'&&p.length>=20&&p.length<=1500))throw new Error('Three image briefs required; a fourth needs a distinct explanatory purpose');
-  const topic=JSON.parse(row.topic_map_json||'{}');
+  const topic=JSON.parse(result.topic_map_json||row.topic_map_json||'{}');
   result.topic_map_json=JSON.stringify({...topic,coverage:[...md.matchAll(/^##\s+(.+)$/gm)].map(m=>m[1]),photoSearchQuery:String(draft.photoSearchQuery||row.article_id.replace(/-\d{8}$/,'').replace(/-/g,' ')).trim().slice(0,150)});
   result.images_json=row.completionMode||row.factCorrectionMode?(row.images_json||'[]'):'[]';
   if(!Number.isFinite(input)||!Number.isFinite(output)) throw new Error('Usage could not be reconciled');
